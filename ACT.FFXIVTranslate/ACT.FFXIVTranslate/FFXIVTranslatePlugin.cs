@@ -11,42 +11,58 @@ namespace ACT.FFXIVTranslate
 {
     public class FFXIVTranslatePlugin : IActPluginV1
     {
-        private readonly string _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config\\ACT.FFXIVTranslate.config.xml");
-
-        private TabPage parentTabPage;
-        private Label statusLabel;
+        public PluginSettings Settings { get; private set; }
+        public TabPage ParentTabPage { get; private set; }
+        public Label StatusLabel { get; private set; }
 
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
-            parentTabPage = pluginScreenSpace;
-            statusLabel = pluginStatusText;
+            ParentTabPage = pluginScreenSpace;
+            StatusLabel = pluginStatusText;
+            ParentTabPage.Text = "Talk Translate";
 
-            // Load FFXIV plugin's assembly if needed
-            AppDomain.CurrentDomain.AssemblyResolve += (o, e) =>
+            try
             {
-                var simpleName = new string(e.Name.TakeWhile(x => x != ',').ToArray());
-                if (simpleName == "FFXIV_ACT_Plugin")
+                // Load FFXIV plugin's assembly if needed
+                AppDomain.CurrentDomain.AssemblyResolve += (o, e) =>
                 {
-                    var query = ActGlobals.oFormActMain.ActPlugins.Where(x => x.lblPluginTitle.Text == "FFXIV_ACT_Plugin.dll");
-                    var plugin = query.FirstOrDefault();
-
-                    if (plugin != null)
+                    var simpleName = new string(e.Name.TakeWhile(x => x != ',').ToArray());
+                    if (simpleName == "FFXIV_ACT_Plugin")
                     {
-                        return System.Reflection.Assembly.LoadFrom(plugin.pluginFile.FullName);
+                        var query =
+                            ActGlobals.oFormActMain.ActPlugins.Where(
+                                x => x.lblPluginTitle.Text == "FFXIV_ACT_Plugin.dll");
+                        var plugin = query.FirstOrDefault();
+
+                        if (plugin != null)
+                        {
+                            return System.Reflection.Assembly.LoadFrom(plugin.pluginFile.FullName);
+                        }
                     }
-                }
 
-                return null;
-            };
+                    return null;
+                };
 
-            parentTabPage.Text = "Talk Translate";
+                Settings = new PluginSettings(this);
 
-            var mainControl = new FFXIVTranslateTabControl();
-            mainControl.AttachToACT(parentTabPage);
+                var mainControl = new FFXIVTranslateTabControl();
+                mainControl.AttachToAct(this);
+
+                Settings.Load();
+
+                StatusLabel.Text = "Init Success. >w<";
+            }
+            catch (Exception ex)
+            {
+                StatusLabel.Text = "Init Failed: " + ex.Message;
+            }
         }
 
         public void DeInitPlugin()
         {
+            Settings?.Save();
+
+            StatusLabel.Text = "Exited. Bye~";
         }
     }
 }

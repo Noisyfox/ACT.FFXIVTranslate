@@ -16,11 +16,16 @@ namespace ACT.FFXIVTranslate
             InitializeComponent();
         }
 
-        public void AttachToACT(TabPage parentTabPage)
+        public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
+            var parentTabPage = plugin.ParentTabPage;
+
             parentTabPage.Controls.Add(this);
             parentTabPage.Resize += ParentTabPageOnResize;
             ParentTabPageOnResize(parentTabPage, null);
+
+            var settings = plugin.Settings;
+            // TODO: add settings
         }
 
         private void ParentTabPageOnResize(object sender, EventArgs eventArgs)

@@ -54,6 +54,7 @@
     <Compile Include="FFXIVTranslateTabControl.Designer.cs">
       <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PluginSettings .cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

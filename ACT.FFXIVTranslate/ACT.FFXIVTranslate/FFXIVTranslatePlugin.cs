@@ -89,7 +89,37 @@ namespace ACT.FFXIVTranslate
 
         private void OnLogLineRead(string line)
         {
+            // Parse log line
+
+            // The legal talking log line has the following format:
+            // 00|[timestamp]|[event code]|[name or to?]|[content]<|[MD5]>
+            // eg:
+            // 00|2017-07-13T22:26:50.0000000+08:00|0010|Pinoko Fox|哈呀|f94872989411d9f173c9e9b36e29c9d1
+            // or
+            // 00|2017-07-13T22:26:50.0000000+08:00|0010|Pinoko Fox|哈呀
+
+            var data = line.Split('|');
+            if (data.Length < 5)
+            {
+                return;
+            }
+
+            if (!"00".Equals(data[0]))
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(data[3]))
+            {
+                return;
+            }
+
+            var eventCode = data[2];
+            var name = data[3];
+            var content = data[4];
+
             Debug.WriteLine(line);
+            Debug.WriteLine($"{name} says: {content}");
         }
     }
 }

@@ -46,7 +46,6 @@
             this.checkBoxClickthrough = new System.Windows.Forms.CheckBox();
             this.buttonFont = new System.Windows.Forms.Button();
             this.textBoxFont = new System.Windows.Forms.TextBox();
-            this.checkBoxResizeByDrag = new System.Windows.Forms.CheckBox();
             this.groupBox_overlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -61,7 +60,7 @@
             this.groupBox_overlay.Controls.Add(this.tableLayoutPanel1);
             this.groupBox_overlay.Location = new System.Drawing.Point(3, 3);
             this.groupBox_overlay.Name = "groupBox_overlay";
-            this.groupBox_overlay.Size = new System.Drawing.Size(377, 202);
+            this.groupBox_overlay.Size = new System.Drawing.Size(377, 182);
             this.groupBox_overlay.TabIndex = 0;
             this.groupBox_overlay.TabStop = false;
             this.groupBox_overlay.Text = "Overlay Settings";
@@ -93,17 +92,15 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBoxClickthrough, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.buttonFont, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.textBoxFont, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxResizeByDrag, 0, 5);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(365, 176);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(365, 156);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericUpDownY
@@ -222,7 +219,7 @@
             0,
             0});
             this.numericUpDownWidth.Minimum = new decimal(new int[] {
-            100,
+            300,
             0,
             0,
             0});
@@ -245,7 +242,7 @@
             0,
             0});
             this.numericUpDownHeight.Minimum = new decimal(new int[] {
-            100,
+            200,
             0,
             0,
             0});
@@ -298,7 +295,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.checkBoxClickthrough, 5);
             this.checkBoxClickthrough.Location = new System.Drawing.Point(3, 137);
             this.checkBoxClickthrough.Name = "checkBoxClickthrough";
-            this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 14);
+            this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 16);
             this.checkBoxClickthrough.TabIndex = 16;
             this.checkBoxClickthrough.Text = "Clickthrough";
             this.checkBoxClickthrough.UseVisualStyleBackColor = true;
@@ -323,18 +320,6 @@
             this.textBoxFont.ReadOnly = true;
             this.textBoxFont.Size = new System.Drawing.Size(256, 21);
             this.textBoxFont.TabIndex = 17;
-            // 
-            // checkBoxResizeByDrag
-            // 
-            this.checkBoxResizeByDrag.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.checkBoxResizeByDrag.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxResizeByDrag, 5);
-            this.checkBoxResizeByDrag.Location = new System.Drawing.Point(3, 157);
-            this.checkBoxResizeByDrag.Name = "checkBoxResizeByDrag";
-            this.checkBoxResizeByDrag.Size = new System.Drawing.Size(108, 16);
-            this.checkBoxResizeByDrag.TabIndex = 18;
-            this.checkBoxResizeByDrag.Text = "Resize by brag";
-            this.checkBoxResizeByDrag.UseVisualStyleBackColor = true;
             // 
             // FFXIVTranslateTabControl
             // 
@@ -376,6 +361,5 @@
         private System.Windows.Forms.Button buttonFont;
         private System.Windows.Forms.CheckBox checkBoxClickthrough;
         private System.Windows.Forms.TextBox textBoxFont;
-        private System.Windows.Forms.CheckBox checkBoxResizeByDrag;
     }
 }

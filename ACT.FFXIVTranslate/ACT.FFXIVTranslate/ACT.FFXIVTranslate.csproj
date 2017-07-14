@@ -56,6 +56,7 @@
       <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="LogReadThread.cs" />
+    <Compile Include="MainController.cs" />
     <Compile Include="PluginSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslateForm.cs">
@@ -64,6 +65,7 @@
     <Compile Include="TranslateForm.Designer.cs">
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win32APIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FFXIVTranslateTabControl.resx">

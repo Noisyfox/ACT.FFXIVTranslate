@@ -8,9 +8,13 @@ namespace ACT.FFXIVTranslate
 {
     public class FFXIVTranslatePlugin : IActPluginV1
     {
+
+        public MainController Controller { get; private set; }
         public PluginSettings Settings { get; private set; }
         public TabPage ParentTabPage { get; private set; }
         public Label StatusLabel { get; private set; }
+        public FFXIVTranslateTabControl SettingsTab { get; private set; }
+        public TranslateForm Overlay { get; private set; }
 
         private readonly LogReadThread _workingThread = new LogReadThread();
 
@@ -47,10 +51,16 @@ namespace ACT.FFXIVTranslate
                     return null;
                 };
 
+                Controller = new MainController();
+
                 Settings = new PluginSettings(this);
 
-                var mainControl = new FFXIVTranslateTabControl();
-                mainControl.AttachToAct(this);
+                Overlay = new TranslateForm();
+                Overlay.AttachToAct(this);
+                Overlay.Show();
+
+                SettingsTab = new FFXIVTranslateTabControl();
+                SettingsTab.AttachToAct(this);
 
                 Settings.Load();
                 
@@ -79,6 +89,8 @@ namespace ACT.FFXIVTranslate
 
         public void DeInitPlugin()
         {
+            Overlay?.Close();
+
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
             _workingThread.StopWorkingThread();
 

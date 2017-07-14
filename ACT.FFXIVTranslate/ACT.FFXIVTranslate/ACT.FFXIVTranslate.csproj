@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ext.cs" />
     <Compile Include="FFXIVTranslatePlugin.cs" />
     <Compile Include="FFXIVTranslateTabControl.cs">
       <SubType>UserControl</SubType>
@@ -57,10 +58,19 @@
     <Compile Include="LogReadThread.cs" />
     <Compile Include="PluginSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TranslateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TranslateForm.Designer.cs">
+      <DependentUpon>TranslateForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FFXIVTranslateTabControl.resx">
       <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslateForm.resx">
+      <DependentUpon>TranslateForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

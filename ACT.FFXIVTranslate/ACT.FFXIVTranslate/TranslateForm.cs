@@ -88,5 +88,10 @@ namespace ACT.FFXIVTranslate
                 Win32APIUtils.DragMove(Handle);
             }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://translate.yandex.com");
+        }
     }
 }

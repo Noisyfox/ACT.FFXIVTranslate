@@ -79,12 +79,13 @@
             this.linkLabel1.TabIndex = 0;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Powered by Yandex.Translate";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // TranslateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 184);
+            this.ClientSize = new System.Drawing.Size(300, 200);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanelContent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -42,5 +42,14 @@ namespace ACT.FFXIVTranslate
         {
             ClickthroughChanged?.Invoke(fromView, clickthrough);
         }
+
+        public delegate void OnOverlayContentUpdatedDelegate(bool fromView, string content);
+
+        public event OnOverlayContentUpdatedDelegate OverlayContentUpdated;
+
+        public void NotifyOverlayContentUpdated(bool fromView, string content)
+        {
+            OverlayContentUpdated?.Invoke(fromView, content);
+        }
     }
 }

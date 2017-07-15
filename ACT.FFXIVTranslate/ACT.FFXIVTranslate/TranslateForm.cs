@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
@@ -29,6 +30,7 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayResized += ControllerOnOverlayResized;
             _controller.OpacityChanged += ControllerOnOpacityChanged;
             _controller.ClickthroughChanged += ControllerOnClickthroughChanged;
+            _controller.OverlayContentUpdated += ControllerOnOverlayContentUpdated;
 
             Move += OnMove;
             SizeChanged += OnSizeChanged;
@@ -74,7 +76,21 @@ namespace ACT.FFXIVTranslate
 
         private void ControllerOnClickthroughChanged(bool fromView, bool clickthrough)
         {
+            if (fromView)
+            {
+                return;
+            }
             Win32APIUtils.SetWS_EX_TRANSPARENT(Handle, clickthrough);
+        }
+
+        private void ControllerOnOverlayContentUpdated(bool fromView, string content)
+        {
+            if (fromView)
+            {
+                return;
+            }
+
+            ThreadInvokes.RichTextBoxAppendText(this, richTextBoxContent, content);
         }
 
         private void OnMove(object sender, EventArgs e)

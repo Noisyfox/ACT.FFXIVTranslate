@@ -132,6 +132,7 @@ namespace ACT.FFXIVTranslate
 
             Debug.WriteLine(line);
             Debug.WriteLine($"{name} says: {content}");
+            Controller.NotifyOverlayContentUpdated(false, $"{name} says: {content}\n");
         }
     }
 }

@@ -48,7 +48,7 @@
             this.richTextBoxContent.ReadOnly = true;
             this.richTextBoxContent.Size = new System.Drawing.Size(234, 145);
             this.richTextBoxContent.TabIndex = 0;
-            this.richTextBoxContent.Text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            this.richTextBoxContent.Text = "";
             // 
             // tableLayoutPanelContent
             // 

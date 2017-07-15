@@ -33,5 +33,14 @@ namespace ACT.FFXIVTranslate
         {
             OpacityChanged?.Invoke(fromView, value);
         }
+
+        public delegate void OnClickthroughChangedDelegate(bool fromView, bool clickthrough);
+
+        public event OnClickthroughChangedDelegate ClickthroughChanged;
+
+        public void NotifyClickthroughChanged(bool fromView, bool clickthrough)
+        {
+            ClickthroughChanged?.Invoke(fromView, clickthrough);
+        }
     }
 }

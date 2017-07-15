@@ -42,6 +42,7 @@ namespace ACT.FFXIVTranslate
             numericUpDownY.ValueChanged += NumericUpDownPositionOnValueChanged;
             numericUpDownWidth.ValueChanged += NumericUpDownSizeOnValueChanged;
             numericUpDownHeight.ValueChanged += NumericUpDownSizeOnValueChanged;
+            checkBoxClickthrough.CheckedChanged += CheckBoxClickthroughOnCheckedChanged;
 
             _controller.OverlayMoved += ControllerOnOverlayMoved;
             _controller.OverlayResized += ControllerOnOverlayResized;
@@ -49,6 +50,7 @@ namespace ACT.FFXIVTranslate
             trackBarOpacity_ValueChanged(this, EventArgs.Empty);
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
             NumericUpDownSizeOnValueChanged(this, EventArgs.Empty);
+            CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
         }
 
         private void ParentTabPageOnResize(object sender, EventArgs eventArgs)
@@ -76,6 +78,11 @@ namespace ACT.FFXIVTranslate
         private void NumericUpDownSizeOnValueChanged(object sender, EventArgs eventArgs)
         {
             _controller.NotifyOverlayResized(false, (int)numericUpDownWidth.Value, (int)numericUpDownHeight.Value);
+        }
+
+        private void CheckBoxClickthroughOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _controller.NotifyClickthroughChanged(false, checkBoxClickthrough.Checked);
         }
 
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)

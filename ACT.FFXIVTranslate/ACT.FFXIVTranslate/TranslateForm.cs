@@ -28,6 +28,7 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayMoved += ControllerOnOverlayMoved;
             _controller.OverlayResized += ControllerOnOverlayResized;
             _controller.OpacityChanged += ControllerOnOpacityChanged;
+            _controller.ClickthroughChanged += ControllerOnClickthroughChanged;
 
             Move += OnMove;
             SizeChanged += OnSizeChanged;
@@ -69,6 +70,11 @@ namespace ACT.FFXIVTranslate
             Size = new Size(w, h);
 
             SizeChanged += OnSizeChanged;
+        }
+
+        private void ControllerOnClickthroughChanged(bool fromView, bool clickthrough)
+        {
+            Win32APIUtils.SetWS_EX_TRANSPARENT(Handle, clickthrough);
         }
 
         private void OnMove(object sender, EventArgs e)

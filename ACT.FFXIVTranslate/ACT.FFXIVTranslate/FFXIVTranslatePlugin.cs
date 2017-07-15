@@ -167,6 +167,7 @@ namespace ACT.FFXIVTranslate
             Novice = 0x1b,
 //            Emote = 0x1d,
             Yell = 0x1e,
+//            NPC = 0x3d,
         }
     }
 }

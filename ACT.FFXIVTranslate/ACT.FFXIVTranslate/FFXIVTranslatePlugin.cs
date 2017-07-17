@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using ACT.FFXIVTranslate.translate;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
@@ -18,6 +19,7 @@ namespace ACT.FFXIVTranslate
         public TranslateForm Overlay { get; private set; }
 
         private readonly LogReadThread _workingThread = new LogReadThread();
+        private readonly TranslateService _translateService = new TranslateService();
 
         public FFXIVTranslatePlugin()
         {
@@ -63,11 +65,15 @@ namespace ACT.FFXIVTranslate
                 SettingsTab = new FFXIVTranslateTabControl();
                 SettingsTab.AttachToAct(this);
 
+                _translateService.AttachToAct(this);
+
                 Settings.Load();
-                
+
                 ActGlobals.oFormActMain.LogFileChanged += OFormActMainOnLogFileChanged;
 
                 _workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
+
+                _translateService.Start();
 
                 StatusLabel.Text = "Init Success. >w<";
             }
@@ -93,6 +99,7 @@ namespace ACT.FFXIVTranslate
             Overlay?.Close();
 
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
+            _translateService.Stop();
             _workingThread.StopWorkingThread();
 
             Settings?.Save();
@@ -141,33 +148,53 @@ namespace ACT.FFXIVTranslate
 
             Debug.WriteLine(line);
             Debug.WriteLine($"{name} says: {content}");
-            Controller.NotifyOverlayContentUpdated(false, $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
-        }
+            Controller.NotifyOverlayContentUpdated(false,
+                $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
 
-        /// <summary>
-        /// All known event codes.
-        /// The codes not treated as talk are commented.
-        /// </summary>
-        public enum EventCode : byte
-        {
-            Say = 0x0a,
-            Shout = 0x0b,
-            TellTo = 0x0c,
-            TellFrom = 0x0d,
-            Party = 0x0e,
-            LS1 = 0x10,
-            LS2 = 0x11,
-            LS3 = 0x12,
-            LS4 = 0x13,
-            LS5 = 0x14,
-            LS6 = 0x15,
-            LS7 = 0x16,
-            LS8 = 0x17,
-            FreeCompany = 0x18,
-            Novice = 0x1b,
-//            Emote = 0x1d,
-            Yell = 0x1e,
-//            NPC = 0x3d,
+            var chat = new ChattingLine
+            {
+                RawEventCode = (byte)(eventCode & byte.MaxValue),
+                RawSender = name,
+                RawContent = content
+            };
+
+            _translateService.SubmitNewLine(chat);
         }
+    }
+
+    /// <summary>
+    /// All known event codes.
+    /// The codes not treated as talk are commented.
+    /// </summary>
+    public enum EventCode : byte
+    {
+        Say = 0x0a,
+        Shout = 0x0b,
+        TellTo = 0x0c,
+        TellFrom = 0x0d,
+        Party = 0x0e,
+        LS1 = 0x10,
+        LS2 = 0x11,
+        LS3 = 0x12,
+        LS4 = 0x13,
+        LS5 = 0x14,
+        LS6 = 0x15,
+        LS7 = 0x16,
+        LS8 = 0x17,
+        FreeCompany = 0x18,
+        Novice = 0x1b,
+//            Emote = 0x1d,
+        Yell = 0x1e,
+//            NPC = 0x3d,
+    }
+
+    public class ChattingLine
+    {
+        public byte RawEventCode;
+        public string RawSender;
+        public string RawContent;
+
+        public string FormattedContent;
+        public string TranslatedContent;
     }
 }

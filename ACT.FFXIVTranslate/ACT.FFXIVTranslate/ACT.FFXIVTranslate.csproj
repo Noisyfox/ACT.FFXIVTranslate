@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseThreading.cs" />
     <Compile Include="Ext.cs" />
     <Compile Include="FFXIVTranslatePlugin.cs" />
     <Compile Include="FFXIVTranslateTabControl.cs">
@@ -65,6 +66,7 @@
     <Compile Include="TranslateForm.Designer.cs">
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="translate\TranslateService.cs" />
     <Compile Include="Win32APIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +77,7 @@
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

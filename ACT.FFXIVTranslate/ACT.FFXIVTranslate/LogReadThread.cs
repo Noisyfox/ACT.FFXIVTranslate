@@ -6,87 +6,33 @@ using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
-    class LogReadThread
+    class LogReadThread : BaseThreading<string>
     {
         public delegate void LogLineReadDelegate(string line);
 
         public event LogLineReadDelegate OnLogLineRead;
 
-        private readonly object _workingThreadLock = new object();
-        private bool _workingThreadStopping = false;
-        private Thread _workingThread;
-        private string _logFilePath;
         private readonly char[] _newlineChars = { '\r', '\n' };
 
-        public void StartWorkingThread(string logFilePath)
+        protected override Thread SetupThread()
         {
-            Monitor.Enter(_workingThreadLock);
-            try
-            {
-                StopWorkingThread();
+            var t = base.SetupThread();
 
-                _logFilePath = logFilePath;
-                _workingThread = new Thread(WorkingThreadFunc);
-                _workingThread.IsBackground = true;
-                _workingThread.Name = "FFXIV Translate";
-                _workingThread.Start();
-            }
-            finally
-            {
-                Monitor.Exit(_workingThreadLock);
-            }
+            t.Name = "FFXIV Translate";
+
+            return t;
         }
 
-        public void StopWorkingThread()
-        {
-            Monitor.Enter(_workingThreadLock);
-            try
-            {
-                while (_workingThread != null && _workingThread.IsAlive)
-                {
-                    _workingThreadStopping = true;
-                    Monitor.Wait(_workingThreadLock, 100);
-                }
-                _workingThread = null;
-                _workingThreadStopping = false;
-            }
-            finally
-            {
-                Monitor.Exit(_workingThreadLock);
-            }
-        }
-
-        private void WorkingThreadFunc()
-        {
-            try
-            {
-                DoWork();
-            }
-            finally
-            {
-                Monitor.Enter(_workingThreadLock);
-                try
-                {
-                    _workingThread = null;
-                    Monitor.PulseAll(_workingThreadLock);
-                }
-                finally
-                {
-                    Monitor.Exit(_workingThreadLock);
-                }
-            }
-        }
-
-        private void DoWork()
+        protected override void DoWork(string logFilePath)
         {
             FileStream logStream = null;
             StreamReader logReader = null;
             try
             {
-                lock (_workingThreadLock)
+                lock (WorkingThreadLock)
                 {
                     // Open log file
-                    logStream = new FileStream(_logFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    logStream = new FileStream(logFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 }
                 logStream.Seek(0L, SeekOrigin.End);
                 logReader = new StreamReader(logStream, ActGlobals.oFormActMain.LogEncoding);
@@ -95,7 +41,7 @@ namespace ACT.FFXIVTranslate
                 var lineBuffer = string.Empty;
                 var lineUpdateCount = 0;
 
-                while (!_workingThreadStopping)
+                while (!WorkingThreadStopping)
                 {
 
                     var data = logReader.ReadToEnd();

@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using ACT.FFXIVTranslate.translate.yandax;
 
 namespace ACT.FFXIVTranslate.translate
 {
@@ -21,9 +22,43 @@ namespace ACT.FFXIVTranslate.translate
         private readonly List<ChattingLine> _pendingLines = new List<ChattingLine>();
         private readonly TranslateThread _workingThread = new TranslateThread();
 
+        private string TranslateProvider { get; set; }
+        private string TranslateApiKey { get; set; }
+        private string TranslateLangFrom { get; set; }
+        private string TranslateLangTo { get; set; }
+
+        public List<ITranslaterProviderFactory> AllProviders { get; } =
+            new ITranslaterProviderFactory[] {new YandaxTranslateProviderFactory()}.ToList();
+
         public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
             _controller = plugin.Controller;
+            _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
+        }
+
+        private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom,
+            string langTo)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            TranslateProvider = provider;
+            TranslateApiKey = apiKey;
+            TranslateLangFrom = langFrom;
+            TranslateLangTo = langTo;
+
+            var factory = AllProviders.First(it => it.ProviderName == provider);
+            var lF = langFrom == "auto" ? null : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);
+            var lT = factory.SupportedDestLanguages.First(it => it.LangCode == langTo);
+            var context = new TranslateContext
+            {
+                Service = this,
+                Provider = factory.CreateProvider(apiKey, lF, lT)
+            };
+
+            _workingThread.StartWorkingThread(context);
         }
 
         public void SubmitNewLine(ChattingLine line)
@@ -35,22 +70,24 @@ namespace ACT.FFXIVTranslate.translate
             }
         }
 
-        public void Start()
-        {
-            _workingThread.StartWorkingThread(this);
-        }
-
         public void Stop()
         {
             _workingThread.StopWorkingThread();
         }
 
-        private class TranslateThread : BaseThreading<TranslateService>
+        private class TranslateContext
+        {
+            public TranslateService Service;
+            public ITranslateProvider Provider;
+        }
+
+        private class TranslateThread : BaseThreading<TranslateContext>
         {
             private const int BatchThreshold = 10;
 
-            protected override void DoWork(TranslateService context)
+            protected override void DoWork(TranslateContext context)
             {
+                var service = context.Service;
                 int batchWait = 0;
                 var batchWorkingList = new List<ChattingLine>();
 
@@ -60,70 +97,10 @@ namespace ACT.FFXIVTranslate.translate
                     {
                         batchWait = 0;
                         // Invoke translate service
-                        // Build text
-                        var textBuilder = new StringBuilder();
-                        var settings = new XmlWriterSettings {OmitXmlDeclaration = true};
-                        var textWriter = XmlWriter.Create(textBuilder, settings);
-                        textWriter.WriteStartElement("lines");
-                        foreach (var line in batchWorkingList)
-                        {
-                            textWriter.WriteStartElement("line");
-                            textWriter.WriteString(line.RawContent);
-                            textWriter.WriteEndElement();
-                        }
-                        textWriter.WriteEndElement();
-                        textWriter.Flush();
-                        textWriter.Close();
-
-                        var text = textBuilder.ToString();
-//                        context._controller.NotifyOverlayContentUpdated(false, text);
-
-                        var client = new HttpClient();
-                        client.BaseAddress = new Uri("https://translate.yandex.net");
-                        var request = new HttpRequestMessage(HttpMethod.Post, "/api/v1.5/tr.json/translate");
-
-                        var keyValues = new List<KeyValuePair<string, string>>();
-                        keyValues.Add(new KeyValuePair<string, string>("key", "trnsl.1.1.20170716T025951Z.13c73247084b012d.3404189299f91adf7792235bc7cf7fb7f3bd26a2"));
-                        keyValues.Add(new KeyValuePair<string, string>("text", text));
-                        keyValues.Add(new KeyValuePair<string, string>("lang", "zh"));
-                        keyValues.Add(new KeyValuePair<string, string>("options", "1"));
-                        keyValues.Add(new KeyValuePair<string, string>("format", "html"));
-
-                        request.Content = new FormUrlEncodedContent(keyValues);
-                        var response = client.SendAsync(request).Result;
-                        var textResponse = response.Content.ReadAsStringAsync().Result;
 
                         try
                         {
-                            // read json
-                            var ser = new DataContractJsonSerializer(typeof(YandexTranslateResult));
-                            var result =
-                                (YandexTranslateResult)
-                                    ser.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(textResponse)));
-
-                            if (result.Code != 200)
-                            {
-                                // Faild
-                                context._controller.NotifyOverlayContentUpdated(false, textResponse);
-                                continue;
-                            }
-
-                            var translatedLinesXml = result.Text[0];
-                            // Parse xml
-                            var doc = new XmlDocument();
-                            doc.LoadXml(translatedLinesXml);
-                            var nodes = doc.SelectNodes("lines/line");
-                            if (nodes == null || nodes.Count != batchWorkingList.Count)
-                            {
-                                // Error
-                                continue;
-                            }
-
-                            foreach (var p in batchWorkingList.Zip(nodes.Cast<XmlNode>(),
-                                (a, b) => new KeyValuePair<ChattingLine, XmlNode>(a, b)))
-                            {
-                                p.Key.TranslatedContent = p.Value.InnerText;
-                            }
+                            context.Provider.Translate(batchWorkingList);
 
                             var finalResultBuilder = new StringBuilder();
                             foreach (var line in batchWorkingList)
@@ -131,12 +108,12 @@ namespace ACT.FFXIVTranslate.translate
                                 finalResultBuilder.Append($"{line.RawSender} says: {line.TranslatedContent}\n");
                             }
 
-                            context._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());
+                            service._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());
                         }
                         catch (Exception ex)
                         {
-                            context._controller.NotifyOverlayContentUpdated(false, textResponse);
-                            context._controller.NotifyOverlayContentUpdated(false, ex.ToString());
+//                            service._controller.NotifyOverlayContentUpdated(false, textResponse);
+                            service._controller.NotifyOverlayContentUpdated(false, ex.ToString());
                         }
                         finally
                         {
@@ -145,13 +122,13 @@ namespace ACT.FFXIVTranslate.translate
                     }
                     else
                     {
-                        lock (context._mainLock)
+                        lock (service._mainLock)
                         {
-                            if (context._pendingLines.Count > 0)
+                            if (service._pendingLines.Count > 0)
                             {
                                 batchWait = 0;
-                                batchWorkingList.AddRange(context._pendingLines);
-                                context._pendingLines.Clear();
+                                batchWorkingList.AddRange(service._pendingLines);
+                                service._pendingLines.Clear();
                             }
                             else
                             {
@@ -159,7 +136,7 @@ namespace ACT.FFXIVTranslate.translate
                                 {
                                     batchWait++;
                                 }
-                                Monitor.Wait(context._mainLock, 500);
+                                Monitor.Wait(service._mainLock, 500);
                             }
                         }
                     }
@@ -173,24 +150,18 @@ namespace ACT.FFXIVTranslate.translate
             [DataContract]
             internal class DetectedLang
             {
-                [DataMember(Name = "lang", IsRequired = true)]
-                internal string Lang;
+                [DataMember(Name = "lang", IsRequired = true)] internal string Lang;
             }
 
-            [DataMember(Name = "code", IsRequired = true)]
-            internal int Code;
+            [DataMember(Name = "code", IsRequired = true)] internal int Code;
 
-            [DataMember(Name = "message", IsRequired = false)]
-            internal string Message;
+            [DataMember(Name = "message", IsRequired = false)] internal string Message;
 
-            [DataMember(Name = "detected", IsRequired = false)]
-            internal DetectedLang Detected;
+            [DataMember(Name = "detected", IsRequired = false)] internal DetectedLang Detected;
 
-            [DataMember(Name = "lang", IsRequired = false)]
-            internal string Lang;
+            [DataMember(Name = "lang", IsRequired = false)] internal string Lang;
 
-            [DataMember(Name = "text", IsRequired = false)]
-            internal string[] Text;
+            [DataMember(Name = "text", IsRequired = false)] internal string[] Text;
         }
     }
 }

@@ -51,5 +51,14 @@ namespace ACT.FFXIVTranslate
         {
             OverlayContentUpdated?.Invoke(fromView, content);
         }
+
+        public delegate void OnProviderChangedDelegate(bool fromView, string provider, string apiKey, string langFrom, string langTo);
+
+        public event OnProviderChangedDelegate TranslateProviderChanged;
+
+        public void NotifyTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom, string langTo)
+        {
+            TranslateProviderChanged?.Invoke(fromView, provider, apiKey, langFrom, langTo);
+        }
     }
 }

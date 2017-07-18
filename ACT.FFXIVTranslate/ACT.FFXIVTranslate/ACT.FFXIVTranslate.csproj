@@ -67,7 +67,16 @@
     <Compile Include="TranslateForm.Designer.cs">
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="translate\ITranslateProvider.cs" />
+    <Compile Include="translate\TranslateProviderPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="translate\TranslateProviderPanel.Designer.cs">
+      <DependentUpon>TranslateProviderPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="translate\TranslateService.cs" />
+    <Compile Include="translate\yandax\YandaxTranslateProvider.cs" />
+    <Compile Include="translate\yandax\YandaxTranslateProviderFactory.cs" />
     <Compile Include="Win32APIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +86,10 @@
     <EmbeddedResource Include="TranslateForm.resx">
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="translate\TranslateProviderPanel.resx">
+      <DependentUpon>TranslateProviderPanel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -17,9 +17,17 @@ namespace ACT.FFXIVTranslate
         public Label StatusLabel { get; private set; }
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
         public TranslateForm Overlay { get; private set; }
+        internal TranslateService TranslateService { get; } = new TranslateService();
 
         private readonly LogReadThread _workingThread = new LogReadThread();
-        private readonly TranslateService _translateService = new TranslateService();
+
+        public string TranslateProvider { get; set; }
+
+        public string TranslateApiKey { get; set; }
+
+        public string TranslateLangFrom { get; set; }
+
+        public string TranslateLangTo { get; set; }
 
         public FFXIVTranslatePlugin()
         {
@@ -65,7 +73,8 @@ namespace ACT.FFXIVTranslate
                 SettingsTab = new FFXIVTranslateTabControl();
                 SettingsTab.AttachToAct(this);
 
-                _translateService.AttachToAct(this);
+                Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
+                TranslateService.AttachToAct(this);
 
                 Settings.Load();
 
@@ -73,14 +82,29 @@ namespace ACT.FFXIVTranslate
 
                 _workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
 
-                _translateService.Start();
+//                TranslateService.Start();
+
+                Controller.NotifyTranslateProviderChanged(false, TranslateProvider, TranslateApiKey, TranslateLangFrom, TranslateLangTo);
 
                 StatusLabel.Text = "Init Success. >w<";
             }
             catch (Exception ex)
             {
-                StatusLabel.Text = "Init Failed: " + ex.Message;
+                StatusLabel.Text = "Init Failed: " + ex.ToString();
             }
+        }
+
+        private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom, string langTo)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            TranslateProvider = provider;
+            TranslateApiKey = apiKey;
+            TranslateLangFrom = langFrom;
+            TranslateLangTo = langTo;
         }
 
         private void OFormActMainOnLogFileChanged(bool isImport, string newLogFileName)
@@ -99,7 +123,7 @@ namespace ACT.FFXIVTranslate
             Overlay?.Close();
 
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
-            _translateService.Stop();
+            TranslateService.Stop();
             _workingThread.StopWorkingThread();
 
             Settings?.Save();
@@ -153,12 +177,12 @@ namespace ACT.FFXIVTranslate
 
             var chat = new ChattingLine
             {
-                RawEventCode = (byte)(eventCode & byte.MaxValue),
+                RawEventCode = (byte) (eventCode & byte.MaxValue),
                 RawSender = name,
                 RawContent = content
             };
 
-            _translateService.SubmitNewLine(chat);
+            TranslateService.SubmitNewLine(chat);
         }
     }
 

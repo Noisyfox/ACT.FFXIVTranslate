@@ -46,6 +46,7 @@
             this.checkBoxClickthrough = new System.Windows.Forms.CheckBox();
             this.buttonFont = new System.Windows.Forms.Button();
             this.textBoxFont = new System.Windows.Forms.TextBox();
+            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.groupBox_overlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -321,11 +322,19 @@
             this.textBoxFont.Size = new System.Drawing.Size(256, 21);
             this.textBoxFont.TabIndex = 17;
             // 
+            // translateProviderPanel
+            // 
+            this.translateProviderPanel.Location = new System.Drawing.Point(3, 191);
+            this.translateProviderPanel.Name = "translateProviderPanel";
+            this.translateProviderPanel.Size = new System.Drawing.Size(377, 159);
+            this.translateProviderPanel.TabIndex = 1;
+            // 
             // FFXIVTranslateTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.translateProviderPanel);
             this.Controls.Add(this.groupBox_overlay);
             this.Name = "FFXIVTranslateTabControl";
             this.Size = new System.Drawing.Size(757, 433);
@@ -361,5 +370,6 @@
         private System.Windows.Forms.Button buttonFont;
         private System.Windows.Forms.CheckBox checkBoxClickthrough;
         private System.Windows.Forms.TextBox textBoxFont;
+        private translate.TranslateProviderPanel translateProviderPanel;
     }
 }

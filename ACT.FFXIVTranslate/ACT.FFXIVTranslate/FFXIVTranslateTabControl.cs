@@ -51,6 +51,8 @@ namespace ACT.FFXIVTranslate
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
             NumericUpDownSizeOnValueChanged(this, EventArgs.Empty);
             CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
+
+            translateProviderPanel.AttachToAct(plugin);
         }
 
         private void ParentTabPageOnResize(object sender, EventArgs eventArgs)

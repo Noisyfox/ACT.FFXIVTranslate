@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Xml;
@@ -89,8 +92,56 @@ namespace ACT.FFXIVTranslate.translate
                         request.Content = new FormUrlEncodedContent(keyValues);
                         var response = client.SendAsync(request).Result;
                         var textResponse = response.Content.ReadAsStringAsync().Result;
-                        context._controller.NotifyOverlayContentUpdated(false, textResponse);
-                        batchWorkingList.Clear();
+
+                        try
+                        {
+                            // read json
+                            var ser = new DataContractJsonSerializer(typeof(YandexTranslateResult));
+                            var result =
+                                (YandexTranslateResult)
+                                    ser.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(textResponse)));
+
+                            if (result.Code != 200)
+                            {
+                                // Faild
+                                context._controller.NotifyOverlayContentUpdated(false, textResponse);
+                                continue;
+                            }
+
+                            var translatedLinesXml = result.Text[0];
+                            // Parse xml
+                            var doc = new XmlDocument();
+                            doc.LoadXml(translatedLinesXml);
+                            var nodes = doc.SelectNodes("lines/line");
+                            if (nodes == null || nodes.Count != batchWorkingList.Count)
+                            {
+                                // Error
+                                continue;
+                            }
+
+                            foreach (var p in batchWorkingList.Zip(nodes.Cast<XmlNode>(),
+                                (a, b) => new KeyValuePair<ChattingLine, XmlNode>(a, b)))
+                            {
+                                p.Key.TranslatedContent = p.Value.InnerText;
+                            }
+
+                            var finalResultBuilder = new StringBuilder();
+                            foreach (var line in batchWorkingList)
+                            {
+                                finalResultBuilder.Append($"{line.RawSender} says: {line.TranslatedContent}\n");
+                            }
+
+                            context._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                            context._controller.NotifyOverlayContentUpdated(false, textResponse);
+                            context._controller.NotifyOverlayContentUpdated(false, ex.ToString());
+                        }
+                        finally
+                        {
+                            batchWorkingList.Clear();
+                        }
                     }
                     else
                     {
@@ -114,6 +165,32 @@ namespace ACT.FFXIVTranslate.translate
                     }
                 }
             }
+        }
+
+        [DataContract]
+        internal class YandexTranslateResult
+        {
+            [DataContract]
+            internal class DetectedLang
+            {
+                [DataMember(Name = "lang", IsRequired = true)]
+                internal string Lang;
+            }
+
+            [DataMember(Name = "code", IsRequired = true)]
+            internal int Code;
+
+            [DataMember(Name = "message", IsRequired = false)]
+            internal string Message;
+
+            [DataMember(Name = "detected", IsRequired = false)]
+            internal DetectedLang Detected;
+
+            [DataMember(Name = "lang", IsRequired = false)]
+            internal string Lang;
+
+            [DataMember(Name = "text", IsRequired = false)]
+            internal string[] Text;
         }
     }
 }

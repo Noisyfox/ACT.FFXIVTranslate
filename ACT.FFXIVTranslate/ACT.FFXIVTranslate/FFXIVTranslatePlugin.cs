@@ -148,8 +148,8 @@ namespace ACT.FFXIVTranslate
 
             Debug.WriteLine(line);
             Debug.WriteLine($"{name} says: {content}");
-            Controller.NotifyOverlayContentUpdated(false,
-                $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
+//            Controller.NotifyOverlayContentUpdated(false,
+//                $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
 
             var chat = new ChattingLine
             {

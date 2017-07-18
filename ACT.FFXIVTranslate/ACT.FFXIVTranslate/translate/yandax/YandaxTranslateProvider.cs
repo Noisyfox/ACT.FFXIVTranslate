@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
@@ -32,7 +33,7 @@ namespace ACT.FFXIVTranslate.translate.yandax
                 foreach (var line in chattingLines)
                 {
                     textWriter.WriteStartElement("line");
-                    textWriter.WriteString(line.RawContent);
+                    textWriter.WriteString(TextProcessor.NaiveCleanText(line.RawContent));
                     textWriter.WriteEndElement();
                 }
                 textWriter.WriteEndElement();
@@ -57,9 +58,9 @@ namespace ACT.FFXIVTranslate.translate.yandax
                 var textResponse = response.Content.ReadAsStringAsync().Result;
 
                 // read json
-                var ser = new DataContractJsonSerializer(typeof(TranslateService.YandexTranslateResult));
+                var ser = new DataContractJsonSerializer(typeof(YandexTranslateResult));
                 var result =
-                    (TranslateService.YandexTranslateResult)
+                    (YandexTranslateResult)
                         ser.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(textResponse)));
 
                 switch (result.Code)
@@ -114,6 +115,26 @@ namespace ACT.FFXIVTranslate.translate.yandax
             {
                 throw new TranslateException(TranslateException.ExceptionReason.UnknownError, null, ex);
             }
+        }
+
+        [DataContract]
+        internal class YandexTranslateResult
+        {
+            [DataContract]
+            internal class DetectedLang
+            {
+                [DataMember(Name = "lang", IsRequired = true)] internal string Lang;
+            }
+
+            [DataMember(Name = "code", IsRequired = true)] internal int Code;
+
+            [DataMember(Name = "message", IsRequired = false)] internal string Message;
+
+            [DataMember(Name = "detected", IsRequired = false)] internal DetectedLang Detected;
+
+            [DataMember(Name = "lang", IsRequired = false)] internal string Lang;
+
+            [DataMember(Name = "text", IsRequired = false)] internal string[] Text;
         }
     }
 }

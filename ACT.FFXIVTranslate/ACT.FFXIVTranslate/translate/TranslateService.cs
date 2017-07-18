@@ -105,7 +105,8 @@ namespace ACT.FFXIVTranslate.translate
                             var finalResultBuilder = new StringBuilder();
                             foreach (var line in batchWorkingList)
                             {
-                                finalResultBuilder.Append($"{line.RawSender} says: {line.TranslatedContent}\n");
+                                finalResultBuilder.Append(
+                                    $"{BuildQuote(line)}{line.TranslatedContent}\n");
                             }
 
                             service._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());
@@ -144,24 +145,32 @@ namespace ACT.FFXIVTranslate.translate
             }
         }
 
-        [DataContract]
-        internal class YandexTranslateResult
+        private static string BuildQuote(ChattingLine chatting)
         {
-            [DataContract]
-            internal class DetectedLang
+            var cleanedName = TextProcessor.NaiveCleanText(chatting.RawSender);
+
+            var eventCode = chatting.RawEventCode;
+            var knownCode = Enum.IsDefined(typeof(EventCode), (byte) (eventCode & byte.MaxValue));
+
+            if (knownCode)
             {
-                [DataMember(Name = "lang", IsRequired = true)] internal string Lang;
+                var codeEnum = (EventCode) eventCode;
+
+                if (codeEnum == EventCode.TellFrom)
+                {
+                    return $"{cleanedName} >> ";
+                }
+                else if (codeEnum == EventCode.TellTo)
+                {
+                    return $">>{cleanedName}：";
+                }
+                else
+                {
+                    return $"{cleanedName}：";
+                }
             }
 
-            [DataMember(Name = "code", IsRequired = true)] internal int Code;
-
-            [DataMember(Name = "message", IsRequired = false)] internal string Message;
-
-            [DataMember(Name = "detected", IsRequired = false)] internal DetectedLang Detected;
-
-            [DataMember(Name = "lang", IsRequired = false)] internal string Lang;
-
-            [DataMember(Name = "text", IsRequired = false)] internal string[] Text;
+            return $"{cleanedName}：";
         }
     }
 }

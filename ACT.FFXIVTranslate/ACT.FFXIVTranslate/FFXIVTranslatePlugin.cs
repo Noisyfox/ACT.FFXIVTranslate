@@ -197,6 +197,7 @@ namespace ACT.FFXIVTranslate
         TellTo = 0x0c,
         TellFrom = 0x0d,
         Party = 0x0e,
+        Alliance = 0x0f,
         LS1 = 0x10,
         LS2 = 0x11,
         LS3 = 0x12,

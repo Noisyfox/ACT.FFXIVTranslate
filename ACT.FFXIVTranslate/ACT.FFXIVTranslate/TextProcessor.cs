@@ -49,6 +49,36 @@ namespace ACT.FFXIVTranslate
             return builder.ToString();
         }
 
+        public static string RemoveControlCharacters(string input)
+        {
+            var builder = new StringBuilder();
+            var is02 = false;
+
+            foreach (var chr in input)
+            {
+                switch (chr)
+                {
+                    case '\u0002':
+                        is02 = true;
+                        continue;
+                    case '\u0003':
+                        is02 = false;
+                        continue;
+                    case '\uFFFD': // EF BF BD
+                        is02 = true;
+                        continue;
+                }
+
+                if (is02)
+                {
+                    continue;
+                }
+
+                builder.Append(chr);
+            }
+            return builder.ToString();
+        }
+
         public static string MappingSpecialCharacter(char c)
         {
             if (c < '\uE000' || c > '\uE0FF')
@@ -94,5 +124,33 @@ namespace ACT.FFXIVTranslate
             return null;
         }
 
+
+        public static string BuildQuote(ChattingLine chatting)
+        {
+            var cleanedName = NaiveCleanText(chatting.RawSender);
+
+            var eventCode = chatting.RawEventCode;
+            var knownCode = Enum.IsDefined(typeof(EventCode), (byte) (eventCode & byte.MaxValue));
+
+            if (knownCode)
+            {
+                var codeEnum = (EventCode) eventCode;
+
+                if (codeEnum == EventCode.TellFrom)
+                {
+                    return $"{cleanedName} >> ";
+                }
+                else if (codeEnum == EventCode.TellTo)
+                {
+                    return $">>{cleanedName}：";
+                }
+                else
+                {
+                    return $"{cleanedName}：";
+                }
+            }
+
+            return $"{cleanedName}：";
+        }
     }
 }

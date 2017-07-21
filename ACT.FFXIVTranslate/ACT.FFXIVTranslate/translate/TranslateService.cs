@@ -106,7 +106,7 @@ namespace ACT.FFXIVTranslate.translate
                             foreach (var line in batchWorkingList)
                             {
                                 finalResultBuilder.Append(
-                                    $"{BuildQuote(line)}{line.TranslatedContent}\n");
+                                    $"{TextProcessor.BuildQuote(line)}{line.TranslatedContent}\n");
                             }
 
                             service._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());
@@ -143,34 +143,6 @@ namespace ACT.FFXIVTranslate.translate
                     }
                 }
             }
-        }
-
-        private static string BuildQuote(ChattingLine chatting)
-        {
-            var cleanedName = TextProcessor.NaiveCleanText(chatting.RawSender);
-
-            var eventCode = chatting.RawEventCode;
-            var knownCode = Enum.IsDefined(typeof(EventCode), (byte) (eventCode & byte.MaxValue));
-
-            if (knownCode)
-            {
-                var codeEnum = (EventCode) eventCode;
-
-                if (codeEnum == EventCode.TellFrom)
-                {
-                    return $"{cleanedName} >> ";
-                }
-                else if (codeEnum == EventCode.TellTo)
-                {
-                    return $">>{cleanedName}：";
-                }
-                else
-                {
-                    return $"{cleanedName}：";
-                }
-            }
-
-            return $"{cleanedName}：";
         }
     }
 }

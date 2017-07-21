@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace ACT.FFXIVTranslate
         internal TranslateService TranslateService { get; } = new TranslateService();
 
         private readonly LogReadThread _workingThread = new LogReadThread();
+        private readonly ConcurrentDictionary<EventCode, bool> _channelFilter = new ConcurrentDictionary<EventCode, bool>();
 
         public string TranslateProvider { get; set; }
 
@@ -73,6 +75,8 @@ namespace ACT.FFXIVTranslate
                 SettingsTab = new FFXIVTranslateTabControl();
                 SettingsTab.AttachToAct(this);
 
+                Controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
+
                 Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
                 TranslateService.AttachToAct(this);
 
@@ -92,6 +96,16 @@ namespace ACT.FFXIVTranslate
             {
                 StatusLabel.Text = "Init Failed: " + ex.ToString();
             }
+        }
+
+        private void ControllerOnChannelFilterChanged(bool fromView, EventCode code, bool show)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            _channelFilter.AddOrUpdate(code, show, (eventCode, b) => show);
         }
 
         private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom, string langTo)
@@ -164,20 +178,34 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            // TODO: Filter by event code
             var knownCode = Enum.IsDefined(typeof(EventCode), (byte) (eventCode & byte.MaxValue));
 
             var name = data[3];
             var content = data[4];
 
             Debug.WriteLine(line);
-            Debug.WriteLine($"{name} says: {content}");
+            Debug.WriteLine($"eventCode={data[2]}, known={knownCode}, {name} says: {content}");
 //            Controller.NotifyOverlayContentUpdated(false,
 //                $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
+
+            if (!knownCode)
+            {
+                return;
+            }
+
+            var eventCodeKnown =(EventCode) (byte) (eventCode & byte.MaxValue);
+            // Filter by event code
+            bool filterV;
+            var filterRes = _channelFilter.TryGetValue(eventCodeKnown == EventCode.TellTo ? EventCode.TellFrom : eventCodeKnown, out filterV);
+            if (filterRes && !filterV)
+            {
+                return;
+            }
 
             var chat = new ChattingLine
             {
                 RawEventCode = (byte) (eventCode & byte.MaxValue),
+                EventCode = eventCodeKnown,
                 RawSender = name,
                 RawContent = content
             };
@@ -219,6 +247,7 @@ namespace ACT.FFXIVTranslate
         public string RawSender;
         public string RawContent;
 
+        public EventCode EventCode;
         public string FormattedContent;
         public string TranslatedContent;
     }

@@ -60,5 +60,14 @@ namespace ACT.FFXIVTranslate
         {
             TranslateProviderChanged?.Invoke(fromView, provider, apiKey, langFrom, langTo);
         }
+
+        public delegate void OnChannelFilterChangedDelegate(bool fromView, EventCode code, bool show);
+
+        public event OnChannelFilterChangedDelegate ChannelFilterChanged;
+
+        public void NotifyChannelFilterChanged(bool fromView, EventCode code, bool show)
+        {
+            ChannelFilterChanged?.Invoke(fromView, code, show);
+        }
     }
 }

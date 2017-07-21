@@ -12,10 +12,28 @@ namespace ACT.FFXIVTranslate
     public partial class FFXIVTranslateTabControl : UserControl
     {
         private MainController _controller;
+        private Dictionary<CheckBox, EventCode> _channelFilterMapper = new Dictionary<CheckBox, EventCode>();
 
         public FFXIVTranslateTabControl()
         {
             InitializeComponent();
+
+            _channelFilterMapper[checkBoxChannelFilterSay] = EventCode.Say;
+            _channelFilterMapper[checkBoxChannelFilterShout] = EventCode.Shout;
+            _channelFilterMapper[checkBoxChannelFilterYell] = EventCode.Yell;
+            _channelFilterMapper[checkBoxChannelFilterTell] = EventCode.TellFrom;
+            _channelFilterMapper[checkBoxChannelFilterParty] = EventCode.Party;
+            _channelFilterMapper[checkBoxChannelFilterAlliance] = EventCode.Alliance;
+            _channelFilterMapper[checkBoxChannelFilterFC] = EventCode.FreeCompany;
+            _channelFilterMapper[checkBoxChannelFilterNovice] = EventCode.Novice;
+            _channelFilterMapper[checkBoxChannelFilterLS1] = EventCode.LS1;
+            _channelFilterMapper[checkBoxChannelFilterLS2] = EventCode.LS2;
+            _channelFilterMapper[checkBoxChannelFilterLS3] = EventCode.LS3;
+            _channelFilterMapper[checkBoxChannelFilterLS4] = EventCode.LS4;
+            _channelFilterMapper[checkBoxChannelFilterLS5] = EventCode.LS5;
+            _channelFilterMapper[checkBoxChannelFilterLS6] = EventCode.LS6;
+            _channelFilterMapper[checkBoxChannelFilterLS7] = EventCode.LS7;
+            _channelFilterMapper[checkBoxChannelFilterLS8] = EventCode.LS8;
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
@@ -36,6 +54,12 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(textBoxFont);
             settings.AddControlSetting(checkBoxClickthrough);
 
+            foreach (var cb in _channelFilterMapper.Keys)
+            {
+                settings.AddControlSetting(cb);
+                cb.CheckedChanged += CheckBoxChannelFilterOnCheckedChanged;
+            }
+
             _controller = plugin.Controller;
 
             numericUpDownX.ValueChanged+= NumericUpDownPositionOnValueChanged;
@@ -53,6 +77,13 @@ namespace ACT.FFXIVTranslate
             CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
 
             translateProviderPanel.AttachToAct(plugin);
+        }
+
+        private void CheckBoxChannelFilterOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            var cb = (CheckBox)sender;
+            var eventCode = _channelFilterMapper[cb];
+            _controller.NotifyChannelFilterChanged(true, eventCode, cb.Checked);
         }
 
         private void ParentTabPageOnResize(object sender, EventArgs eventArgs)

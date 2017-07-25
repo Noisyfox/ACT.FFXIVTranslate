@@ -175,13 +175,13 @@
     <value>说话</value>
   </data>
   <data name="checkBoxChannelFilterShout" xml:space="preserve">
-    <value>呼喊</value>
+    <value>喊话</value>
   </data>
   <data name="checkBoxChannelFilterTell" xml:space="preserve">
     <value>悄悄话</value>
   </data>
   <data name="checkBoxChannelFilterYell" xml:space="preserve">
-    <value>喊话</value>
+    <value>呼喊</value>
   </data>
   <data name="checkBoxClickthrough" xml:space="preserve">
     <value>鼠标穿透</value>

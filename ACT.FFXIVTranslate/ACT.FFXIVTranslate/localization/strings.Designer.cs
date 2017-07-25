@@ -205,7 +205,7 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
-        ///   查找类似 呼喊 的本地化字符串。
+        ///   查找类似 喊话 的本地化字符串。
         /// </summary>
         public static string checkBoxChannelFilterShout {
             get {
@@ -223,7 +223,7 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
-        ///   查找类似 喊话 的本地化字符串。
+        ///   查找类似 呼喊 的本地化字符串。
         /// </summary>
         public static string checkBoxChannelFilterYell {
             get {

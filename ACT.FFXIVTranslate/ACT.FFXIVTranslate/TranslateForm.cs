@@ -31,6 +31,7 @@ namespace ACT.FFXIVTranslate
             _controller.OpacityChanged += ControllerOnOpacityChanged;
             _controller.ClickthroughChanged += ControllerOnClickthroughChanged;
             _controller.OverlayContentUpdated += ControllerOnOverlayContentUpdated;
+            _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
 
             Move += OnMove;
             SizeChanged += OnSizeChanged;
@@ -91,6 +92,11 @@ namespace ACT.FFXIVTranslate
             }
 
             ThreadInvokes.RichTextBoxAppendText(this, richTextBoxContent, content);
+        }
+
+        private void ControllerOnOverlayFontChanged(bool fromView, Font font)
+        {
+            richTextBoxContent.Font = font;
         }
 
         private void OnMove(object sender, EventArgs e)

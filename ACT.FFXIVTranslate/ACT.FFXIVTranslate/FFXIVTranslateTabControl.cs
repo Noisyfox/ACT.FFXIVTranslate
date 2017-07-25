@@ -15,6 +15,7 @@ namespace ACT.FFXIVTranslate
     {
         private MainController _controller;
         private Dictionary<CheckBox, EventCode> _channelFilterMapper = new Dictionary<CheckBox, EventCode>();
+        private Font _currentFont;
 
         public FFXIVTranslateTabControl()
         {
@@ -57,9 +58,9 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(numericUpDownWidth);
             settings.AddControlSetting(numericUpDownHeight);
             settings.AddControlSetting(trackBarOpacity);
-            settings.AddControlSetting(textBoxFont);
             settings.AddControlSetting(checkBoxClickthrough);
             settings.AddStringSetting(nameof(plugin.Language));
+            settings.AddStringSetting(nameof(plugin.OverlayFont));
 
             foreach (var cb in _channelFilterMapper.Keys)
             {
@@ -80,6 +81,7 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayResized += ControllerOnOverlayResized;
             _controller.LanguageChanged += ControllerOnLanguageChanged;
             _controller.LogMessageAppend += ControllerOnLogMessageAppend;
+            _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
 
             trackBarOpacity_ValueChanged(this, EventArgs.Empty);
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
@@ -116,7 +118,13 @@ namespace ACT.FFXIVTranslate
 
         private void buttonFont_Click(object sender, EventArgs e)
         {
+            FontDialog fontdialog = new FontDialog();
+            fontdialog.Font = _currentFont;
 
+            if (fontdialog.ShowDialog() != DialogResult.Cancel)
+            {
+                _controller.NotifyOverlayFontChanged(true, fontdialog.Font);
+            }
         }
 
         private void NumericUpDownPositionOnValueChanged(object sender, EventArgs eventArgs)
@@ -186,6 +194,12 @@ namespace ACT.FFXIVTranslate
         private void ControllerOnLogMessageAppend(bool fromView, string log)
         {
             ThreadInvokes.RichTextBoxAppendText(ActGlobals.oFormActMain, richTextBoxLog, log);
+        }
+
+        private void ControllerOnOverlayFontChanged(bool fromView, Font font)
+        {
+            _currentFont = font;
+            textBoxFont.Text = TypeDescriptor.GetConverter(typeof(Font)).ConvertToString(font);
         }
     }
 }

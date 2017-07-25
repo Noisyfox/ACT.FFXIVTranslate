@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -52,11 +53,13 @@ namespace ACT.FFXIVTranslate
             OverlayContentUpdated?.Invoke(fromView, content);
         }
 
-        public delegate void OnProviderChangedDelegate(bool fromView, string provider, string apiKey, string langFrom, string langTo);
+        public delegate void OnProviderChangedDelegate(
+            bool fromView, string provider, string apiKey, string langFrom, string langTo);
 
         public event OnProviderChangedDelegate TranslateProviderChanged;
 
-        public void NotifyTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom, string langTo)
+        public void NotifyTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom,
+            string langTo)
         {
             TranslateProviderChanged?.Invoke(fromView, provider, apiKey, langFrom, langTo);
         }
@@ -86,6 +89,15 @@ namespace ACT.FFXIVTranslate
         public void NotifyLogMessageAppend(bool fromView, string log)
         {
             LogMessageAppend?.Invoke(fromView, log);
+        }
+
+        public delegate void OnOverlayFontChangedDelegate(bool fromView, Font font);
+
+        public event OnOverlayFontChangedDelegate OverlayFontChanged;
+
+        public void NotifyOverlayFontChanged(bool fromView, Font font)
+        {
+            OverlayFontChanged?.Invoke(fromView, font);
         }
     }
 }

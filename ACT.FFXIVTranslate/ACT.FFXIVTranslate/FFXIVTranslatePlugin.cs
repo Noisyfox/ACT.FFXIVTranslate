@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -32,6 +34,8 @@ namespace ACT.FFXIVTranslate
         public string TranslateLangTo { get; set; }
 
         public string Language { get; set; }
+
+        public string OverlayFont { get; set; }
 
         public FFXIVTranslatePlugin()
         {
@@ -79,6 +83,7 @@ namespace ACT.FFXIVTranslate
 
                 Controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
                 Controller.LanguageChanged += ControllerOnLanguageChanged;
+                Controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
 
                 Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
                 TranslateService.AttachToAct(this);
@@ -91,7 +96,15 @@ namespace ACT.FFXIVTranslate
 
                 _workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
 
-//                TranslateService.Start();
+                try
+                {
+                    Controller.NotifyOverlayFontChanged(false,
+                        (Font)TypeDescriptor.GetConverter(typeof(Font)).ConvertFromString(OverlayFont));
+                }
+                catch (Exception)
+                {
+                    Controller.NotifyOverlayFontChanged(true, new Font(FontFamily.GenericSansSerif, 12, FontStyle.Regular));
+                }
 
                 Controller.NotifyTranslateProviderChanged(false, TranslateProvider, TranslateApiKey, TranslateLangFrom, TranslateLangTo);
 
@@ -121,6 +134,16 @@ namespace ACT.FFXIVTranslate
             }
 
             Language = lang;
+        }
+
+        private void ControllerOnOverlayFontChanged(bool fromView, Font font)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            OverlayFont = TypeDescriptor.GetConverter(typeof(Font)).ConvertToString(font);
         }
 
         private void ControllerOnChannelFilterChanged(bool fromView, EventCode code, bool show)

@@ -10,11 +10,11 @@ namespace ACT.FFXIVTranslate.translate.yandax
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {
-            new LanguageDef("zh", "Chinese", ""),
-            new LanguageDef("en", "English", ""),
-            new LanguageDef("ja", "Japanese", ""),
-            new LanguageDef("de", "German", ""),
-            new LanguageDef("fr", "French", ""),
+            LanguageDef.BuildLangFromCulture("zh"),
+            LanguageDef.BuildLangFromCulture("en"),
+            LanguageDef.BuildLangFromCulture("ja"),
+            LanguageDef.BuildLangFromCulture("de"),
+            LanguageDef.BuildLangFromCulture("fr"),
         }.ToList();
 
         public string ProviderName { get; } = "Yandex Translate";

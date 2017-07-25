@@ -1,4 +1,6 @@
-﻿namespace ACT.FFXIVTranslate.localization
+﻿using System.Globalization;
+
+namespace ACT.FFXIVTranslate.localization
 {
 
     public class LanguageDef
@@ -30,5 +32,24 @@
             EnglishName = eName;
             LocalizedName = lName;
         }
+
+        public static LanguageDef BuildLangFromCulture(string name)
+        {
+            return BuildLangFromCulture(name, name);
+        }
+
+        public static LanguageDef BuildLangFromCulture(string name, string code)
+        {
+            var ci = CultureInfo.GetCultureInfo(name);
+            var eName = ci.EnglishName;
+            var nName = ci.NativeName;
+            if (nName == eName)
+            {
+                nName = string.Empty;
+            }
+            return new LanguageDef(code, eName, nName);
+        }
     }
+
+
 }

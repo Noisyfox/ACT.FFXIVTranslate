@@ -10,23 +10,13 @@ namespace ACT.FFXIVTranslate.localization
     public static class Localization
     {
         public static readonly LanguageDef[] SupportedLanguages = {
-            BuildLangFromCulture("zh-CN"),
-            BuildLangFromCulture("en-US"),
+            LanguageDef.BuildLangFromCulture("zh-CN"),
+            LanguageDef.BuildLangFromCulture("en-US"),
         };
 
         private const string DefaultLanguage = "zh-CN";
 
-        private static LanguageDef BuildLangFromCulture(string name)
-        {
-            var ci = CultureInfo.GetCultureInfo(name);
-            var eName = ci.EnglishName;
-            var nName = ci.NativeName;
-            if (nName == eName)
-            {
-                nName = string.Empty;
-            }
-            return new LanguageDef(name, eName, nName);
-        }
+
 
         public static LanguageDef GetLanguage(string code)
         {

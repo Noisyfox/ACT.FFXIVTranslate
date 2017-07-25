@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
@@ -78,6 +79,7 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayMoved += ControllerOnOverlayMoved;
             _controller.OverlayResized += ControllerOnOverlayResized;
             _controller.LanguageChanged += ControllerOnLanguageChanged;
+            _controller.LogMessageAppend += ControllerOnLogMessageAppend;
 
             trackBarOpacity_ValueChanged(this, EventArgs.Empty);
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
@@ -132,6 +134,11 @@ namespace ACT.FFXIVTranslate
             _controller.NotifyClickthroughChanged(false, checkBoxClickthrough.Checked);
         }
 
+        private void ComboBoxLanguageSelectedIndexChanged(object sender, EventArgs e)
+        {
+            _controller.NoitfyLanguageChanged(true, (string)comboBoxLanguage.SelectedValue);
+        }
+
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
         {
             if (!fromView)
@@ -176,9 +183,9 @@ namespace ACT.FFXIVTranslate
             comboBoxLanguage.SelectedValue = ld.LangCode;
         }
 
-        private void ComboBoxLanguageSelectedIndexChanged(object sender, EventArgs e)
+        private void ControllerOnLogMessageAppend(bool fromView, string log)
         {
-            _controller.NoitfyLanguageChanged(true, (string) comboBoxLanguage.SelectedValue);
+            ThreadInvokes.RichTextBoxAppendText(ActGlobals.oFormActMain, richTextBoxLog, log);
         }
     }
 }

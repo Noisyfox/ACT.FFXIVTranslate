@@ -78,5 +78,14 @@ namespace ACT.FFXIVTranslate
         {
             LanguageChanged?.Invoke(fromView, lang);
         }
+
+        public delegate void OnLogMessageAppendDelegate(bool fromView, string log);
+
+        public event OnLogMessageAppendDelegate LogMessageAppend;
+
+        public void NotifyLogMessageAppend(bool fromView, string log)
+        {
+            LogMessageAppend?.Invoke(fromView, log);
+        }
     }
 }

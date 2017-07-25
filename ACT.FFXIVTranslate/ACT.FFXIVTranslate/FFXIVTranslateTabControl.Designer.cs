@@ -68,6 +68,7 @@
             this.labelMainLanguage = new System.Windows.Forms.Label();
             this.tableLayoutPanelMainLanguage = new System.Windows.Forms.TableLayoutPanel();
             this.labelNeedToRestart = new System.Windows.Forms.Label();
+            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -623,6 +624,18 @@
             this.labelNeedToRestart.TabIndex = 5;
             this.labelNeedToRestart.Text = "*Need to restart the ACT.";
             // 
+            // richTextBoxLog
+            // 
+            this.richTextBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLog.Location = new System.Drawing.Point(3, 393);
+            this.richTextBoxLog.Name = "richTextBoxLog";
+            this.richTextBoxLog.ReadOnly = true;
+            this.richTextBoxLog.Size = new System.Drawing.Size(831, 124);
+            this.richTextBoxLog.TabIndex = 6;
+            this.richTextBoxLog.Text = "";
+            // 
             // translateProviderPanel
             // 
             this.translateProviderPanel.Location = new System.Drawing.Point(3, 228);
@@ -635,12 +648,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.richTextBoxLog);
             this.Controls.Add(this.tableLayoutPanelMainLanguage);
             this.Controls.Add(this.groupBoxChannelFilter);
             this.Controls.Add(this.translateProviderPanel);
             this.Controls.Add(this.groupBoxOverlay);
             this.Name = "FFXIVTranslateTabControl";
-            this.Size = new System.Drawing.Size(757, 433);
+            this.Size = new System.Drawing.Size(837, 520);
             this.groupBoxOverlay.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -701,5 +715,6 @@
         private System.Windows.Forms.Label labelMainLanguage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMainLanguage;
         private System.Windows.Forms.Label labelNeedToRestart;
+        private System.Windows.Forms.RichTextBox richTextBoxLog;
     }
 }

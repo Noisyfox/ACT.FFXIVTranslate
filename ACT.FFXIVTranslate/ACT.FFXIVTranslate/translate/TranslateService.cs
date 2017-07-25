@@ -114,8 +114,7 @@ namespace ACT.FFXIVTranslate.translate
                         }
                         catch (Exception ex)
                         {
-//                            service._controller.NotifyOverlayContentUpdated(false, textResponse);
-                            service._controller.NotifyOverlayContentUpdated(false, ex.ToString());
+                            service._controller.NotifyLogMessageAppend(false, ex + "\n");
                         }
                         finally
                         {

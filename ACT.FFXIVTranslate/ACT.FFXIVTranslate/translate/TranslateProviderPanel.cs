@@ -66,23 +66,48 @@ namespace ACT.FFXIVTranslate.translate
                 return;
             }
 
-            comboBoxProvider.SelectedValue = provider;
-            if (comboBoxProvider.SelectedIndex == -1)
+            if (string.IsNullOrEmpty(provider))
             {
                 comboBoxProvider.SelectedIndex = 0;
             }
+            else
+            {
+                comboBoxProvider.SelectedValue = provider;
+                if (comboBoxProvider.SelectedIndex == -1)
+                {
+                    comboBoxProvider.SelectedIndex = 0;
+                }
+            }
 
-            textBoxApiKey.Text = apiKey;
+            if (!string.IsNullOrEmpty(apiKey))
+            {
+                textBoxApiKey.Text = apiKey;
+            }
 
-            comboBoxLangFrom.SelectedValue = langFrom;
-            if (comboBoxLangFrom.SelectedIndex == -1)
+            if (string.IsNullOrEmpty(langFrom))
             {
                 comboBoxLangFrom.SelectedIndex = 0;
             }
-            comboBoxLangTo.SelectedValue = langTo;
-            if (comboBoxLangTo.SelectedIndex == -1)
+            else
+            {
+                comboBoxLangFrom.SelectedValue = langFrom;
+                if (comboBoxLangFrom.SelectedIndex == -1)
+                {
+                    comboBoxLangFrom.SelectedIndex = 0;
+                }
+            }
+
+            if (string.IsNullOrEmpty(langTo))
             {
                 comboBoxLangTo.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBoxLangTo.SelectedValue = langTo;
+                if (comboBoxLangTo.SelectedIndex == -1)
+                {
+                    comboBoxLangTo.SelectedIndex = 0;
+                }
             }
             _plugin.Controller.NotifyTranslateProviderChanged(true, (string)comboBoxProvider.SelectedValue,
                 textBoxApiKey.Text, (string)comboBoxLangFrom.SelectedValue, (string)comboBoxLangTo.SelectedValue);

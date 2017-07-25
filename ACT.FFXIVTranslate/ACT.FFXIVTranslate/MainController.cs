@@ -69,5 +69,14 @@ namespace ACT.FFXIVTranslate
         {
             ChannelFilterChanged?.Invoke(fromView, code, show);
         }
+
+        public delegate void OnLanguageChangedDelegate(bool fromView, string lang);
+
+        public event OnLanguageChangedDelegate LanguageChanged;
+
+        public void NoitfyLanguageChanged(bool fromView, string lang)
+        {
+            LanguageChanged?.Invoke(fromView, lang);
+        }
     }
 }

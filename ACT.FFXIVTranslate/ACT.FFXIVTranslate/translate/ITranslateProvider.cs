@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate
 {
@@ -19,37 +20,6 @@ namespace ACT.FFXIVTranslate.translate
         List<LanguageDef> SupportedDestLanguages { get; }
 
         ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst);
-    }
-
-    internal class LanguageDef
-    {
-        public static readonly LanguageDef Auto = new LanguageDef("auto", "Auto Detect", string.Empty);
-
-        public string LangCode { get; }
-
-        public string EnglishName { get; }
-
-        public string LocalizedName { get; }
-
-        public string DisplayName
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(LocalizedName))
-                {
-                    return EnglishName;
-                }
-
-                return $"{LocalizedName}({EnglishName})";
-            }
-        }
-
-        internal LanguageDef(string code, string eName, string lName)
-        {
-            LangCode = code;
-            EnglishName = eName;
-            LocalizedName = lName;
-        }
     }
 
     internal class TranslateException : Exception

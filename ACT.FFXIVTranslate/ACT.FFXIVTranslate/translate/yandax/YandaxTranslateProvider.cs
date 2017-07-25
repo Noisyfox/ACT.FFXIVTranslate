@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
+using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate.yandax
 {

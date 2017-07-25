@@ -31,6 +31,8 @@ namespace ACT.FFXIVTranslate
 
         public string TranslateLangTo { get; set; }
 
+        public string Language { get; set; }
+
         public FFXIVTranslatePlugin()
         {
             _workingThread.OnLogLineRead += OnLogLineRead;
@@ -40,7 +42,7 @@ namespace ACT.FFXIVTranslate
         {
             ParentTabPage = pluginScreenSpace;
             StatusLabel = pluginStatusText;
-            ParentTabPage.Text = "Talk Translate";
+            ParentTabPage.Text = "Chatting Translate";
 
             try
             {
@@ -76,11 +78,14 @@ namespace ACT.FFXIVTranslate
                 SettingsTab.AttachToAct(this);
 
                 Controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
+                Controller.LanguageChanged += ControllerOnLanguageChanged;
 
                 Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
                 TranslateService.AttachToAct(this);
 
                 Settings.Load();
+
+                DoLocalization();
 
                 ActGlobals.oFormActMain.LogFileChanged += OFormActMainOnLogFileChanged;
 
@@ -96,6 +101,26 @@ namespace ACT.FFXIVTranslate
             {
                 StatusLabel.Text = "Init Failed: " + ex.ToString();
             }
+        }
+
+        private void DoLocalization()
+        {
+            Controller.NoitfyLanguageChanged(false, Language);
+
+            localization.Localization.ConfigLocalization(Language);
+
+            ParentTabPage.Text = localization.strings.actPanelTitle;
+            SettingsTab.DoLocalization();
+        }
+
+        private void ControllerOnLanguageChanged(bool fromView, string lang)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            Language = lang;
         }
 
         private void ControllerOnChannelFilterChanged(bool fromView, EventCode code, bool show)

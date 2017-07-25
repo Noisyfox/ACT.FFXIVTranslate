@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate.yandax
 {

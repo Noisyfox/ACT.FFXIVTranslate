@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox_overlay = new System.Windows.Forms.GroupBox();
+            this.groupBoxOverlay = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.numericUpDownY = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelPosition = new System.Windows.Forms.Label();
+            this.labelX = new System.Windows.Forms.Label();
+            this.labelY = new System.Windows.Forms.Label();
             this.numericUpDownX = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelSize = new System.Windows.Forms.Label();
+            this.labelWidth = new System.Windows.Forms.Label();
+            this.labelHeight = new System.Windows.Forms.Label();
             this.numericUpDownWidth = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownHeight = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelOpacity = new System.Windows.Forms.Label();
             this.trackBarOpacity = new System.Windows.Forms.TrackBar();
             this.labelOpacityValue = new System.Windows.Forms.Label();
             this.checkBoxClickthrough = new System.Windows.Forms.CheckBox();
             this.buttonFont = new System.Windows.Forms.Button();
             this.textBoxFont = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxChannelFilter = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxChannelFilterSay = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterShout = new System.Windows.Forms.CheckBox();
@@ -54,6 +54,8 @@
             this.checkBoxChannelFilterTell = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterParty = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterAlliance = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelFilterFC = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelFilterNovice = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterLS1 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterLS2 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterLS3 = new System.Windows.Forms.CheckBox();
@@ -62,29 +64,32 @@
             this.checkBoxChannelFilterLS6 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterLS7 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterLS8 = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelFilterFC = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelFilterNovice = new System.Windows.Forms.CheckBox();
+            this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
+            this.labelMainLanguage = new System.Windows.Forms.Label();
+            this.tableLayoutPanelMainLanguage = new System.Windows.Forms.TableLayoutPanel();
+            this.labelNeedToRestart = new System.Windows.Forms.Label();
             this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
-            this.groupBox_overlay.SuspendLayout();
+            this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOpacity)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxChannelFilter.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanelMainLanguage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox_overlay
+            // groupBoxOverlay
             // 
-            this.groupBox_overlay.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox_overlay.Location = new System.Drawing.Point(3, 3);
-            this.groupBox_overlay.Name = "groupBox_overlay";
-            this.groupBox_overlay.Size = new System.Drawing.Size(377, 182);
-            this.groupBox_overlay.TabIndex = 0;
-            this.groupBox_overlay.TabStop = false;
-            this.groupBox_overlay.Text = "Overlay Settings";
+            this.groupBoxOverlay.Controls.Add(this.tableLayoutPanel1);
+            this.groupBoxOverlay.Location = new System.Drawing.Point(3, 40);
+            this.groupBoxOverlay.Name = "groupBoxOverlay";
+            this.groupBoxOverlay.Size = new System.Drawing.Size(377, 182);
+            this.groupBoxOverlay.TabIndex = 0;
+            this.groupBoxOverlay.TabStop = false;
+            this.groupBoxOverlay.Text = "Overlay Settings";
             // 
             // tableLayoutPanel1
             // 
@@ -98,16 +103,16 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownY, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelPosition, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelX, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelY, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownX, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelSize, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelWidth, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelHeight, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownWidth, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownHeight, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelOpacity, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.trackBarOpacity, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelOpacityValue, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxClickthrough, 0, 4);
@@ -147,35 +152,35 @@
             0,
             0});
             // 
-            // label1
+            // labelPosition
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Position";
+            this.labelPosition.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.Location = new System.Drawing.Point(3, 7);
+            this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(53, 12);
+            this.labelPosition.TabIndex = 0;
+            this.labelPosition.Text = "Position";
             // 
-            // label2
+            // labelX
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(86, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "X:";
+            this.labelX.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelX.AutoSize = true;
+            this.labelX.Location = new System.Drawing.Point(86, 7);
+            this.labelX.Name = "labelX";
+            this.labelX.Size = new System.Drawing.Size(17, 12);
+            this.labelX.TabIndex = 1;
+            this.labelX.Text = "X:";
             // 
-            // label3
+            // labelY
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(242, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Y:";
+            this.labelY.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelY.AutoSize = true;
+            this.labelY.Location = new System.Drawing.Point(242, 7);
+            this.labelY.Name = "labelY";
+            this.labelY.Size = new System.Drawing.Size(17, 12);
+            this.labelY.TabIndex = 2;
+            this.labelY.Text = "Y:";
             // 
             // numericUpDownX
             // 
@@ -200,35 +205,35 @@
             0,
             0});
             // 
-            // label4
+            // labelSize
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Size";
+            this.labelSize.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelSize.AutoSize = true;
+            this.labelSize.Location = new System.Drawing.Point(3, 34);
+            this.labelSize.Name = "labelSize";
+            this.labelSize.Size = new System.Drawing.Size(29, 12);
+            this.labelSize.TabIndex = 5;
+            this.labelSize.Text = "Size";
             // 
-            // label5
+            // labelWidth
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(62, 34);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Width:";
+            this.labelWidth.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelWidth.AutoSize = true;
+            this.labelWidth.Location = new System.Drawing.Point(62, 34);
+            this.labelWidth.Name = "labelWidth";
+            this.labelWidth.Size = new System.Drawing.Size(41, 12);
+            this.labelWidth.TabIndex = 6;
+            this.labelWidth.Text = "Width:";
             // 
-            // label6
+            // labelHeight
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(212, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 12);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Height:";
+            this.labelHeight.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelHeight.AutoSize = true;
+            this.labelHeight.Location = new System.Drawing.Point(212, 34);
+            this.labelHeight.Name = "labelHeight";
+            this.labelHeight.Size = new System.Drawing.Size(47, 12);
+            this.labelHeight.TabIndex = 7;
+            this.labelHeight.Text = "Height:";
             // 
             // numericUpDownWidth
             // 
@@ -276,15 +281,15 @@
             0,
             0});
             // 
-            // label7
+            // labelOpacity
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 54);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label7.Size = new System.Drawing.Size(53, 22);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Opacity:";
+            this.labelOpacity.AutoSize = true;
+            this.labelOpacity.Location = new System.Drawing.Point(3, 54);
+            this.labelOpacity.Name = "labelOpacity";
+            this.labelOpacity.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.labelOpacity.Size = new System.Drawing.Size(53, 22);
+            this.labelOpacity.TabIndex = 10;
+            this.labelOpacity.Text = "Opacity:";
             // 
             // trackBarOpacity
             // 
@@ -342,15 +347,15 @@
             this.textBoxFont.Size = new System.Drawing.Size(256, 21);
             this.textBoxFont.TabIndex = 17;
             // 
-            // groupBox1
+            // groupBoxChannelFilter
             // 
-            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(387, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(160, 346);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Channel Filter";
+            this.groupBoxChannelFilter.Controls.Add(this.flowLayoutPanel1);
+            this.groupBoxChannelFilter.Location = new System.Drawing.Point(387, 41);
+            this.groupBoxChannelFilter.Name = "groupBoxChannelFilter";
+            this.groupBoxChannelFilter.Size = new System.Drawing.Size(160, 346);
+            this.groupBoxChannelFilter.TabIndex = 2;
+            this.groupBoxChannelFilter.TabStop = false;
+            this.groupBoxChannelFilter.Text = "Channel Filter";
             // 
             // flowLayoutPanel1
             // 
@@ -451,6 +456,30 @@
             this.checkBoxChannelFilterAlliance.Text = "Alliance";
             this.checkBoxChannelFilterAlliance.UseVisualStyleBackColor = true;
             // 
+            // checkBoxChannelFilterFC
+            // 
+            this.checkBoxChannelFilterFC.AutoSize = true;
+            this.checkBoxChannelFilterFC.Checked = true;
+            this.checkBoxChannelFilterFC.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxChannelFilterFC.Location = new System.Drawing.Point(3, 69);
+            this.checkBoxChannelFilterFC.Name = "checkBoxChannelFilterFC";
+            this.checkBoxChannelFilterFC.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxChannelFilterFC.TabIndex = 14;
+            this.checkBoxChannelFilterFC.Text = "Free Company";
+            this.checkBoxChannelFilterFC.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelFilterNovice
+            // 
+            this.checkBoxChannelFilterNovice.AutoSize = true;
+            this.checkBoxChannelFilterNovice.Checked = true;
+            this.checkBoxChannelFilterNovice.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxChannelFilterNovice.Location = new System.Drawing.Point(3, 91);
+            this.checkBoxChannelFilterNovice.Name = "checkBoxChannelFilterNovice";
+            this.checkBoxChannelFilterNovice.Size = new System.Drawing.Size(60, 16);
+            this.checkBoxChannelFilterNovice.TabIndex = 15;
+            this.checkBoxChannelFilterNovice.Text = "Novice";
+            this.checkBoxChannelFilterNovice.UseVisualStyleBackColor = true;
+            // 
             // checkBoxChannelFilterLS1
             // 
             this.checkBoxChannelFilterLS1.AutoSize = true;
@@ -547,33 +576,56 @@
             this.checkBoxChannelFilterLS8.Text = "Linkshell 8";
             this.checkBoxChannelFilterLS8.UseVisualStyleBackColor = true;
             // 
-            // checkBoxChannelFilterFC
+            // comboBoxLanguage
             // 
-            this.checkBoxChannelFilterFC.AutoSize = true;
-            this.checkBoxChannelFilterFC.Checked = true;
-            this.checkBoxChannelFilterFC.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxChannelFilterFC.Location = new System.Drawing.Point(3, 69);
-            this.checkBoxChannelFilterFC.Name = "checkBoxChannelFilterFC";
-            this.checkBoxChannelFilterFC.Size = new System.Drawing.Size(96, 16);
-            this.checkBoxChannelFilterFC.TabIndex = 14;
-            this.checkBoxChannelFilterFC.Text = "Free Company";
-            this.checkBoxChannelFilterFC.UseVisualStyleBackColor = true;
+            this.comboBoxLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLanguage.FormattingEnabled = true;
+            this.comboBoxLanguage.Location = new System.Drawing.Point(68, 5);
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.comboBoxLanguage.Size = new System.Drawing.Size(312, 20);
+            this.comboBoxLanguage.TabIndex = 3;
             // 
-            // checkBoxChannelFilterNovice
+            // labelMainLanguage
             // 
-            this.checkBoxChannelFilterNovice.AutoSize = true;
-            this.checkBoxChannelFilterNovice.Checked = true;
-            this.checkBoxChannelFilterNovice.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxChannelFilterNovice.Location = new System.Drawing.Point(3, 91);
-            this.checkBoxChannelFilterNovice.Name = "checkBoxChannelFilterNovice";
-            this.checkBoxChannelFilterNovice.Size = new System.Drawing.Size(60, 16);
-            this.checkBoxChannelFilterNovice.TabIndex = 15;
-            this.checkBoxChannelFilterNovice.Text = "Novice";
-            this.checkBoxChannelFilterNovice.UseVisualStyleBackColor = true;
+            this.labelMainLanguage.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelMainLanguage.AutoSize = true;
+            this.labelMainLanguage.Location = new System.Drawing.Point(3, 9);
+            this.labelMainLanguage.Name = "labelMainLanguage";
+            this.labelMainLanguage.Size = new System.Drawing.Size(59, 12);
+            this.labelMainLanguage.TabIndex = 4;
+            this.labelMainLanguage.Text = "Language:";
+            // 
+            // tableLayoutPanelMainLanguage
+            // 
+            this.tableLayoutPanelMainLanguage.ColumnCount = 3;
+            this.tableLayoutPanelMainLanguage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelMainLanguage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelMainLanguage.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelMainLanguage.Controls.Add(this.comboBoxLanguage, 1, 0);
+            this.tableLayoutPanelMainLanguage.Controls.Add(this.labelMainLanguage, 0, 0);
+            this.tableLayoutPanelMainLanguage.Controls.Add(this.labelNeedToRestart, 2, 0);
+            this.tableLayoutPanelMainLanguage.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelMainLanguage.Name = "tableLayoutPanelMainLanguage";
+            this.tableLayoutPanelMainLanguage.RowCount = 1;
+            this.tableLayoutPanelMainLanguage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelMainLanguage.Size = new System.Drawing.Size(544, 31);
+            this.tableLayoutPanelMainLanguage.TabIndex = 5;
+            // 
+            // labelNeedToRestart
+            // 
+            this.labelNeedToRestart.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelNeedToRestart.AutoSize = true;
+            this.labelNeedToRestart.Enabled = false;
+            this.labelNeedToRestart.Location = new System.Drawing.Point(386, 9);
+            this.labelNeedToRestart.Name = "labelNeedToRestart";
+            this.labelNeedToRestart.Size = new System.Drawing.Size(155, 12);
+            this.labelNeedToRestart.TabIndex = 5;
+            this.labelNeedToRestart.Text = "*Need to restart the ACT.";
             // 
             // translateProviderPanel
             // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(3, 191);
+            this.translateProviderPanel.Location = new System.Drawing.Point(3, 228);
             this.translateProviderPanel.Name = "translateProviderPanel";
             this.translateProviderPanel.Size = new System.Drawing.Size(377, 159);
             this.translateProviderPanel.TabIndex = 1;
@@ -583,12 +635,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tableLayoutPanelMainLanguage);
+            this.Controls.Add(this.groupBoxChannelFilter);
             this.Controls.Add(this.translateProviderPanel);
-            this.Controls.Add(this.groupBox_overlay);
+            this.Controls.Add(this.groupBoxOverlay);
             this.Name = "FFXIVTranslateTabControl";
             this.Size = new System.Drawing.Size(757, 433);
-            this.groupBox_overlay.ResumeLayout(false);
+            this.groupBoxOverlay.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).EndInit();
@@ -596,35 +649,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOpacity)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBoxChannelFilter.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.tableLayoutPanelMainLanguage.ResumeLayout(false);
+            this.tableLayoutPanelMainLanguage.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox_overlay;
+        private System.Windows.Forms.GroupBox groupBoxOverlay;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.NumericUpDown numericUpDownY;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelPosition;
+        private System.Windows.Forms.Label labelX;
+        private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.NumericUpDown numericUpDownX;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelSize;
+        private System.Windows.Forms.Label labelWidth;
+        private System.Windows.Forms.Label labelHeight;
         private System.Windows.Forms.NumericUpDown numericUpDownWidth;
         private System.Windows.Forms.NumericUpDown numericUpDownHeight;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelOpacity;
         private System.Windows.Forms.TrackBar trackBarOpacity;
         private System.Windows.Forms.Label labelOpacityValue;
         private System.Windows.Forms.Button buttonFont;
         private System.Windows.Forms.CheckBox checkBoxClickthrough;
         private System.Windows.Forms.TextBox textBoxFont;
         private translate.TranslateProviderPanel translateProviderPanel;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxChannelFilter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterSay;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterShout;
@@ -642,5 +697,9 @@
         private System.Windows.Forms.CheckBox checkBoxChannelFilterLS8;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterFC;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterNovice;
+        private System.Windows.Forms.ComboBox comboBoxLanguage;
+        private System.Windows.Forms.Label labelMainLanguage;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMainLanguage;
+        private System.Windows.Forms.Label labelNeedToRestart;
     }
 }

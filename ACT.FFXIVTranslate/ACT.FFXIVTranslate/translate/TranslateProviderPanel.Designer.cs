@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxProvider = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labelProvider = new System.Windows.Forms.Label();
             this.comboBoxProvider = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.labelApiKey = new System.Windows.Forms.Label();
             this.textBoxApiKey = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.labelLang = new System.Windows.Forms.Label();
+            this.labelLangFrom = new System.Windows.Forms.Label();
+            this.labelLangTo = new System.Windows.Forms.Label();
             this.comboBoxLangFrom = new System.Windows.Forms.ComboBox();
             this.comboBoxLangTo = new System.Windows.Forms.ComboBox();
             this.buttonProviderApply = new System.Windows.Forms.Button();
             this.linkLabelPowered = new System.Windows.Forms.LinkLabel();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxProvider.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupBoxProvider
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.groupBoxProvider.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(433, 153);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Provider Settings";
+            this.groupBoxProvider.Controls.Add(this.tableLayoutPanel2);
+            this.groupBoxProvider.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxProvider.Name = "groupBoxProvider";
+            this.groupBoxProvider.Size = new System.Drawing.Size(433, 153);
+            this.groupBoxProvider.TabIndex = 2;
+            this.groupBoxProvider.TabStop = false;
+            this.groupBoxProvider.Text = "Provider Settings";
             // 
             // tableLayoutPanel2
             // 
@@ -69,13 +69,13 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelProvider, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBoxProvider, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.labelApiKey, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.textBoxApiKey, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 3, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelLang, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelLangFrom, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelLangTo, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.comboBoxLangFrom, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.comboBoxLangTo, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.buttonProviderApply, 4, 3);
@@ -91,15 +91,15 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(421, 127);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // label8
+            // labelProvider
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 7);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 12);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Provider:";
+            this.labelProvider.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProvider.AutoSize = true;
+            this.labelProvider.Location = new System.Drawing.Point(3, 7);
+            this.labelProvider.Name = "labelProvider";
+            this.labelProvider.Size = new System.Drawing.Size(59, 12);
+            this.labelProvider.TabIndex = 0;
+            this.labelProvider.Text = "Provider:";
             // 
             // comboBoxProvider
             // 
@@ -113,15 +113,15 @@
             this.comboBoxProvider.TabIndex = 1;
             this.comboBoxProvider.SelectedIndexChanged += new System.EventHandler(this.comboBoxProvider_SelectedIndexChanged);
             // 
-            // label9
+            // labelApiKey
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 33);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "API Key:";
+            this.labelApiKey.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelApiKey.AutoSize = true;
+            this.labelApiKey.Location = new System.Drawing.Point(3, 33);
+            this.labelApiKey.Name = "labelApiKey";
+            this.labelApiKey.Size = new System.Drawing.Size(53, 12);
+            this.labelApiKey.TabIndex = 2;
+            this.labelApiKey.Text = "API Key:";
             // 
             // textBoxApiKey
             // 
@@ -134,35 +134,35 @@
             this.textBoxApiKey.Text = "trnsl.1.1.20170716T025951Z.13c73247084b012d.3404189299f91adf7792235bc7cf7fb7f3bd2" +
     "6a2";
             // 
-            // label10
+            // labelLang
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 60);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 12);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Language";
+            this.labelLang.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelLang.AutoSize = true;
+            this.labelLang.Location = new System.Drawing.Point(3, 60);
+            this.labelLang.Name = "labelLang";
+            this.labelLang.Size = new System.Drawing.Size(53, 12);
+            this.labelLang.TabIndex = 4;
+            this.labelLang.Text = "Language";
             // 
-            // label11
+            // labelLangFrom
             // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(68, 60);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 12);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "From:";
+            this.labelLangFrom.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelLangFrom.AutoSize = true;
+            this.labelLangFrom.Location = new System.Drawing.Point(68, 60);
+            this.labelLangFrom.Name = "labelLangFrom";
+            this.labelLangFrom.Size = new System.Drawing.Size(35, 12);
+            this.labelLangFrom.TabIndex = 5;
+            this.labelLangFrom.Text = "From:";
             // 
-            // label12
+            // labelLangTo
             // 
-            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(252, 60);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(23, 12);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "To:";
+            this.labelLangTo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelLangTo.AutoSize = true;
+            this.labelLangTo.Location = new System.Drawing.Point(252, 60);
+            this.labelLangTo.Name = "labelLangTo";
+            this.labelLangTo.Size = new System.Drawing.Size(23, 12);
+            this.labelLangTo.TabIndex = 6;
+            this.labelLangTo.Text = "To:";
             // 
             // comboBoxLangFrom
             // 
@@ -211,10 +211,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxProvider);
             this.Name = "TranslateProviderPanel";
             this.Size = new System.Drawing.Size(436, 159);
-            this.groupBox1.ResumeLayout(false);
+            this.groupBoxProvider.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -223,15 +223,15 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxProvider;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelProvider;
         private System.Windows.Forms.ComboBox comboBoxProvider;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelApiKey;
         private System.Windows.Forms.TextBox textBoxApiKey;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelLang;
+        private System.Windows.Forms.Label labelLangFrom;
+        private System.Windows.Forms.Label labelLangTo;
         private System.Windows.Forms.ComboBox comboBoxLangFrom;
         private System.Windows.Forms.ComboBox comboBoxLangTo;
         private System.Windows.Forms.Button buttonProviderApply;

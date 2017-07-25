@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -34,6 +35,10 @@ namespace ACT.FFXIVTranslate
             _channelFilterMapper[checkBoxChannelFilterLS6] = EventCode.LS6;
             _channelFilterMapper[checkBoxChannelFilterLS7] = EventCode.LS7;
             _channelFilterMapper[checkBoxChannelFilterLS8] = EventCode.LS8;
+
+            comboBoxLanguage.DisplayMember = "DisplayName";
+            comboBoxLanguage.ValueMember = "LangCode";
+            comboBoxLanguage.DataSource = localization.Localization.SupportedLanguages;
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
@@ -53,6 +58,7 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(trackBarOpacity);
             settings.AddControlSetting(textBoxFont);
             settings.AddControlSetting(checkBoxClickthrough);
+            settings.AddStringSetting(nameof(plugin.Language));
 
             foreach (var cb in _channelFilterMapper.Keys)
             {
@@ -67,9 +73,11 @@ namespace ACT.FFXIVTranslate
             numericUpDownWidth.ValueChanged += NumericUpDownSizeOnValueChanged;
             numericUpDownHeight.ValueChanged += NumericUpDownSizeOnValueChanged;
             checkBoxClickthrough.CheckedChanged += CheckBoxClickthroughOnCheckedChanged;
+            comboBoxLanguage.SelectedIndexChanged += ComboBoxLanguageSelectedIndexChanged;
 
             _controller.OverlayMoved += ControllerOnOverlayMoved;
             _controller.OverlayResized += ControllerOnOverlayResized;
+            _controller.LanguageChanged += ControllerOnLanguageChanged;
 
             trackBarOpacity_ValueChanged(this, EventArgs.Empty);
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
@@ -77,6 +85,12 @@ namespace ACT.FFXIVTranslate
             CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
 
             translateProviderPanel.AttachToAct(plugin);
+        }
+
+        public void DoLocalization()
+        {
+            localization.Localization.TranslateControls(this);
+            translateProviderPanel.DoLocalization();
         }
 
         private void CheckBoxChannelFilterOnCheckedChanged(object sender, EventArgs eventArgs)
@@ -149,6 +163,22 @@ namespace ACT.FFXIVTranslate
 
             numericUpDownWidth.ValueChanged += NumericUpDownSizeOnValueChanged;
             numericUpDownHeight.ValueChanged += NumericUpDownSizeOnValueChanged;
+        }
+
+        private void ControllerOnLanguageChanged(bool fromView, string lang)
+        {
+            if (fromView)
+            {
+                return;
+            }
+            var ld = localization.Localization.GetLanguage(lang);
+            _controller.NoitfyLanguageChanged(true, ld.LangCode);
+            comboBoxLanguage.SelectedValue = ld.LangCode;
+        }
+
+        private void ComboBoxLanguageSelectedIndexChanged(object sender, EventArgs e)
+        {
+            _controller.NoitfyLanguageChanged(true, (string) comboBoxLanguage.SelectedValue);
         }
     }
 }

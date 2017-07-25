@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate.yandax;
 
 namespace ACT.FFXIVTranslate.translate
@@ -50,7 +51,7 @@ namespace ACT.FFXIVTranslate.translate
             TranslateLangTo = langTo;
 
             var factory = AllProviders.First(it => it.ProviderName == provider);
-            var lF = langFrom == "auto" ? null : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);
+            var lF = langFrom == LanguageDef.CodeAuto ? null : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);
             var lT = factory.SupportedDestLanguages.First(it => it.LangCode == langTo);
             var context = new TranslateContext
             {

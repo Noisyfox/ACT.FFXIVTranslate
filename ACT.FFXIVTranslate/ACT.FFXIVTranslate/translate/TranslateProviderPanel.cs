@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate
 {
@@ -36,10 +37,12 @@ namespace ACT.FFXIVTranslate.translate
             settings.AddStringSetting(nameof(plugin.TranslateLangFrom));
             settings.AddStringSetting(nameof(plugin.TranslateLangTo));
 
-            comboBoxProvider.DataSource = _service.AllProviders;
-
             var controller = plugin.Controller;
             controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
+        }
+        public void DoLocalization()
+        {
+            comboBoxProvider.DataSource = _service.AllProviders;
         }
 
         private void comboBoxProvider_SelectedIndexChanged(object sender, EventArgs e)
@@ -50,7 +53,7 @@ namespace ACT.FFXIVTranslate.translate
             {
                 // Update language selector
                 comboBoxLangFrom.DataSource = selectedProvider.SupportAutoDetect
-                    ? new[] {LanguageDef.Auto}.Concat(selectedProvider.SupportedSrcLanguages).ToList()
+                    ? new[] { new LanguageDef(LanguageDef.CodeAuto, strings.LangAutoDetect, string.Empty) }.Concat(selectedProvider.SupportedSrcLanguages).ToList()
                     : selectedProvider.SupportedSrcLanguages;
                 comboBoxLangTo.DataSource = selectedProvider.SupportedDestLanguages;
             }

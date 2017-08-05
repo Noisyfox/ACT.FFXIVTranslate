@@ -11,7 +11,7 @@ using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate.yandax
 {
-    class YandaxTranslateProvider : ITranslateProvider
+    internal class YandaxTranslateProvider : ITranslateProvider
     {
         private readonly string _apiKey;
         private readonly string _lang;
@@ -33,9 +33,7 @@ namespace ACT.FFXIVTranslate.translate.yandax
                 textWriter.WriteStartElement("lines");
                 foreach (var line in chattingLines)
                 {
-                    textWriter.WriteStartElement("line");
-                    textWriter.WriteString(TextProcessor.NaiveCleanText(line.RawContent));
-                    textWriter.WriteEndElement();
+                    textWriter.WriteElementString("line", TextProcessor.NaiveCleanText(line.RawContent));
                 }
                 textWriter.WriteEndElement();
                 textWriter.Flush();

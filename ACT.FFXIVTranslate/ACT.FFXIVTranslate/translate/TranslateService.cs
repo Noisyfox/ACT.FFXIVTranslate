@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using ACT.FFXIVTranslate.localization;
+using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.yandax;
 
 namespace ACT.FFXIVTranslate.translate
@@ -29,7 +30,7 @@ namespace ACT.FFXIVTranslate.translate
         private string TranslateLangTo { get; set; }
 
         public List<ITranslaterProviderFactory> AllProviders { get; } =
-            new ITranslaterProviderFactory[] {new YandaxTranslateProviderFactory()}.ToList();
+            new ITranslaterProviderFactory[] {new YandaxTranslateProviderFactory(), new BingTranslateProviderFactory(), }.ToList();
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
         {

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT.FFXIVTranslate", "ACT.FFXIVTranslate\ACT.FFXIVTranslate.csproj", "{7263A6D5-A142-4F3F-92A7-C3DFA9BA45B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT.FFXIVTranslate.Test", "ACT.FFXIVTranslate.Test\ACT.FFXIVTranslate.Test.csproj", "{81906072-43FD-40D0-916A-F16D0EDA15BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7263A6D5-A142-4F3F-92A7-C3DFA9BA45B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7263A6D5-A142-4F3F-92A7-C3DFA9BA45B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7263A6D5-A142-4F3F-92A7-C3DFA9BA45B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81906072-43FD-40D0-916A-F16D0EDA15BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81906072-43FD-40D0-916A-F16D0EDA15BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81906072-43FD-40D0-916A-F16D0EDA15BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81906072-43FD-40D0-916A-F16D0EDA15BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

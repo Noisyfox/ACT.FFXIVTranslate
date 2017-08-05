@@ -1,7 +1,6 @@
 ﻿using ACT.FFXIVTranslate.localization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -61,7 +60,7 @@ namespace ACT.FFXIVTranslate.translate.bing
                         foreach (var line in chattingLines)
                         {
                             textWriter.WriteElementString("string", NsArrays,
-                                TextProcessor.NaiveCleanText(line.RawContent));
+                                WebUtility.HtmlEncode(TextProcessor.NaiveCleanText(line.RawContent)));
                         }
 
                         textWriter.WriteEndElement();
@@ -73,64 +72,43 @@ namespace ACT.FFXIVTranslate.translate.bing
                 }
                 textWriter.Flush();
                 textWriter.Close();
-
                 var requestBody = textBuilder.ToString();
-
                 Console.WriteLine("Request body is: {0}.", requestBody);
 
-                var authToken = _token.GetAccessToken();
+                // Call Microsoft translate API.
+                DoRequest(GetAuthToken(), requestBody, out string responseBody, out HttpStatusCode statusCode);
 
-                var task = TaskEx.Run(async () =>
+                // Parse result
+                switch (statusCode)
                 {
-                    using (var client = new HttpClient())
-                    using (var request = new HttpRequestMessage())
-                    {
-                        request.Method = HttpMethod.Post;
-                        request.RequestUri = new Uri(ServiceUri);
-                        request.Content = new StringContent(requestBody, Encoding.UTF8, "text/xml");
-                        request.Headers.Add("Authorization", authToken);
-                        var response = await client.SendAsync(request);
-                        var responseBody = await response.Content.ReadAsStringAsync();
-                        switch (response.StatusCode)
+                    case HttpStatusCode.OK:
+                        Console.WriteLine("Request status is OK. Response body is:");
+                        Console.WriteLine(responseBody);
+                        Console.WriteLine("Result of translate array method is:");
+                        var doc = XDocument.Parse(responseBody);
+                        var ns = XNamespace.Get(NsService);
+                        var sourceTextCounter = 0;
+                        foreach (var xe in doc.Descendants(ns + "TranslateArrayResponse"))
                         {
-                            case HttpStatusCode.OK:
-                                Console.WriteLine("Request status is OK. Response body is:");
-                                Console.WriteLine(responseBody);
-                                Console.WriteLine("Result of translate array method is:");
-                                var doc = XDocument.Parse(responseBody);
-                                var ns = XNamespace.Get(
-                                    "http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2");
-                                var sourceTextCounter = 0;
-                                foreach (XElement xe in doc.Descendants(ns + "TranslateArrayResponse"))
-                                {
-                                    foreach (var node in xe.Elements(ns + "TranslatedText"))
-                                    {
-                                        Console.WriteLine("\n\nSource text: {0}\nTranslated Text: {1}",
-                                            chattingLines[sourceTextCounter].RawContent, node.Value);
-                                        chattingLines[sourceTextCounter].TranslatedContent = node.Value;
-                                    }
-                                    sourceTextCounter++;
-                                }
-                                break;
-                            default:
-                                Console.WriteLine("Request status code is: {0}.", response.StatusCode);
-                                Console.WriteLine("Request error message: {0}.", responseBody);
-                                break;
+                            foreach (var node in xe.Elements(ns + "TranslatedText"))
+                            {
+                                var result = WebUtility.HtmlDecode(node.Value);
+                                Console.WriteLine("\n\nSource text: {0}\nTranslated Text: {1}",
+                                    chattingLines[sourceTextCounter].RawContent, result);
+                                chattingLines[sourceTextCounter].TranslatedContent = result;
+                            }
+                            sourceTextCounter++;
                         }
-                    }
-                });
-
-                while (!task.IsCompleted)
-                {
-                    System.Threading.Thread.Yield();
-                }
-                if (task.IsFaulted)
-                {
-                    throw task.Exception;
-                }
-                if (task.IsCanceled)
-                {
-                    throw new Exception("Timeout obtaining access token.");
+                        break;
+                    case HttpStatusCode.Unauthorized:
+                        throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey,
+                            "Invalid API key",
+                            null);
+                    default:
+                        Console.WriteLine("Request status code is: {0}.", statusCode);
+                        Console.WriteLine("Request error message: {0}.", responseBody);
+                        throw new TranslateException(TranslateException.ExceptionReason.GeneralServiceError,
+                            responseBody, null);
                 }
             }
             catch (TranslateException)
@@ -141,6 +119,75 @@ namespace ACT.FFXIVTranslate.translate.bing
             {
                 throw new TranslateException(TranslateException.ExceptionReason.UnknownError, null, ex);
             }
+        }
+
+        private string GetAuthToken()
+        {
+            string authToken;
+            try
+            {
+                authToken = _token.GetAccessToken();
+            }
+            catch (AggregateException ex)
+            {
+                if (ex.GetBaseException() is HttpRequestException)
+                {
+                    switch (_token.RequestStatusCode)
+                    {
+                        case HttpStatusCode.Unauthorized:
+                            throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey,
+                                "Invalid API key",
+                                null);
+                        case HttpStatusCode.Forbidden:
+                            throw new TranslateException(TranslateException.ExceptionReason.ApiLimitExceed,
+                                "Account quota has been exceeded.",
+                                null);
+                        default:
+                            throw new TranslateException(TranslateException.ExceptionReason.GeneralServiceError,
+                                null, ex);
+                    }
+                }
+                throw;
+            }
+
+            return authToken;
+        }
+
+        private void DoRequest(string authToken, string requestBody,
+            out string responseBody, out HttpStatusCode statusCode)
+        {
+            string _responseBody = null;
+            var _statusCode = HttpStatusCode.BadRequest;
+            var task = TaskEx.Run(async () =>
+            {
+                using (var client = new HttpClient())
+                using (var request = new HttpRequestMessage())
+                {
+                    request.Method = HttpMethod.Post;
+                    request.RequestUri = new Uri(ServiceUri);
+                    request.Content = new StringContent(requestBody, Encoding.UTF8, "text/xml");
+                    request.Headers.Add("Authorization", authToken);
+                    var response = await client.SendAsync(request);
+                    _responseBody = await response.Content.ReadAsStringAsync();
+                    _statusCode = response.StatusCode;
+                }
+            });
+
+            while (!task.IsCompleted)
+            {
+                System.Threading.Thread.Yield();
+            }
+            if (task.IsFaulted)
+            {
+                throw task.Exception;
+            }
+            if (task.IsCanceled)
+            {
+                throw new Exception("Timeout obtaining access token.");
+            }
+
+            responseBody = _responseBody;
+            statusCode = _statusCode;
         }
     }
 }

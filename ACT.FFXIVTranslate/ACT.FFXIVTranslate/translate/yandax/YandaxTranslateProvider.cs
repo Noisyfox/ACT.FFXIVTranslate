@@ -110,6 +110,10 @@ namespace ACT.FFXIVTranslate.translate.yandax
                     p.Key.TranslatedContent = p.Value.InnerText;
                 }
             }
+            catch (TranslateException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 throw new TranslateException(TranslateException.ExceptionReason.UnknownError, null, ex);

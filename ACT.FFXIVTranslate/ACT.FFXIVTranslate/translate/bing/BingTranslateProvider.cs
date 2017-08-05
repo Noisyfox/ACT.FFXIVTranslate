@@ -133,6 +133,10 @@ namespace ACT.FFXIVTranslate.translate.bing
                     throw new Exception("Timeout obtaining access token.");
                 }
             }
+            catch (TranslateException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 throw new TranslateException(TranslateException.ExceptionReason.UnknownError, null, ex);

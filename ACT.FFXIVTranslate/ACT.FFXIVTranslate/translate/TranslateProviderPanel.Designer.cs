@@ -41,6 +41,7 @@
             this.comboBoxLangTo = new System.Windows.Forms.ComboBox();
             this.buttonProviderApply = new System.Windows.Forms.Button();
             this.linkLabelPowered = new System.Windows.Forms.LinkLabel();
+            this.buttonFreeKey = new System.Windows.Forms.Button();
             this.groupBoxProvider.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +81,7 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBoxLangTo, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.buttonProviderApply, 4, 3);
             this.tableLayoutPanel2.Controls.Add(this.linkLabelPowered, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.buttonFreeKey, 4, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 20);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
@@ -117,7 +119,7 @@
             // 
             this.labelApiKey.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelApiKey.AutoSize = true;
-            this.labelApiKey.Location = new System.Drawing.Point(3, 33);
+            this.labelApiKey.Location = new System.Drawing.Point(3, 34);
             this.labelApiKey.Name = "labelApiKey";
             this.labelApiKey.Size = new System.Drawing.Size(53, 12);
             this.labelApiKey.TabIndex = 2;
@@ -126,10 +128,10 @@
             // textBoxApiKey
             // 
             this.textBoxApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.SetColumnSpan(this.textBoxApiKey, 4);
-            this.textBoxApiKey.Location = new System.Drawing.Point(68, 29);
+            this.tableLayoutPanel2.SetColumnSpan(this.textBoxApiKey, 3);
+            this.textBoxApiKey.Location = new System.Drawing.Point(68, 30);
             this.textBoxApiKey.Name = "textBoxApiKey";
-            this.textBoxApiKey.Size = new System.Drawing.Size(350, 21);
+            this.textBoxApiKey.Size = new System.Drawing.Size(207, 21);
             this.textBoxApiKey.TabIndex = 3;
             this.textBoxApiKey.Text = "trnsl.1.1.20170716T025951Z.13c73247084b012d.3404189299f91adf7792235bc7cf7fb7f3bd2" +
     "6a2";
@@ -138,7 +140,7 @@
             // 
             this.labelLang.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelLang.AutoSize = true;
-            this.labelLang.Location = new System.Drawing.Point(3, 60);
+            this.labelLang.Location = new System.Drawing.Point(3, 62);
             this.labelLang.Name = "labelLang";
             this.labelLang.Size = new System.Drawing.Size(53, 12);
             this.labelLang.TabIndex = 4;
@@ -148,7 +150,7 @@
             // 
             this.labelLangFrom.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelLangFrom.AutoSize = true;
-            this.labelLangFrom.Location = new System.Drawing.Point(68, 60);
+            this.labelLangFrom.Location = new System.Drawing.Point(68, 62);
             this.labelLangFrom.Name = "labelLangFrom";
             this.labelLangFrom.Size = new System.Drawing.Size(35, 12);
             this.labelLangFrom.TabIndex = 5;
@@ -158,7 +160,7 @@
             // 
             this.labelLangTo.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelLangTo.AutoSize = true;
-            this.labelLangTo.Location = new System.Drawing.Point(252, 60);
+            this.labelLangTo.Location = new System.Drawing.Point(252, 62);
             this.labelLangTo.Name = "labelLangTo";
             this.labelLangTo.Size = new System.Drawing.Size(23, 12);
             this.labelLangTo.TabIndex = 6;
@@ -169,7 +171,7 @@
             this.comboBoxLangFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxLangFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLangFrom.FormattingEnabled = true;
-            this.comboBoxLangFrom.Location = new System.Drawing.Point(109, 56);
+            this.comboBoxLangFrom.Location = new System.Drawing.Point(109, 58);
             this.comboBoxLangFrom.Name = "comboBoxLangFrom";
             this.comboBoxLangFrom.Size = new System.Drawing.Size(137, 20);
             this.comboBoxLangFrom.TabIndex = 7;
@@ -179,7 +181,7 @@
             this.comboBoxLangTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxLangTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLangTo.FormattingEnabled = true;
-            this.comboBoxLangTo.Location = new System.Drawing.Point(281, 56);
+            this.comboBoxLangTo.Location = new System.Drawing.Point(281, 58);
             this.comboBoxLangTo.Name = "comboBoxLangTo";
             this.comboBoxLangTo.Size = new System.Drawing.Size(137, 20);
             this.comboBoxLangTo.TabIndex = 8;
@@ -199,7 +201,7 @@
             // 
             this.linkLabelPowered.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.linkLabelPowered, 4);
-            this.linkLabelPowered.Location = new System.Drawing.Point(3, 79);
+            this.linkLabelPowered.Location = new System.Drawing.Point(3, 81);
             this.linkLabelPowered.Name = "linkLabelPowered";
             this.linkLabelPowered.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.linkLabelPowered.Size = new System.Drawing.Size(101, 17);
@@ -207,6 +209,18 @@
             this.linkLabelPowered.TabStop = true;
             this.linkLabelPowered.Text = "Powered by XXXXX";
             this.linkLabelPowered.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelPowered_LinkClicked);
+            // 
+            // buttonFreeKey
+            // 
+            this.buttonFreeKey.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.buttonFreeKey.AutoSize = true;
+            this.buttonFreeKey.Location = new System.Drawing.Point(281, 29);
+            this.buttonFreeKey.Name = "buttonFreeKey";
+            this.buttonFreeKey.Size = new System.Drawing.Size(87, 23);
+            this.buttonFreeKey.TabIndex = 11;
+            this.buttonFreeKey.Text = "Use Free Key";
+            this.buttonFreeKey.UseVisualStyleBackColor = true;
+            this.buttonFreeKey.Click += new System.EventHandler(this.buttonFreeKey_Click);
             // 
             // TranslateProviderPanel
             // 
@@ -237,5 +251,6 @@
         private System.Windows.Forms.ComboBox comboBoxLangTo;
         private System.Windows.Forms.Button buttonProviderApply;
         private System.Windows.Forms.LinkLabel linkLabelPowered;
+        private System.Windows.Forms.Button buttonFreeKey;
     }
 }

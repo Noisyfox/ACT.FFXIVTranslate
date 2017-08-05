@@ -144,5 +144,16 @@ namespace ACT.FFXIVTranslate.translate
                 System.Diagnostics.Process.Start(link);
             }
         }
+
+        private void buttonFreeKey_Click(object sender, EventArgs e)
+        {
+
+            var selectedProvider = (ITranslaterProviderFactory) comboBoxProvider.SelectedItem;
+
+            if (selectedProvider != null)
+            {
+                textBoxApiKey.Text = selectedProvider.DefaultPublicKey;
+            }
+        }
     }
 }

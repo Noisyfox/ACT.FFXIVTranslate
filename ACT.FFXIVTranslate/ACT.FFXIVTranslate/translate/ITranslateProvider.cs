@@ -21,6 +21,11 @@ namespace ACT.FFXIVTranslate.translate
 
         ProviderLegalInfo LegalInfo { get; }
 
+        /// <summary>
+        /// The default API key for free public use. A gift from me :)
+        /// </summary>
+        string DefaultPublicKey { get; }
+
         ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst);
     }
 

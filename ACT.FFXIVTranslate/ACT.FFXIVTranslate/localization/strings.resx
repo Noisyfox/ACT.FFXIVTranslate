@@ -225,4 +225,7 @@
   <data name="labelWidth" xml:space="preserve">
     <value>宽:</value>
   </data>
+  <data name="buttonFreeKey" xml:space="preserve">
+    <value>使用公用密钥</value>
+  </data>
 </root>

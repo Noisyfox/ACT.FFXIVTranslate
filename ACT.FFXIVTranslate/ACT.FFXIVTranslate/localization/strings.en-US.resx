@@ -225,4 +225,7 @@
   <data name="LangAutoDetect" xml:space="preserve">
     <value>Auto Detect</value>
   </data>
+  <data name="buttonFreeKey" xml:space="preserve">
+    <value>Use Free Key</value>
+  </data>
 </root>

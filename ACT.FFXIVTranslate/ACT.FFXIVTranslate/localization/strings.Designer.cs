@@ -79,6 +79,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 使用公用密钥 的本地化字符串。
+        /// </summary>
+        public static string buttonFreeKey {
+            get {
+                return ResourceManager.GetString("buttonFreeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 应用 的本地化字符串。
         /// </summary>
         public static string buttonProviderApply {

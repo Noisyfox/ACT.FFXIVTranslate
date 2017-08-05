@@ -40,27 +40,29 @@ namespace ACT.FFXIVTranslate.translate.yandax
                 textWriter.Close();
 
                 var text = textBuilder.ToString();
+                string textResponse;
+                using (var client = new HttpClient())
+                using (var request = new HttpRequestMessage(HttpMethod.Post, "/api/v1.5/tr.json/translate"))
+                {
+                    client.BaseAddress = new Uri("https://translate.yandex.net");
 
-                var client = new HttpClient();
-                client.BaseAddress = new Uri("https://translate.yandex.net");
-                var request = new HttpRequestMessage(HttpMethod.Post, "/api/v1.5/tr.json/translate");
+                    var keyValues = new List<KeyValuePair<string, string>>();
+                    keyValues.Add(new KeyValuePair<string, string>("key", _apiKey));
+                    keyValues.Add(new KeyValuePair<string, string>("text", text));
+                    keyValues.Add(new KeyValuePair<string, string>("lang", _lang));
+                    keyValues.Add(new KeyValuePair<string, string>("options", "1"));
+                    keyValues.Add(new KeyValuePair<string, string>("format", "html"));
 
-                var keyValues = new List<KeyValuePair<string, string>>();
-                keyValues.Add(new KeyValuePair<string, string>("key", _apiKey));
-                keyValues.Add(new KeyValuePair<string, string>("text", text));
-                keyValues.Add(new KeyValuePair<string, string>("lang", _lang));
-                keyValues.Add(new KeyValuePair<string, string>("options", "1"));
-                keyValues.Add(new KeyValuePair<string, string>("format", "html"));
-
-                request.Content = new FormUrlEncodedContent(keyValues);
-                var response = client.SendAsync(request).Result;
-                var textResponse = response.Content.ReadAsStringAsync().Result;
+                    request.Content = new FormUrlEncodedContent(keyValues);
+                    var response = client.SendAsync(request).Result;
+                    textResponse = response.Content.ReadAsStringAsync().Result;
+                }
 
                 // read json
                 var ser = new DataContractJsonSerializer(typeof(YandexTranslateResult));
                 var result =
                     (YandexTranslateResult)
-                        ser.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(textResponse)));
+                    ser.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(textResponse)));
 
                 switch (result.Code)
                 {
@@ -69,10 +71,12 @@ namespace ACT.FFXIVTranslate.translate.yandax
 
                     // Faild
                     case 401:
-                        throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey, "Invalid API key",
+                        throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey,
+                            "Invalid API key",
                             null);
                     case 402:
-                        throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey, "Blocked API key",
+                        throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey,
+                            "Blocked API key",
                             null);
                     case 404:
                         throw new TranslateException(TranslateException.ExceptionReason.ApiLimitExceed,

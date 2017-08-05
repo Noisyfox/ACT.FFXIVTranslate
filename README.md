@@ -40,3 +40,12 @@ The free api keys have limits on words per month. You may want to get your own p
    pricing otherwise you will be charged.
 4. After creating the instance, find it in Azure protal and go to the detail page.
 5. Click tje link **Keys** at the left side, and you will find two keys. Any of those should be work.
+
+# TODO
+- Add official Google Translate support.
+- Add unofficial Google Translate support.
+- Add http proxy support.
+- Add socks5 proxy support.
+- Display chatting channel. Have different colors for different channels, just like the game does.
+- (unlikely) Display *Auto-Translate*.
+- More to come :P

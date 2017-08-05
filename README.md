@@ -27,7 +27,7 @@ The free api keys have limits on words per month. You may want to get your own p
 
 ## Yandax.Translate
 1. Visit https://tech.yandex.com/translate/
-2. Click the link *Get a free API key.* on that page.
+2. Click the link **Get a free API key.** on that page.
 3. Follow the instructions and you will get your own API key for free.
 
 ## Microsoft Translator

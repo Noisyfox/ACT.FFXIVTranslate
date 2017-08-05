@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ACT.FFXIVTranslate.translate;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
@@ -32,6 +33,7 @@ namespace ACT.FFXIVTranslate
             _controller.ClickthroughChanged += ControllerOnClickthroughChanged;
             _controller.OverlayContentUpdated += ControllerOnOverlayContentUpdated;
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
+            _controller.LegalInfoChanged += ControllerOnLegalInfoChanged;
 
             Move += OnMove;
             SizeChanged += OnSizeChanged;
@@ -99,6 +101,22 @@ namespace ACT.FFXIVTranslate
             richTextBoxContent.Font = font;
         }
 
+        private void ControllerOnLegalInfoChanged(bool fromView, ProviderLegalInfo info)
+        {
+            var label = info?.LabelResult;
+            if (label != null)
+            {
+                linkLabelLegalInfo.Visible = true;
+                linkLabelLegalInfo.Text = label;
+                linkLabelLegalInfo.Tag = info.LabelResultLink;
+            }
+            else
+            {
+                linkLabelLegalInfo.Visible = false;
+                linkLabelLegalInfo.Tag = null;
+            }
+        }
+
         private void OnMove(object sender, EventArgs e)
         {
             _controller.NotifyOverlayMoved(true, Left, Top);
@@ -119,7 +137,10 @@ namespace ACT.FFXIVTranslate
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://translate.yandex.com");
+            if (linkLabelLegalInfo.Tag is string link)
+            {
+                System.Diagnostics.Process.Start(link);
+            }
         }
     }
 }

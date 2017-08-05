@@ -19,6 +19,8 @@ namespace ACT.FFXIVTranslate.translate
 
         List<LanguageDef> SupportedDestLanguages { get; }
 
+        ProviderLegalInfo LegalInfo { get; }
+
         ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst);
     }
 
@@ -42,5 +44,13 @@ namespace ACT.FFXIVTranslate.translate
         {
             Reason = reason;
         }
+    }
+
+    public class ProviderLegalInfo
+    {
+        public string LabelMain { get; set; }
+        public string LabelMainLink { get; set; }
+        public string LabelResult { get; set; }
+        public string LabelResultLink { get; set; }
     }
 }

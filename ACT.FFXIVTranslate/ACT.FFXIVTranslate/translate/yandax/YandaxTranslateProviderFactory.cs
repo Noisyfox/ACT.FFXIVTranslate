@@ -22,6 +22,13 @@ namespace ACT.FFXIVTranslate.translate.yandax
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
 
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;
+        public ProviderLegalInfo LegalInfo { get; } = new ProviderLegalInfo
+        {
+            LabelMain = "Powered by Yandex.Translate",
+            LabelResult = "Powered by Yandex.Translate",
+            LabelMainLink = "http://translate.yandex.com",
+            LabelResultLink = "http://translate.yandex.com",
+        };
 
         public ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst)
         {

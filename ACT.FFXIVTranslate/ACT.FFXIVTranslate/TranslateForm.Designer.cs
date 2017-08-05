@@ -30,7 +30,7 @@
         {
             this.richTextBoxContent = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanelContent = new System.Windows.Forms.TableLayoutPanel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelLegalInfo = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanelContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             this.tableLayoutPanelContent.ColumnCount = 2;
             this.tableLayoutPanelContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanelContent.Controls.Add(this.linkLabel1, 1, 0);
+            this.tableLayoutPanelContent.Controls.Add(this.linkLabelLegalInfo, 1, 0);
             this.tableLayoutPanelContent.Controls.Add(this.richTextBoxContent, 0, 1);
             this.tableLayoutPanelContent.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.tableLayoutPanelContent.Location = new System.Drawing.Point(12, 12);
@@ -70,16 +70,16 @@
             this.tableLayoutPanelContent.TabIndex = 1;
             this.tableLayoutPanelContent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TranslateForm_MouseDown);
             // 
-            // linkLabel1
+            // linkLabelLegalInfo
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(70, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(167, 12);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Powered by Yandex.Translate";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabelLegalInfo.AutoSize = true;
+            this.linkLabelLegalInfo.Location = new System.Drawing.Point(118, 0);
+            this.linkLabelLegalInfo.Name = "linkLabelLegalInfo";
+            this.linkLabelLegalInfo.Size = new System.Drawing.Size(119, 12);
+            this.linkLabelLegalInfo.TabIndex = 0;
+            this.linkLabelLegalInfo.TabStop = true;
+            this.linkLabelLegalInfo.Text = "Powered by XXXXXXXX";
+            this.linkLabelLegalInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // TranslateForm
             // 
@@ -107,6 +107,6 @@
 
         private System.Windows.Forms.RichTextBox richTextBoxContent;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelContent;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabelLegalInfo;
     }
 }

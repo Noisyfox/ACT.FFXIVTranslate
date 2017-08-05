@@ -60,6 +60,7 @@ namespace ACT.FFXIVTranslate.translate
                 Provider = factory.CreateProvider(apiKey, lF, lT)
             };
 
+            _controller.NotifyLegalInfoChanged(false, factory.LegalInfo);
             _workingThread.StartWorkingThread(context);
         }
 

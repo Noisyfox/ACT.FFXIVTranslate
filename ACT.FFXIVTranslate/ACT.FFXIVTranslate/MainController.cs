@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
+using ACT.FFXIVTranslate.translate;
 
 namespace ACT.FFXIVTranslate
 {
@@ -98,6 +95,15 @@ namespace ACT.FFXIVTranslate
         public void NotifyOverlayFontChanged(bool fromView, Font font)
         {
             OverlayFontChanged?.Invoke(fromView, font);
+        }
+
+        public delegate void OnLegalInfoChangedDelegate(bool fromView, ProviderLegalInfo info);
+
+        public event OnLegalInfoChangedDelegate LegalInfoChanged;
+
+        public void NotifyLegalInfoChanged(bool fromView, ProviderLegalInfo info)
+        {
+            LegalInfoChanged?.Invoke(fromView, info);
         }
     }
 }

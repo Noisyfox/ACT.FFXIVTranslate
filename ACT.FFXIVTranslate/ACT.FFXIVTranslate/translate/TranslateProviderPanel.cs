@@ -39,7 +39,9 @@ namespace ACT.FFXIVTranslate.translate
 
             var controller = plugin.Controller;
             controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
+            controller.LegalInfoChanged += ControllerOnLegalInfoChanged;
         }
+
         public void DoLocalization()
         {
             comboBoxProvider.DataSource = _service.AllProviders;
@@ -113,10 +115,34 @@ namespace ACT.FFXIVTranslate.translate
                 textBoxApiKey.Text, (string)comboBoxLangFrom.SelectedValue, (string)comboBoxLangTo.SelectedValue);
         }
 
+        private void ControllerOnLegalInfoChanged(bool fromView, ProviderLegalInfo info)
+        {
+            var label = info?.LabelResult;
+            if (label != null)
+            {
+                linkLabelPowered.Visible = true;
+                linkLabelPowered.Text = label;
+                linkLabelPowered.Tag = info.LabelResultLink;
+            }
+            else
+            {
+                linkLabelPowered.Visible = false;
+                linkLabelPowered.Tag = null;
+            }
+        }
+
         private void buttonProviderApply_Click(object sender, EventArgs e)
         {
             _plugin.Controller.NotifyTranslateProviderChanged(true, (string) comboBoxProvider.SelectedValue,
                 textBoxApiKey.Text, (string) comboBoxLangFrom.SelectedValue, (string) comboBoxLangTo.SelectedValue);
+        }
+
+        private void linkLabelPowered_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (linkLabelPowered.Tag is string link)
+            {
+                System.Diagnostics.Process.Start(link);
+            }
         }
     }
 }

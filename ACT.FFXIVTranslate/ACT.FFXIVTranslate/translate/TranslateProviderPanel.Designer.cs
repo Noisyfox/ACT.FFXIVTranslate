@@ -202,10 +202,11 @@
             this.linkLabelPowered.Location = new System.Drawing.Point(3, 79);
             this.linkLabelPowered.Name = "linkLabelPowered";
             this.linkLabelPowered.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.linkLabelPowered.Size = new System.Drawing.Size(167, 17);
+            this.linkLabelPowered.Size = new System.Drawing.Size(101, 17);
             this.linkLabelPowered.TabIndex = 10;
             this.linkLabelPowered.TabStop = true;
-            this.linkLabelPowered.Text = "Powered by Yandex.Translate";
+            this.linkLabelPowered.Text = "Powered by XXXXX";
+            this.linkLabelPowered.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelPowered_LinkClicked);
             // 
             // TranslateProviderPanel
             // 

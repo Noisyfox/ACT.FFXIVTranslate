@@ -20,6 +20,7 @@ namespace ACT.FFXIVTranslate.translate.bing
         public bool SupportAutoDetect { get; } = true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;
+        public ProviderLegalInfo LegalInfo { get; } = null;
 
         public ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst)
         {

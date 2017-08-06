@@ -151,30 +151,31 @@ namespace ACT.FFXIVTranslate
                         switch (codeEnum)
                         {
                             case EventCode.LS1:
-                                return $"[1]<{cleanedName}>";
+                                return $"[1]<{cleanedName}> ";
                             case EventCode.LS2:
-                                return $"[2]<{cleanedName}>";
+                                return $"[2]<{cleanedName}> ";
                             case EventCode.LS3:
-                                return $"[3]<{cleanedName}>";
+                                return $"[3]<{cleanedName}> ";
                             case EventCode.LS4:
-                                return $"[4]<{cleanedName}>";
+                                return $"[4]<{cleanedName}> ";
                             case EventCode.LS5:
-                                return $"[5]<{cleanedName}>";
+                                return $"[5]<{cleanedName}> ";
                             case EventCode.LS6:
-                                return $"[6]<{cleanedName}>";
+                                return $"[6]<{cleanedName}> ";
                             case EventCode.LS7:
-                                return $"[7]<{cleanedName}>";
+                                return $"[7]<{cleanedName}> ";
                             case EventCode.LS8:
-                                return $"[8]<{cleanedName}>";
+                                return $"[8]<{cleanedName}> ";
                             case EventCode.FreeCompany:
-                                return $"[FC]<{cleanedName}>";
+                                return $"[FC]<{cleanedName}> ";
+                            case EventCode.Party:
+                                return $"({cleanedName}) ";
                         }
                     }
-                    return $"<{cleanedName}>";
                 }
             }
 
-            return $"<{cleanedName}>";
+            return $"{cleanedName}: ";
         }
     }
 }

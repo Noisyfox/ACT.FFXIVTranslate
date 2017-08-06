@@ -228,4 +228,13 @@
   <data name="buttonFreeKey" xml:space="preserve">
     <value>使用公用密钥</value>
   </data>
+  <data name="tabPageChannelSettings" xml:space="preserve">
+    <value>频道设置</value>
+  </data>
+  <data name="tabPageGeneralSettings" xml:space="preserve">
+    <value>常规设置</value>
+  </data>
+  <data name="tabPageLog" xml:space="preserve">
+    <value>插件日志</value>
+  </data>
 </root>

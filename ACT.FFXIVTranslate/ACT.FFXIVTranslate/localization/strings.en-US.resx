@@ -228,4 +228,13 @@
   <data name="buttonFreeKey" xml:space="preserve">
     <value>Use Free Key</value>
   </data>
+  <data name="tabPageChannelSettings" xml:space="preserve">
+    <value>Channel Settings</value>
+  </data>
+  <data name="tabPageGeneralSettings" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="tabPageLog" xml:space="preserve">
+    <value>Log</value>
+  </data>
 </root>

@@ -392,5 +392,32 @@ namespace ACT.FFXIVTranslate.localization {
                 return ResourceManager.GetString("LangAutoDetect", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 频道设置 的本地化字符串。
+        /// </summary>
+        public static string tabPageChannelSettings {
+            get {
+                return ResourceManager.GetString("tabPageChannelSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 常规设置 的本地化字符串。
+        /// </summary>
+        public static string tabPageGeneralSettings {
+            get {
+                return ResourceManager.GetString("tabPageGeneralSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件日志 的本地化字符串。
+        /// </summary>
+        public static string tabPageLog {
+            get {
+                return ResourceManager.GetString("tabPageLog", resourceCulture);
+            }
+        }
     }
 }

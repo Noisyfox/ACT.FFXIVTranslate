@@ -12,12 +12,14 @@ using System.Xml;
 using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.yandax;
+using RTF;
 
 namespace ACT.FFXIVTranslate.translate
 {
 
     class TranslateService
     {
+        private FFXIVTranslatePlugin _plugin;
         private MainController _controller;
 
         private readonly object _mainLock = new object();
@@ -34,6 +36,7 @@ namespace ACT.FFXIVTranslate.translate
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
+            _plugin = plugin;
             _controller = plugin.Controller;
             _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
         }
@@ -106,11 +109,11 @@ namespace ACT.FFXIVTranslate.translate
                             context.Provider.Translate(batchWorkingList);
 
                             // TODO: Set color and label
-                            var finalResultBuilder = new StringBuilder();
+                            var finalResultBuilder = new RTFBuilder();
                             foreach (var line in batchWorkingList)
                             {
-                                finalResultBuilder.Append(
-                                    $"{TextProcessor.BuildQuote(line)}{line.TranslatedContent}\n");
+                                finalResultBuilder.ForeColor(service._plugin.GetChannelSettings(line.EventCode).DisplayColor).AppendLine(
+                                    $"{TextProcessor.BuildQuote(line)}{line.TranslatedContent}");
                             }
 
                             service._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());

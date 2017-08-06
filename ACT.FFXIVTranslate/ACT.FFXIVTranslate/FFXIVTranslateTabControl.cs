@@ -255,7 +255,7 @@ namespace ACT.FFXIVTranslate
 
         private void ControllerOnLogMessageAppend(bool fromView, string log)
         {
-            ThreadInvokes.RichTextBoxAppendText(ActGlobals.oFormActMain, richTextBoxLog, log);
+            ThreadInvokes.RichTextBoxAppendDateTimeLine(ActGlobals.oFormActMain, richTextBoxLog, log);
         }
 
         private void ControllerOnOverlayFontChanged(bool fromView, Font font)

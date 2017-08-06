@@ -93,7 +93,7 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            ThreadInvokes.RichTextBoxAppendText(this, richTextBoxContent, content);
+            ThreadInvokesExt.RichTextBoxAppendRtf(this, richTextBoxContent, content);
         }
 
         private void ControllerOnOverlayFontChanged(bool fromView, Font font)

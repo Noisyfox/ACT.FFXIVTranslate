@@ -20,4 +20,29 @@ namespace ACT.FFXIVTranslate
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
     }
+
+    public static class ThreadInvokesExt
+    {
+        private delegate void RichTextBoxAppendRtfCallback(Form parent, RichTextBox target, string rtf);
+
+        public static void RichTextBoxAppendRtf(Form parent, RichTextBox target, string rtf)
+        {
+            if (target.InvokeRequired)
+            {
+                RichTextBoxAppendRtfCallback appendTextCallback = RichTextBoxAppendRtf;
+                parent.Invoke(appendTextCallback, parent, target, rtf);
+            }
+            else
+            {
+                target.SelectionStart = target.TextLength;
+                target.SelectionLength = 0;
+
+                target.SelectedRtf = rtf;
+//                target.SelectionFont = font;
+//                target.AppendText(text);
+//                target.SelectionColor = target.ForeColor;
+                target.ScrollToCaret();
+            }
+        }
+    }
 }

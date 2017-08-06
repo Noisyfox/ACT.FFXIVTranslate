@@ -289,7 +289,7 @@ namespace ACT.FFXIVTranslate
 
             var eventCodeKnown =(EventCode) (byte) (eventCode & byte.MaxValue);
             // Filter by event code
-            if (GetChannelSettings(eventCodeKnown).Show)
+            if (!GetChannelSettings(eventCodeKnown).Show)
             {
                 return;
             }

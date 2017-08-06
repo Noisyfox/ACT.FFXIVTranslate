@@ -23,7 +23,7 @@ namespace ACT.FFXIVTranslate
         internal TranslateService TranslateService { get; } = new TranslateService();
 
         private readonly LogReadThread _workingThread = new LogReadThread();
-        private readonly ConcurrentDictionary<EventCode, bool> _channelFilter = new ConcurrentDictionary<EventCode, bool>();
+        private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
 
         public string TranslateProvider { get; set; }
 
@@ -82,6 +82,8 @@ namespace ACT.FFXIVTranslate
                 SettingsTab.AttachToAct(this);
 
                 Controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
+                Controller.ChannelColorChanged += ControllerOnChannelColorChanged;
+                Controller.ChannelLabelChanged += ControllerOnChannelLabelChanged;
                 Controller.LanguageChanged += ControllerOnLanguageChanged;
                 Controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
 
@@ -153,7 +155,51 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            _channelFilter.AddOrUpdate(code, show, (eventCode, b) => show);
+            _channelSettings.AddOrUpdate(code,
+                eventCode => new ChannelSettings
+                {
+                    Show = show
+                }, (eventCode, b) =>
+                {
+                    b.Show = show;
+                    return b;
+                });
+        }
+
+        private void ControllerOnChannelColorChanged(bool fromView, EventCode code, Color color)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            _channelSettings.AddOrUpdate(code,
+                eventCode => new ChannelSettings
+                {
+                    DisplayColor = color
+                }, (eventCode, b) =>
+                {
+                    b.DisplayColor = color;
+                    return b;
+                });
+        }
+
+        private void ControllerOnChannelLabelChanged(bool fromView, EventCode code, bool show)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            _channelSettings.AddOrUpdate(code,
+                eventCode => new ChannelSettings
+                {
+                    ShowLabel = show
+                }, (eventCode, b) =>
+                {
+                    b.ShowLabel = show;
+                    return b;
+                });
         }
 
         private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom, string langTo)
@@ -243,9 +289,7 @@ namespace ACT.FFXIVTranslate
 
             var eventCodeKnown =(EventCode) (byte) (eventCode & byte.MaxValue);
             // Filter by event code
-            bool filterV;
-            var filterRes = _channelFilter.TryGetValue(eventCodeKnown == EventCode.TellTo ? EventCode.TellFrom : eventCodeKnown, out filterV);
-            if (filterRes && !filterV)
+            if (GetChannelSettings(eventCodeKnown).Show)
             {
                 return;
             }
@@ -259,6 +303,15 @@ namespace ACT.FFXIVTranslate
             };
 
             TranslateService.SubmitNewLine(chat);
+        }
+
+        public ChannelSettings GetChannelSettings(EventCode eventCode)
+        {
+            if (eventCode == EventCode.TellTo)
+            {
+                eventCode = EventCode.TellFrom;
+            }
+            return _channelSettings.GetOrAdd(eventCode, e => new ChannelSettings());
         }
     }
 
@@ -298,5 +351,12 @@ namespace ACT.FFXIVTranslate
         public EventCode EventCode;
         public string FormattedContent;
         public string TranslatedContent;
+    }
+
+    public class ChannelSettings
+    {
+        public bool Show { get; set; } = true;
+        public Color DisplayColor { get; set; } = Color.White;
+        public bool ShowLabel { get; set; } = false;
     }
 }

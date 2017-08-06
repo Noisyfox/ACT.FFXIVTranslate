@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -12,6 +13,11 @@ namespace ACT.FFXIVTranslate
         public static void AddControlSetting(this SettingsSerializer serializer, Control controlToSerialize)
         {
             serializer.AddControlSetting(controlToSerialize.Name, controlToSerialize);
+        }
+
+        public static string ToHexString(this Color c)
+        {
+            return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
     }
 }

@@ -177,7 +177,7 @@
   <data name="checkBoxClickthrough" xml:space="preserve">
     <value>Clickthrough</value>
   </data>
-  <data name="groupBoxChannelFilter" xml:space="preserve">
+  <data name="labelChannelFilter" xml:space="preserve">
     <value>Channel Filter</value>
   </data>
   <data name="groupBoxOverlay" xml:space="preserve">
@@ -236,5 +236,14 @@
   </data>
   <data name="tabPageLog" xml:space="preserve">
     <value>Log</value>
+  </data>
+  <data name="labelChannelColor" xml:space="preserve">
+    <value>Channel Color</value>
+  </data>
+  <data name="labelChannelLabel" xml:space="preserve">
+    <value>Show Channel Label</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

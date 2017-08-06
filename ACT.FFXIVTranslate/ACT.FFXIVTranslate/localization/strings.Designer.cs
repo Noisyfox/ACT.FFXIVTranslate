@@ -250,15 +250,6 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
-        ///   查找类似 频道过滤 的本地化字符串。
-        /// </summary>
-        public static string groupBoxChannelFilter {
-            get {
-                return ResourceManager.GetString("groupBoxChannelFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 悬浮窗设置 的本地化字符串。
         /// </summary>
         public static string groupBoxOverlay {
@@ -282,6 +273,33 @@ namespace ACT.FFXIVTranslate.localization {
         public static string labelApiKey {
             get {
                 return ResourceManager.GetString("labelApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 频道颜色 的本地化字符串。
+        /// </summary>
+        public static string labelChannelColor {
+            get {
+                return ResourceManager.GetString("labelChannelColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 频道过滤 的本地化字符串。
+        /// </summary>
+        public static string labelChannelFilter {
+            get {
+                return ResourceManager.GetString("labelChannelFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示频道标签 的本地化字符串。
+        /// </summary>
+        public static string labelChannelLabel {
+            get {
+                return ResourceManager.GetString("labelChannelLabel", resourceCulture);
             }
         }
         

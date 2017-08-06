@@ -70,6 +70,24 @@ namespace ACT.FFXIVTranslate
             ChannelFilterChanged?.Invoke(fromView, code, show);
         }
 
+        public delegate void OnChannelLabelChangedDelegate(bool fromView, EventCode code, bool show);
+
+        public event OnChannelLabelChangedDelegate ChannelLabelChanged;
+
+        public void NotifyChannelLabelChanged(bool fromView, EventCode code, bool show)
+        {
+            ChannelLabelChanged?.Invoke(fromView, code, show);
+        }
+
+        public delegate void OnChannelColorChangedDelegate(bool fromView, EventCode code, Color color);
+
+        public event OnChannelColorChangedDelegate ChannelColorChanged;
+
+        public void NotifyChannelColorChanged(bool fromView, EventCode code, Color color)
+        {
+            ChannelColorChanged?.Invoke(fromView, code, color);
+        }
+
         public delegate void OnLanguageChangedDelegate(bool fromView, string lang);
 
         public event OnLanguageChangedDelegate LanguageChanged;

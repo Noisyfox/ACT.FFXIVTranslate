@@ -14,29 +14,50 @@ namespace ACT.FFXIVTranslate
     public partial class FFXIVTranslateTabControl : UserControl
     {
         private MainController _controller;
-        private Dictionary<CheckBox, EventCode> _channelFilterMapper = new Dictionary<CheckBox, EventCode>();
+        private readonly List<ChannelSettingsMapper> _channelSettings;
         private Font _currentFont;
+
+        private class ChannelSettingsMapper
+        {
+            public EventCode Code { get; }
+            public CheckBox CheckBoxFilter { get; }
+            public Button ButtonColor { get; }
+            public CheckBox CheckBoxLabel { get; }
+
+            public ChannelSettingsMapper(EventCode code, CheckBox cbFilter, Button btnColor, CheckBox cbLabel)
+            {
+                Code = code;
+                CheckBoxFilter = cbFilter;
+                ButtonColor = btnColor;
+                CheckBoxLabel = cbLabel;
+            }
+
+            public ChannelSettingsMapper(EventCode code, ControlCollection panel)
+            {
+                Code = code;
+
+                var name = code.ToString();
+                switch (name)
+                {
+                    case "FreeCompany":
+                        name = "FC";
+                        break;
+                    case "TellFrom":
+                        name = "Tell";
+                        break;
+                }
+                CheckBoxFilter = (CheckBox) panel.Find($"checkBoxChannelFilter{name}", true)[0];
+                ButtonColor = (Button)panel.Find($"buttonChannelColor{name}", true)[0];
+                CheckBoxLabel = (CheckBox)panel.Find($"checkBoxChannelLabel{name}", true)[0];
+            }
+        }
 
         public FFXIVTranslateTabControl()
         {
             InitializeComponent();
 
-            _channelFilterMapper[checkBoxChannelFilterSay] = EventCode.Say;
-            _channelFilterMapper[checkBoxChannelFilterShout] = EventCode.Shout;
-            _channelFilterMapper[checkBoxChannelFilterYell] = EventCode.Yell;
-            _channelFilterMapper[checkBoxChannelFilterTell] = EventCode.TellFrom;
-            _channelFilterMapper[checkBoxChannelFilterParty] = EventCode.Party;
-            _channelFilterMapper[checkBoxChannelFilterAlliance] = EventCode.Alliance;
-            _channelFilterMapper[checkBoxChannelFilterFC] = EventCode.FreeCompany;
-            _channelFilterMapper[checkBoxChannelFilterNovice] = EventCode.Novice;
-            _channelFilterMapper[checkBoxChannelFilterLS1] = EventCode.LS1;
-            _channelFilterMapper[checkBoxChannelFilterLS2] = EventCode.LS2;
-            _channelFilterMapper[checkBoxChannelFilterLS3] = EventCode.LS3;
-            _channelFilterMapper[checkBoxChannelFilterLS4] = EventCode.LS4;
-            _channelFilterMapper[checkBoxChannelFilterLS5] = EventCode.LS5;
-            _channelFilterMapper[checkBoxChannelFilterLS6] = EventCode.LS6;
-            _channelFilterMapper[checkBoxChannelFilterLS7] = EventCode.LS7;
-            _channelFilterMapper[checkBoxChannelFilterLS8] = EventCode.LS8;
+            _channelSettings = Enum.GetValues(typeof(EventCode)).OfType<EventCode>().Where(it => it != EventCode.TellTo)
+                .Select(it => new ChannelSettingsMapper(it, Controls)).ToList();
 
             comboBoxLanguage.DisplayMember = "DisplayName";
             comboBoxLanguage.ValueMember = "LangCode";
@@ -45,6 +66,7 @@ namespace ACT.FFXIVTranslate
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
+
             var parentTabPage = plugin.ParentTabPage;
 
             parentTabPage.Controls.Add(this);
@@ -62,10 +84,17 @@ namespace ACT.FFXIVTranslate
             settings.AddStringSetting(nameof(plugin.Language));
             settings.AddStringSetting(nameof(plugin.OverlayFont));
 
-            foreach (var cb in _channelFilterMapper.Keys)
+            foreach (var cs in _channelSettings)
             {
-                settings.AddControlSetting(cb);
-                cb.CheckedChanged += CheckBoxChannelFilterOnCheckedChanged;
+                settings.AddControlSetting(cs.CheckBoxFilter);
+                cs.CheckBoxFilter.CheckedChanged += CheckBoxChannelFilterOnCheckedChanged;
+
+                settings.AddControlSetting(cs.CheckBoxLabel);
+                cs.CheckBoxLabel.CheckedChanged += CheckBoxChannelLabelOnCheckedChanged;
+
+                settings.AddControlSetting(cs.ButtonColor);
+                cs.ButtonColor.Click += ButtonChannelColorClick;
+                cs.ButtonColor.TextChanged += ButtonColorOnTextChanged;
             }
 
             _controller = plugin.Controller;
@@ -82,11 +111,16 @@ namespace ACT.FFXIVTranslate
             _controller.LanguageChanged += ControllerOnLanguageChanged;
             _controller.LogMessageAppend += ControllerOnLogMessageAppend;
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
+            _controller.ChannelColorChanged += ControllerOnChannelColorChanged;
 
             trackBarOpacity_ValueChanged(this, EventArgs.Empty);
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
             NumericUpDownSizeOnValueChanged(this, EventArgs.Empty);
             CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
+            foreach (var cs in _channelSettings)
+            {
+                cs.ButtonColor.Text = "#FFFFFF";
+            }
 
             translateProviderPanel.AttachToAct(plugin);
         }
@@ -100,8 +134,36 @@ namespace ACT.FFXIVTranslate
         private void CheckBoxChannelFilterOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             var cb = (CheckBox)sender;
-            var eventCode = _channelFilterMapper[cb];
+            var eventCode = _channelSettings.Find(it => it.CheckBoxFilter == sender).Code;
             _controller.NotifyChannelFilterChanged(true, eventCode, cb.Checked);
+        }
+
+        private void CheckBoxChannelLabelOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            var cb = (CheckBox)sender;
+            var eventCode = _channelSettings.Find(it => it.CheckBoxLabel == sender).Code;
+            _controller.NotifyChannelLabelChanged(true, eventCode, cb.Checked);
+        }
+
+        private void ButtonChannelColorClick(object sender, EventArgs e)
+        {
+            var btn = (Button) sender;
+            var eventCode = _channelSettings.Find(it => it.ButtonColor == sender).Code;
+            var colorDialog = new ColorDialog();
+            colorDialog.Color = btn.BackColor;
+            if (colorDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                _controller.NotifyChannelColorChanged(true, eventCode, colorDialog.Color);
+            }
+        }
+
+        private void ButtonColorOnTextChanged(object sender, EventArgs eventArgs)
+        {
+            var btn = (Button)sender;
+            var eventCode = _channelSettings.Find(it => it.ButtonColor == sender).Code;
+            var color = ColorTranslator.FromHtml(btn.Text);
+
+            _controller.NotifyChannelColorChanged(true, eventCode, color);
         }
 
         private void ParentTabPageOnResize(object sender, EventArgs eventArgs)
@@ -118,7 +180,7 @@ namespace ACT.FFXIVTranslate
 
         private void buttonFont_Click(object sender, EventArgs e)
         {
-            FontDialog fontdialog = new FontDialog();
+            var fontdialog = new FontDialog();
             fontdialog.Font = _currentFont;
 
             if (fontdialog.ShowDialog() != DialogResult.Cancel)
@@ -200,6 +262,13 @@ namespace ACT.FFXIVTranslate
         {
             _currentFont = font;
             textBoxFont.Text = TypeDescriptor.GetConverter(typeof(Font)).ConvertToString(font);
+        }
+
+        private void ControllerOnChannelColorChanged(bool fromView, EventCode code, Color color)
+        {
+            var btn = _channelSettings.Find(it => it.Code == code).ButtonColor;
+            btn.BackColor = color;
+            btn.Text = color.ToHexString();
         }
     }
 }

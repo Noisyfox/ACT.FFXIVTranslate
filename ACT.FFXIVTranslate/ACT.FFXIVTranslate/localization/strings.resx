@@ -186,7 +186,7 @@
   <data name="checkBoxClickthrough" xml:space="preserve">
     <value>鼠标穿透</value>
   </data>
-  <data name="groupBoxChannelFilter" xml:space="preserve">
+  <data name="labelChannelFilter" xml:space="preserve">
     <value>频道过滤</value>
   </data>
   <data name="groupBoxOverlay" xml:space="preserve">
@@ -236,5 +236,11 @@
   </data>
   <data name="tabPageLog" xml:space="preserve">
     <value>插件日志</value>
+  </data>
+  <data name="labelChannelColor" xml:space="preserve">
+    <value>频道颜色</value>
+  </data>
+  <data name="labelChannelLabel" xml:space="preserve">
+    <value>显示频道标签</value>
   </data>
 </root>

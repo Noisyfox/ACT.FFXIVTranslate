@@ -105,6 +105,7 @@ namespace ACT.FFXIVTranslate.translate
                         {
                             context.Provider.Translate(batchWorkingList);
 
+                            // TODO: Set color and label
                             var finalResultBuilder = new StringBuilder();
                             foreach (var line in batchWorkingList)
                             {

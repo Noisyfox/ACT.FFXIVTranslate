@@ -112,8 +112,9 @@ namespace ACT.FFXIVTranslate.translate
                             var finalResultBuilder = new RTFBuilder();
                             foreach (var line in batchWorkingList)
                             {
-                                finalResultBuilder.ForeColor(service._plugin.GetChannelSettings(line.EventCode).DisplayColor).AppendLine(
-                                    $"{TextProcessor.BuildQuote(line)}{line.TranslatedContent}");
+                                var settings = service._plugin.GetChannelSettings(line.EventCode);
+                                finalResultBuilder.ForeColor(settings.DisplayColor).AppendLine(
+                                    $"{TextProcessor.BuildQuote(line, settings.ShowLabel)}{line.TranslatedContent}");
                             }
 
                             service._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());

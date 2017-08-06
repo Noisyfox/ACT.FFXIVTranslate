@@ -125,7 +125,7 @@ namespace ACT.FFXIVTranslate
         }
 
 
-        public static string BuildQuote(ChattingLine chatting)
+        public static string BuildQuote(ChattingLine chatting, bool showLabel)
         {
             var cleanedName = NaiveCleanText(chatting.RawSender);
 
@@ -146,11 +146,35 @@ namespace ACT.FFXIVTranslate
                 }
                 else
                 {
-                    return $"{cleanedName}：";
+                    if (showLabel)
+                    {
+                        switch (codeEnum)
+                        {
+                            case EventCode.LS1:
+                                return $"[1]<{cleanedName}>";
+                            case EventCode.LS2:
+                                return $"[2]<{cleanedName}>";
+                            case EventCode.LS3:
+                                return $"[3]<{cleanedName}>";
+                            case EventCode.LS4:
+                                return $"[4]<{cleanedName}>";
+                            case EventCode.LS5:
+                                return $"[5]<{cleanedName}>";
+                            case EventCode.LS6:
+                                return $"[6]<{cleanedName}>";
+                            case EventCode.LS7:
+                                return $"[7]<{cleanedName}>";
+                            case EventCode.LS8:
+                                return $"[8]<{cleanedName}>";
+                            case EventCode.FreeCompany:
+                                return $"[FC]<{cleanedName}>";
+                        }
+                    }
+                    return $"<{cleanedName}>";
                 }
             }
 
-            return $"{cleanedName}：";
+            return $"<{cleanedName}>";
         }
     }
 }

@@ -15,6 +15,9 @@ namespace ACT.FFXIVTranslate
     {
         private MainController _controller;
 
+        private double _targetOpacity = 1;
+        private bool _targetClickthrough = false;
+
         public TranslateForm()
         {
             InitializeComponent();
@@ -46,7 +49,8 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            Opacity = value;
+            _targetOpacity = value;
+            ApplyOpacityAndClickthrough();
         }
 
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
@@ -83,7 +87,19 @@ namespace ACT.FFXIVTranslate
             {
                 return;
             }
-            Win32APIUtils.SetWS_EX_TRANSPARENT(Handle, clickthrough);
+            _targetClickthrough = clickthrough;
+            ApplyOpacityAndClickthrough();
+        }
+
+        private void ApplyOpacityAndClickthrough()
+        {
+            var op = _targetOpacity;
+            if (_targetClickthrough && op >= 1)
+            {
+                op = 0.99;
+            }
+            Opacity = op;
+            Win32APIUtils.SetWS_EX_TRANSPARENT(Handle, _targetClickthrough);
         }
 
         private void ControllerOnOverlayContentUpdated(bool fromView, string content)

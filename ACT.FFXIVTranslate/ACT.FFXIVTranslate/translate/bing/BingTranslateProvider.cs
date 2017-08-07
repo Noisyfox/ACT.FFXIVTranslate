@@ -158,32 +158,17 @@ namespace ACT.FFXIVTranslate.translate.bing
         {
             string _responseBody = null;
             var _statusCode = HttpStatusCode.BadRequest;
-            var task = TaskEx.Run(async () =>
-            {
-                using (var client = new HttpClient())
-                using (var request = new HttpRequestMessage())
-                {
-                    request.Method = HttpMethod.Post;
-                    request.RequestUri = new Uri(ServiceUri);
-                    request.Content = new StringContent(requestBody, Encoding.UTF8, "text/xml");
-                    request.Headers.Add("Authorization", authToken);
-                    var response = await client.SendAsync(request);
-                    _responseBody = await response.Content.ReadAsStringAsync();
-                    _statusCode = response.StatusCode;
-                }
-            });
 
-            while (!task.IsCompleted)
+            using (var client = new HttpClient())
+            using (var request = new HttpRequestMessage())
             {
-                System.Threading.Thread.Yield();
-            }
-            if (task.IsFaulted)
-            {
-                throw task.Exception;
-            }
-            if (task.IsCanceled)
-            {
-                throw new Exception("Timeout obtaining access token.");
+                request.Method = HttpMethod.Post;
+                request.RequestUri = new Uri(ServiceUri);
+                request.Content = new StringContent(requestBody, Encoding.UTF8, "text/xml");
+                request.Headers.Add("Authorization", authToken);
+                var response = client.SendAsync(request).Result;
+                _responseBody = response.Content.ReadAsStringAsync().Result;
+                _statusCode = response.StatusCode;
             }
 
             responseBody = _responseBody;

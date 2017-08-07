@@ -59,7 +59,7 @@ namespace ACT.FFXIVTranslate.translate.bing
         /// invocations of the method return the cached token for the next 5 minutes. After
         /// 5 minutes, a new token is fetched from the token service and the cache is updated.
         /// </remarks>
-        public async Task<string> GetAccessTokenAsync()
+        public string GetAccessToken()
         {
             if (string.IsNullOrWhiteSpace(this.SubscriptionKey))
             {
@@ -80,56 +80,56 @@ namespace ACT.FFXIVTranslate.translate.bing
                 request.Content = new StringContent(string.Empty);
                 request.Headers.TryAddWithoutValidation(OcpApimSubscriptionKeyHeader, this.SubscriptionKey);
                 client.Timeout = TimeSpan.FromSeconds(2);
-                var response = await client.SendAsync(request);
+                var response = client.SendAsync(request).Result;
                 this.RequestStatusCode = response.StatusCode;
                 response.EnsureSuccessStatusCode();
-                var token = await response.Content.ReadAsStringAsync();
+                var token = response.Content.ReadAsStringAsync().Result;
                 _storedTokenTime = DateTime.Now;
                 _storedTokenValue = "Bearer " + token;
                 return _storedTokenValue;
             }
         }
 
-        /// <summary>
-        /// Gets a token for the specified subscription. Synchronous version.
-        /// Use of async version preferred
-        /// </summary>
-        /// <returns>The encoded JWT token prefixed with the string "Bearer ".</returns>
-        /// <remarks>
-        /// This method uses a cache to limit the number of request to the token service.
-        /// A fresh token can be re-used during its lifetime of 10 minutes. After a successful
-        /// request to the token service, this method caches the access token. Subsequent 
-        /// invocations of the method return the cached token for the next 5 minutes. After
-        /// 5 minutes, a new token is fetched from the token service and the cache is updated.
-        /// </remarks>
-        public string GetAccessToken()
-        {
-            // Re-use the cached token if there is one.
-            if ((DateTime.Now - _storedTokenTime) < TokenCacheDuration)
-            {
-                return _storedTokenValue;
-            }
-
-            string accessToken = null;
-            var task = TaskEx.Run(async () =>
-            {
-                accessToken = await this.GetAccessTokenAsync();
-            });
-
-            while (!task.IsCompleted)
-            {
-                System.Threading.Thread.Yield();
-            }
-            if (task.IsFaulted)
-            {
-                throw task.Exception;
-            }
-            if (task.IsCanceled)
-            {
-                throw new Exception("Timeout obtaining access token.");
-            }
-            return accessToken;
-        }
+//        /// <summary>
+//        /// Gets a token for the specified subscription. Synchronous version.
+//        /// Use of async version preferred
+//        /// </summary>
+//        /// <returns>The encoded JWT token prefixed with the string "Bearer ".</returns>
+//        /// <remarks>
+//        /// This method uses a cache to limit the number of request to the token service.
+//        /// A fresh token can be re-used during its lifetime of 10 minutes. After a successful
+//        /// request to the token service, this method caches the access token. Subsequent 
+//        /// invocations of the method return the cached token for the next 5 minutes. After
+//        /// 5 minutes, a new token is fetched from the token service and the cache is updated.
+//        /// </remarks>
+//        public string GetAccessToken()
+//        {
+//            // Re-use the cached token if there is one.
+//            if ((DateTime.Now - _storedTokenTime) < TokenCacheDuration)
+//            {
+//                return _storedTokenValue;
+//            }
+//
+//            string accessToken = null;
+//            var task = Task.Factory.StartNew(async () =>
+//            {
+//                accessToken = this.GetAccessTokenAsync().Result;
+//            });
+//
+//            while (!task.IsCompleted)
+//            {
+//                System.Threading.Thread.Yield();
+//            }
+//            if (task.IsFaulted)
+//            {
+//                throw task.Exception;
+//            }
+//            if (task.IsCanceled)
+//            {
+//                throw new Exception("Timeout obtaining access token.");
+//            }
+//            return accessToken;
+//        }
 
     }
 }

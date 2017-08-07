@@ -128,26 +128,22 @@ namespace ACT.FFXIVTranslate.translate.bing
             {
                 authToken = _token.GetAccessToken();
             }
-            catch (AggregateException ex)
+            catch (HttpRequestException ex)
             {
-                if (ex.GetBaseException() is HttpRequestException)
+                switch (_token.RequestStatusCode)
                 {
-                    switch (_token.RequestStatusCode)
-                    {
-                        case HttpStatusCode.Unauthorized:
-                            throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey,
-                                "Invalid API key",
-                                null);
-                        case HttpStatusCode.Forbidden:
-                            throw new TranslateException(TranslateException.ExceptionReason.ApiLimitExceed,
-                                "Account quota has been exceeded.",
-                                null);
-                        default:
-                            throw new TranslateException(TranslateException.ExceptionReason.GeneralServiceError,
-                                null, ex);
-                    }
+                    case HttpStatusCode.Unauthorized:
+                        throw new TranslateException(TranslateException.ExceptionReason.InvalidApiKey,
+                            "Invalid API key",
+                            null);
+                    case HttpStatusCode.Forbidden:
+                        throw new TranslateException(TranslateException.ExceptionReason.ApiLimitExceed,
+                            "Account quota has been exceeded.",
+                            null);
+                    default:
+                        throw new TranslateException(TranslateException.ExceptionReason.GeneralServiceError,
+                            null, ex);
                 }
-                throw;
             }
 
             return authToken;

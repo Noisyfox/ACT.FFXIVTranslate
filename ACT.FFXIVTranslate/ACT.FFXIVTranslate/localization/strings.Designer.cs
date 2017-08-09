@@ -358,7 +358,7 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
-        ///   查找类似 透明度: 的本地化字符串。
+        ///   查找类似 不透明度: 的本地化字符串。
         /// </summary>
         public static string labelOpacity {
             get {

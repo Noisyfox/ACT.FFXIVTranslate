@@ -211,7 +211,7 @@
     <value>目标语言:</value>
   </data>
   <data name="labelOpacity" xml:space="preserve">
-    <value>透明度:</value>
+    <value>不透明度:</value>
   </data>
   <data name="labelPosition" xml:space="preserve">
     <value>位置</value>

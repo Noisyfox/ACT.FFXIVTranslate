@@ -39,6 +39,7 @@
 5. 点击页面左侧的 **Keys** 链接，你会看到两个KEY。这两个KEY你可以任选一个来用。
 
 # TODO
+- 加入显示开关
 - 加入谷歌翻译官方API支持。
 - 加入谷歌翻译非官方API支持。
 - 加入http代理支持。
@@ -93,6 +94,7 @@ The free api keys have limits on words per month. You may want to get your own p
 5. Click the link **Keys** at the left side, and you will find two keys. Any of those should be work.
 
 # TODO
+- Add switch to show / hide the overlay
 - Add official Google Translate support.
 - Add unofficial Google Translate support.
 - Add http proxy support.

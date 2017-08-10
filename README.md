@@ -47,6 +47,7 @@
 - ~~在翻译窗口中显示聊天的频道。不同频道的聊天内容会用不同颜色来显示，就和游戏里一样。~~
 - (不太容易) 正常显示 *定型文字*.
 - 显示消息时间
+- 当游戏窗口非激活状态时自动隐藏悬浮窗
 - 以后想到啥再加咯 :P
 
 -------
@@ -102,4 +103,5 @@ The free api keys have limits on words per month. You may want to get your own p
 - ~~Display chatting channel. Have different colors for different channels, just like the game does.~~
 - (unlikely) Display *Auto-Translate*.
 - Show message time.
+- Hide overlay when game window is not active.
 - More to come :P

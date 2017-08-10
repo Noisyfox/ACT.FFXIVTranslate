@@ -52,7 +52,7 @@
 
 -------
 # ACT.FFXIVTranslate
-A你ACT plugin to translate palyers' chatting for Final Fantasy XIV
+An ACT plugin to translate palyers' chatting for Final Fantasy XIV
 
 # How To
 1. Download the latest version of the plugin from https://github.com/Noisyfox/ACT.FFXIVTranslate/releases

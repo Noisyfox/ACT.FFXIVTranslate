@@ -123,5 +123,23 @@ namespace ACT.FFXIVTranslate
         {
             LegalInfoChanged?.Invoke(fromView, info);
         }
+
+        public delegate void OnShowOverlayChangedDelegate(bool fromView, bool showOverlay);
+
+        public event OnShowOverlayChangedDelegate ShowOverlayChanged;
+
+        public void NotifyShowOverlayChanged(bool fromView, bool showOverlay)
+        {
+            ShowOverlayChanged?.Invoke(fromView, showOverlay);
+        }
+
+        public delegate void OnOverlayAutoHideChangedDelegate(bool fromView, bool autoHide);
+
+        public event OnOverlayAutoHideChangedDelegate OverlayAutoHideChanged;
+
+        public void NotifyOverlayAutoHideChanged(bool fromView, bool autoHide)
+        {
+            OverlayAutoHideChanged?.Invoke(fromView, autoHide);
+        }
     }
 }

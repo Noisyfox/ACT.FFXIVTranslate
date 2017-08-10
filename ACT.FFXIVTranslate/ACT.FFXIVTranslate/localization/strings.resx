@@ -243,4 +243,10 @@
   <data name="labelChannelLabel" xml:space="preserve">
     <value>显示频道标签</value>
   </data>
+  <data name="checkBoxAutoHide" xml:space="preserve">
+    <value>悬浮窗自动隐藏</value>
+  </data>
+  <data name="checkBoxShowOverlay" xml:space="preserve">
+    <value>显示悬浮窗</value>
+  </data>
 </root>

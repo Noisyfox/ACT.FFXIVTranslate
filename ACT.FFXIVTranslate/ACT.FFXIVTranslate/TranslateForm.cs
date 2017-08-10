@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using ACT.FFXIVTranslate.translate;
-using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
@@ -17,6 +13,9 @@ namespace ACT.FFXIVTranslate
 
         private double _targetOpacity = 1;
         private bool _targetClickthrough = false;
+
+        private bool _showOverlay = false;
+        private bool _autoHide = false;
 
         public TranslateForm()
         {
@@ -37,9 +36,23 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayContentUpdated += ControllerOnOverlayContentUpdated;
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
             _controller.LegalInfoChanged += ControllerOnLegalInfoChanged;
+            _controller.OverlayAutoHideChanged += ControllerOnOverlayAutoHideChanged;
+            _controller.ShowOverlayChanged += ControllerOnShowOverlayChanged;
 
             Move += OnMove;
             SizeChanged += OnSizeChanged;
+
+            timerAutoHide.Enabled = true;
+        }
+
+        private void ControllerOnOverlayAutoHideChanged(bool fromView, bool autoHide)
+        {
+            _autoHide = autoHide;
+        }
+
+        private void ControllerOnShowOverlayChanged(bool fromView, bool showOverlay)
+        {
+            _showOverlay = showOverlay;
         }
 
         private void ControllerOnOpacityChanged(bool fromView, double value)
@@ -155,8 +168,52 @@ namespace ACT.FFXIVTranslate
         {
             if (linkLabelLegalInfo.Tag is string link)
             {
-                System.Diagnostics.Process.Start(link);
+                Process.Start(link);
             }
+        }
+
+        private void timerAutoHide_Tick(object sender, EventArgs e)
+        {
+            var targetVisible = false;
+            try
+            {
+                if (_showOverlay && _autoHide)
+                {
+                    var hWndFg = Win32APIUtils.GetForegroundWindow();
+                    if (hWndFg == IntPtr.Zero)
+                    {
+                        return;
+                    }
+                    Win32APIUtils.GetWindowThreadProcessId(hWndFg, out uint pid);
+                    var exePath = Process.GetProcessById((int) pid).MainModule.FileName;
+
+                    if (Path.GetFileName(exePath) == "ffxiv.exe" ||
+                        Path.GetFileName(exePath) == "ffxiv_dx11.exe" ||
+                        exePath == Process.GetCurrentProcess().MainModule.FileName)
+                    {
+                        targetVisible = true;
+                    }
+                }
+                else
+                {
+                    targetVisible = _showOverlay;
+                }
+            }
+            catch (Exception ex)
+            {
+                _controller.NotifyLogMessageAppend(true, ex.ToString());
+                targetVisible = true; // Force show overlay if something goes wrong.
+            }
+
+            if (Visible != targetVisible)
+            {
+                Visible = targetVisible;
+            }
+        }
+
+        private void TranslateForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timerAutoHide.Enabled = false;
         }
     }
 }

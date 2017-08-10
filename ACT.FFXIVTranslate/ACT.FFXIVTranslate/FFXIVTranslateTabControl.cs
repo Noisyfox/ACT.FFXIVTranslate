@@ -81,6 +81,8 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(numericUpDownHeight);
             settings.AddControlSetting(trackBarOpacity);
             settings.AddControlSetting(checkBoxClickthrough);
+            settings.AddControlSetting(checkBoxShowOverlay);
+            settings.AddControlSetting(checkBoxAutoHide);
             settings.AddStringSetting(nameof(plugin.Language));
             settings.AddStringSetting(nameof(plugin.OverlayFont));
 
@@ -117,6 +119,8 @@ namespace ACT.FFXIVTranslate
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
             NumericUpDownSizeOnValueChanged(this, EventArgs.Empty);
             CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
+            checkBoxShowOverlay_CheckedChanged(this, EventArgs.Empty);
+            checkBoxAutoHide_CheckedChanged(this, EventArgs.Empty);
             foreach (var cs in _channelSettings)
             {
                 cs.ButtonColor.Text = "#FFFFFF";
@@ -187,6 +191,16 @@ namespace ACT.FFXIVTranslate
             {
                 _controller.NotifyOverlayFontChanged(true, fontdialog.Font);
             }
+        }
+
+        private void checkBoxShowOverlay_CheckedChanged(object sender, EventArgs e)
+        {
+            _controller.NotifyShowOverlayChanged(true, checkBoxShowOverlay.Checked);
+        }
+
+        private void checkBoxAutoHide_CheckedChanged(object sender, EventArgs e)
+        {
+            _controller.NotifyOverlayAutoHideChanged(true, checkBoxAutoHide.Checked);
         }
 
         private void NumericUpDownPositionOnValueChanged(object sender, EventArgs eventArgs)

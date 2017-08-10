@@ -97,6 +97,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 悬浮窗自动隐藏 的本地化字符串。
+        /// </summary>
+        public static string checkBoxAutoHide {
+            get {
+                return ResourceManager.GetString("checkBoxAutoHide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 团队 的本地化字符串。
         /// </summary>
         public static string checkBoxChannelFilterAlliance {
@@ -246,6 +255,15 @@ namespace ACT.FFXIVTranslate.localization {
         public static string checkBoxClickthrough {
             get {
                 return ResourceManager.GetString("checkBoxClickthrough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示悬浮窗 的本地化字符串。
+        /// </summary>
+        public static string checkBoxShowOverlay {
+            get {
+                return ResourceManager.GetString("checkBoxShowOverlay", resourceCulture);
             }
         }
         

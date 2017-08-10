@@ -43,9 +43,11 @@
             this.labelOpacity = new System.Windows.Forms.Label();
             this.trackBarOpacity = new System.Windows.Forms.TrackBar();
             this.labelOpacityValue = new System.Windows.Forms.Label();
-            this.checkBoxClickthrough = new System.Windows.Forms.CheckBox();
             this.buttonFont = new System.Windows.Forms.Button();
             this.textBoxFont = new System.Windows.Forms.TextBox();
+            this.checkBoxClickthrough = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowOverlay = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoHide = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterSay = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterShout = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterYell = new System.Windows.Forms.CheckBox();
@@ -73,13 +75,22 @@
             this.tabPageChannelSettings = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonChannelColorSay = new System.Windows.Forms.Button();
-            this.buttonChannelColorShout = new System.Windows.Forms.Button();
-            this.buttonChannelColorYell = new System.Windows.Forms.Button();
             this.buttonChannelColorTell = new System.Windows.Forms.Button();
             this.buttonChannelColorParty = new System.Windows.Forms.Button();
             this.buttonChannelColorAlliance = new System.Windows.Forms.Button();
             this.buttonChannelColorFC = new System.Windows.Forms.Button();
-            this.buttonChannelColorNovice = new System.Windows.Forms.Button();
+            this.labelChannelFilter = new System.Windows.Forms.Label();
+            this.labelChannelColor = new System.Windows.Forms.Label();
+            this.labelChannelLabel = new System.Windows.Forms.Label();
+            this.checkBoxChannelLabelSay = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelLabelTell = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelLabelParty = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelLabelAlliance = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelLabelFC = new System.Windows.Forms.CheckBox();
+            this.buttonChannelColorShout = new System.Windows.Forms.Button();
+            this.buttonChannelColorYell = new System.Windows.Forms.Button();
+            this.checkBoxChannelLabelShout = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelLabelYell = new System.Windows.Forms.CheckBox();
             this.buttonChannelColorLS1 = new System.Windows.Forms.Button();
             this.buttonChannelColorLS2 = new System.Windows.Forms.Button();
             this.buttonChannelColorLS3 = new System.Windows.Forms.Button();
@@ -88,17 +99,7 @@
             this.buttonChannelColorLS6 = new System.Windows.Forms.Button();
             this.buttonChannelColorLS7 = new System.Windows.Forms.Button();
             this.buttonChannelColorLS8 = new System.Windows.Forms.Button();
-            this.labelChannelFilter = new System.Windows.Forms.Label();
-            this.labelChannelColor = new System.Windows.Forms.Label();
-            this.labelChannelLabel = new System.Windows.Forms.Label();
-            this.checkBoxChannelLabelSay = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelShout = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelYell = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelTell = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelParty = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelAlliance = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelFC = new System.Windows.Forms.CheckBox();
-            this.checkBoxChannelLabelNovice = new System.Windows.Forms.CheckBox();
+            this.buttonChannelColorNovice = new System.Windows.Forms.Button();
             this.checkBoxChannelLabelLS1 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelLS2 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelLS3 = new System.Windows.Forms.CheckBox();
@@ -107,6 +108,7 @@
             this.checkBoxChannelLabelLS6 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelLS7 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelLS8 = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelLabelNovice = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -128,7 +130,7 @@
             this.groupBoxOverlay.Controls.Add(this.tableLayoutPanel1);
             this.groupBoxOverlay.Location = new System.Drawing.Point(6, 43);
             this.groupBoxOverlay.Name = "groupBoxOverlay";
-            this.groupBoxOverlay.Size = new System.Drawing.Size(505, 182);
+            this.groupBoxOverlay.Size = new System.Drawing.Size(505, 232);
             this.groupBoxOverlay.TabIndex = 0;
             this.groupBoxOverlay.TabStop = false;
             this.groupBoxOverlay.Text = "Overlay Settings";
@@ -144,37 +146,41 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDownY, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelPosition, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelX, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelY, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDownX, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelSize, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelWidth, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelHeight, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDownWidth, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDownHeight, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelOpacity, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.trackBarOpacity, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelOpacityValue, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxClickthrough, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.buttonFont, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFont, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownY, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelPosition, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelX, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelY, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownX, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelSize, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelWidth, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelHeight, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownWidth, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.numericUpDownHeight, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelOpacity, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.trackBarOpacity, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelOpacityValue, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.buttonFont, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxFont, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxClickthrough, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxShowOverlay, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutoHide, 0, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(493, 156);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(493, 206);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericUpDownY
             // 
             this.numericUpDownY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownY.Location = new System.Drawing.Point(329, 3);
+            this.numericUpDownY.Location = new System.Drawing.Point(329, 25);
             this.numericUpDownY.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -198,7 +204,7 @@
             // 
             this.labelPosition.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelPosition.AutoSize = true;
-            this.labelPosition.Location = new System.Drawing.Point(3, 7);
+            this.labelPosition.Location = new System.Drawing.Point(3, 29);
             this.labelPosition.Name = "labelPosition";
             this.labelPosition.Size = new System.Drawing.Size(53, 12);
             this.labelPosition.TabIndex = 0;
@@ -208,7 +214,7 @@
             // 
             this.labelX.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelX.AutoSize = true;
-            this.labelX.Location = new System.Drawing.Point(86, 7);
+            this.labelX.Location = new System.Drawing.Point(86, 29);
             this.labelX.Name = "labelX";
             this.labelX.Size = new System.Drawing.Size(17, 12);
             this.labelX.TabIndex = 1;
@@ -218,7 +224,7 @@
             // 
             this.labelY.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(306, 7);
+            this.labelY.Location = new System.Drawing.Point(306, 29);
             this.labelY.Name = "labelY";
             this.labelY.Size = new System.Drawing.Size(17, 12);
             this.labelY.TabIndex = 2;
@@ -227,7 +233,7 @@
             // numericUpDownX
             // 
             this.numericUpDownX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownX.Location = new System.Drawing.Point(109, 3);
+            this.numericUpDownX.Location = new System.Drawing.Point(109, 25);
             this.numericUpDownX.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -251,7 +257,7 @@
             // 
             this.labelSize.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelSize.AutoSize = true;
-            this.labelSize.Location = new System.Drawing.Point(3, 34);
+            this.labelSize.Location = new System.Drawing.Point(3, 56);
             this.labelSize.Name = "labelSize";
             this.labelSize.Size = new System.Drawing.Size(29, 12);
             this.labelSize.TabIndex = 5;
@@ -261,7 +267,7 @@
             // 
             this.labelWidth.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelWidth.AutoSize = true;
-            this.labelWidth.Location = new System.Drawing.Point(62, 34);
+            this.labelWidth.Location = new System.Drawing.Point(62, 56);
             this.labelWidth.Name = "labelWidth";
             this.labelWidth.Size = new System.Drawing.Size(41, 12);
             this.labelWidth.TabIndex = 6;
@@ -271,7 +277,7 @@
             // 
             this.labelHeight.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelHeight.AutoSize = true;
-            this.labelHeight.Location = new System.Drawing.Point(276, 34);
+            this.labelHeight.Location = new System.Drawing.Point(276, 56);
             this.labelHeight.Name = "labelHeight";
             this.labelHeight.Size = new System.Drawing.Size(47, 12);
             this.labelHeight.TabIndex = 7;
@@ -280,7 +286,7 @@
             // numericUpDownWidth
             // 
             this.numericUpDownWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownWidth.Location = new System.Drawing.Point(109, 30);
+            this.numericUpDownWidth.Location = new System.Drawing.Point(109, 52);
             this.numericUpDownWidth.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -303,7 +309,7 @@
             // numericUpDownHeight
             // 
             this.numericUpDownHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownHeight.Location = new System.Drawing.Point(329, 30);
+            this.numericUpDownHeight.Location = new System.Drawing.Point(329, 52);
             this.numericUpDownHeight.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -326,7 +332,7 @@
             // labelOpacity
             // 
             this.labelOpacity.AutoSize = true;
-            this.labelOpacity.Location = new System.Drawing.Point(3, 54);
+            this.labelOpacity.Location = new System.Drawing.Point(3, 76);
             this.labelOpacity.Name = "labelOpacity";
             this.labelOpacity.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.labelOpacity.Size = new System.Drawing.Size(53, 22);
@@ -338,7 +344,7 @@
             this.trackBarOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarOpacity.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.SetColumnSpan(this.trackBarOpacity, 2);
-            this.trackBarOpacity.Location = new System.Drawing.Point(109, 57);
+            this.trackBarOpacity.Location = new System.Drawing.Point(109, 79);
             this.trackBarOpacity.Maximum = 100;
             this.trackBarOpacity.Name = "trackBarOpacity";
             this.trackBarOpacity.Size = new System.Drawing.Size(214, 45);
@@ -350,29 +356,17 @@
             // labelOpacityValue
             // 
             this.labelOpacityValue.AutoSize = true;
-            this.labelOpacityValue.Location = new System.Drawing.Point(329, 54);
+            this.labelOpacityValue.Location = new System.Drawing.Point(329, 76);
             this.labelOpacityValue.Name = "labelOpacityValue";
             this.labelOpacityValue.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.labelOpacityValue.Size = new System.Drawing.Size(29, 22);
             this.labelOpacityValue.TabIndex = 12;
             this.labelOpacityValue.Text = "100%";
             // 
-            // checkBoxClickthrough
-            // 
-            this.checkBoxClickthrough.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.checkBoxClickthrough.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxClickthrough, 5);
-            this.checkBoxClickthrough.Location = new System.Drawing.Point(3, 137);
-            this.checkBoxClickthrough.Name = "checkBoxClickthrough";
-            this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 16);
-            this.checkBoxClickthrough.TabIndex = 16;
-            this.checkBoxClickthrough.Text = "Clickthrough";
-            this.checkBoxClickthrough.UseVisualStyleBackColor = true;
-            // 
             // buttonFont
             // 
             this.buttonFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFont.Location = new System.Drawing.Point(329, 108);
+            this.buttonFont.Location = new System.Drawing.Point(329, 130);
             this.buttonFont.Name = "buttonFont";
             this.buttonFont.Size = new System.Drawing.Size(161, 23);
             this.buttonFont.TabIndex = 14;
@@ -384,11 +378,49 @@
             // 
             this.textBoxFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxFont, 4);
-            this.textBoxFont.Location = new System.Drawing.Point(3, 109);
+            this.textBoxFont.Location = new System.Drawing.Point(3, 131);
             this.textBoxFont.Name = "textBoxFont";
             this.textBoxFont.ReadOnly = true;
             this.textBoxFont.Size = new System.Drawing.Size(320, 21);
             this.textBoxFont.TabIndex = 17;
+            // 
+            // checkBoxClickthrough
+            // 
+            this.checkBoxClickthrough.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxClickthrough.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxClickthrough, 5);
+            this.checkBoxClickthrough.Location = new System.Drawing.Point(3, 159);
+            this.checkBoxClickthrough.Name = "checkBoxClickthrough";
+            this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxClickthrough.TabIndex = 16;
+            this.checkBoxClickthrough.Text = "Clickthrough";
+            this.checkBoxClickthrough.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxShowOverlay
+            // 
+            this.checkBoxShowOverlay.AutoSize = true;
+            this.checkBoxShowOverlay.Checked = true;
+            this.checkBoxShowOverlay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxShowOverlay, 5);
+            this.checkBoxShowOverlay.Location = new System.Drawing.Point(3, 3);
+            this.checkBoxShowOverlay.Name = "checkBoxShowOverlay";
+            this.checkBoxShowOverlay.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxShowOverlay.TabIndex = 18;
+            this.checkBoxShowOverlay.Text = "Show Overlay";
+            this.checkBoxShowOverlay.UseVisualStyleBackColor = true;
+            this.checkBoxShowOverlay.CheckedChanged += new System.EventHandler(this.checkBoxShowOverlay_CheckedChanged);
+            // 
+            // checkBoxAutoHide
+            // 
+            this.checkBoxAutoHide.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutoHide, 5);
+            this.checkBoxAutoHide.Location = new System.Drawing.Point(3, 181);
+            this.checkBoxAutoHide.Name = "checkBoxAutoHide";
+            this.checkBoxAutoHide.Size = new System.Drawing.Size(180, 16);
+            this.checkBoxAutoHide.TabIndex = 19;
+            this.checkBoxAutoHide.Text = "Automatically Hide Overlay";
+            this.checkBoxAutoHide.UseVisualStyleBackColor = true;
+            this.checkBoxAutoHide.CheckedChanged += new System.EventHandler(this.checkBoxAutoHide_CheckedChanged);
             // 
             // checkBoxChannelFilterSay
             // 
@@ -657,7 +689,7 @@
             // 
             // translateProviderPanel
             // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(6, 231);
+            this.translateProviderPanel.Location = new System.Drawing.Point(6, 281);
             this.translateProviderPanel.Name = "translateProviderPanel";
             this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
             this.translateProviderPanel.TabIndex = 1;
@@ -791,26 +823,6 @@
             this.buttonChannelColorSay.TabIndex = 16;
             this.buttonChannelColorSay.UseVisualStyleBackColor = false;
             // 
-            // buttonChannelColorShout
-            // 
-            this.buttonChannelColorShout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonChannelColorShout.BackColor = System.Drawing.Color.Transparent;
-            this.buttonChannelColorShout.Location = new System.Drawing.Point(105, 73);
-            this.buttonChannelColorShout.Name = "buttonChannelColorShout";
-            this.buttonChannelColorShout.Size = new System.Drawing.Size(98, 23);
-            this.buttonChannelColorShout.TabIndex = 16;
-            this.buttonChannelColorShout.UseVisualStyleBackColor = false;
-            // 
-            // buttonChannelColorYell
-            // 
-            this.buttonChannelColorYell.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonChannelColorYell.BackColor = System.Drawing.Color.Transparent;
-            this.buttonChannelColorYell.Location = new System.Drawing.Point(105, 44);
-            this.buttonChannelColorYell.Name = "buttonChannelColorYell";
-            this.buttonChannelColorYell.Size = new System.Drawing.Size(98, 23);
-            this.buttonChannelColorYell.TabIndex = 16;
-            this.buttonChannelColorYell.UseVisualStyleBackColor = false;
-            // 
             // buttonChannelColorTell
             // 
             this.buttonChannelColorTell.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -851,15 +863,123 @@
             this.buttonChannelColorFC.TabIndex = 16;
             this.buttonChannelColorFC.UseVisualStyleBackColor = false;
             // 
-            // buttonChannelColorNovice
+            // labelChannelFilter
             // 
-            this.buttonChannelColorNovice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonChannelColorNovice.BackColor = System.Drawing.Color.Transparent;
-            this.buttonChannelColorNovice.Location = new System.Drawing.Point(105, 450);
-            this.buttonChannelColorNovice.Name = "buttonChannelColorNovice";
-            this.buttonChannelColorNovice.Size = new System.Drawing.Size(98, 23);
-            this.buttonChannelColorNovice.TabIndex = 16;
-            this.buttonChannelColorNovice.UseVisualStyleBackColor = false;
+            this.labelChannelFilter.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelChannelFilter.AutoSize = true;
+            this.labelChannelFilter.Location = new System.Drawing.Point(3, 0);
+            this.labelChannelFilter.Name = "labelChannelFilter";
+            this.labelChannelFilter.Size = new System.Drawing.Size(89, 12);
+            this.labelChannelFilter.TabIndex = 17;
+            this.labelChannelFilter.Text = "Channel Filter";
+            // 
+            // labelChannelColor
+            // 
+            this.labelChannelColor.AutoSize = true;
+            this.labelChannelColor.Location = new System.Drawing.Point(105, 0);
+            this.labelChannelColor.Name = "labelChannelColor";
+            this.labelChannelColor.Size = new System.Drawing.Size(83, 12);
+            this.labelChannelColor.TabIndex = 18;
+            this.labelChannelColor.Text = "Channel Color";
+            // 
+            // labelChannelLabel
+            // 
+            this.labelChannelLabel.AutoSize = true;
+            this.labelChannelLabel.Location = new System.Drawing.Point(209, 0);
+            this.labelChannelLabel.Name = "labelChannelLabel";
+            this.labelChannelLabel.Size = new System.Drawing.Size(113, 12);
+            this.labelChannelLabel.TabIndex = 19;
+            this.labelChannelLabel.Text = "Show Channel Label";
+            // 
+            // checkBoxChannelLabelSay
+            // 
+            this.checkBoxChannelLabelSay.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelSay.AutoSize = true;
+            this.checkBoxChannelLabelSay.Location = new System.Drawing.Point(258, 19);
+            this.checkBoxChannelLabelSay.Name = "checkBoxChannelLabelSay";
+            this.checkBoxChannelLabelSay.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelSay.TabIndex = 20;
+            this.checkBoxChannelLabelSay.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelLabelTell
+            // 
+            this.checkBoxChannelLabelTell.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelTell.AutoSize = true;
+            this.checkBoxChannelLabelTell.Location = new System.Drawing.Point(258, 106);
+            this.checkBoxChannelLabelTell.Name = "checkBoxChannelLabelTell";
+            this.checkBoxChannelLabelTell.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelTell.TabIndex = 20;
+            this.checkBoxChannelLabelTell.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelLabelParty
+            // 
+            this.checkBoxChannelLabelParty.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelParty.AutoSize = true;
+            this.checkBoxChannelLabelParty.Location = new System.Drawing.Point(258, 135);
+            this.checkBoxChannelLabelParty.Name = "checkBoxChannelLabelParty";
+            this.checkBoxChannelLabelParty.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelParty.TabIndex = 20;
+            this.checkBoxChannelLabelParty.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelLabelAlliance
+            // 
+            this.checkBoxChannelLabelAlliance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelAlliance.AutoSize = true;
+            this.checkBoxChannelLabelAlliance.Location = new System.Drawing.Point(258, 164);
+            this.checkBoxChannelLabelAlliance.Name = "checkBoxChannelLabelAlliance";
+            this.checkBoxChannelLabelAlliance.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelAlliance.TabIndex = 20;
+            this.checkBoxChannelLabelAlliance.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelLabelFC
+            // 
+            this.checkBoxChannelLabelFC.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelFC.AutoSize = true;
+            this.checkBoxChannelLabelFC.Location = new System.Drawing.Point(258, 193);
+            this.checkBoxChannelLabelFC.Name = "checkBoxChannelLabelFC";
+            this.checkBoxChannelLabelFC.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelFC.TabIndex = 20;
+            this.checkBoxChannelLabelFC.UseVisualStyleBackColor = true;
+            // 
+            // buttonChannelColorShout
+            // 
+            this.buttonChannelColorShout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonChannelColorShout.BackColor = System.Drawing.Color.Transparent;
+            this.buttonChannelColorShout.Location = new System.Drawing.Point(105, 73);
+            this.buttonChannelColorShout.Name = "buttonChannelColorShout";
+            this.buttonChannelColorShout.Size = new System.Drawing.Size(98, 23);
+            this.buttonChannelColorShout.TabIndex = 16;
+            this.buttonChannelColorShout.UseVisualStyleBackColor = false;
+            // 
+            // buttonChannelColorYell
+            // 
+            this.buttonChannelColorYell.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonChannelColorYell.BackColor = System.Drawing.Color.Transparent;
+            this.buttonChannelColorYell.Location = new System.Drawing.Point(105, 44);
+            this.buttonChannelColorYell.Name = "buttonChannelColorYell";
+            this.buttonChannelColorYell.Size = new System.Drawing.Size(98, 23);
+            this.buttonChannelColorYell.TabIndex = 16;
+            this.buttonChannelColorYell.UseVisualStyleBackColor = false;
+            // 
+            // checkBoxChannelLabelShout
+            // 
+            this.checkBoxChannelLabelShout.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelShout.AutoSize = true;
+            this.checkBoxChannelLabelShout.Location = new System.Drawing.Point(258, 77);
+            this.checkBoxChannelLabelShout.Name = "checkBoxChannelLabelShout";
+            this.checkBoxChannelLabelShout.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelShout.TabIndex = 20;
+            this.checkBoxChannelLabelShout.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelLabelYell
+            // 
+            this.checkBoxChannelLabelYell.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelYell.AutoSize = true;
+            this.checkBoxChannelLabelYell.Location = new System.Drawing.Point(258, 48);
+            this.checkBoxChannelLabelYell.Name = "checkBoxChannelLabelYell";
+            this.checkBoxChannelLabelYell.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelYell.TabIndex = 20;
+            this.checkBoxChannelLabelYell.UseVisualStyleBackColor = true;
             // 
             // buttonChannelColorLS1
             // 
@@ -941,113 +1061,15 @@
             this.buttonChannelColorLS8.TabIndex = 16;
             this.buttonChannelColorLS8.UseVisualStyleBackColor = false;
             // 
-            // labelChannelFilter
+            // buttonChannelColorNovice
             // 
-            this.labelChannelFilter.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelChannelFilter.AutoSize = true;
-            this.labelChannelFilter.Location = new System.Drawing.Point(3, 0);
-            this.labelChannelFilter.Name = "labelChannelFilter";
-            this.labelChannelFilter.Size = new System.Drawing.Size(89, 12);
-            this.labelChannelFilter.TabIndex = 17;
-            this.labelChannelFilter.Text = "Channel Filter";
-            // 
-            // labelChannelColor
-            // 
-            this.labelChannelColor.AutoSize = true;
-            this.labelChannelColor.Location = new System.Drawing.Point(105, 0);
-            this.labelChannelColor.Name = "labelChannelColor";
-            this.labelChannelColor.Size = new System.Drawing.Size(83, 12);
-            this.labelChannelColor.TabIndex = 18;
-            this.labelChannelColor.Text = "Channel Color";
-            // 
-            // labelChannelLabel
-            // 
-            this.labelChannelLabel.AutoSize = true;
-            this.labelChannelLabel.Location = new System.Drawing.Point(209, 0);
-            this.labelChannelLabel.Name = "labelChannelLabel";
-            this.labelChannelLabel.Size = new System.Drawing.Size(113, 12);
-            this.labelChannelLabel.TabIndex = 19;
-            this.labelChannelLabel.Text = "Show Channel Label";
-            // 
-            // checkBoxChannelLabelSay
-            // 
-            this.checkBoxChannelLabelSay.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelSay.AutoSize = true;
-            this.checkBoxChannelLabelSay.Location = new System.Drawing.Point(258, 19);
-            this.checkBoxChannelLabelSay.Name = "checkBoxChannelLabelSay";
-            this.checkBoxChannelLabelSay.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelSay.TabIndex = 20;
-            this.checkBoxChannelLabelSay.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelShout
-            // 
-            this.checkBoxChannelLabelShout.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelShout.AutoSize = true;
-            this.checkBoxChannelLabelShout.Location = new System.Drawing.Point(258, 77);
-            this.checkBoxChannelLabelShout.Name = "checkBoxChannelLabelShout";
-            this.checkBoxChannelLabelShout.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelShout.TabIndex = 20;
-            this.checkBoxChannelLabelShout.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelYell
-            // 
-            this.checkBoxChannelLabelYell.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelYell.AutoSize = true;
-            this.checkBoxChannelLabelYell.Location = new System.Drawing.Point(258, 48);
-            this.checkBoxChannelLabelYell.Name = "checkBoxChannelLabelYell";
-            this.checkBoxChannelLabelYell.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelYell.TabIndex = 20;
-            this.checkBoxChannelLabelYell.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelTell
-            // 
-            this.checkBoxChannelLabelTell.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelTell.AutoSize = true;
-            this.checkBoxChannelLabelTell.Location = new System.Drawing.Point(258, 106);
-            this.checkBoxChannelLabelTell.Name = "checkBoxChannelLabelTell";
-            this.checkBoxChannelLabelTell.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelTell.TabIndex = 20;
-            this.checkBoxChannelLabelTell.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelParty
-            // 
-            this.checkBoxChannelLabelParty.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelParty.AutoSize = true;
-            this.checkBoxChannelLabelParty.Location = new System.Drawing.Point(258, 135);
-            this.checkBoxChannelLabelParty.Name = "checkBoxChannelLabelParty";
-            this.checkBoxChannelLabelParty.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelParty.TabIndex = 20;
-            this.checkBoxChannelLabelParty.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelAlliance
-            // 
-            this.checkBoxChannelLabelAlliance.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelAlliance.AutoSize = true;
-            this.checkBoxChannelLabelAlliance.Location = new System.Drawing.Point(258, 164);
-            this.checkBoxChannelLabelAlliance.Name = "checkBoxChannelLabelAlliance";
-            this.checkBoxChannelLabelAlliance.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelAlliance.TabIndex = 20;
-            this.checkBoxChannelLabelAlliance.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelFC
-            // 
-            this.checkBoxChannelLabelFC.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelFC.AutoSize = true;
-            this.checkBoxChannelLabelFC.Location = new System.Drawing.Point(258, 193);
-            this.checkBoxChannelLabelFC.Name = "checkBoxChannelLabelFC";
-            this.checkBoxChannelLabelFC.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelFC.TabIndex = 20;
-            this.checkBoxChannelLabelFC.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxChannelLabelNovice
-            // 
-            this.checkBoxChannelLabelNovice.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.checkBoxChannelLabelNovice.AutoSize = true;
-            this.checkBoxChannelLabelNovice.Location = new System.Drawing.Point(258, 454);
-            this.checkBoxChannelLabelNovice.Name = "checkBoxChannelLabelNovice";
-            this.checkBoxChannelLabelNovice.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxChannelLabelNovice.TabIndex = 20;
-            this.checkBoxChannelLabelNovice.UseVisualStyleBackColor = true;
+            this.buttonChannelColorNovice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonChannelColorNovice.BackColor = System.Drawing.Color.Transparent;
+            this.buttonChannelColorNovice.Location = new System.Drawing.Point(105, 450);
+            this.buttonChannelColorNovice.Name = "buttonChannelColorNovice";
+            this.buttonChannelColorNovice.Size = new System.Drawing.Size(98, 23);
+            this.buttonChannelColorNovice.TabIndex = 16;
+            this.buttonChannelColorNovice.UseVisualStyleBackColor = false;
             // 
             // checkBoxChannelLabelLS1
             // 
@@ -1128,6 +1150,16 @@
             this.checkBoxChannelLabelLS8.Size = new System.Drawing.Size(15, 14);
             this.checkBoxChannelLabelLS8.TabIndex = 20;
             this.checkBoxChannelLabelLS8.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChannelLabelNovice
+            // 
+            this.checkBoxChannelLabelNovice.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelNovice.AutoSize = true;
+            this.checkBoxChannelLabelNovice.Location = new System.Drawing.Point(258, 454);
+            this.checkBoxChannelLabelNovice.Name = "checkBoxChannelLabelNovice";
+            this.checkBoxChannelLabelNovice.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelNovice.TabIndex = 20;
+            this.checkBoxChannelLabelNovice.UseVisualStyleBackColor = true;
             // 
             // tabPageLog
             // 
@@ -1250,5 +1282,7 @@
         private System.Windows.Forms.CheckBox checkBoxChannelLabelLS7;
         private System.Windows.Forms.CheckBox checkBoxChannelLabelLS8;
         private System.Windows.Forms.CheckBox checkBoxChannelLabelTell;
+        private System.Windows.Forms.CheckBox checkBoxShowOverlay;
+        private System.Windows.Forms.CheckBox checkBoxAutoHide;
     }
 }

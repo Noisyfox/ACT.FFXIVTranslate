@@ -8,17 +8,21 @@
 4. 将悬浮窗拖拽到合适的位置，大功告成！
 
 # 翻译来源设置
-目前本插件支持以下两个在线翻译API:
+目前本插件支持以下四个在线翻译API:
 - Yandax.Translate
+- 百度翻译
 - Microsoft Translator
+- 谷歌翻译非官方版
 
-我为这两个翻译API都申请了免费的API key提供给大家测试或者临时使用。
+其中谷歌翻译非官方版不需要输入API key就可以使用。
+我为 Yandax.Translate 与 Microsoft Translator 这两个翻译API都申请了免费的API key提供给大家测试或者临时使用。
+由于百度翻译会在免费额度用完后立刻开始收费，因此在此不提供试用key，大家可以按照下文的说明自行申请API key（非常简单）。
 
 插件默认使用Yandax.Translate（老毛子的翻译），你可以在**来源**下拉列表中选择不同的翻译API。
 
 点击**使用公用密钥**按钮会自动根据当前选择的翻译API设置我提供的免费公开的API密钥，或者你可以输入自己申请的API密钥。
 
-请记得每次更改完翻译来源设置后要点击**应用**按钮，否则除非你重新开启ACT否则新的设置都不会生效。
+请记得每次更改完翻译来源设置后要点击**应用**按钮，否则更改不会被保存。
 
 # 获取你自己的API密钥
 我提供的免费密钥是有各种使用限制的，你可以申请属于自己的API密钥来避免遇到这些限制。
@@ -38,16 +42,23 @@
 4. 创建完实例后，在Azure门户中找到这个实例并进入详情页面。
 5. 点击页面左侧的 **Keys** 链接，你会看到两个KEY。这两个KEY你可以任选一个来用。
 
+## 百度翻译
+1. 访问 http://api.fanyi.baidu.com/api/trans/product/index
+2. 点击页面中的 **申请接入** 按钮，如有需要请登录你的百度账号。
+3. 根据页面提示输入所需资料并继续。
+4. 当提示**API接口权限申请成功**时，你可以在下方找到你的**APP ID**和**密钥**。
+5. 在本插件的**API密钥**框中输入 **APP ID**:**密钥**，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
+
 # TODO
-- 加入显示开关
+- ~~加入显示开关~~
 - 加入谷歌翻译官方API支持。
-- 加入谷歌翻译非官方API支持。
+- ~~加入谷歌翻译非官方API支持。~~
 - 加入http代理支持。
 - 加入socks5代理支持。
 - ~~在翻译窗口中显示聊天的频道。不同频道的聊天内容会用不同颜色来显示，就和游戏里一样。~~
 - (不太容易) 正常显示 *定型文字*.
 - 显示消息时间
-- 当游戏窗口非激活状态时自动隐藏悬浮窗
+- ~~当游戏窗口非激活状态时自动隐藏悬浮窗~~
 - 以后想到啥再加咯 :P
 
 -------
@@ -62,11 +73,15 @@ where you can find the ACT's main executable file. Replace any existing files.
 4. Drag the translation window to your prefer location and enjoy!
 
 # Translator Provider Settings
-Currently this plugin support 2 providers:
+Currently this plugin support 4 providers:
 - Yandax.Translate
+- Baidu Translator
 - Microsoft Translator
+- Unofficial Google Translate
 
-All 2 providers are bundled with a free public API key for testing / temporarily using.
+The unofficial Google Translate doesn't require an API key.
+Yandax.Translate and Microsoft Translator providers are bundled with a free public API key for testing / temporarily using.
+For Baidu Translator users, I assume you are Chinese people so please read the Chinese part above :P
 
 The default provider is Yandax.Translate, you could change it by selecting a different one from the **Provider** combo box.
 
@@ -95,13 +110,13 @@ The free api keys have limits on words per month. You may want to get your own p
 5. Click the link **Keys** at the left side, and you will find two keys. Any of those should be work.
 
 # TODO
-- Add switch to show / hide the overlay
+- ~~Add switch to show / hide the overlay~~
 - Add official Google Translate support.
-- Add unofficial Google Translate support.
+- ~~Add unofficial Google Translate support.~~
 - Add http proxy support.
 - Add socks5 proxy support.
 - ~~Display chatting channel. Have different colors for different channels, just like the game does.~~
 - (unlikely) Display *Auto-Translate*.
 - Show message time.
-- Hide overlay when game window is not active.
+- ~~Hide overlay when game window is not active.~~
 - More to come :P

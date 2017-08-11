@@ -15,9 +15,9 @@ namespace ACT.FFXIVTranslate.translate.yandax
             LanguageDef.BuildLangFromCulture("fr"),
         }.ToList();
 
-        public string ProviderName { get; } = "Yandex Translate";
+        public string ProviderName => "Yandex Translate";
 
-        public bool SupportAutoDetect { get; } = true;
+        public bool SupportAutoDetect => true;
 
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
 

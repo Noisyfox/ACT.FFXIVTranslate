@@ -430,6 +430,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 该翻译来源未提供公用密钥。请参照插件文档获取密钥。 的本地化字符串。
+        /// </summary>
+        public static string messageNoFreeKey {
+            get {
+                return ResourceManager.GetString("messageNoFreeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 频道设置 的本地化字符串。
         /// </summary>
         public static string tabPageChannelSettings {

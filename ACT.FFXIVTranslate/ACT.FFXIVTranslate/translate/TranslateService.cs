@@ -11,6 +11,7 @@ using System.Threading;
 using System.Xml;
 using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate.bing;
+using ACT.FFXIVTranslate.translate.google_unofficial;
 using ACT.FFXIVTranslate.translate.yandax;
 using RTF;
 
@@ -32,7 +33,12 @@ namespace ACT.FFXIVTranslate.translate
         private string TranslateLangTo { get; set; }
 
         public List<ITranslaterProviderFactory> AllProviders { get; } =
-            new ITranslaterProviderFactory[] {new YandaxTranslateProviderFactory(), new BingTranslateProviderFactory(), }.ToList();
+            new ITranslaterProviderFactory[]
+            {
+                new YandaxTranslateProviderFactory(),
+                new BingTranslateProviderFactory(),
+                new GoogleTranslateProviderFactory(),
+            }.ToList();
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
@@ -41,7 +47,8 @@ namespace ACT.FFXIVTranslate.translate
             _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
         }
 
-        private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom,
+        private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey,
+            string langFrom,
             string langTo)
         {
             if (!fromView)
@@ -55,7 +62,9 @@ namespace ACT.FFXIVTranslate.translate
             TranslateLangTo = langTo;
 
             var factory = AllProviders.First(it => it.ProviderName == provider);
-            var lF = langFrom == LanguageDef.CodeAuto ? null : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);
+            var lF = langFrom == LanguageDef.CodeAuto
+                ? null
+                : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);
             var lT = factory.SupportedDestLanguages.First(it => it.LangCode == langTo);
             var context = new TranslateContext
             {

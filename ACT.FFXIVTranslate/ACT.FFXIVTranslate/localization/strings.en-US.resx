@@ -252,4 +252,7 @@
   <data name="checkBoxShowOverlay" xml:space="preserve">
     <value>Show Overlay</value>
   </data>
+  <data name="messageNoFreeKey" xml:space="preserve">
+    <value>The current provider doesn't have a free key provided.</value>
+  </data>
 </root>

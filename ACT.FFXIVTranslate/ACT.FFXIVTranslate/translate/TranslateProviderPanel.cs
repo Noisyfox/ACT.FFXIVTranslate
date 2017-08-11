@@ -152,7 +152,14 @@ namespace ACT.FFXIVTranslate.translate
 
             if (selectedProvider != null)
             {
-                textBoxApiKey.Text = selectedProvider.DefaultPublicKey;
+                var key = selectedProvider.DefaultPublicKey;
+                if (string.IsNullOrEmpty(key))
+                {
+                    key = string.Empty;
+                    MessageBox.Show(strings.messageNoFreeKey, strings.actPanelTitle,
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                textBoxApiKey.Text = key;
             }
         }
     }

@@ -152,8 +152,8 @@ namespace ACT.FFXIVTranslate.translate.bing
         private void DoRequest(string authToken, string requestBody,
             out string responseBody, out HttpStatusCode statusCode)
         {
-            string _responseBody = null;
-            var _statusCode = HttpStatusCode.BadRequest;
+            string _responseBody;
+            HttpStatusCode _statusCode;
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage())

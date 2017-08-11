@@ -8,7 +8,8 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {
-            LanguageDef.BuildLangFromCulture("zh"),
+            LanguageDef.BuildLangFromCulture("zh-CN"),
+            LanguageDef.BuildLangFromCulture("zh-TW"),
             LanguageDef.BuildLangFromCulture("en"),
             LanguageDef.BuildLangFromCulture("ja"),
             LanguageDef.BuildLangFromCulture("de"),

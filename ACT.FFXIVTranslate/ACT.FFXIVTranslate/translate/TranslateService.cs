@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using ACT.FFXIVTranslate.localization;
+using ACT.FFXIVTranslate.translate.baidu;
 using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.google_unofficial;
 using ACT.FFXIVTranslate.translate.yandax;
@@ -36,6 +37,7 @@ namespace ACT.FFXIVTranslate.translate
             new ITranslaterProviderFactory[]
             {
                 new YandaxTranslateProviderFactory(),
+                new BaiduTranslateProviderFactory(), 
                 new BingTranslateProviderFactory(),
                 new GoogleTranslateProviderFactory(),
             }.ToList();

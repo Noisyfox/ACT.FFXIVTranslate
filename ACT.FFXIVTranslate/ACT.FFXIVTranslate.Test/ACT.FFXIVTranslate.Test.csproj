@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaiduTranslateTest.cs" />
     <Compile Include="UnofficialGoogleTranslateTest.cs" />
     <Compile Include="BingTranslateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

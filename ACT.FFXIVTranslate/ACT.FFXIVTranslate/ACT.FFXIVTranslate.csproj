@@ -103,6 +103,8 @@
     <Compile Include="TranslateForm.Designer.cs">
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="translate\baidu\BaiduTranslateProvider.cs" />
+    <Compile Include="translate\baidu\BaiduTranslateProviderFactory.cs" />
     <Compile Include="translate\bing\AzureAuthToken.cs" />
     <Compile Include="translate\bing\BingTranslateProvider.cs" />
     <Compile Include="translate\bing\BingTranslateProviderFactory.cs" />

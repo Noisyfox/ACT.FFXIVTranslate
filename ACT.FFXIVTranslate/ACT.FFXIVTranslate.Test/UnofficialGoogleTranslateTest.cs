@@ -24,6 +24,7 @@ namespace ACT.FFXIVTranslate.Test
                 new ChattingLine{RawContent = "This is a string <aaa> contains html tag."},
                 new ChattingLine{RawContent = "This is a string &lt; contains html tag."},
                 new ChattingLine{RawContent = "&lt;"},
+                new ChattingLine{RawContent = "你在逗我呢？"},
             }.ToList();
 
             provider.Translate(lines);

@@ -41,6 +41,13 @@ namespace ACT.FFXIVTranslate.translate.baidu
                 // Build text
                 var query = string.Join("\n", chattingLines.Select(it => TextProcessor.NaiveCleanText(it.RawContent)));
 
+                // Make sure we do have something to translate
+                if (string.IsNullOrEmpty(query))
+                {
+                    chattingLines.ForEach(it => it.TranslatedContent = string.Empty);
+                    return;
+                }
+
                 // 1. Generate a salt
                 var salt = TimestampMillisFromDateTime(DateTime.Now).ToString();
                 // 2. Calculate sign

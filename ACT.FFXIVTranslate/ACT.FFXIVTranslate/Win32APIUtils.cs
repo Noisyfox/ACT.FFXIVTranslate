@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ACT.FFXIVTranslate
 {
-    static class Win32APIUtils
+    internal static class Win32APIUtils
     {
         const int WM_NCLBUTTONDOWN = 0xA1;
         const int HT_CAPTION = 0x2;

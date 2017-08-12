@@ -120,6 +120,9 @@
     <Compile Include="translate\TranslateService.cs" />
     <Compile Include="translate\yandax\YandaxTranslateProvider.cs" />
     <Compile Include="translate\yandax\YandaxTranslateProviderFactory.cs" />
+    <Compile Include="translate\youdao\YoudaoTranslateProvider.cs" />
+    <Compile Include="translate\youdao\YoudaoTranslateProviderFactory.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="Win32APIUtils.cs" />
   </ItemGroup>
   <ItemGroup>

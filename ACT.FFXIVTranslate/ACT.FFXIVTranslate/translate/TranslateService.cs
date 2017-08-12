@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading;
-using System.Xml;
 using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate.baidu;
 using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.google_unofficial;
 using ACT.FFXIVTranslate.translate.yandax;
+using ACT.FFXIVTranslate.translate.youdao;
 using RTF;
 
 namespace ACT.FFXIVTranslate.translate
@@ -40,6 +34,7 @@ namespace ACT.FFXIVTranslate.translate
                 new BaiduTranslateProviderFactory(), 
                 new BingTranslateProviderFactory(),
                 new GoogleTranslateProviderFactory(),
+                new YoudaoTranslateProviderFactory(), 
             }.ToList();
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)

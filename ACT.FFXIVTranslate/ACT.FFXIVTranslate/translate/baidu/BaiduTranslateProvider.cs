@@ -49,7 +49,7 @@ namespace ACT.FFXIVTranslate.translate.baidu
                 }
 
                 // 1. Generate a salt
-                var salt = TimestampMillisFromDateTime(DateTime.Now).ToString();
+                var salt = Utils.TimestampMillisFromDateTime(DateTime.Now).ToString();
                 // 2. Calculate sign
                 var md5Input = Encoding.UTF8.GetBytes($"{_appId}{query}{salt}{_secret}");
                 var md5 = System.Security.Cryptography.MD5.Create();
@@ -141,13 +141,6 @@ namespace ACT.FFXIVTranslate.translate.baidu
             {
                 throw new TranslateException(TranslateException.ExceptionReason.UnknownError, null, ex);
             }
-        }
-
-        private static long TimestampMillisFromDateTime(DateTime date)
-        {
-            var unixTimestamp = date.Ticks - new DateTime(1970, 1, 1).Ticks;
-            unixTimestamp /= TimeSpan.TicksPerMillisecond;
-            return unixTimestamp;
         }
     }
 }

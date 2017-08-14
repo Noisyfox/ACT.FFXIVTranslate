@@ -90,6 +90,10 @@ namespace ACT.FFXIVTranslate
                 Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
                 TranslateService.AttachToAct(this);
 
+                Overlay.PostAttachToAct(this);
+                SettingsTab.PostAttachToAct(this);
+                TranslateService.PostAttachToAct(this);
+
                 Settings.Load();
 
                 DoLocalization();
@@ -299,7 +303,8 @@ namespace ACT.FFXIVTranslate
                 RawEventCode = (byte) (eventCode & byte.MaxValue),
                 EventCode = eventCodeKnown,
                 RawSender = name,
-                RawContent = content
+                RawContent = content,
+                Timestamp = DateTime.Parse(data[1]),
             };
 
             TranslateService.SubmitNewLine(chat);
@@ -313,6 +318,12 @@ namespace ACT.FFXIVTranslate
             }
             return _channelSettings.GetOrAdd(eventCode, e => new ChannelSettings());
         }
+    }
+
+    public interface PluginComponent
+    {
+        void AttachToAct(FFXIVTranslatePlugin plugin);
+        void PostAttachToAct(FFXIVTranslatePlugin plugin);
     }
 
     /// <summary>
@@ -347,6 +358,8 @@ namespace ACT.FFXIVTranslate
         public byte RawEventCode;
         public string RawSender;
         public string RawContent;
+
+        public DateTime Timestamp;
 
         public EventCode EventCode;
         public string FormattedContent;

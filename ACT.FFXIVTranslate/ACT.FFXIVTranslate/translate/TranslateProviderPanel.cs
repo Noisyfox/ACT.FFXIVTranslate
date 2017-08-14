@@ -10,7 +10,7 @@ using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate
 {
-    public partial class TranslateProviderPanel : UserControl
+    public partial class TranslateProviderPanel : UserControl, PluginComponent
     {
         private FFXIVTranslatePlugin _plugin;
         private TranslateService _service;
@@ -26,7 +26,7 @@ namespace ACT.FFXIVTranslate.translate
             comboBoxLangTo.ValueMember = "LangCode";
         }
 
-        internal void AttachToAct(FFXIVTranslatePlugin plugin)
+        public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
             _service = plugin.TranslateService;
             _plugin = plugin;
@@ -40,6 +40,10 @@ namespace ACT.FFXIVTranslate.translate
             var controller = plugin.Controller;
             controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
             controller.LegalInfoChanged += ControllerOnLegalInfoChanged;
+        }
+
+        public void PostAttachToAct(FFXIVTranslatePlugin plugin)
+        {
         }
 
         public void DoLocalization()

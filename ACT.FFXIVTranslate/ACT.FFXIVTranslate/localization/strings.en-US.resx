@@ -255,4 +255,16 @@
   <data name="messageNoFreeKey" xml:space="preserve">
     <value>The current provider doesn't have a free key provided.</value>
   </data>
+  <data name="checkBox24Hour" xml:space="preserve">
+    <value>24-hour Format</value>
+  </data>
+  <data name="checkBoxAddTimestamp" xml:space="preserve">
+    <value>Add Timestamp to Messages</value>
+  </data>
+  <data name="timeFormat12HourAM" xml:space="preserve">
+    <value>h:MM "a.m."</value>
+  </data>
+  <data name="timeFormat12HourPM" xml:space="preserve">
+    <value>h:MM "p.m."</value>
+  </data>
 </root>

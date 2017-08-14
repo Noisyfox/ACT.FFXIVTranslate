@@ -97,6 +97,24 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 24小时制 的本地化字符串。
+        /// </summary>
+        public static string checkBox24Hour {
+            get {
+                return ResourceManager.GetString("checkBox24Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示消息时间戳 的本地化字符串。
+        /// </summary>
+        public static string checkBoxAddTimestamp {
+            get {
+                return ResourceManager.GetString("checkBoxAddTimestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 悬浮窗自动隐藏 的本地化字符串。
         /// </summary>
         public static string checkBoxAutoHide {
@@ -462,6 +480,24 @@ namespace ACT.FFXIVTranslate.localization {
         public static string tabPageLog {
             get {
                 return ResourceManager.GetString("tabPageLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &quot;上午 &quot;h:MM 的本地化字符串。
+        /// </summary>
+        public static string timeFormat12HourAM {
+            get {
+                return ResourceManager.GetString("timeFormat12HourAM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &quot;下午 &quot;h:MM 的本地化字符串。
+        /// </summary>
+        public static string timeFormat12HourPM {
+            get {
+                return ResourceManager.GetString("timeFormat12HourPM", resourceCulture);
             }
         }
     }

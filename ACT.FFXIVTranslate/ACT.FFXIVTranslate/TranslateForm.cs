@@ -7,7 +7,7 @@ using ACT.FFXIVTranslate.translate;
 
 namespace ACT.FFXIVTranslate
 {
-    public partial class TranslateForm : Form
+    public partial class TranslateForm : Form, PluginComponent
     {
         private MainController _controller;
 
@@ -43,6 +43,11 @@ namespace ACT.FFXIVTranslate
             SizeChanged += OnSizeChanged;
 
             timerAutoHide.Enabled = true;
+        }
+
+        public void PostAttachToAct(FFXIVTranslatePlugin plugin)
+        {
+            
         }
 
         private void ControllerOnOverlayAutoHideChanged(bool fromView, bool autoHide)

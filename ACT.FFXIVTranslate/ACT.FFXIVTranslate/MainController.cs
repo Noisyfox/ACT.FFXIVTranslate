@@ -141,5 +141,23 @@ namespace ACT.FFXIVTranslate
         {
             OverlayAutoHideChanged?.Invoke(fromView, autoHide);
         }
+
+        public delegate void OnAddTimestampChangedDelegate(bool fromView, bool show);
+
+        public event OnAddTimestampChangedDelegate AddTimestampChanged;
+
+        public void NotifyAddTimestampChanged(bool fromView, bool show)
+        {
+            AddTimestampChanged?.Invoke(fromView, show);
+        }
+
+        public delegate void OnTimestampFormatChangedDelegate(bool fromView, bool is24Hour);
+
+        public event OnTimestampFormatChangedDelegate TimestampFormatChanged;
+
+        public void NotifyTimestampFormatChanged(bool fromView, bool is24Hour)
+        {
+            TimestampFormatChanged?.Invoke(fromView, is24Hour);
+        }
     }
 }

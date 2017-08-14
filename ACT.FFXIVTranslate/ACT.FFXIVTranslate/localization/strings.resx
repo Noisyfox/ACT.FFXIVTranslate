@@ -252,4 +252,16 @@
   <data name="messageNoFreeKey" xml:space="preserve">
     <value>该翻译来源未提供公用密钥。请参照插件文档获取密钥。</value>
   </data>
+  <data name="checkBox24Hour" xml:space="preserve">
+    <value>24小时制</value>
+  </data>
+  <data name="checkBoxAddTimestamp" xml:space="preserve">
+    <value>显示消息时间戳</value>
+  </data>
+  <data name="timeFormat12HourAM" xml:space="preserve">
+    <value>"上午 "h:MM</value>
+  </data>
+  <data name="timeFormat12HourPM" xml:space="preserve">
+    <value>"下午 "h:MM</value>
+  </data>
 </root>

@@ -11,7 +11,7 @@ using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
-    public partial class FFXIVTranslateTabControl : UserControl
+    public partial class FFXIVTranslateTabControl : UserControl, PluginComponent
     {
         private MainController _controller;
         private readonly List<ChannelSettingsMapper> _channelSettings;
@@ -83,6 +83,8 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(checkBoxClickthrough);
             settings.AddControlSetting(checkBoxShowOverlay);
             settings.AddControlSetting(checkBoxAutoHide);
+            settings.AddControlSetting(checkBoxAddTimestamp);
+            settings.AddControlSetting(checkBox24Hour);
             settings.AddStringSetting(nameof(plugin.Language));
             settings.AddStringSetting(nameof(plugin.OverlayFont));
 
@@ -107,6 +109,8 @@ namespace ACT.FFXIVTranslate
             numericUpDownHeight.ValueChanged += NumericUpDownSizeOnValueChanged;
             checkBoxClickthrough.CheckedChanged += CheckBoxClickthroughOnCheckedChanged;
             comboBoxLanguage.SelectedIndexChanged += ComboBoxLanguageSelectedIndexChanged;
+            checkBoxAddTimestamp.CheckedChanged += CheckBoxAddTimestampOnCheckedChanged;
+            checkBox24Hour.CheckedChanged += CheckBox24HourOnCheckedChanged;
 
             _controller.OverlayMoved += ControllerOnOverlayMoved;
             _controller.OverlayResized += ControllerOnOverlayResized;
@@ -115,18 +119,25 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
             _controller.ChannelColorChanged += ControllerOnChannelColorChanged;
 
+            translateProviderPanel.AttachToAct(plugin);
+        }
+
+        public void PostAttachToAct(FFXIVTranslatePlugin plugin)
+        {
             trackBarOpacity_ValueChanged(this, EventArgs.Empty);
             NumericUpDownPositionOnValueChanged(this, EventArgs.Empty);
             NumericUpDownSizeOnValueChanged(this, EventArgs.Empty);
             CheckBoxClickthroughOnCheckedChanged(this, EventArgs.Empty);
             checkBoxShowOverlay_CheckedChanged(this, EventArgs.Empty);
             checkBoxAutoHide_CheckedChanged(this, EventArgs.Empty);
+            CheckBoxAddTimestampOnCheckedChanged(this, EventArgs.Empty);
+            CheckBox24HourOnCheckedChanged(this, EventArgs.Empty);
             foreach (var cs in _channelSettings)
             {
                 cs.ButtonColor.Text = "#FFFFFF";
             }
 
-            translateProviderPanel.AttachToAct(plugin);
+            translateProviderPanel.PostAttachToAct(plugin);
         }
 
         public void DoLocalization()
@@ -201,6 +212,16 @@ namespace ACT.FFXIVTranslate
         private void checkBoxAutoHide_CheckedChanged(object sender, EventArgs e)
         {
             _controller.NotifyOverlayAutoHideChanged(true, checkBoxAutoHide.Checked);
+        }
+
+        private void CheckBoxAddTimestampOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _controller.NotifyAddTimestampChanged(true, checkBoxAddTimestamp.Checked);
+        }
+
+        private void CheckBox24HourOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _controller.NotifyTimestampFormatChanged(true, checkBox24Hour.Checked);
         }
 
         private void NumericUpDownPositionOnValueChanged(object sender, EventArgs eventArgs)

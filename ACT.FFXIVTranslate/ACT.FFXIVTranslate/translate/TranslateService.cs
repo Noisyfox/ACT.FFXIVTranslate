@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using ACT.FFXIVTranslate.localization;
@@ -13,7 +14,7 @@ using RTF;
 namespace ACT.FFXIVTranslate.translate
 {
 
-    class TranslateService
+    class TranslateService : PluginComponent
     {
         private FFXIVTranslatePlugin _plugin;
         private MainController _controller;
@@ -26,6 +27,8 @@ namespace ACT.FFXIVTranslate.translate
         private string TranslateApiKey { get; set; }
         private string TranslateLangFrom { get; set; }
         private string TranslateLangTo { get; set; }
+        private bool AddTimestamp { get; set; }
+        private bool Timestamp24Hour { get; set; }
 
         public List<ITranslaterProviderFactory> AllProviders { get; } =
             new ITranslaterProviderFactory[]
@@ -42,6 +45,12 @@ namespace ACT.FFXIVTranslate.translate
             _plugin = plugin;
             _controller = plugin.Controller;
             _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
+            _controller.AddTimestampChanged += ControllerOnAddTimestampChanged;
+            _controller.TimestampFormatChanged += ControllerOnTimestampFormatChanged;
+        }
+
+        public void PostAttachToAct(FFXIVTranslatePlugin plugin)
+        {
         }
 
         private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey,
@@ -71,6 +80,16 @@ namespace ACT.FFXIVTranslate.translate
 
             _controller.NotifyLegalInfoChanged(false, factory.LegalInfo);
             _workingThread.StartWorkingThread(context);
+        }
+
+        private void ControllerOnAddTimestampChanged(bool fromView, bool show)
+        {
+            AddTimestamp = show;
+        }
+
+        private void ControllerOnTimestampFormatChanged(bool fromView, bool is24Hour)
+        {
+            Timestamp24Hour = is24Hour;
         }
 
         public void SubmitNewLine(ChattingLine line)
@@ -114,12 +133,32 @@ namespace ACT.FFXIVTranslate.translate
                         {
                             context.Provider.Translate(batchWorkingList);
 
-                            // TODO: Set color and label
                             var finalResultBuilder = new RTFBuilder();
                             foreach (var line in batchWorkingList)
                             {
+                                if (service.AddTimestamp)
+                                {
+                                    finalResultBuilder.ForeColor(Color.White);
+                                    string formattedTime;
+                                    if (service.Timestamp24Hour)
+                                    {
+                                        formattedTime = $"[{line.Timestamp:HH:mm}]";
+                                    }
+                                    else
+                                    {
+                                        formattedTime =
+                                            string.Format("[{0}]",
+                                                line.Timestamp.ToString(
+                                                    line.Timestamp.Hour > 11
+                                                        ? strings.timeFormat12HourPM
+                                                        : strings.timeFormat12HourAM,
+                                                    strings.Culture));
+                                    }
+                                    finalResultBuilder.Append(formattedTime);
+                                }
                                 var settings = service._plugin.GetChannelSettings(line.EventCode);
-                                finalResultBuilder.ForeColor(settings.DisplayColor).AppendLine(
+                                finalResultBuilder.ForeColor(settings.DisplayColor);
+                                finalResultBuilder.AppendLine(
                                     $"{TextProcessor.BuildQuote(line, settings.ShowLabel)}{line.TranslatedContent}");
                             }
 

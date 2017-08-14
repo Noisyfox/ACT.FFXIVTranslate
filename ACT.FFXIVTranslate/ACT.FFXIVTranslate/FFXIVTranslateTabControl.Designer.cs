@@ -110,6 +110,8 @@
             this.checkBoxChannelLabelLS8 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelNovice = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
+            this.checkBoxAddTimestamp = new System.Windows.Forms.CheckBox();
+            this.checkBox24Hour = new System.Windows.Forms.CheckBox();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -157,13 +159,15 @@
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownWidth, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.numericUpDownHeight, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelOpacity, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.trackBarOpacity, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.labelOpacityValue, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.trackBarOpacity, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.labelOpacityValue, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.buttonFont, 4, 4);
             this.tableLayoutPanel1.Controls.Add(this.textBoxFont, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxClickthrough, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxClickthrough, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxShowOverlay, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutoHide, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxAutoHide, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.checkBoxAddTimestamp, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox24Hour, 3, 5);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -174,6 +178,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(493, 206);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -344,10 +349,10 @@
             this.trackBarOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarOpacity.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.SetColumnSpan(this.trackBarOpacity, 2);
-            this.trackBarOpacity.Location = new System.Drawing.Point(109, 79);
+            this.trackBarOpacity.Location = new System.Drawing.Point(62, 79);
             this.trackBarOpacity.Maximum = 100;
             this.trackBarOpacity.Name = "trackBarOpacity";
-            this.trackBarOpacity.Size = new System.Drawing.Size(214, 45);
+            this.trackBarOpacity.Size = new System.Drawing.Size(208, 45);
             this.trackBarOpacity.TabIndex = 11;
             this.trackBarOpacity.TickFrequency = 10;
             this.trackBarOpacity.Value = 100;
@@ -356,12 +361,14 @@
             // labelOpacityValue
             // 
             this.labelOpacityValue.AutoSize = true;
-            this.labelOpacityValue.Location = new System.Drawing.Point(329, 76);
+            this.labelOpacityValue.Location = new System.Drawing.Point(276, 76);
+            this.labelOpacityValue.MinimumSize = new System.Drawing.Size(35, 0);
             this.labelOpacityValue.Name = "labelOpacityValue";
             this.labelOpacityValue.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.labelOpacityValue.Size = new System.Drawing.Size(29, 22);
+            this.labelOpacityValue.Size = new System.Drawing.Size(35, 22);
             this.labelOpacityValue.TabIndex = 12;
             this.labelOpacityValue.Text = "100%";
+            this.labelOpacityValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // buttonFont
             // 
@@ -386,12 +393,11 @@
             // 
             // checkBoxClickthrough
             // 
-            this.checkBoxClickthrough.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkBoxClickthrough.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxClickthrough, 5);
-            this.checkBoxClickthrough.Location = new System.Drawing.Point(3, 159);
+            this.checkBoxClickthrough.Location = new System.Drawing.Point(329, 79);
             this.checkBoxClickthrough.Name = "checkBoxClickthrough";
-            this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxClickthrough.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 21);
             this.checkBoxClickthrough.TabIndex = 16;
             this.checkBoxClickthrough.Text = "Clickthrough";
             this.checkBoxClickthrough.UseVisualStyleBackColor = true;
@@ -401,7 +407,7 @@
             this.checkBoxShowOverlay.AutoSize = true;
             this.checkBoxShowOverlay.Checked = true;
             this.checkBoxShowOverlay.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxShowOverlay, 5);
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxShowOverlay, 3);
             this.checkBoxShowOverlay.Location = new System.Drawing.Point(3, 3);
             this.checkBoxShowOverlay.Name = "checkBoxShowOverlay";
             this.checkBoxShowOverlay.Size = new System.Drawing.Size(96, 16);
@@ -413,8 +419,8 @@
             // checkBoxAutoHide
             // 
             this.checkBoxAutoHide.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutoHide, 5);
-            this.checkBoxAutoHide.Location = new System.Drawing.Point(3, 181);
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutoHide, 2);
+            this.checkBoxAutoHide.Location = new System.Drawing.Point(276, 3);
             this.checkBoxAutoHide.Name = "checkBoxAutoHide";
             this.checkBoxAutoHide.Size = new System.Drawing.Size(180, 16);
             this.checkBoxAutoHide.TabIndex = 19;
@@ -1172,6 +1178,34 @@
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
+            // checkBoxAddTimestamp
+            // 
+            this.checkBoxAddTimestamp.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxAddTimestamp.AutoSize = true;
+            this.checkBoxAddTimestamp.Checked = true;
+            this.checkBoxAddTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAddTimestamp, 3);
+            this.checkBoxAddTimestamp.Location = new System.Drawing.Point(3, 159);
+            this.checkBoxAddTimestamp.Name = "checkBoxAddTimestamp";
+            this.checkBoxAddTimestamp.Size = new System.Drawing.Size(174, 16);
+            this.checkBoxAddTimestamp.TabIndex = 20;
+            this.checkBoxAddTimestamp.Text = "Add Timestamp to Messages";
+            this.checkBoxAddTimestamp.UseVisualStyleBackColor = true;
+            // 
+            // checkBox24Hour
+            // 
+            this.checkBox24Hour.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBox24Hour.AutoSize = true;
+            this.checkBox24Hour.Checked = true;
+            this.checkBox24Hour.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBox24Hour, 2);
+            this.checkBox24Hour.Location = new System.Drawing.Point(276, 159);
+            this.checkBox24Hour.Name = "checkBox24Hour";
+            this.checkBox24Hour.Size = new System.Drawing.Size(108, 16);
+            this.checkBox24Hour.TabIndex = 21;
+            this.checkBox24Hour.Text = "24-hour Format";
+            this.checkBox24Hour.UseVisualStyleBackColor = true;
+            // 
             // FFXIVTranslateTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1284,5 +1318,7 @@
         private System.Windows.Forms.CheckBox checkBoxChannelLabelTell;
         private System.Windows.Forms.CheckBox checkBoxShowOverlay;
         private System.Windows.Forms.CheckBox checkBoxAutoHide;
+        private System.Windows.Forms.CheckBox checkBoxAddTimestamp;
+        private System.Windows.Forms.CheckBox checkBox24Hour;
     }
 }

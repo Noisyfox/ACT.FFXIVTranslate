@@ -8,7 +8,7 @@
 4. 将悬浮窗拖拽到合适的位置，大功告成！
 
 # 翻译来源设置
-目前本插件支持以下四个在线翻译API:
+目前本插件支持以下五个在线翻译API:
 - Yandax.Translate
 - 百度翻译
 - Microsoft Translator
@@ -83,7 +83,7 @@ where you can find the ACT's main executable file. Replace any existing files.
 4. Drag the translation window to your prefer location and enjoy!
 
 # Translator Provider Settings
-Currently this plugin support 4 providers:
+Currently this plugin support 5 providers:
 - Yandax.Translate
 - Baidu Translator
 - Microsoft Translator

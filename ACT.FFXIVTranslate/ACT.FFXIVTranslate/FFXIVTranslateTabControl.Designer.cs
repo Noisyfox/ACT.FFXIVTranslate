@@ -48,6 +48,8 @@
             this.checkBoxClickthrough = new System.Windows.Forms.CheckBox();
             this.checkBoxShowOverlay = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoHide = new System.Windows.Forms.CheckBox();
+            this.checkBoxAddTimestamp = new System.Windows.Forms.CheckBox();
+            this.checkBox24Hour = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterSay = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterShout = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelFilterYell = new System.Windows.Forms.CheckBox();
@@ -110,8 +112,9 @@
             this.checkBoxChannelLabelLS8 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelNovice = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
-            this.checkBoxAddTimestamp = new System.Windows.Forms.CheckBox();
-            this.checkBox24Hour = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelFilterNPC = new System.Windows.Forms.CheckBox();
+            this.buttonChannelColorNPC = new System.Windows.Forms.Button();
+            this.checkBoxChannelLabelNPC = new System.Windows.Forms.CheckBox();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -427,6 +430,34 @@
             this.checkBoxAutoHide.Text = "Automatically Hide Overlay";
             this.checkBoxAutoHide.UseVisualStyleBackColor = true;
             this.checkBoxAutoHide.CheckedChanged += new System.EventHandler(this.checkBoxAutoHide_CheckedChanged);
+            // 
+            // checkBoxAddTimestamp
+            // 
+            this.checkBoxAddTimestamp.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxAddTimestamp.AutoSize = true;
+            this.checkBoxAddTimestamp.Checked = true;
+            this.checkBoxAddTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAddTimestamp, 3);
+            this.checkBoxAddTimestamp.Location = new System.Drawing.Point(3, 159);
+            this.checkBoxAddTimestamp.Name = "checkBoxAddTimestamp";
+            this.checkBoxAddTimestamp.Size = new System.Drawing.Size(174, 16);
+            this.checkBoxAddTimestamp.TabIndex = 20;
+            this.checkBoxAddTimestamp.Text = "Add Timestamp to Messages";
+            this.checkBoxAddTimestamp.UseVisualStyleBackColor = true;
+            // 
+            // checkBox24Hour
+            // 
+            this.checkBox24Hour.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBox24Hour.AutoSize = true;
+            this.checkBox24Hour.Checked = true;
+            this.checkBox24Hour.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkBox24Hour, 2);
+            this.checkBox24Hour.Location = new System.Drawing.Point(276, 159);
+            this.checkBox24Hour.Name = "checkBox24Hour";
+            this.checkBox24Hour.Size = new System.Drawing.Size(108, 16);
+            this.checkBox24Hour.TabIndex = 21;
+            this.checkBox24Hour.Text = "24-hour Format";
+            this.checkBox24Hour.UseVisualStyleBackColor = true;
             // 
             // checkBoxChannelFilterSay
             // 
@@ -795,9 +826,12 @@
             this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelLabelLS7, 2, 14);
             this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelLabelLS8, 2, 15);
             this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelLabelNovice, 2, 16);
+            this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelFilterNPC, 0, 17);
+            this.tableLayoutPanel2.Controls.Add(this.buttonChannelColorNPC, 1, 17);
+            this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelLabelNPC, 2, 17);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 18;
+            this.tableLayoutPanel2.RowCount = 19;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -815,8 +849,9 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 506);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 523);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // buttonChannelColorSay
@@ -1178,33 +1213,36 @@
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
-            // checkBoxAddTimestamp
+            // checkBoxChannelFilterNPC
             // 
-            this.checkBoxAddTimestamp.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.checkBoxAddTimestamp.AutoSize = true;
-            this.checkBoxAddTimestamp.Checked = true;
-            this.checkBoxAddTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAddTimestamp, 3);
-            this.checkBoxAddTimestamp.Location = new System.Drawing.Point(3, 159);
-            this.checkBoxAddTimestamp.Name = "checkBoxAddTimestamp";
-            this.checkBoxAddTimestamp.Size = new System.Drawing.Size(174, 16);
-            this.checkBoxAddTimestamp.TabIndex = 20;
-            this.checkBoxAddTimestamp.Text = "Add Timestamp to Messages";
-            this.checkBoxAddTimestamp.UseVisualStyleBackColor = true;
+            this.checkBoxChannelFilterNPC.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxChannelFilterNPC.AutoSize = true;
+            this.checkBoxChannelFilterNPC.Location = new System.Drawing.Point(3, 482);
+            this.checkBoxChannelFilterNPC.Name = "checkBoxChannelFilterNPC";
+            this.checkBoxChannelFilterNPC.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxChannelFilterNPC.TabIndex = 15;
+            this.checkBoxChannelFilterNPC.Text = "NPC Dialogue";
+            this.checkBoxChannelFilterNPC.UseVisualStyleBackColor = true;
             // 
-            // checkBox24Hour
+            // buttonChannelColorNPC
             // 
-            this.checkBox24Hour.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.checkBox24Hour.AutoSize = true;
-            this.checkBox24Hour.Checked = true;
-            this.checkBox24Hour.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkBox24Hour, 2);
-            this.checkBox24Hour.Location = new System.Drawing.Point(276, 159);
-            this.checkBox24Hour.Name = "checkBox24Hour";
-            this.checkBox24Hour.Size = new System.Drawing.Size(108, 16);
-            this.checkBox24Hour.TabIndex = 21;
-            this.checkBox24Hour.Text = "24-hour Format";
-            this.checkBox24Hour.UseVisualStyleBackColor = true;
+            this.buttonChannelColorNPC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonChannelColorNPC.BackColor = System.Drawing.Color.Transparent;
+            this.buttonChannelColorNPC.Location = new System.Drawing.Point(105, 479);
+            this.buttonChannelColorNPC.Name = "buttonChannelColorNPC";
+            this.buttonChannelColorNPC.Size = new System.Drawing.Size(98, 23);
+            this.buttonChannelColorNPC.TabIndex = 16;
+            this.buttonChannelColorNPC.UseVisualStyleBackColor = false;
+            // 
+            // checkBoxChannelLabelNPC
+            // 
+            this.checkBoxChannelLabelNPC.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelNPC.AutoSize = true;
+            this.checkBoxChannelLabelNPC.Location = new System.Drawing.Point(258, 483);
+            this.checkBoxChannelLabelNPC.Name = "checkBoxChannelLabelNPC";
+            this.checkBoxChannelLabelNPC.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelNPC.TabIndex = 20;
+            this.checkBoxChannelLabelNPC.UseVisualStyleBackColor = true;
             // 
             // FFXIVTranslateTabControl
             // 
@@ -1320,5 +1358,8 @@
         private System.Windows.Forms.CheckBox checkBoxAutoHide;
         private System.Windows.Forms.CheckBox checkBoxAddTimestamp;
         private System.Windows.Forms.CheckBox checkBox24Hour;
+        private System.Windows.Forms.CheckBox checkBoxChannelFilterNPC;
+        private System.Windows.Forms.Button buttonChannelColorNPC;
+        private System.Windows.Forms.CheckBox checkBoxChannelLabelNPC;
     }
 }

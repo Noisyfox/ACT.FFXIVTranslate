@@ -223,6 +223,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 非玩家角色对话 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterNPC {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterNPC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 小队 的本地化字符串。
         /// </summary>
         public static string checkBoxChannelFilterParty {

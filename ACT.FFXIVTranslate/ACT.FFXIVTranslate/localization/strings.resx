@@ -264,4 +264,7 @@
   <data name="timeFormat12HourPM" xml:space="preserve">
     <value>"下午 "h:MM</value>
   </data>
+  <data name="checkBoxChannelFilterNPC" xml:space="preserve">
+    <value>非玩家角色对话</value>
+  </data>
 </root>

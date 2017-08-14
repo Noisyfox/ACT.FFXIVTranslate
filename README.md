@@ -13,10 +13,11 @@
 - 百度翻译
 - Microsoft Translator
 - 谷歌翻译非官方版
+- 有道翻译
 
 其中谷歌翻译非官方版不需要输入API key就可以使用。
 我为 Yandax.Translate 与 Microsoft Translator 这两个翻译API都申请了免费的API key提供给大家测试或者临时使用。
-由于百度翻译会在免费额度用完后立刻开始收费，因此在此不提供试用key，大家可以按照下文的说明自行申请API key（非常简单）。
+由于百度翻译和有道翻译会在免费额度用完后立刻开始收费，因此在此不提供试用key，大家可以按照下文的说明自行申请API key（非常简单）。
 
 插件默认使用Yandax.Translate（老毛子的翻译），你可以在**来源**下拉列表中选择不同的翻译API。
 
@@ -49,6 +50,15 @@
 4. 当提示**API接口权限申请成功**时，你可以在下方找到你的**APP ID**和**密钥**。
 5. 在本插件的**API密钥**框中输入 **APP ID**:**密钥**，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
 
+## 有道翻译
+1. 访问 http://ai.youdao.com/index.s 并登录。
+2. 页面左侧选择**自然语言翻译**->**翻译实例**。
+3. 点击**创建实例**按钮，按照提示创建好一个实例。
+4. 页面左侧选择**应用管理**->**我的应用**。
+5. 点击**创建应用**按钮，按照提示创建好一个应用。在创建应用完成后的**应用实例添加**对话框中，选中刚才创建好的**自然语言翻译服务**的实例，并点击**提交更改**按钮。
+6. 在**应用详情**页面可以看到应用的**应用ID**以及**应用密钥**。
+7. 在本插件的**API密钥**框中输入 **应用ID**:**应用密钥**，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
+
 # TODO
 - ~~加入显示开关~~
 - 加入谷歌翻译官方API支持。
@@ -56,9 +66,9 @@
 - 加入http代理支持。
 - 加入socks5代理支持。
 - ~~在翻译窗口中显示聊天的频道。不同频道的聊天内容会用不同颜色来显示，就和游戏里一样。~~
-- (不太容易) 正常显示 *定型文字*.
-- 显示消息时间
-- ~~当游戏窗口非激活状态时自动隐藏悬浮窗~~
+- (不太容易) 正常显示 *定型文字*。
+- ~~显示消息时间。~~
+- ~~当游戏窗口非激活状态时自动隐藏悬浮窗。~~
 - 以后想到啥再加咯 :P
 
 -------
@@ -78,10 +88,11 @@ Currently this plugin support 4 providers:
 - Baidu Translator
 - Microsoft Translator
 - Unofficial Google Translate
+- Youdao Translator
 
 The unofficial Google Translate doesn't require an API key.
 Yandax.Translate and Microsoft Translator providers are bundled with a free public API key for testing / temporarily using.
-For Baidu Translator users, I assume you are Chinese people so please read the Chinese part above :P
+For Baidu & Youdao Translator users, I assume you are Chinese people so please read the Chinese part above :P
 
 The default provider is Yandax.Translate, you could change it by selecting a different one from the **Provider** combo box.
 
@@ -117,6 +128,6 @@ The free api keys have limits on words per month. You may want to get your own p
 - Add socks5 proxy support.
 - ~~Display chatting channel. Have different colors for different channels, just like the game does.~~
 - (unlikely) Display *Auto-Translate*.
-- Show message time.
+- ~~Show message time.~~
 - ~~Hide overlay when game window is not active.~~
 - More to come :P

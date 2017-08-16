@@ -39,14 +39,27 @@ namespace ACT.FFXIVTranslate.translate.baidu
             try
             {
                 // Build text
-                var query = string.Join("\n", chattingLines.Select(it => TextProcessor.NaiveCleanText(it.RawContent)));
+                var availableLines = new List<ChattingLine>();
+                chattingLines.ForEach(it =>
+                {
+                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
+                    if (!string.IsNullOrEmpty(it.CleanedContent))
+                    {
+                        availableLines.Add(it);
+                    }
+                    else
+                    {
+                        it.TranslatedContent = string.Empty;
+                    }
+                });
 
                 // Make sure we do have something to translate
-                if (string.IsNullOrEmpty(query))
+                if (availableLines.Count == 0)
                 {
-                    chattingLines.ForEach(it => it.TranslatedContent = string.Empty);
                     return;
                 }
+
+                var query = string.Join("\n", availableLines.Select(it => it.CleanedContent));
 
                 // 1. Generate a salt
                 var salt = Utils.TimestampMillisFromDateTime(DateTime.Now).ToString();
@@ -120,12 +133,12 @@ namespace ACT.FFXIVTranslate.translate.baidu
                     }
                 }
 
-                var trans_result = (JArray) result["trans_result"];
-                if (trans_result.Count >= chattingLines.Count)
+                var transResult = (JArray) result["trans_result"];
+                if (transResult.Count >= availableLines.Count)
                 {
-                    for (var i = 0; i < chattingLines.Count; i++)
+                    for (var i = 0; i < availableLines.Count; i++)
                     {
-                        chattingLines[i].TranslatedContent = (string) trans_result[i]["dst"];
+                        availableLines[i].TranslatedContent = (string) transResult[i]["dst"];
                     }
                 }
                 else

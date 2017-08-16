@@ -39,14 +39,27 @@ namespace ACT.FFXIVTranslate.translate.youdao
             try
             {
                 // Build text
-                var query = string.Join("\n", chattingLines.Select(it => TextProcessor.NaiveCleanText(it.RawContent)));
+                var availableLines = new List<ChattingLine>();
+                chattingLines.ForEach(it =>
+                {
+                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
+                    if (!string.IsNullOrEmpty(it.CleanedContent))
+                    {
+                        availableLines.Add(it);
+                    }
+                    else
+                    {
+                        it.TranslatedContent = string.Empty;
+                    }
+                });
 
                 // Make sure we do have something to translate
-                if (string.IsNullOrEmpty(query))
+                if (availableLines.Count == 0)
                 {
-                    chattingLines.ForEach(it => it.TranslatedContent = string.Empty);
                     return;
                 }
+
+                var query = string.Join("\n", availableLines.Select(it => it.CleanedContent));
 
                 // 1. Generate a salt
                 var salt = Utils.TimestampMillisFromDateTime(DateTime.Now).ToString();
@@ -126,11 +139,11 @@ namespace ACT.FFXIVTranslate.translate.youdao
                 }
 
                 var translation = ((string) result["translation"][0]).Split('\n');
-                if (translation.Length >= chattingLines.Count)
+                if (translation.Length >= availableLines.Count)
                 {
-                    for (var i = 0; i < chattingLines.Count; i++)
+                    for (var i = 0; i < availableLines.Count; i++)
                     {
-                        chattingLines[i].TranslatedContent = translation[i];
+                        availableLines[i].TranslatedContent = translation[i];
                     }
                 }
                 else

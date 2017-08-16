@@ -35,6 +35,26 @@ namespace ACT.FFXIVTranslate.translate.bing
             try
             {
                 // Build text
+                var availableLines = new List<ChattingLine>();
+                chattingLines.ForEach(it =>
+                {
+                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
+                    if (!string.IsNullOrEmpty(it.CleanedContent))
+                    {
+                        availableLines.Add(it);
+                    }
+                    else
+                    {
+                        it.TranslatedContent = string.Empty;
+                    }
+                });
+
+                // Make sure we do have something to translate
+                if (availableLines.Count == 0)
+                {
+                    return;
+                }
+
                 var textBuilder = new StringBuilder();
                 var settings = new XmlWriterSettings {OmitXmlDeclaration = true};
                 var textWriter = XmlWriter.Create(textBuilder, settings);
@@ -57,10 +77,10 @@ namespace ACT.FFXIVTranslate.translate.bing
 
                     textWriter.WriteStartElement("Texts");
                     {
-                        foreach (var line in chattingLines)
+                        foreach (var line in availableLines)
                         {
                             textWriter.WriteElementString("string", NsArrays,
-                                WebUtility.HtmlEncode(TextProcessor.NaiveCleanText(line.RawContent)));
+                                WebUtility.HtmlEncode(line.CleanedContent));
                         }
 
                         textWriter.WriteEndElement();
@@ -94,8 +114,8 @@ namespace ACT.FFXIVTranslate.translate.bing
                             {
                                 var result = WebUtility.HtmlDecode(node.Value);
                                 Console.WriteLine("\n\nSource text: {0}\nTranslated Text: {1}",
-                                    chattingLines[sourceTextCounter].RawContent, result);
-                                chattingLines[sourceTextCounter].TranslatedContent = result;
+                                    availableLines[sourceTextCounter].RawContent, result);
+                                availableLines[sourceTextCounter].TranslatedContent = result;
                             }
                             sourceTextCounter++;
                         }

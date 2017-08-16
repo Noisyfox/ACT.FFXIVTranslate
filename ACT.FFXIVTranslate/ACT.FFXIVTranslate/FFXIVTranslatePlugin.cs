@@ -362,6 +362,7 @@ namespace ACT.FFXIVTranslate
         public DateTime Timestamp;
 
         public EventCode EventCode;
+        public string CleanedContent;
         public string FormattedContent;
         public string TranslatedContent;
     }

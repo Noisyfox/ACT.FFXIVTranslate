@@ -27,13 +27,33 @@ namespace ACT.FFXIVTranslate.translate.yandax
             try
             {
                 // Build text
+                var availableLines = new List<ChattingLine>();
+                chattingLines.ForEach(it =>
+                {
+                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
+                    if (!string.IsNullOrEmpty(it.CleanedContent))
+                    {
+                        availableLines.Add(it);
+                    }
+                    else
+                    {
+                        it.TranslatedContent = string.Empty;
+                    }
+                });
+
+                // Make sure we do have something to translate
+                if (availableLines.Count == 0)
+                {
+                    return;
+                }
+
                 var textBuilder = new StringBuilder();
                 var settings = new XmlWriterSettings {OmitXmlDeclaration = true};
                 var textWriter = XmlWriter.Create(textBuilder, settings);
                 textWriter.WriteStartElement("lines");
-                foreach (var line in chattingLines)
+                foreach (var line in availableLines)
                 {
-                    textWriter.WriteElementString("line", TextProcessor.NaiveCleanText(line.RawContent));
+                    textWriter.WriteElementString("line", line.CleanedContent);
                 }
                 textWriter.WriteEndElement();
                 textWriter.Flush();
@@ -101,14 +121,14 @@ namespace ACT.FFXIVTranslate.translate.yandax
                 var doc = new XmlDocument();
                 doc.LoadXml(translatedLinesXml);
                 var nodes = doc.SelectNodes("lines/line");
-                if (nodes == null || nodes.Count != chattingLines.Count)
+                if (nodes == null || nodes.Count != availableLines.Count)
                 {
                     // Error
                     throw new TranslateException(TranslateException.ExceptionReason.InternalError,
                         "Translate result count mismatch.", null);
                 }
 
-                foreach (var p in chattingLines.Zip(nodes.Cast<XmlNode>(),
+                foreach (var p in availableLines.Zip(nodes.Cast<XmlNode>(),
                     (a, b) => new KeyValuePair<ChattingLine, XmlNode>(a, b)))
                 {
                     p.Key.TranslatedContent = p.Value.InnerText;

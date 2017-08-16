@@ -27,8 +27,28 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
         {
             try
             {
+                var availableLines = new List<ChattingLine>();
+                chattingLines.ForEach(it =>
+                {
+                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
+                    if (!string.IsNullOrEmpty(it.CleanedContent))
+                    {
+                        availableLines.Add(it);
+                    }
+                    else
+                    {
+                        it.TranslatedContent = string.Empty;
+                    }
+                });
+
+                // Make sure we do have something to translate
+                if (availableLines.Count == 0)
+                {
+                    return;
+                }
+
                 var current = 0;
-                while (current < chattingLines.Count)
+                while (current < availableLines.Count)
                 {
                     var start = current;
 
@@ -41,13 +61,13 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     // Build text
                     var vaildText = string.Empty;
                     var textBuilder = new StringBuilder();
-                    for (current = start; current < chattingLines.Count; current++)
+                    for (current = start; current < availableLines.Count; current++)
                     {
                         if (textBuilder.Length > 0)
                         {
                             textBuilder.Append('\n');
                         }
-                        textBuilder.Append(TextProcessor.NaiveCleanText(chattingLines[current].RawContent));
+                        textBuilder.Append(availableLines[current].CleanedContent);
                         var newText = HttpUtility.UrlEncode(textBuilder.ToString(), Encoding.UTF8);
                         if (newText.Length > MaxContentLength)
                         {
@@ -58,7 +78,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     if (current == start)
                     {
                         // The single line exceeds the limit, skip
-                        chattingLines[current].TranslatedContent = "Content too long for translating.";
+                        availableLines[current].TranslatedContent = "Content too long for translating.";
                         current++;
                         continue;
                     }
@@ -84,7 +104,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     {
                         for (var i = start; i < current; i++)
                         {
-                            chattingLines[i].TranslatedContent = finalResults[i - start];
+                            availableLines[i].TranslatedContent = finalResults[i - start];
                         }
                     }
                     else

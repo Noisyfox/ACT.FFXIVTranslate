@@ -124,10 +124,23 @@ namespace ACT.FFXIVTranslate
             return null;
         }
 
+        private static readonly string WorldSp = Encoding.UTF8.GetString(new byte []{ 0x03, 0x02, 0x12, 0x02, 0x59, 0x03 });
+
+        public static Tuple<string, string> ExtractName(string rawSender)
+        {
+            var i = rawSender.IndexOf(WorldSp, StringComparison.Ordinal);
+            if (i == -1)
+            {
+                return new Tuple<string, string>(NaiveCleanText(rawSender), null);
+            }
+            return new Tuple<string, string>(NaiveCleanText(rawSender.Substring(0, i)),
+                NaiveCleanText(rawSender.Substring(i + 1)));
+        }
+
 
         public static string BuildQuote(ChattingLine chatting, bool showLabel)
         {
-            var cleanedName = NaiveCleanText(chatting.RawSender);
+            var extractedName = ExtractName(chatting.RawSender);
 
             var eventCode = chatting.RawEventCode;
             var knownCode = Enum.IsDefined(typeof(EventCode), (byte) (eventCode & byte.MaxValue));
@@ -138,44 +151,47 @@ namespace ACT.FFXIVTranslate
 
                 if (codeEnum == EventCode.TellFrom)
                 {
-                    return $"{cleanedName} >> ";
+                    return $"{extractedName.Item1} >> ";
                 }
                 else if (codeEnum == EventCode.TellTo)
                 {
-                    return $">>{cleanedName}：";
+                    return $">>{extractedName.Item1}：";
                 }
                 else
                 {
                     if (showLabel)
                     {
+                        var nameWithWorld = extractedName.Item2 == null
+                            ? extractedName.Item1
+                            : $"{extractedName.Item1}@{extractedName.Item2}";
                         switch (codeEnum)
                         {
                             case EventCode.LS1:
-                                return $"[1]<{cleanedName}> ";
+                                return $"[1]<{nameWithWorld}> ";
                             case EventCode.LS2:
-                                return $"[2]<{cleanedName}> ";
+                                return $"[2]<{nameWithWorld}> ";
                             case EventCode.LS3:
-                                return $"[3]<{cleanedName}> ";
+                                return $"[3]<{nameWithWorld}> ";
                             case EventCode.LS4:
-                                return $"[4]<{cleanedName}> ";
+                                return $"[4]<{nameWithWorld}> ";
                             case EventCode.LS5:
-                                return $"[5]<{cleanedName}> ";
+                                return $"[5]<{nameWithWorld}> ";
                             case EventCode.LS6:
-                                return $"[6]<{cleanedName}> ";
+                                return $"[6]<{nameWithWorld}> ";
                             case EventCode.LS7:
-                                return $"[7]<{cleanedName}> ";
+                                return $"[7]<{nameWithWorld}> ";
                             case EventCode.LS8:
-                                return $"[8]<{cleanedName}> ";
+                                return $"[8]<{nameWithWorld}> ";
                             case EventCode.FreeCompany:
-                                return $"[FC]<{cleanedName}> ";
+                                return $"[FC]<{nameWithWorld}> ";
                             case EventCode.Party:
-                                return $"({cleanedName}) ";
+                                return $"({nameWithWorld}) ";
                         }
                     }
                 }
             }
 
-            return $"{cleanedName}: ";
+            return $"{extractedName.Item1}: ";
         }
     }
 }

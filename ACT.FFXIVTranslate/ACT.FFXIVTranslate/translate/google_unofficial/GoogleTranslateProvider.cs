@@ -12,7 +12,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
 {
     internal class GoogleTranslateProvider : ITranslateProvider
     {
-        private const int MaxContentLength = 200;
+        private const int MaxContentLength = 2048 - 50;
 
         private readonly string _langFrom;
         private readonly string _langTo;

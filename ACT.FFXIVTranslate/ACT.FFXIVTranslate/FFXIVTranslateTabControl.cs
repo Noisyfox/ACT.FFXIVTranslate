@@ -135,6 +135,8 @@ namespace ACT.FFXIVTranslate
             foreach (var cs in _channelSettings)
             {
                 cs.ButtonColor.Text = "#FFFFFF";
+                CheckBoxChannelFilterOnCheckedChanged(cs.CheckBoxFilter, EventArgs.Empty);
+                CheckBoxChannelLabelOnCheckedChanged(cs.CheckBoxLabel, EventArgs.Empty);
             }
 
             translateProviderPanel.PostAttachToAct(plugin);

@@ -178,25 +178,25 @@ namespace RTF
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang3081");
-            sb.Append("{\\fonttbl");
-
-
-            for (int i = 0; i < _rawFonts.Count; i++)
-            {
-
-                try
-                {
-                    sb.Append(string.Format(_rawFonts[i], i));
-                }
-                catch (Exception ex )
-                {
-
-                    Console.WriteLine(ex.Message );
-                }
-
-            }
-
-            sb.AppendLine("}");
+//            sb.Append("{\\fonttbl");
+//
+//
+//            for (int i = 0; i < _rawFonts.Count; i++)
+//            {
+//
+//                try
+//                {
+//                    sb.Append(string.Format(_rawFonts[i], i));
+//                }
+//                catch (Exception ex )
+//                {
+//
+//                    Console.WriteLine(ex.Message );
+//                }
+//
+//            }
+//
+//            sb.AppendLine("}");
 
             sb.Append("{\\colortbl ;");
 
@@ -208,9 +208,9 @@ namespace RTF
             sb.AppendLine("}");
 
 
-            sb.Append("\\viewkind4\\uc1\\pard\\plain\\f0");
+//            sb.Append("\\viewkind4\\uc1\\pard\\plain\\f0");
 
-            sb.AppendFormat("\\fs{0} ", DefaultFontSize);
+//            sb.AppendFormat("\\fs{0} ", DefaultFontSize);
             sb.AppendLine();
 
             sb.Append(this._sb.ToString());

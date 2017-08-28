@@ -271,7 +271,7 @@ namespace ACT.FFXIVTranslate
                         }
                         if (!uint.TryParse(kv[1], out var vInt))
                         {
-                            return;
+                            continue;
                         }
                         // Get RGB hex
                         vInt &= 0xFFFFFF;

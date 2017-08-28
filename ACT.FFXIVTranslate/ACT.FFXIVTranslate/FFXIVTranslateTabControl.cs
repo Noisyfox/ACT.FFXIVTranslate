@@ -163,7 +163,11 @@ namespace ACT.FFXIVTranslate
 
         public void DoLocalization()
         {
-            localization.Localization.TranslateControls(this);
+            Localization.TranslateControls(this);
+            foreach (var cs in _channelSettings)
+            {
+                cs.ButtonColor.Font = DefaultFont;
+            }
             translateProviderPanel.DoLocalization();
         }
 

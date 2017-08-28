@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ACT.FFXIVTranslate.localization;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
@@ -23,6 +25,7 @@ namespace ACT.FFXIVTranslate
             public CheckBox CheckBoxFilter { get; }
             public Button ButtonColor { get; }
             public CheckBox CheckBoxLabel { get; }
+            public string ColorSettingKey { get; } // The settings key in COMMON.DAT
 
             public ChannelSettingsMapper(EventCode code, CheckBox cbFilter, Button btnColor, CheckBox cbLabel)
             {
@@ -37,18 +40,34 @@ namespace ACT.FFXIVTranslate
                 Code = code;
 
                 var name = code.ToString();
-                switch (name)
+                switch (code)
                 {
-                    case "FreeCompany":
+                    case EventCode.FreeCompany:
                         name = "FC";
                         break;
-                    case "TellFrom":
+                    case EventCode.TellFrom:
                         name = "Tell";
                         break;
                 }
                 CheckBoxFilter = (CheckBox) panel.Find($"checkBoxChannelFilter{name}", true)[0];
                 ButtonColor = (Button)panel.Find($"buttonChannelColor{name}", true)[0];
                 CheckBoxLabel = (CheckBox)panel.Find($"checkBoxChannelLabel{name}", true)[0];
+
+                switch (code)
+                {
+                    case EventCode.FreeCompany:
+                        ColorSettingKey = "ColorFCompany";
+                        break;
+                    case EventCode.Novice:
+                        ColorSettingKey = "ColorBeginner";
+                        break;
+                    case EventCode.NPC:
+                        ColorSettingKey = "ColorNpcSay";
+                        break;
+                    default:
+                        ColorSettingKey = $"Color{name}";
+                        break;
+                }
             }
         }
 
@@ -203,6 +222,77 @@ namespace ACT.FFXIVTranslate
             if (fontdialog.ShowDialog() != DialogResult.Cancel)
             {
                 _controller.NotifyOverlayFontChanged(true, fontdialog.Font);
+            }
+        }
+
+        private void buttonReadColor_Click(object sender, EventArgs e)
+        {
+            var dialog = new FolderBrowserDialog();
+            dialog.Description = strings.openGameConfigDescription;
+            dialog.ShowNewFolderButton = false;
+            dialog.SelectedPath = string.Join(Path.DirectorySeparatorChar.ToString(),
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games",
+                "FINAL FANTASY XIV - A Realm Reborn");
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+            var confirm = MessageBox.Show(strings.configOverwriteConfirm,
+                strings.actPanelTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirm == DialogResult.No)
+            {
+                return;
+            }
+
+            var selectedPath = dialog.SelectedPath;
+
+            var common_dat = string.Join(Path.DirectorySeparatorChar.ToString(), selectedPath, "COMMON.DAT");
+            try
+            {
+                var count = 0;
+                using (var reader = new StreamReader(common_dat, Encoding.UTF8))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var kv = line.Split(' ', '\t');
+                        if (kv.Length != 2)
+                        {
+                            continue;
+                        }
+                        var channel = _channelSettings.FirstOrDefault(it => it.ColorSettingKey == kv[0]);
+                        if (channel == null)
+                        {
+                            continue;
+                        }
+                        if (!uint.TryParse(kv[1], out var vInt))
+                        {
+                            return;
+                        }
+                        // Get RGB hex
+                        vInt &= 0xFFFFFF;
+                        var c = Color.FromArgb((int) (vInt | 0xFF000000));
+                        _controller.NotifyChannelColorChanged(true, channel.Code, c);
+                        count++;
+                    }
+                }
+                MessageBox.Show(string.Format(strings.colorReadFinished, count), strings.actPanelTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show(strings.messageWrongDir, strings.actPanelTitle, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show(strings.messageWrongDir, strings.actPanelTitle, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(strings.messageSettingsReadFailed, ex), strings.actPanelTitle, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

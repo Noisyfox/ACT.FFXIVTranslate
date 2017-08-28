@@ -19,7 +19,7 @@ namespace ACT.FFXIVTranslate.localization {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class strings {
@@ -93,6 +93,15 @@ namespace ACT.FFXIVTranslate.localization {
         public static string buttonProviderApply {
             get {
                 return ResourceManager.GetString("buttonProviderApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 从游戏中读取配色 的本地化字符串。
+        /// </summary>
+        public static string buttonReadColor {
+            get {
+                return ResourceManager.GetString("buttonReadColor", resourceCulture);
             }
         }
         
@@ -295,6 +304,24 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 颜色数据读取完成！共设置了{0}个颜色。 的本地化字符串。
+        /// </summary>
+        public static string colorReadFinished {
+            get {
+                return ResourceManager.GetString("colorReadFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 将会覆写已经存在的设置，是否要继续？ 的本地化字符串。
+        /// </summary>
+        public static string configOverwriteConfirm {
+            get {
+                return ResourceManager.GetString("configOverwriteConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 悬浮窗设置 的本地化字符串。
         /// </summary>
         public static string groupBoxOverlay {
@@ -462,6 +489,35 @@ namespace ACT.FFXIVTranslate.localization {
         public static string messageNoFreeKey {
             get {
                 return ResourceManager.GetString("messageNoFreeKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置读取失败！
+        ///{0} 的本地化字符串。
+        /// </summary>
+        public static string messageSettingsReadFailed {
+            get {
+                return ResourceManager.GetString("messageSettingsReadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择了错误的文件夹！ 的本地化字符串。
+        /// </summary>
+        public static string messageWrongDir {
+            get {
+                return ResourceManager.GetString("messageWrongDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择最终幻想14用户设置文件夹。
+        ///通常位于 我的文档\\My Games\\FINAL FANTASY XIV - A Realm Reborn 并且以 FFXIV_CHR 开头。 的本地化字符串。
+        /// </summary>
+        public static string openGameConfigDescription {
+            get {
+                return ResourceManager.GetString("openGameConfigDescription", resourceCulture);
             }
         }
         

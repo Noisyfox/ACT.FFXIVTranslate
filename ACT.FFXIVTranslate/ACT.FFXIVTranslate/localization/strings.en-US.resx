@@ -243,9 +243,6 @@
   <data name="labelChannelLabel" xml:space="preserve">
     <value>Show Channel Label</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="checkBoxAutoHide" xml:space="preserve">
     <value>Automatically Hide Overlay</value>
   </data>
@@ -269,5 +266,25 @@
   </data>
   <data name="checkBoxChannelFilterNPC" xml:space="preserve">
     <value>NPC Dialogue</value>
+  </data>
+  <data name="buttonReadColor" xml:space="preserve">
+    <value>Read Colors from Game</value>
+  </data>
+  <data name="colorReadFinished" xml:space="preserve">
+    <value>Colors read finished! {0} color(s) set.</value>
+  </data>
+  <data name="configOverwriteConfirm" xml:space="preserve">
+    <value>This will overwrite any exist color settings, proceed?</value>
+  </data>
+  <data name="messageSettingsReadFailed" xml:space="preserve">
+    <value>Settings read failed!
+{0}</value>
+  </data>
+  <data name="messageWrongDir" xml:space="preserve">
+    <value>Wrong directory selected!</value>
+  </data>
+  <data name="openGameConfigDescription" xml:space="preserve">
+    <value>Select FFXIV Character Configuration folder.
+Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a name start with FFXIV_CHR.</value>
   </data>
 </root>

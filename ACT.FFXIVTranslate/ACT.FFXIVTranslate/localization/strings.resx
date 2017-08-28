@@ -267,4 +267,24 @@
   <data name="checkBoxChannelFilterNPC" xml:space="preserve">
     <value>非玩家角色对话</value>
   </data>
+  <data name="buttonReadColor" xml:space="preserve">
+    <value>从游戏中读取配色</value>
+  </data>
+  <data name="colorReadFinished" xml:space="preserve">
+    <value>颜色数据读取完成！共设置了{0}个颜色。</value>
+  </data>
+  <data name="configOverwriteConfirm" xml:space="preserve">
+    <value>将会覆写已经存在的设置，是否要继续？</value>
+  </data>
+  <data name="messageSettingsReadFailed" xml:space="preserve">
+    <value>设置读取失败！
+{0}</value>
+  </data>
+  <data name="messageWrongDir" xml:space="preserve">
+    <value>选择了错误的文件夹！</value>
+  </data>
+  <data name="openGameConfigDescription" xml:space="preserve">
+    <value>请选择最终幻想14用户设置文件夹。
+通常位于 我的文档\\My Games\\FINAL FANTASY XIV - A Realm Reborn 并且以 FFXIV_CHR 开头。</value>
+  </data>
 </root>

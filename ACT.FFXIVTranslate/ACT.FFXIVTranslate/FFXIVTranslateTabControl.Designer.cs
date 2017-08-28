@@ -71,10 +71,11 @@
             this.tableLayoutPanelMainLanguage = new System.Windows.Forms.TableLayoutPanel();
             this.labelNeedToRestart = new System.Windows.Forms.Label();
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
-            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneralSettings = new System.Windows.Forms.TabPage();
+            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.tabPageChannelSettings = new System.Windows.Forms.TabPage();
+            this.buttonReadColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonChannelColorSay = new System.Windows.Forms.Button();
             this.buttonChannelColorTell = new System.Windows.Forms.Button();
@@ -111,10 +112,10 @@
             this.checkBoxChannelLabelLS7 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelLS8 = new System.Windows.Forms.CheckBox();
             this.checkBoxChannelLabelNovice = new System.Windows.Forms.CheckBox();
-            this.tabPageLog = new System.Windows.Forms.TabPage();
             this.checkBoxChannelFilterNPC = new System.Windows.Forms.CheckBox();
             this.buttonChannelColorNPC = new System.Windows.Forms.Button();
             this.checkBoxChannelLabelNPC = new System.Windows.Forms.CheckBox();
+            this.tabPageLog = new System.Windows.Forms.TabPage();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -724,13 +725,6 @@
             this.richTextBoxLog.TabIndex = 6;
             this.richTextBoxLog.Text = "";
             // 
-            // translateProviderPanel
-            // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(6, 281);
-            this.translateProviderPanel.Name = "translateProviderPanel";
-            this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
-            this.translateProviderPanel.TabIndex = 1;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageGeneralSettings);
@@ -757,9 +751,17 @@
             this.tabPageGeneralSettings.Text = "General Settings";
             this.tabPageGeneralSettings.UseVisualStyleBackColor = true;
             // 
+            // translateProviderPanel
+            // 
+            this.translateProviderPanel.Location = new System.Drawing.Point(6, 281);
+            this.translateProviderPanel.Name = "translateProviderPanel";
+            this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
+            this.translateProviderPanel.TabIndex = 1;
+            // 
             // tabPageChannelSettings
             // 
             this.tabPageChannelSettings.AutoScroll = true;
+            this.tabPageChannelSettings.Controls.Add(this.buttonReadColor);
             this.tabPageChannelSettings.Controls.Add(this.tableLayoutPanel2);
             this.tabPageChannelSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageChannelSettings.Name = "tabPageChannelSettings";
@@ -768,6 +770,17 @@
             this.tabPageChannelSettings.TabIndex = 1;
             this.tabPageChannelSettings.Text = "Channel Settings";
             this.tabPageChannelSettings.UseVisualStyleBackColor = true;
+            // 
+            // buttonReadColor
+            // 
+            this.buttonReadColor.AutoSize = true;
+            this.buttonReadColor.Location = new System.Drawing.Point(425, 25);
+            this.buttonReadColor.Name = "buttonReadColor";
+            this.buttonReadColor.Size = new System.Drawing.Size(141, 23);
+            this.buttonReadColor.TabIndex = 4;
+            this.buttonReadColor.Text = "Read Colors from Game";
+            this.buttonReadColor.UseVisualStyleBackColor = true;
+            this.buttonReadColor.Click += new System.EventHandler(this.buttonReadColor_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -1202,17 +1215,6 @@
             this.checkBoxChannelLabelNovice.TabIndex = 20;
             this.checkBoxChannelLabelNovice.UseVisualStyleBackColor = true;
             // 
-            // tabPageLog
-            // 
-            this.tabPageLog.Controls.Add(this.richTextBoxLog);
-            this.tabPageLog.Location = new System.Drawing.Point(4, 22);
-            this.tabPageLog.Name = "tabPageLog";
-            this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLog.Size = new System.Drawing.Size(866, 535);
-            this.tabPageLog.TabIndex = 2;
-            this.tabPageLog.Text = "Log";
-            this.tabPageLog.UseVisualStyleBackColor = true;
-            // 
             // checkBoxChannelFilterNPC
             // 
             this.checkBoxChannelFilterNPC.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -1244,6 +1246,17 @@
             this.checkBoxChannelLabelNPC.TabIndex = 20;
             this.checkBoxChannelLabelNPC.UseVisualStyleBackColor = true;
             // 
+            // tabPageLog
+            // 
+            this.tabPageLog.Controls.Add(this.richTextBoxLog);
+            this.tabPageLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLog.Name = "tabPageLog";
+            this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageLog.Size = new System.Drawing.Size(866, 535);
+            this.tabPageLog.TabIndex = 2;
+            this.tabPageLog.Text = "Log";
+            this.tabPageLog.UseVisualStyleBackColor = true;
+            // 
             // FFXIVTranslateTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1265,6 +1278,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneralSettings.ResumeLayout(false);
             this.tabPageChannelSettings.ResumeLayout(false);
+            this.tabPageChannelSettings.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tabPageLog.ResumeLayout(false);
@@ -1361,5 +1375,6 @@
         private System.Windows.Forms.CheckBox checkBoxChannelFilterNPC;
         private System.Windows.Forms.Button buttonChannelColorNPC;
         private System.Windows.Forms.CheckBox checkBoxChannelLabelNPC;
+        private System.Windows.Forms.Button buttonReadColor;
     }
 }

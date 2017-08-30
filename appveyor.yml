@@ -1,0 +1,29 @@
+version: 1.0.7.{build}
+image: Visual Studio 2017
+configuration:
+- Debug
+- Release
+assembly_info:
+  patch: true
+  file: ACT.FFXIVTranslate\ACT.FFXIVTranslate*\**\AssemblyInfo.*
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- cmd: nuget restore ACT.FFXIVTranslate
+build:
+  project: ACT.FFXIVTranslate/ACT.FFXIVTranslate.sln
+  verbosity: minimal
+after_build:
+- cmd: >-
+    cd ACT.FFXIVTranslate\ACT.FFXIVTranslate\bin\%CONFIGURATION%\
+
+
+    7z a -x!*.pdb %APPVEYOR_BUILD_FOLDER%\ACT.FFXIVTranslate-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%.7z .\*
+test: off
+artifacts:
+- path: ACT.FFXIVTranslate\ACT.FFXIVTranslate\bin\**\*
+  name: Bin
+- path: ACT.FFXIVTranslate*.7z
+  name: PKG
+  

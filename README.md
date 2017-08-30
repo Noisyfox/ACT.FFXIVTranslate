@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/oy9yi49qnsk26hiq/branch/master?svg=true)](https://ci.appveyor.com/project/Noisyfox/act-ffxivtranslate/branch/master)
+
+
 # ACT.FFXIVTranslate
 这是一个用来翻译最终幻想14国际服玩家聊天内容的ACT插件。
 

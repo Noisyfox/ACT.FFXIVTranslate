@@ -124,6 +124,7 @@
     <Compile Include="translate\youdao\YoudaoTranslateProviderFactory.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Win32APIUtils.cs" />
+    <Compile Include="WindowsMessagePump.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FFXIVTranslateTabControl.resx">

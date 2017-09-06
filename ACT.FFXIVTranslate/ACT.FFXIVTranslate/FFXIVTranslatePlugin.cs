@@ -21,6 +21,7 @@ namespace ACT.FFXIVTranslate
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
         public TranslateForm Overlay { get; private set; }
         internal TranslateService TranslateService { get; } = new TranslateService();
+        private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
 
         private readonly LogReadThread _workingThread = new LogReadThread();
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
@@ -90,9 +91,12 @@ namespace ACT.FFXIVTranslate
                 Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
                 TranslateService.AttachToAct(this);
 
+                _windowsMessagePump.AttachToAct(this);
+
                 Overlay.PostAttachToAct(this);
                 SettingsTab.PostAttachToAct(this);
                 TranslateService.PostAttachToAct(this);
+                _windowsMessagePump.PostAttachToAct(this);
 
                 Settings.Load();
 
@@ -232,6 +236,8 @@ namespace ACT.FFXIVTranslate
 
         public void DeInitPlugin()
         {
+            _windowsMessagePump.Dispose();
+
             Overlay?.Close();
 
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;

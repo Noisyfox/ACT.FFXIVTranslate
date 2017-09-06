@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace ACT.FFXIVTranslate
@@ -71,6 +72,22 @@ namespace ACT.FFXIVTranslate
         public static void SetWindowSize(IntPtr handle, int w, int h)
         {
             SetWindowPos(handle, HWND_TOP, 0, 0, w, h, SWP_NOMOVE);
+        }
+
+        public static string GetForgegroundProcessPath()
+        {
+            var hWndFg = GetForegroundWindow();
+            if (hWndFg == IntPtr.Zero)
+            {
+                return null;
+            }
+            return GetProcessPathByWindow(hWndFg);
+        }
+
+        public static string GetProcessPathByWindow(IntPtr hWnd)
+        {
+            GetWindowThreadProcessId(hWnd, out var pid);
+            return Process.GetProcessById((int)pid).MainModule.FileName;
         }
     }
 }

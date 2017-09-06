@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using ACT.FFXIVTranslate.translate;
 
@@ -16,6 +15,7 @@ namespace ACT.FFXIVTranslate
 
         private bool _showOverlay = false;
         private bool _autoHide = false;
+        private string _activatedExePath = null;
 
         public TranslateForm()
         {
@@ -38,11 +38,10 @@ namespace ACT.FFXIVTranslate
             _controller.LegalInfoChanged += ControllerOnLegalInfoChanged;
             _controller.OverlayAutoHideChanged += ControllerOnOverlayAutoHideChanged;
             _controller.ShowOverlayChanged += ControllerOnShowOverlayChanged;
+            _controller.ActivatedProcessPathChanged += ControllerOnActivatedProcessPathChanged;
 
             Move += OnMove;
             SizeChanged += OnSizeChanged;
-
-            timerAutoHide.Enabled = true;
         }
 
         public void PostAttachToAct(FFXIVTranslatePlugin plugin)
@@ -53,11 +52,19 @@ namespace ACT.FFXIVTranslate
         private void ControllerOnOverlayAutoHideChanged(bool fromView, bool autoHide)
         {
             _autoHide = autoHide;
+            CheckVisibility();
         }
 
         private void ControllerOnShowOverlayChanged(bool fromView, bool showOverlay)
         {
             _showOverlay = showOverlay;
+            CheckVisibility();
+        }
+
+        private void ControllerOnActivatedProcessPathChanged(bool fromView, string path)
+        {
+            _activatedExePath = path;
+            CheckVisibility();
         }
 
         private void ControllerOnOpacityChanged(bool fromView, double value)
@@ -177,48 +184,62 @@ namespace ACT.FFXIVTranslate
             }
         }
 
-        private void timerAutoHide_Tick(object sender, EventArgs e)
+        private void TranslateForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _controller.OverlayMoved -= ControllerOnOverlayMoved;
+            _controller.OverlayResized -= ControllerOnOverlayResized;
+            _controller.OpacityChanged -= ControllerOnOpacityChanged;
+            _controller.ClickthroughChanged -= ControllerOnClickthroughChanged;
+            _controller.OverlayContentUpdated -= ControllerOnOverlayContentUpdated;
+            _controller.OverlayFontChanged -= ControllerOnOverlayFontChanged;
+            _controller.LegalInfoChanged -= ControllerOnLegalInfoChanged;
+            _controller.OverlayAutoHideChanged -= ControllerOnOverlayAutoHideChanged;
+            _controller.ShowOverlayChanged -= ControllerOnShowOverlayChanged;
+            _controller.ActivatedProcessPathChanged -= ControllerOnActivatedProcessPathChanged;
+        }
+
+        private void CheckVisibility()
         {
             var targetVisible = false;
-            try
+            if (_showOverlay && _autoHide)
             {
-                if (_showOverlay && _autoHide)
+                if (_activatedExePath == null)
                 {
-                    var hWndFg = Win32APIUtils.GetForegroundWindow();
-                    if (hWndFg == IntPtr.Zero)
-                    {
-                        return;
-                    }
-                    Win32APIUtils.GetWindowThreadProcessId(hWndFg, out uint pid);
-                    var exePath = Process.GetProcessById((int) pid).MainModule.FileName;
-
-                    if (Path.GetFileName(exePath) == "ffxiv.exe" ||
-                        Path.GetFileName(exePath) == "ffxiv_dx11.exe" ||
-                        exePath == Process.GetCurrentProcess().MainModule.FileName)
+                    targetVisible = true;
+                }
+                else
+                {
+                    if (Utils.IsGameExePath(_activatedExePath) || Utils.IsActExePaht(_activatedExePath))
                     {
                         targetVisible = true;
                     }
                 }
-                else
-                {
-                    targetVisible = _showOverlay;
-                }
             }
-            catch (Exception ex)
+            else
             {
-                _controller.NotifyLogMessageAppend(true, ex.ToString());
-                targetVisible = true; // Force show overlay if something goes wrong.
+                targetVisible = _showOverlay;
             }
 
-            if (Visible != targetVisible)
-            {
-                Visible = targetVisible;
-            }
+            ApplyVisibility(targetVisible);
         }
 
-        private void TranslateForm_FormClosing(object sender, FormClosingEventArgs e)
+        private delegate void ApplyVisibilityCallback(bool visibility);
+
+        private void ApplyVisibility(bool visibility)
         {
-            timerAutoHide.Enabled = false;
+            if (InvokeRequired)
+            {
+                ApplyVisibilityCallback applyVisibilityCallback = ApplyVisibility;
+                Invoke(applyVisibilityCallback, visibility);
+            }
+            else
+            {
+
+                if (Visible != visibility)
+                {
+                    Visible = visibility;
+                }
+            }
         }
     }
 }

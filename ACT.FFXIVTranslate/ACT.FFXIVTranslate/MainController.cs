@@ -159,5 +159,14 @@ namespace ACT.FFXIVTranslate
         {
             TimestampFormatChanged?.Invoke(fromView, is24Hour);
         }
+
+        public delegate void OnActivatedProcessPathChangedDelegate(bool fromView, string path);
+
+        public event OnActivatedProcessPathChangedDelegate ActivatedProcessPathChanged;
+
+        public void NotifyActivatedProcessPathChanged(bool fromView, string path)
+        {
+            ActivatedProcessPathChanged?.Invoke(fromView, path);
+        }
     }
 }

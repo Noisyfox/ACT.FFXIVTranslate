@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.richTextBoxContent = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanelContent = new System.Windows.Forms.TableLayoutPanel();
             this.linkLabelLegalInfo = new System.Windows.Forms.LinkLabel();
-            this.timerAutoHide = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanelContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,11 +81,6 @@
             this.linkLabelLegalInfo.Text = "Powered by XXXXXXXX";
             this.linkLabelLegalInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // timerAutoHide
-            // 
-            this.timerAutoHide.Interval = 1000;
-            this.timerAutoHide.Tick += new System.EventHandler(this.timerAutoHide_Tick);
-            // 
             // TranslateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -116,6 +109,5 @@
         private System.Windows.Forms.RichTextBox richTextBoxContent;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelContent;
         private System.Windows.Forms.LinkLabel linkLabelLegalInfo;
-        private System.Windows.Forms.Timer timerAutoHide;
     }
 }

@@ -57,6 +57,19 @@ namespace ACT.FFXIVTranslate
         {
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _controller.OverlayMoved -= ControllerOnOverlayMoved;
+            _controller.OverlayResized -= ControllerOnOverlayResized;
+            _controller.OpacityChanged -= ControllerOnOpacityChanged;
+            _controller.ClickthroughChanged -= ControllerOnClickthroughChanged;
+            _controller.OverlayContentUpdated -= ControllerOnOverlayContentUpdated;
+            _controller.OverlayFontChanged -= ControllerOnOverlayFontChanged;
+            _controller.LegalInfoChanged -= ControllerOnLegalInfoChanged;
+            _controller.OverlayAutoHideChanged -= ControllerOnOverlayAutoHideChanged;
+            _controller.ShowOverlayChanged -= ControllerOnShowOverlayChanged;
+            _controller.ActivatedProcessPathChanged -= ControllerOnActivatedProcessPathChanged;
+        }
 
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
         {

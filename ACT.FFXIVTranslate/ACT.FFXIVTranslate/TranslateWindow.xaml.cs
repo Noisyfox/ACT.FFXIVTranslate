@@ -23,6 +23,8 @@ namespace ACT.FFXIVTranslate
 
         private IntPtr _handle;
 
+        private bool _isClosed = false;
+
         private bool _showOverlay = false;
         private bool _autoHide = false;
         private string _activatedExePath = null;
@@ -35,6 +37,7 @@ namespace ACT.FFXIVTranslate
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _handle = new WindowInteropHelper(this).Handle;
+            _isClosed = false;
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
@@ -69,6 +72,8 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayAutoHideChanged -= ControllerOnOverlayAutoHideChanged;
             _controller.ShowOverlayChanged -= ControllerOnShowOverlayChanged;
             _controller.ActivatedProcessPathChanged -= ControllerOnActivatedProcessPathChanged;
+
+            _isClosed = true;
         }
 
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
@@ -116,6 +121,10 @@ namespace ACT.FFXIVTranslate
         {
             RichTextBoxContent.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
             {
+                if (_isClosed)
+                {
+                    return;
+                }
                 var textRange = new TextRange(RichTextBoxContent.Document.ContentEnd,
                     RichTextBoxContent.Document.ContentEnd);
                 textRange.Load(new MemoryStream(Encoding.UTF8.GetBytes(content)), DataFormats.Rtf);
@@ -227,6 +236,10 @@ namespace ACT.FFXIVTranslate
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
             {
+                if (_isClosed)
+                {
+                    return;
+                }
                 var t = visibility ? Visibility.Visible : Visibility.Hidden;
                 if (Visibility != t)
                 {

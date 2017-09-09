@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using ACT.FFXIVTranslate.translate;
 using Advanced_Combat_Tracker;
 
@@ -20,6 +21,7 @@ namespace ACT.FFXIVTranslate
         public Label StatusLabel { get; private set; }
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
         public TranslateForm Overlay { get; private set; }
+        public Window1 OverlayWPF { get; private set; }
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
 
@@ -51,26 +53,6 @@ namespace ACT.FFXIVTranslate
 
             try
             {
-                // Load FFXIV plugin's assembly if needed
-                AppDomain.CurrentDomain.AssemblyResolve += (o, e) =>
-                {
-                    var simpleName = new string(e.Name.TakeWhile(x => x != ',').ToArray());
-                    if (simpleName == "FFXIV_ACT_Plugin")
-                    {
-                        var query =
-                            ActGlobals.oFormActMain.ActPlugins.Where(
-                                x => x.lblPluginTitle.Text == "FFXIV_ACT_Plugin.dll");
-                        var plugin = query.FirstOrDefault();
-
-                        if (plugin != null)
-                        {
-                            return System.Reflection.Assembly.LoadFrom(plugin.pluginFile.FullName);
-                        }
-                    }
-
-                    return null;
-                };
-
                 Controller = new MainController();
 
                 Settings = new PluginSettings(this);
@@ -78,6 +60,10 @@ namespace ACT.FFXIVTranslate
                 Overlay = new TranslateForm();
                 Overlay.AttachToAct(this);
                 Overlay.Show();
+
+                OverlayWPF = new Window1();
+                ElementHost.EnableModelessKeyboardInterop(OverlayWPF);
+                OverlayWPF.Show();
 
                 SettingsTab = new FFXIVTranslateTabControl();
                 SettingsTab.AttachToAct(this);
@@ -123,6 +109,7 @@ namespace ACT.FFXIVTranslate
             catch (Exception ex)
             {
                 StatusLabel.Text = "Init Failed: " + ex.ToString();
+                MessageBox.Show(StatusLabel.Text);
             }
         }
 
@@ -239,6 +226,7 @@ namespace ACT.FFXIVTranslate
             _windowsMessagePump.Dispose();
 
             Overlay?.Close();
+            OverlayWPF?.Close();
 
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
             TranslateService.Stop();

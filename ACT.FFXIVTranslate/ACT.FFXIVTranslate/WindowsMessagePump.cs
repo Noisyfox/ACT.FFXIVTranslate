@@ -51,6 +51,8 @@ namespace ACT.FFXIVTranslate
 
         private const uint WINEVENT_OUTOFCONTEXT = 0;
         private const uint EVENT_SYSTEM_FOREGROUND = 0x3;
+        private const uint EVENT_SYSTEM_MENUPOPUPSTART = 0x6;
+        private const uint EVENT_SYSTEM_MENUPOPUPEND = 0x7;
         private const uint EVENT_SYSTEM_MINIMIZEEND = 0x17;
 
 //        [DllImport("user32.dll")]
@@ -72,11 +74,20 @@ namespace ACT.FFXIVTranslate
 
         private void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
-            if (eventType != EVENT_SYSTEM_FOREGROUND && eventType != EVENT_SYSTEM_MINIMIZEEND)
+            if (eventType != EVENT_SYSTEM_FOREGROUND && eventType != EVENT_SYSTEM_MENUPOPUPSTART &&
+                eventType != EVENT_SYSTEM_MENUPOPUPEND && eventType != EVENT_SYSTEM_MINIMIZEEND)
             {
                 return;
             }
-            var path = hwnd == IntPtr.Zero ? Win32APIUtils.GetForgegroundProcessPath() : Win32APIUtils.GetProcessPathByWindow(hwnd);
+            string path = null;
+            if (hwnd != IntPtr.Zero)
+            {
+                path = Win32APIUtils.GetProcessPathByWindow(hwnd);
+            }
+            if (path == null)
+            {
+                path = Win32APIUtils.GetForgegroundProcessPath();
+            }
             if (path == null)
             {
                 return;

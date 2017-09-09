@@ -87,6 +87,10 @@ namespace ACT.FFXIVTranslate
         public static string GetProcessPathByWindow(IntPtr hWnd)
         {
             GetWindowThreadProcessId(hWnd, out var pid);
+            if (pid == 0)
+            {
+                return null;
+            }
             return Process.GetProcessById((int)pid).MainModule.FileName;
         }
     }

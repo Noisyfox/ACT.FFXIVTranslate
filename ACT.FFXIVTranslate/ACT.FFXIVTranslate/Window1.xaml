@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACT.FFXIVTranslate"
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="300">
+        Title="Window1" Height="300" Width="300"
+        AllowsTransparency="True" WindowStyle="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" Loaded="Window_Loaded">
+    
+    <Window.Background>
+        <SolidColorBrush Opacity="0.5" Color="Black"/>
+    </Window.Background>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="47*"/>
+        </Grid.RowDefinitions>
+        <RichTextBox Name="RichTextBoxContent" Background="Transparent" Foreground="White" Cursor="Arrow" Grid.Row="1" BorderThickness="0" IsReadOnly="True" IsUndoEnabled="False" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </Window>

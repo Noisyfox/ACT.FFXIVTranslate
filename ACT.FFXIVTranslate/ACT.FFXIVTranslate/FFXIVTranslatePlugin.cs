@@ -20,7 +20,6 @@ namespace ACT.FFXIVTranslate
         public TabPage ParentTabPage { get; private set; }
         public Label StatusLabel { get; private set; }
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
-        public TranslateForm Overlay { get; private set; }
         public Window1 OverlayWPF { get; private set; }
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
@@ -57,12 +56,9 @@ namespace ACT.FFXIVTranslate
 
                 Settings = new PluginSettings(this);
 
-                Overlay = new TranslateForm();
-                Overlay.AttachToAct(this);
-                Overlay.Show();
-
                 OverlayWPF = new Window1();
                 ElementHost.EnableModelessKeyboardInterop(OverlayWPF);
+                OverlayWPF.AttachToAct(this);
                 OverlayWPF.Show();
 
                 SettingsTab = new FFXIVTranslateTabControl();
@@ -79,7 +75,7 @@ namespace ACT.FFXIVTranslate
 
                 _windowsMessagePump.AttachToAct(this);
 
-                Overlay.PostAttachToAct(this);
+                OverlayWPF.PostAttachToAct(this);
                 SettingsTab.PostAttachToAct(this);
                 TranslateService.PostAttachToAct(this);
                 _windowsMessagePump.PostAttachToAct(this);
@@ -224,8 +220,7 @@ namespace ACT.FFXIVTranslate
         public void DeInitPlugin()
         {
             _windowsMessagePump.Dispose();
-
-            Overlay?.Close();
+            
             OverlayWPF?.Close();
 
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;

@@ -10,7 +10,10 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 before_build:
-- cmd: nuget restore ACT.FFXIVTranslate
+- cmd: >-
+    nuget restore ACT.FFXIVTranslate
+
+    cp MSBuild.ILMerge.Task.targets .\ACT.FFXIVTranslate\packages\MSBuild.ILMerge.Task.1.0.5\build\MSBuild.ILMerge.Task.targets
 build:
   project: ACT.FFXIVTranslate/ACT.FFXIVTranslate.sln
   verbosity: minimal

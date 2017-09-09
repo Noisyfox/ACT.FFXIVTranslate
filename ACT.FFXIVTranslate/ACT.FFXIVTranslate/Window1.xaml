@@ -7,15 +7,23 @@
         mc:Ignorable="d"
         Title="Window1" Height="300" Width="300"
         AllowsTransparency="True" WindowStyle="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" Loaded="Window_Loaded">
-    
+
     <Window.Background>
         <SolidColorBrush Opacity="0.5" Color="Black"/>
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="47*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <RichTextBox Name="RichTextBoxContent" Background="Transparent" Foreground="White" Cursor="Arrow" Grid.Row="1" BorderThickness="0" IsReadOnly="True" IsUndoEnabled="False" VerticalScrollBarVisibility="Auto"/>
+        <RichTextBox Name="RichTextBoxContent" Background="Transparent" Foreground="White" Cursor="Arrow" BorderThickness="0" IsReadOnly="True" IsUndoEnabled="False" VerticalScrollBarVisibility="Auto"/>
+        <Label Name="LabelCopyRight" Grid.Row="1" HorizontalContentAlignment="Right" Visibility="Collapsed">
+            <Label.Foreground>
+                <SolidColorBrush Color="White" Opacity="0.5"/>
+            </Label.Foreground>
+            <Hyperlink NavigateUri="http://www.google.com" >
+                 Copyright XXXXXXXXX
+            </Hyperlink>
+        </Label>
     </Grid>
 </Window>

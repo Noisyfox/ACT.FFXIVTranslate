@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -6,7 +7,9 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using System.Windows.Threading;
+using ACT.FFXIVTranslate.translate;
 using FontFamily = System.Windows.Media.FontFamily;
 
 namespace ACT.FFXIVTranslate
@@ -44,6 +47,7 @@ namespace ACT.FFXIVTranslate
             _controller.ClickthroughChanged += ControllerOnClickthroughChanged;
             _controller.OverlayContentUpdated += ControllerOnOverlayContentUpdated;
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
+            _controller.LegalInfoChanged += ControllerOnLegalInfoChanged;
             _controller.OverlayAutoHideChanged += ControllerOnOverlayAutoHideChanged;
             _controller.ShowOverlayChanged += ControllerOnShowOverlayChanged;
             _controller.ActivatedProcessPathChanged += ControllerOnActivatedProcessPathChanged;
@@ -117,6 +121,38 @@ namespace ACT.FFXIVTranslate
             RichTextBoxContent.FontSize = font.Size * 96.0 / 72.0;
             var range = new TextRange(RichTextBoxContent.Document.ContentStart, RichTextBoxContent.Document.ContentEnd);
             range.ApplyPropertyValue(TextElement.FontSizeProperty, font.Size * 96.0 / 72.0);
+        }
+
+        private void ControllerOnLegalInfoChanged(bool fromView, ProviderLegalInfo info)
+        {
+            var label = info?.LabelResult;
+            if (label != null)
+            {
+                LabelCopyRight.Visibility = Visibility.Visible;
+                if (info.LabelResultLink != null)
+                {
+                    var hl = new Hyperlink(new Run(label))
+                    {
+                        Foreground = LabelCopyRight.Foreground,
+                        NavigateUri = new Uri(info.LabelResultLink)
+                    };
+                    hl.RequestNavigate += RequestNavigate;
+                    LabelCopyRight.Content = hl;
+                }
+                else
+                {
+                    LabelCopyRight.Content = label;
+                }
+            }
+            else
+            {
+                LabelCopyRight.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private static void RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
         }
 
         private void ControllerOnOverlayAutoHideChanged(bool fromView, bool autoHide)

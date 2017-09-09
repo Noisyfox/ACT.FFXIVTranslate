@@ -20,7 +20,7 @@ namespace ACT.FFXIVTranslate
         public TabPage ParentTabPage { get; private set; }
         public Label StatusLabel { get; private set; }
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
-        public Window1 OverlayWPF { get; private set; }
+        public TranslateWindow OverlayWPF { get; private set; }
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
 
@@ -56,7 +56,7 @@ namespace ACT.FFXIVTranslate
 
                 Settings = new PluginSettings(this);
 
-                OverlayWPF = new Window1();
+                OverlayWPF = new TranslateWindow();
                 ElementHost.EnableModelessKeyboardInterop(OverlayWPF);
                 OverlayWPF.AttachToAct(this);
                 OverlayWPF.Show();

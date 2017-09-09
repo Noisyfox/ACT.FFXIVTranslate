@@ -140,8 +140,8 @@
     <Compile Include="translate\youdao\YoudaoTranslateProviderFactory.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Win32APIUtils.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="TranslateWindow.xaml.cs">
+      <DependentUpon>TranslateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsMessagePump.cs" />
   </ItemGroup>
@@ -179,7 +179,7 @@
     <Content Include="ILMergeOrder.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Window1.xaml">
+    <Page Include="TranslateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,9 +15,9 @@ using FontFamily = System.Windows.Media.FontFamily;
 namespace ACT.FFXIVTranslate
 {
     /// <summary>
-    /// Window1.xaml 的交互逻辑
+    /// TranslateWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class Window1 : Window, PluginComponent
+    public partial class TranslateWindow : Window, PluginComponent
     {
         private MainController _controller;
 
@@ -27,7 +27,7 @@ namespace ACT.FFXIVTranslate
         private bool _autoHide = false;
         private string _activatedExePath = null;
 
-        public Window1()
+        public TranslateWindow()
         {
             InitializeComponent();
         }

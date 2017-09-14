@@ -287,4 +287,28 @@
     <value>Select FFXIV Character Configuration folder.
 Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a name start with FFXIV_CHR.</value>
   </data>
+  <data name="buttonProxyApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="groupBoxProxy" xml:space="preserve">
+    <value>Proxy Settings</value>
+  </data>
+  <data name="labelProxyDomain" xml:space="preserve">
+    <value>Domain:</value>
+  </data>
+  <data name="labelProxyPassword" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="labelProxyPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="labelProxyServer" xml:space="preserve">
+    <value>Server:</value>
+  </data>
+  <data name="labelProxyType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="labelProxyUser" xml:space="preserve">
+    <value>User:</value>
+  </data>
 </root>

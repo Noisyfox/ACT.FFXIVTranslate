@@ -73,6 +73,21 @@
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneralSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxProxy = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelProxyType = new System.Windows.Forms.Label();
+            this.labelProxyServer = new System.Windows.Forms.Label();
+            this.labelProxyPort = new System.Windows.Forms.Label();
+            this.labelProxyUser = new System.Windows.Forms.Label();
+            this.labelProxyPassword = new System.Windows.Forms.Label();
+            this.labelProxyDomain = new System.Windows.Forms.Label();
+            this.comboBoxProxyType = new System.Windows.Forms.ComboBox();
+            this.textBoxProxyServer = new System.Windows.Forms.TextBox();
+            this.textBoxProxyUser = new System.Windows.Forms.TextBox();
+            this.textBoxProxyPassword = new System.Windows.Forms.TextBox();
+            this.textBoxProxyDomain = new System.Windows.Forms.TextBox();
+            this.buttonProxyApply = new System.Windows.Forms.Button();
+            this.numericUpDownProxyPort = new System.Windows.Forms.NumericUpDown();
             this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.tabPageChannelSettings = new System.Windows.Forms.TabPage();
             this.buttonReadColor = new System.Windows.Forms.Button();
@@ -126,6 +141,9 @@
             this.tableLayoutPanelMainLanguage.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGeneralSettings.SuspendLayout();
+            this.groupBoxProxy.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).BeginInit();
             this.tabPageChannelSettings.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabPageLog.SuspendLayout();
@@ -136,16 +154,13 @@
             this.groupBoxOverlay.Controls.Add(this.tableLayoutPanel1);
             this.groupBoxOverlay.Location = new System.Drawing.Point(6, 43);
             this.groupBoxOverlay.Name = "groupBoxOverlay";
-            this.groupBoxOverlay.Size = new System.Drawing.Size(505, 232);
+            this.groupBoxOverlay.Size = new System.Drawing.Size(505, 201);
             this.groupBoxOverlay.TabIndex = 0;
             this.groupBoxOverlay.TabStop = false;
             this.groupBoxOverlay.Text = "Overlay Settings";
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -172,7 +187,8 @@
             this.tableLayoutPanel1.Controls.Add(this.checkBoxAutoHide, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.checkBoxAddTimestamp, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.checkBox24Hour, 3, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 20);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -182,14 +198,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(493, 206);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(499, 181);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericUpDownY
             // 
             this.numericUpDownY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownY.Location = new System.Drawing.Point(329, 25);
+            this.numericUpDownY.Location = new System.Drawing.Point(332, 25);
             this.numericUpDownY.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -201,7 +216,7 @@
             0,
             -2147483648});
             this.numericUpDownY.Name = "numericUpDownY";
-            this.numericUpDownY.Size = new System.Drawing.Size(161, 21);
+            this.numericUpDownY.Size = new System.Drawing.Size(164, 21);
             this.numericUpDownY.TabIndex = 4;
             this.numericUpDownY.Value = new decimal(new int[] {
             200,
@@ -233,7 +248,7 @@
             // 
             this.labelY.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(306, 29);
+            this.labelY.Location = new System.Drawing.Point(309, 29);
             this.labelY.Name = "labelY";
             this.labelY.Size = new System.Drawing.Size(17, 12);
             this.labelY.TabIndex = 2;
@@ -254,7 +269,7 @@
             0,
             -2147483648});
             this.numericUpDownX.Name = "numericUpDownX";
-            this.numericUpDownX.Size = new System.Drawing.Size(161, 21);
+            this.numericUpDownX.Size = new System.Drawing.Size(164, 21);
             this.numericUpDownX.TabIndex = 3;
             this.numericUpDownX.Value = new decimal(new int[] {
             200,
@@ -286,7 +301,7 @@
             // 
             this.labelHeight.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelHeight.AutoSize = true;
-            this.labelHeight.Location = new System.Drawing.Point(276, 56);
+            this.labelHeight.Location = new System.Drawing.Point(279, 56);
             this.labelHeight.Name = "labelHeight";
             this.labelHeight.Size = new System.Drawing.Size(47, 12);
             this.labelHeight.TabIndex = 7;
@@ -307,7 +322,7 @@
             0,
             0});
             this.numericUpDownWidth.Name = "numericUpDownWidth";
-            this.numericUpDownWidth.Size = new System.Drawing.Size(161, 21);
+            this.numericUpDownWidth.Size = new System.Drawing.Size(164, 21);
             this.numericUpDownWidth.TabIndex = 8;
             this.numericUpDownWidth.Value = new decimal(new int[] {
             300,
@@ -318,7 +333,7 @@
             // numericUpDownHeight
             // 
             this.numericUpDownHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownHeight.Location = new System.Drawing.Point(329, 52);
+            this.numericUpDownHeight.Location = new System.Drawing.Point(332, 52);
             this.numericUpDownHeight.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -330,7 +345,7 @@
             0,
             0});
             this.numericUpDownHeight.Name = "numericUpDownHeight";
-            this.numericUpDownHeight.Size = new System.Drawing.Size(161, 21);
+            this.numericUpDownHeight.Size = new System.Drawing.Size(164, 21);
             this.numericUpDownHeight.TabIndex = 9;
             this.numericUpDownHeight.Value = new decimal(new int[] {
             200,
@@ -356,7 +371,7 @@
             this.trackBarOpacity.Location = new System.Drawing.Point(62, 79);
             this.trackBarOpacity.Maximum = 100;
             this.trackBarOpacity.Name = "trackBarOpacity";
-            this.trackBarOpacity.Size = new System.Drawing.Size(208, 45);
+            this.trackBarOpacity.Size = new System.Drawing.Size(211, 45);
             this.trackBarOpacity.TabIndex = 11;
             this.trackBarOpacity.TickFrequency = 10;
             this.trackBarOpacity.Value = 100;
@@ -365,7 +380,7 @@
             // labelOpacityValue
             // 
             this.labelOpacityValue.AutoSize = true;
-            this.labelOpacityValue.Location = new System.Drawing.Point(276, 76);
+            this.labelOpacityValue.Location = new System.Drawing.Point(279, 76);
             this.labelOpacityValue.MinimumSize = new System.Drawing.Size(35, 0);
             this.labelOpacityValue.Name = "labelOpacityValue";
             this.labelOpacityValue.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -377,9 +392,9 @@
             // buttonFont
             // 
             this.buttonFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFont.Location = new System.Drawing.Point(329, 130);
+            this.buttonFont.Location = new System.Drawing.Point(332, 130);
             this.buttonFont.Name = "buttonFont";
-            this.buttonFont.Size = new System.Drawing.Size(161, 23);
+            this.buttonFont.Size = new System.Drawing.Size(164, 23);
             this.buttonFont.TabIndex = 14;
             this.buttonFont.Text = "Change Font";
             this.buttonFont.UseVisualStyleBackColor = true;
@@ -392,13 +407,13 @@
             this.textBoxFont.Location = new System.Drawing.Point(3, 131);
             this.textBoxFont.Name = "textBoxFont";
             this.textBoxFont.ReadOnly = true;
-            this.textBoxFont.Size = new System.Drawing.Size(320, 21);
+            this.textBoxFont.Size = new System.Drawing.Size(323, 21);
             this.textBoxFont.TabIndex = 17;
             // 
             // checkBoxClickthrough
             // 
             this.checkBoxClickthrough.AutoSize = true;
-            this.checkBoxClickthrough.Location = new System.Drawing.Point(329, 79);
+            this.checkBoxClickthrough.Location = new System.Drawing.Point(332, 79);
             this.checkBoxClickthrough.Name = "checkBoxClickthrough";
             this.checkBoxClickthrough.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.checkBoxClickthrough.Size = new System.Drawing.Size(96, 21);
@@ -424,7 +439,7 @@
             // 
             this.checkBoxAutoHide.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkBoxAutoHide, 2);
-            this.checkBoxAutoHide.Location = new System.Drawing.Point(276, 3);
+            this.checkBoxAutoHide.Location = new System.Drawing.Point(279, 3);
             this.checkBoxAutoHide.Name = "checkBoxAutoHide";
             this.checkBoxAutoHide.Size = new System.Drawing.Size(180, 16);
             this.checkBoxAutoHide.TabIndex = 19;
@@ -453,7 +468,7 @@
             this.checkBox24Hour.Checked = true;
             this.checkBox24Hour.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tableLayoutPanel1.SetColumnSpan(this.checkBox24Hour, 2);
-            this.checkBox24Hour.Location = new System.Drawing.Point(276, 159);
+            this.checkBox24Hour.Location = new System.Drawing.Point(279, 159);
             this.checkBox24Hour.Name = "checkBox24Hour";
             this.checkBox24Hour.Size = new System.Drawing.Size(108, 16);
             this.checkBox24Hour.TabIndex = 21;
@@ -740,6 +755,7 @@
             // tabPageGeneralSettings
             // 
             this.tabPageGeneralSettings.AutoScroll = true;
+            this.tabPageGeneralSettings.Controls.Add(this.groupBoxProxy);
             this.tabPageGeneralSettings.Controls.Add(this.tableLayoutPanelMainLanguage);
             this.tabPageGeneralSettings.Controls.Add(this.groupBoxOverlay);
             this.tabPageGeneralSettings.Controls.Add(this.translateProviderPanel);
@@ -751,9 +767,182 @@
             this.tabPageGeneralSettings.Text = "General Settings";
             this.tabPageGeneralSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBoxProxy
+            // 
+            this.groupBoxProxy.Controls.Add(this.tableLayoutPanel3);
+            this.groupBoxProxy.Location = new System.Drawing.Point(518, 4);
+            this.groupBoxProxy.Name = "groupBoxProxy";
+            this.groupBoxProxy.Size = new System.Drawing.Size(263, 209);
+            this.groupBoxProxy.TabIndex = 6;
+            this.groupBoxProxy.TabStop = false;
+            this.groupBoxProxy.Text = "Proxy Settings";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.labelProxyType, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.labelProxyServer, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.labelProxyPort, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.labelProxyUser, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.labelProxyPassword, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.labelProxyDomain, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxProxyType, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxProxyServer, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxProxyUser, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxProxyPassword, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxProxyDomain, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.buttonProxyApply, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.numericUpDownProxyPort, 1, 2);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 7;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(257, 189);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // labelProxyType
+            // 
+            this.labelProxyType.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProxyType.AutoSize = true;
+            this.labelProxyType.Location = new System.Drawing.Point(3, 7);
+            this.labelProxyType.Name = "labelProxyType";
+            this.labelProxyType.Size = new System.Drawing.Size(35, 12);
+            this.labelProxyType.TabIndex = 0;
+            this.labelProxyType.Text = "Type:";
+            // 
+            // labelProxyServer
+            // 
+            this.labelProxyServer.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProxyServer.AutoSize = true;
+            this.labelProxyServer.Location = new System.Drawing.Point(3, 33);
+            this.labelProxyServer.Name = "labelProxyServer";
+            this.labelProxyServer.Size = new System.Drawing.Size(47, 12);
+            this.labelProxyServer.TabIndex = 1;
+            this.labelProxyServer.Text = "Server:";
+            // 
+            // labelProxyPort
+            // 
+            this.labelProxyPort.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProxyPort.AutoSize = true;
+            this.labelProxyPort.Location = new System.Drawing.Point(3, 60);
+            this.labelProxyPort.Name = "labelProxyPort";
+            this.labelProxyPort.Size = new System.Drawing.Size(35, 12);
+            this.labelProxyPort.TabIndex = 2;
+            this.labelProxyPort.Text = "Port:";
+            // 
+            // labelProxyUser
+            // 
+            this.labelProxyUser.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProxyUser.AutoSize = true;
+            this.labelProxyUser.Location = new System.Drawing.Point(3, 87);
+            this.labelProxyUser.Name = "labelProxyUser";
+            this.labelProxyUser.Size = new System.Drawing.Size(35, 12);
+            this.labelProxyUser.TabIndex = 3;
+            this.labelProxyUser.Text = "User:";
+            // 
+            // labelProxyPassword
+            // 
+            this.labelProxyPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProxyPassword.AutoSize = true;
+            this.labelProxyPassword.Location = new System.Drawing.Point(3, 114);
+            this.labelProxyPassword.Name = "labelProxyPassword";
+            this.labelProxyPassword.Size = new System.Drawing.Size(59, 12);
+            this.labelProxyPassword.TabIndex = 4;
+            this.labelProxyPassword.Text = "Password:";
+            // 
+            // labelProxyDomain
+            // 
+            this.labelProxyDomain.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelProxyDomain.AutoSize = true;
+            this.labelProxyDomain.Location = new System.Drawing.Point(3, 141);
+            this.labelProxyDomain.Name = "labelProxyDomain";
+            this.labelProxyDomain.Size = new System.Drawing.Size(47, 12);
+            this.labelProxyDomain.TabIndex = 5;
+            this.labelProxyDomain.Text = "Domain:";
+            // 
+            // comboBoxProxyType
+            // 
+            this.comboBoxProxyType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxProxyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxProxyType.FormattingEnabled = true;
+            this.comboBoxProxyType.Location = new System.Drawing.Point(68, 3);
+            this.comboBoxProxyType.Name = "comboBoxProxyType";
+            this.comboBoxProxyType.Size = new System.Drawing.Size(186, 20);
+            this.comboBoxProxyType.TabIndex = 6;
+            // 
+            // textBoxProxyServer
+            // 
+            this.textBoxProxyServer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxProxyServer.Location = new System.Drawing.Point(68, 29);
+            this.textBoxProxyServer.Name = "textBoxProxyServer";
+            this.textBoxProxyServer.Size = new System.Drawing.Size(186, 21);
+            this.textBoxProxyServer.TabIndex = 7;
+            // 
+            // textBoxProxyUser
+            // 
+            this.textBoxProxyUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxProxyUser.Location = new System.Drawing.Point(68, 83);
+            this.textBoxProxyUser.Name = "textBoxProxyUser";
+            this.textBoxProxyUser.Size = new System.Drawing.Size(186, 21);
+            this.textBoxProxyUser.TabIndex = 9;
+            // 
+            // textBoxProxyPassword
+            // 
+            this.textBoxProxyPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxProxyPassword.Location = new System.Drawing.Point(68, 110);
+            this.textBoxProxyPassword.Name = "textBoxProxyPassword";
+            this.textBoxProxyPassword.Size = new System.Drawing.Size(186, 21);
+            this.textBoxProxyPassword.TabIndex = 10;
+            this.textBoxProxyPassword.UseSystemPasswordChar = true;
+            // 
+            // textBoxProxyDomain
+            // 
+            this.textBoxProxyDomain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxProxyDomain.Location = new System.Drawing.Point(68, 137);
+            this.textBoxProxyDomain.Name = "textBoxProxyDomain";
+            this.textBoxProxyDomain.Size = new System.Drawing.Size(186, 21);
+            this.textBoxProxyDomain.TabIndex = 11;
+            // 
+            // buttonProxyApply
+            // 
+            this.buttonProxyApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonProxyApply.Location = new System.Drawing.Point(179, 164);
+            this.buttonProxyApply.Name = "buttonProxyApply";
+            this.buttonProxyApply.Size = new System.Drawing.Size(75, 21);
+            this.buttonProxyApply.TabIndex = 12;
+            this.buttonProxyApply.Text = "Apply";
+            this.buttonProxyApply.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDownProxyPort
+            // 
+            this.numericUpDownProxyPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownProxyPort.Location = new System.Drawing.Point(68, 56);
+            this.numericUpDownProxyPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numericUpDownProxyPort.Name = "numericUpDownProxyPort";
+            this.numericUpDownProxyPort.Size = new System.Drawing.Size(186, 21);
+            this.numericUpDownProxyPort.TabIndex = 13;
+            this.numericUpDownProxyPort.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            // 
             // translateProviderPanel
             // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(6, 281);
+            this.translateProviderPanel.Location = new System.Drawing.Point(6, 250);
             this.translateProviderPanel.Name = "translateProviderPanel";
             this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
             this.translateProviderPanel.TabIndex = 1;
@@ -1277,6 +1466,10 @@
             this.tableLayoutPanelMainLanguage.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneralSettings.ResumeLayout(false);
+            this.groupBoxProxy.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).EndInit();
             this.tabPageChannelSettings.ResumeLayout(false);
             this.tabPageChannelSettings.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1376,5 +1569,20 @@
         private System.Windows.Forms.Button buttonChannelColorNPC;
         private System.Windows.Forms.CheckBox checkBoxChannelLabelNPC;
         private System.Windows.Forms.Button buttonReadColor;
+        private System.Windows.Forms.GroupBox groupBoxProxy;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label labelProxyType;
+        private System.Windows.Forms.Label labelProxyServer;
+        private System.Windows.Forms.Label labelProxyPort;
+        private System.Windows.Forms.Label labelProxyUser;
+        private System.Windows.Forms.Label labelProxyPassword;
+        private System.Windows.Forms.Label labelProxyDomain;
+        private System.Windows.Forms.ComboBox comboBoxProxyType;
+        private System.Windows.Forms.TextBox textBoxProxyServer;
+        private System.Windows.Forms.TextBox textBoxProxyUser;
+        private System.Windows.Forms.TextBox textBoxProxyPassword;
+        private System.Windows.Forms.TextBox textBoxProxyDomain;
+        private System.Windows.Forms.Button buttonProxyApply;
+        private System.Windows.Forms.NumericUpDown numericUpDownProxyPort;
     }
 }

@@ -97,6 +97,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 应用 的本地化字符串。
+        /// </summary>
+        public static string buttonProxyApply {
+            get {
+                return ResourceManager.GetString("buttonProxyApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 从游戏中读取配色 的本地化字符串。
         /// </summary>
         public static string buttonReadColor {
@@ -340,6 +349,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 代理设置 的本地化字符串。
+        /// </summary>
+        public static string groupBoxProxy {
+            get {
+                return ResourceManager.GetString("groupBoxProxy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 API密钥: 的本地化字符串。
         /// </summary>
         public static string labelApiKey {
@@ -453,6 +471,60 @@ namespace ACT.FFXIVTranslate.localization {
         public static string labelProvider {
             get {
                 return ResourceManager.GetString("labelProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 域: 的本地化字符串。
+        /// </summary>
+        public static string labelProxyDomain {
+            get {
+                return ResourceManager.GetString("labelProxyDomain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 密码: 的本地化字符串。
+        /// </summary>
+        public static string labelProxyPassword {
+            get {
+                return ResourceManager.GetString("labelProxyPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 端口: 的本地化字符串。
+        /// </summary>
+        public static string labelProxyPort {
+            get {
+                return ResourceManager.GetString("labelProxyPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 服务器: 的本地化字符串。
+        /// </summary>
+        public static string labelProxyServer {
+            get {
+                return ResourceManager.GetString("labelProxyServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 类型: 的本地化字符串。
+        /// </summary>
+        public static string labelProxyType {
+            get {
+                return ResourceManager.GetString("labelProxyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户名: 的本地化字符串。
+        /// </summary>
+        public static string labelProxyUser {
+            get {
+                return ResourceManager.GetString("labelProxyUser", resourceCulture);
             }
         }
         

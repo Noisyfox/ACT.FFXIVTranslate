@@ -287,4 +287,28 @@
     <value>请选择最终幻想14用户设置文件夹。
 通常位于 我的文档\\My Games\\FINAL FANTASY XIV - A Realm Reborn 并且以 FFXIV_CHR 开头。</value>
   </data>
+  <data name="buttonProxyApply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="groupBoxProxy" xml:space="preserve">
+    <value>代理设置</value>
+  </data>
+  <data name="labelProxyDomain" xml:space="preserve">
+    <value>域:</value>
+  </data>
+  <data name="labelProxyPassword" xml:space="preserve">
+    <value>密码:</value>
+  </data>
+  <data name="labelProxyPort" xml:space="preserve">
+    <value>端口:</value>
+  </data>
+  <data name="labelProxyServer" xml:space="preserve">
+    <value>服务器:</value>
+  </data>
+  <data name="labelProxyType" xml:space="preserve">
+    <value>类型:</value>
+  </data>
+  <data name="labelProxyUser" xml:space="preserve">
+    <value>用户名:</value>
+  </data>
 </root>

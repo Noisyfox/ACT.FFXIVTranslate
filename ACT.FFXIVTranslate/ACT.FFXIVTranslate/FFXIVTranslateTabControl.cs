@@ -50,8 +50,8 @@ namespace ACT.FFXIVTranslate
                         break;
                 }
                 CheckBoxFilter = (CheckBox) panel.Find($"checkBoxChannelFilter{name}", true)[0];
-                ButtonColor = (Button)panel.Find($"buttonChannelColor{name}", true)[0];
-                CheckBoxLabel = (CheckBox)panel.Find($"checkBoxChannelLabel{name}", true)[0];
+                ButtonColor = (Button) panel.Find($"buttonChannelColor{name}", true)[0];
+                CheckBoxLabel = (CheckBox) panel.Find($"checkBoxChannelLabel{name}", true)[0];
 
                 switch (code)
                 {
@@ -68,6 +68,18 @@ namespace ACT.FFXIVTranslate
                         ColorSettingKey = $"Color{name}";
                         break;
                 }
+            }
+        }
+
+        private class Item
+        {
+            public string Name { get; }
+            public string Value { get; }
+
+            public Item(string name, string value)
+            {
+                Name = name;
+                Value = value;
             }
         }
 
@@ -120,7 +132,7 @@ namespace ACT.FFXIVTranslate
 
             _controller = plugin.Controller;
 
-            numericUpDownX.ValueChanged+= NumericUpDownPositionOnValueChanged;
+            numericUpDownX.ValueChanged += NumericUpDownPositionOnValueChanged;
             numericUpDownY.ValueChanged += NumericUpDownPositionOnValueChanged;
             numericUpDownWidth.ValueChanged += NumericUpDownSizeOnValueChanged;
             numericUpDownHeight.ValueChanged += NumericUpDownSizeOnValueChanged;
@@ -135,6 +147,7 @@ namespace ACT.FFXIVTranslate
             _controller.LogMessageAppend += ControllerOnLogMessageAppend;
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
             _controller.ChannelColorChanged += ControllerOnChannelColorChanged;
+            _controller.ProxyChanged += ControllerOnProxyChanged;
 
             translateProviderPanel.AttachToAct(plugin);
         }
@@ -166,19 +179,29 @@ namespace ACT.FFXIVTranslate
             {
                 cs.ButtonColor.Font = DefaultFont;
             }
+
+            comboBoxProxyType.DisplayMember = nameof(Item.Name);
+            comboBoxProxyType.ValueMember = nameof(Item.Value);
+            comboBoxProxyType.DataSource = new[]
+            {
+                new Item(strings.proxyTypeNone, "none"),
+                new Item(strings.proxyTypeHttp, "http"),
+                new Item(strings.proxyTypeSocks5, "socks5")
+            }.ToList();
+
             translateProviderPanel.DoLocalization();
         }
 
         private void CheckBoxChannelFilterOnCheckedChanged(object sender, EventArgs eventArgs)
         {
-            var cb = (CheckBox)sender;
+            var cb = (CheckBox) sender;
             var eventCode = _channelSettings.Find(it => it.CheckBoxFilter == sender).Code;
             _controller.NotifyChannelFilterChanged(true, eventCode, cb.Checked);
         }
 
         private void CheckBoxChannelLabelOnCheckedChanged(object sender, EventArgs eventArgs)
         {
-            var cb = (CheckBox)sender;
+            var cb = (CheckBox) sender;
             var eventCode = _channelSettings.Find(it => it.CheckBoxLabel == sender).Code;
             _controller.NotifyChannelLabelChanged(true, eventCode, cb.Checked);
         }
@@ -197,7 +220,7 @@ namespace ACT.FFXIVTranslate
 
         private void ButtonColorOnTextChanged(object sender, EventArgs eventArgs)
         {
-            var btn = (Button)sender;
+            var btn = (Button) sender;
             var eventCode = _channelSettings.Find(it => it.ButtonColor == sender).Code;
             var color = ColorTranslator.FromHtml(btn.Text);
 
@@ -207,7 +230,7 @@ namespace ACT.FFXIVTranslate
         private void ParentTabPageOnResize(object sender, EventArgs eventArgs)
         {
             Location = new Point(0, 0);
-            Size = ((TabPage)sender).Size;
+            Size = ((TabPage) sender).Size;
         }
 
         private void trackBarOpacity_ValueChanged(object sender, EventArgs e)
@@ -293,7 +316,8 @@ namespace ACT.FFXIVTranslate
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format(strings.messageSettingsReadFailed, ex), strings.actPanelTitle, MessageBoxButtons.OK,
+                MessageBox.Show(string.Format(strings.messageSettingsReadFailed, ex), strings.actPanelTitle,
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
@@ -325,7 +349,7 @@ namespace ACT.FFXIVTranslate
 
         private void NumericUpDownSizeOnValueChanged(object sender, EventArgs eventArgs)
         {
-            _controller.NotifyOverlayResized(false, (int)numericUpDownWidth.Value, (int)numericUpDownHeight.Value);
+            _controller.NotifyOverlayResized(false, (int) numericUpDownWidth.Value, (int) numericUpDownHeight.Value);
         }
 
         private void CheckBoxClickthroughOnCheckedChanged(object sender, EventArgs eventArgs)
@@ -335,7 +359,7 @@ namespace ACT.FFXIVTranslate
 
         private void ComboBoxLanguageSelectedIndexChanged(object sender, EventArgs e)
         {
-            _controller.NoitfyLanguageChanged(true, (string)comboBoxLanguage.SelectedValue);
+            _controller.NoitfyLanguageChanged(true, (string) comboBoxLanguage.SelectedValue);
         }
 
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
@@ -398,6 +422,35 @@ namespace ACT.FFXIVTranslate
             var btn = _channelSettings.Find(it => it.Code == code).ButtonColor;
             btn.BackColor = color;
             btn.Text = color.ToHexString();
+        }
+
+        private void ControllerOnProxyChanged(bool fromView, string type, string server, int port, string user,
+            string password, string domain)
+        {
+            if (fromView)
+            {
+                return;
+            }
+
+            comboBoxProxyType.SelectedValue = type;
+            if (comboBoxProxyType.SelectedIndex == -1)
+            {
+                comboBoxProxyType.SelectedIndex = 0;
+            }
+            textBoxProxyServer.Text = server;
+            numericUpDownProxyPort.Value = port;
+            textBoxProxyUser.Text = user;
+            textBoxProxyPassword.Text = password;
+            textBoxProxyDomain.Text = domain;
+
+            buttonProxyApply_Click(this, EventArgs.Empty);
+        }
+
+        private void buttonProxyApply_Click(object sender, EventArgs e)
+        {
+            _controller.NotifyProxyChanged(true, (string) comboBoxProxyType.SelectedValue, textBoxProxyServer.Text,
+                (int) numericUpDownProxyPort.Value, textBoxProxyUser.Text, textBoxProxyPassword.Text,
+                textBoxProxyDomain.Text);
         }
     }
 }

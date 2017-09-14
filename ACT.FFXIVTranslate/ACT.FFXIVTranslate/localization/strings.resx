@@ -311,4 +311,13 @@
   <data name="labelProxyUser" xml:space="preserve">
     <value>用户名:</value>
   </data>
+  <data name="proxyTypeHttp" xml:space="preserve">
+    <value>HTTP代理</value>
+  </data>
+  <data name="proxyTypeNone" xml:space="preserve">
+    <value>不使用代理</value>
+  </data>
+  <data name="proxyTypeSocks5" xml:space="preserve">
+    <value>SOCKS5代理</value>
+  </data>
 </root>

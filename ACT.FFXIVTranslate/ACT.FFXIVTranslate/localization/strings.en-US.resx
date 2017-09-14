@@ -311,4 +311,13 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="labelProxyUser" xml:space="preserve">
     <value>User:</value>
   </data>
+  <data name="proxyTypeHttp" xml:space="preserve">
+    <value>HTTP Proxy</value>
+  </data>
+  <data name="proxyTypeNone" xml:space="preserve">
+    <value>Direct Connect</value>
+  </data>
+  <data name="proxyTypeSocks5" xml:space="preserve">
+    <value>SOCKS5 Proxy</value>
+  </data>
 </root>

@@ -168,5 +168,16 @@ namespace ACT.FFXIVTranslate
         {
             ActivatedProcessPathChanged?.Invoke(fromView, path);
         }
+
+        public delegate void OnProxyChangedDelegate(bool fromView, string type, string server, int port,
+            string user, string password, string domain);
+
+        public event OnProxyChangedDelegate ProxyChanged;
+
+        public void NotifyProxyChanged(bool fromView, string type, string server, int port,
+            string user, string password, string domain)
+        {
+            ProxyChanged?.Invoke(fromView, type, server, port, user, password, domain);
+        }
     }
 }

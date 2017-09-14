@@ -594,6 +594,33 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 HTTP代理 的本地化字符串。
+        /// </summary>
+        public static string proxyTypeHttp {
+            get {
+                return ResourceManager.GetString("proxyTypeHttp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不使用代理 的本地化字符串。
+        /// </summary>
+        public static string proxyTypeNone {
+            get {
+                return ResourceManager.GetString("proxyTypeNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SOCKS5代理 的本地化字符串。
+        /// </summary>
+        public static string proxyTypeSocks5 {
+            get {
+                return ResourceManager.GetString("proxyTypeSocks5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 频道设置 的本地化字符串。
         /// </summary>
         public static string tabPageChannelSettings {

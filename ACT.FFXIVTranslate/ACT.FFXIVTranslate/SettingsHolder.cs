@@ -97,6 +97,18 @@ namespace ACT.FFXIVTranslate
 
         public string OverlayFont { get; set; }
 
+        public string ProxyType { get; set; }
+
+        public string ProxyServer { get; set; }
+
+        public int ProxyPort { get; set; }
+
+        public string ProxyUser { get; set; }
+
+        public string ProxyPassword { get; set; }
+
+        public string ProxyDomain { get; set; }
+
         #endregion
 
         #region Controller notify
@@ -111,12 +123,19 @@ namespace ACT.FFXIVTranslate
             Settings.AddStringSetting(nameof(TranslateLangTo));
             Settings.AddStringSetting(nameof(Language));
             Settings.AddStringSetting(nameof(OverlayFont));
+            Settings.AddStringSetting(nameof(ProxyType));
+            Settings.AddStringSetting(nameof(ProxyServer));
+            Settings.AddIntSetting(nameof(ProxyPort));
+            Settings.AddStringSetting(nameof(ProxyUser));
+            Settings.AddStringSetting(nameof(ProxyPassword));
+            Settings.AddStringSetting(nameof(ProxyDomain));
 
             _controller = plugin.Controller;
 
             _controller.LanguageChanged += ControllerOnLanguageChanged;
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
             _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
+            _controller.ProxyChanged += ControllerOnProxyChanged;
         }
 
         public void PostAttachToAct(FFXIVTranslatePlugin plugin)
@@ -137,6 +156,7 @@ namespace ACT.FFXIVTranslate
             }
 
             _controller.NotifyTranslateProviderChanged(false, TranslateProvider, TranslateApiKey, TranslateLangFrom, TranslateLangTo);
+            _controller.NotifyProxyChanged(false, ProxyType, ProxyServer, ProxyPort, ProxyUser, ProxyPassword, ProxyDomain);
         }
 
         private void ControllerOnLanguageChanged(bool fromView, string lang)
@@ -170,6 +190,22 @@ namespace ACT.FFXIVTranslate
             TranslateApiKey = apiKey;
             TranslateLangFrom = langFrom;
             TranslateLangTo = langTo;
+        }
+
+        private void ControllerOnProxyChanged(bool fromView, string type, string server, int port, string user,
+            string password, string domain)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            ProxyType = type;
+            ProxyServer = server;
+            ProxyPort = port;
+            ProxyUser = user;
+            ProxyPassword = password;
+            ProxyDomain = domain;
         }
 
         #endregion

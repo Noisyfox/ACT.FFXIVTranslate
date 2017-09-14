@@ -921,6 +921,7 @@
             this.buttonProxyApply.TabIndex = 12;
             this.buttonProxyApply.Text = "Apply";
             this.buttonProxyApply.UseVisualStyleBackColor = true;
+            this.buttonProxyApply.Click += new System.EventHandler(this.buttonProxyApply_Click);
             // 
             // numericUpDownProxyPort
             // 

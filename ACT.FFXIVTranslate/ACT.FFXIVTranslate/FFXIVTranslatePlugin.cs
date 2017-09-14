@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using ACT.FFXIVTranslate.translate;
@@ -16,7 +15,7 @@ namespace ACT.FFXIVTranslate
     {
 
         public MainController Controller { get; private set; }
-        public PluginSettings Settings { get; private set; }
+        public SettingsHolder Settings { get; private set; }
         public TabPage ParentTabPage { get; private set; }
         public Label StatusLabel { get; private set; }
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
@@ -26,18 +25,6 @@ namespace ACT.FFXIVTranslate
 
         private readonly LogReadThread _workingThread = new LogReadThread();
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
-
-        public string TranslateProvider { get; set; }
-
-        public string TranslateApiKey { get; set; }
-
-        public string TranslateLangFrom { get; set; }
-
-        public string TranslateLangTo { get; set; }
-
-        public string Language { get; set; }
-
-        public string OverlayFont { get; set; }
 
         public FFXIVTranslatePlugin()
         {
@@ -53,8 +40,9 @@ namespace ACT.FFXIVTranslate
             try
             {
                 Controller = new MainController();
+                Settings = new SettingsHolder();
 
-                Settings = new PluginSettings(this);
+                Settings.AttachToAct(this);
 
                 OverlayWPF = new TranslateWindow();
                 ElementHost.EnableModelessKeyboardInterop(OverlayWPF);
@@ -67,14 +55,11 @@ namespace ACT.FFXIVTranslate
                 Controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
                 Controller.ChannelColorChanged += ControllerOnChannelColorChanged;
                 Controller.ChannelLabelChanged += ControllerOnChannelLabelChanged;
-                Controller.LanguageChanged += ControllerOnLanguageChanged;
-                Controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
 
-                Controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
                 TranslateService.AttachToAct(this);
-
                 _windowsMessagePump.AttachToAct(this);
 
+                Settings.PostAttachToAct(this);
                 OverlayWPF.PostAttachToAct(this);
                 SettingsTab.PostAttachToAct(this);
                 TranslateService.PostAttachToAct(this);
@@ -88,17 +73,7 @@ namespace ACT.FFXIVTranslate
 
                 _workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
 
-                try
-                {
-                    Controller.NotifyOverlayFontChanged(false,
-                        (Font)TypeDescriptor.GetConverter(typeof(Font)).ConvertFromString(OverlayFont));
-                }
-                catch (Exception)
-                {
-                    Controller.NotifyOverlayFontChanged(true, new Font(FontFamily.GenericSansSerif, 12, FontStyle.Regular));
-                }
-
-                Controller.NotifyTranslateProviderChanged(false, TranslateProvider, TranslateApiKey, TranslateLangFrom, TranslateLangTo);
+                Settings.NotifySettingsLoaded();
 
                 StatusLabel.Text = "Init Success. >w<";
             }
@@ -111,32 +86,12 @@ namespace ACT.FFXIVTranslate
 
         private void DoLocalization()
         {
-            Controller.NoitfyLanguageChanged(false, Language);
+            Controller.NoitfyLanguageChanged(false, Settings.Language);
 
-            localization.Localization.ConfigLocalization(Language);
+            localization.Localization.ConfigLocalization(Settings.Language);
 
             ParentTabPage.Text = localization.strings.actPanelTitle;
             SettingsTab.DoLocalization();
-        }
-
-        private void ControllerOnLanguageChanged(bool fromView, string lang)
-        {
-            if (!fromView)
-            {
-                return;
-            }
-
-            Language = lang;
-        }
-
-        private void ControllerOnOverlayFontChanged(bool fromView, Font font)
-        {
-            if (!fromView)
-            {
-                return;
-            }
-
-            OverlayFont = TypeDescriptor.GetConverter(typeof(Font)).ConvertToString(font);
         }
 
         private void ControllerOnChannelFilterChanged(bool fromView, EventCode code, bool show)
@@ -191,19 +146,6 @@ namespace ACT.FFXIVTranslate
                     b.ShowLabel = show;
                     return b;
                 });
-        }
-
-        private void ControllerOnTranslateProviderChanged(bool fromView, string provider, string apiKey, string langFrom, string langTo)
-        {
-            if (!fromView)
-            {
-                return;
-            }
-
-            TranslateProvider = provider;
-            TranslateApiKey = apiKey;
-            TranslateLangFrom = langFrom;
-            TranslateLangTo = langTo;
         }
 
         private void OFormActMainOnLogFileChanged(bool isImport, string newLogFileName)

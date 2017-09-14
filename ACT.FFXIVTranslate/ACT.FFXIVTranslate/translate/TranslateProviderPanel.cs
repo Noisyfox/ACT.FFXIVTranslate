@@ -31,12 +31,6 @@ namespace ACT.FFXIVTranslate.translate
             _service = plugin.TranslateService;
             _plugin = plugin;
 
-            var settings = plugin.Settings;
-            settings.AddStringSetting(nameof(plugin.TranslateProvider));
-            settings.AddStringSetting(nameof(plugin.TranslateApiKey));
-            settings.AddStringSetting(nameof(plugin.TranslateLangFrom));
-            settings.AddStringSetting(nameof(plugin.TranslateLangTo));
-
             var controller = plugin.Controller;
             controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
             controller.LegalInfoChanged += ControllerOnLegalInfoChanged;

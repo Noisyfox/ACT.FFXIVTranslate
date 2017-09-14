@@ -104,8 +104,6 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(checkBoxAutoHide);
             settings.AddControlSetting(checkBoxAddTimestamp);
             settings.AddControlSetting(checkBox24Hour);
-            settings.AddStringSetting(nameof(plugin.Language));
-            settings.AddStringSetting(nameof(plugin.OverlayFont));
 
             foreach (var cs in _channelSettings)
             {

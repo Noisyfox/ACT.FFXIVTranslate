@@ -105,13 +105,13 @@
     <Compile Include="localization\Localization.cs" />
     <Compile Include="LogReadThread.cs" />
     <Compile Include="MainController.cs" />
-    <Compile Include="PluginSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="localization\strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsHolder.cs" />
     <Compile Include="TextProcessor.cs" />
     <Compile Include="TranslateForm.cs">
       <SubType>Form</SubType>

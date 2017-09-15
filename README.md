@@ -66,8 +66,8 @@
 - ~~加入显示开关~~
 - 加入谷歌翻译官方API支持。
 - ~~加入谷歌翻译非官方API支持。~~
-- 加入http代理支持。
-- 加入socks5代理支持。
+- ~~加入http代理支持。~~
+- ~~加入socks5代理支持。~~
 - ~~在翻译窗口中显示聊天的频道。不同频道的聊天内容会用不同颜色来显示，就和游戏里一样。~~
 - (不太容易) 正常显示 *定型文字*。
 - ~~显示消息时间。~~
@@ -127,8 +127,8 @@ The free api keys have limits on words per month. You may want to get your own p
 - ~~Add switch to show / hide the overlay~~
 - Add official Google Translate support.
 - ~~Add unofficial Google Translate support.~~
-- Add http proxy support.
-- Add socks5 proxy support.
+- ~~Add http proxy support.~~
+- ~~Add socks5 proxy support.~~
 - ~~Display chatting channel. Have different colors for different channels, just like the game does.~~
 - (unlikely) Display *Auto-Translate*.
 - ~~Show message time.~~

@@ -218,7 +218,7 @@
             this.buttonFreeKey.Location = new System.Drawing.Point(282, 29);
             this.buttonFreeKey.Name = "buttonFreeKey";
             this.buttonFreeKey.Size = new System.Drawing.Size(87, 23);
-            this.buttonFreeKey.TabIndex = 11;
+            this.buttonFreeKey.TabIndex = 5;
             this.buttonFreeKey.Text = "Use Free Key";
             this.buttonFreeKey.UseVisualStyleBackColor = true;
             this.buttonFreeKey.Click += new System.EventHandler(this.buttonFreeKey_Click);

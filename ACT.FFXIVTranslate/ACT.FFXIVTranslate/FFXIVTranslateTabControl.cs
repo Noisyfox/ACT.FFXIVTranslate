@@ -184,9 +184,9 @@ namespace ACT.FFXIVTranslate
             comboBoxProxyType.ValueMember = nameof(Item.Value);
             comboBoxProxyType.DataSource = new[]
             {
-                new Item(strings.proxyTypeNone, "none"),
-                new Item(strings.proxyTypeHttp, "http"),
-                new Item(strings.proxyTypeSocks5, "socks5")
+                new Item(strings.proxyTypeNone, ProxyFactory.TypeNone),
+                new Item(strings.proxyTypeHttp, ProxyFactory.TypeHttp),
+                new Item(strings.proxyTypeSocks5, ProxyFactory.TypeSocks5)
             }.ToList();
 
             translateProviderPanel.DoLocalization();

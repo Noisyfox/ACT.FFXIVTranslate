@@ -70,7 +70,7 @@ namespace ACT.FFXIVTranslate.translate.baidu
                 var sign = string.Join("", hash.Select(it => it.ToString("x2")));
 
                 string textResponse;
-                using (var client = new HttpClient())
+                using (var client = ProxyFactory.Instance.NewClient())
                 using (var request = new HttpRequestMessage(HttpMethod.Post, "/api/trans/vip/translate"))
                 {
                     client.BaseAddress = new Uri("https://fanyi-api.baidu.com");

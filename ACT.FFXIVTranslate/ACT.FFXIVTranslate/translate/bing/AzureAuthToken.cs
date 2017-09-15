@@ -72,7 +72,7 @@ namespace ACT.FFXIVTranslate.translate.bing
                 return _storedTokenValue;
             }
 
-            using (var client = new HttpClient())
+            using (var client = ProxyFactory.Instance.NewClient())
             using (var request = new HttpRequestMessage())
             {
                 request.Method = HttpMethod.Post;

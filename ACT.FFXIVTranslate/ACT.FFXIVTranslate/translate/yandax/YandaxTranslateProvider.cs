@@ -61,7 +61,7 @@ namespace ACT.FFXIVTranslate.translate.yandax
 
                 var text = textBuilder.ToString();
                 string textResponse;
-                using (var client = new HttpClient())
+                using (var client = ProxyFactory.Instance.NewClient())
                 using (var request = new HttpRequestMessage(HttpMethod.Post, "/api/v1.5/tr.json/translate"))
                 {
                     client.BaseAddress = new Uri("https://translate.yandex.net");

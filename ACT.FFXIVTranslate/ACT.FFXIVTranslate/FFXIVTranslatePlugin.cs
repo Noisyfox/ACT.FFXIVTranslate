@@ -56,12 +56,15 @@ namespace ACT.FFXIVTranslate
                 Controller.ChannelColorChanged += ControllerOnChannelColorChanged;
                 Controller.ChannelLabelChanged += ControllerOnChannelLabelChanged;
 
+                ProxyFactory.Instance.AttachToAct(this);
+
                 TranslateService.AttachToAct(this);
                 _windowsMessagePump.AttachToAct(this);
 
                 Settings.PostAttachToAct(this);
                 OverlayWPF.PostAttachToAct(this);
                 SettingsTab.PostAttachToAct(this);
+                ProxyFactory.Instance.PostAttachToAct(this);
                 TranslateService.PostAttachToAct(this);
                 _windowsMessagePump.PostAttachToAct(this);
 

@@ -87,7 +87,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     var url =
                         $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={_langFrom}&tl={_langTo}&dt=t&ie=UTF-8&oe=UTF-8&q={vaildText}";
                     string responseBody;
-                    using (var client = new HttpClient())
+                    using (var client = ProxyFactory.Instance.NewClient())
                     using (var request = new HttpRequestMessage())
                     {
                         request.Method = HttpMethod.Get;

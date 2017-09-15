@@ -175,7 +175,7 @@ namespace ACT.FFXIVTranslate.translate.bing
             string _responseBody;
             HttpStatusCode _statusCode;
 
-            using (var client = new HttpClient())
+            using (var client = ProxyFactory.Instance.NewClient())
             using (var request = new HttpRequestMessage())
             {
                 request.Method = HttpMethod.Post;

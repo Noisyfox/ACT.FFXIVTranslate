@@ -90,6 +90,7 @@
     <Compile Include="localization\Localization.cs" />
     <Compile Include="LogReadThread.cs" />
     <Compile Include="MainController.cs" />
+    <Compile Include="MessageBoxManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="localization\strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -124,6 +125,7 @@
     <Compile Include="translate\yandax\YandaxTranslateProviderFactory.cs" />
     <Compile Include="translate\youdao\YoudaoTranslateProvider.cs" />
     <Compile Include="translate\youdao\YoudaoTranslateProviderFactory.cs" />
+    <Compile Include="UpdateChecker.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Win32APIUtils.cs" />
     <Compile Include="TranslateWindow.xaml.cs">

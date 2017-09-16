@@ -119,7 +119,7 @@ namespace ACT.FFXIVTranslate
 
         private void ControllerOnOverlayContentUpdated(bool fromView, string content)
         {
-            RichTextBoxContent.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
+            if (RichTextBoxContent.Dispatcher.CheckAccess())
             {
                 if (_isClosed)
                 {
@@ -131,7 +131,14 @@ namespace ACT.FFXIVTranslate
                 textRange.ApplyPropertyValue(TextElement.FontSizeProperty, RichTextBoxContent.FontSize);
 
                 RichTextBoxContent.ScrollToEnd();
-            }));
+            }
+            else
+            {
+                RichTextBoxContent.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
+                {
+                    ControllerOnOverlayContentUpdated(fromView, content);
+                }));
+            }
         }
 
         private void ControllerOnOverlayFontChanged(bool fromView, Font font)
@@ -234,7 +241,7 @@ namespace ACT.FFXIVTranslate
 
         private void ApplyVisibility(bool visibility)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
+            if (Dispatcher.CheckAccess())
             {
                 if (_isClosed)
                 {
@@ -245,7 +252,14 @@ namespace ACT.FFXIVTranslate
                 {
                     Visibility = t;
                 }
-            }));
+            }
+            else
+            {
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
+                {
+                    ApplyVisibility(visibility);
+                }));
+            }
         }
     }
 }

@@ -344,4 +344,28 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="labelLatestVersion" xml:space="preserve">
     <value>Latest Version:</value>
   </data>
+  <data name="updateChecking" xml:space="preserve">
+    <value>Checking...</value>
+  </data>
+  <data name="versionUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="buttonIgnoreVersion" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="buttonUpdateLater" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="buttonUpdateNow" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="messageLatest" xml:space="preserve">
+    <value>You are now using the latest version!</value>
+  </data>
+  <data name="messageNewPrerelease" xml:space="preserve">
+    <value>New prerelease version available: {0}.</value>
+  </data>
+  <data name="messageNewStable" xml:space="preserve">
+    <value>New stable version available: {0}.</value>
+  </data>
 </root>

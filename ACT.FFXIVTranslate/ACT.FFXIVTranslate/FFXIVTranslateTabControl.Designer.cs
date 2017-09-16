@@ -74,6 +74,17 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneralSettings = new System.Windows.Forms.TabPage();
             this.groupBoxUpdate = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelCurrentVersion = new System.Windows.Forms.Label();
+            this.labelCurrentVersionValue = new System.Windows.Forms.Label();
+            this.labelLatestStableVersion = new System.Windows.Forms.Label();
+            this.labelLatestVersion = new System.Windows.Forms.Label();
+            this.labelLatestStableVersionValue = new System.Windows.Forms.Label();
+            this.labelLatestVersionValue = new System.Windows.Forms.Label();
+            this.checkBoxCheckUpdate = new System.Windows.Forms.CheckBox();
+            this.checkBoxNotifyStableOnly = new System.Windows.Forms.CheckBox();
+            this.buttonCheckUpdate = new System.Windows.Forms.Button();
+            this.buttonDownloadUpdate = new System.Windows.Forms.Button();
             this.groupBoxProxy = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.labelProxyType = new System.Windows.Forms.Label();
@@ -131,17 +142,6 @@
             this.buttonChannelColorNPC = new System.Windows.Forms.Button();
             this.checkBoxChannelLabelNPC = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelCurrentVersion = new System.Windows.Forms.Label();
-            this.labelCurrentVersionValue = new System.Windows.Forms.Label();
-            this.labelLatestStableVersion = new System.Windows.Forms.Label();
-            this.labelLatestVersion = new System.Windows.Forms.Label();
-            this.labelLatestStableVersionValue = new System.Windows.Forms.Label();
-            this.labelLatestVersionValue = new System.Windows.Forms.Label();
-            this.checkBoxCheckUpdate = new System.Windows.Forms.CheckBox();
-            this.checkBoxNotifyStableOnly = new System.Windows.Forms.CheckBox();
-            this.buttonCheckUpdate = new System.Windows.Forms.Button();
-            this.buttonDownloadUpdate = new System.Windows.Forms.Button();
             this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -154,13 +154,13 @@
             this.tabControl1.SuspendLayout();
             this.tabPageGeneralSettings.SuspendLayout();
             this.groupBoxUpdate.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.groupBoxProxy.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).BeginInit();
             this.tabPageChannelSettings.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabPageLog.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxOverlay
@@ -791,6 +791,142 @@
             this.groupBoxUpdate.TabIndex = 4;
             this.groupBoxUpdate.TabStop = false;
             this.groupBoxUpdate.Text = "Update";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.labelCurrentVersion, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.labelCurrentVersionValue, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.labelLatestStableVersion, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.labelLatestVersion, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.labelLatestStableVersionValue, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.labelLatestVersionValue, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.checkBoxCheckUpdate, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.checkBoxNotifyStableOnly, 0, 4);
+            this.tableLayoutPanel4.Controls.Add(this.buttonCheckUpdate, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.buttonDownloadUpdate, 0, 6);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 7;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(257, 170);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // labelCurrentVersion
+            // 
+            this.labelCurrentVersion.AutoSize = true;
+            this.labelCurrentVersion.Location = new System.Drawing.Point(3, 0);
+            this.labelCurrentVersion.Name = "labelCurrentVersion";
+            this.labelCurrentVersion.Size = new System.Drawing.Size(101, 12);
+            this.labelCurrentVersion.TabIndex = 0;
+            this.labelCurrentVersion.Text = "Current Version:";
+            // 
+            // labelCurrentVersionValue
+            // 
+            this.labelCurrentVersionValue.AutoSize = true;
+            this.labelCurrentVersionValue.Location = new System.Drawing.Point(146, 0);
+            this.labelCurrentVersionValue.Name = "labelCurrentVersionValue";
+            this.labelCurrentVersionValue.Size = new System.Drawing.Size(41, 12);
+            this.labelCurrentVersionValue.TabIndex = 1;
+            this.labelCurrentVersionValue.Text = "label2";
+            // 
+            // labelLatestStableVersion
+            // 
+            this.labelLatestStableVersion.AutoSize = true;
+            this.labelLatestStableVersion.Location = new System.Drawing.Point(3, 12);
+            this.labelLatestStableVersion.Name = "labelLatestStableVersion";
+            this.labelLatestStableVersion.Size = new System.Drawing.Size(137, 12);
+            this.labelLatestStableVersion.TabIndex = 2;
+            this.labelLatestStableVersion.Text = "Latest Stable Version:";
+            // 
+            // labelLatestVersion
+            // 
+            this.labelLatestVersion.AutoSize = true;
+            this.labelLatestVersion.Location = new System.Drawing.Point(3, 24);
+            this.labelLatestVersion.Name = "labelLatestVersion";
+            this.labelLatestVersion.Size = new System.Drawing.Size(95, 12);
+            this.labelLatestVersion.TabIndex = 3;
+            this.labelLatestVersion.Text = "Latest Version:";
+            // 
+            // labelLatestStableVersionValue
+            // 
+            this.labelLatestStableVersionValue.AutoSize = true;
+            this.labelLatestStableVersionValue.Location = new System.Drawing.Point(146, 12);
+            this.labelLatestStableVersionValue.Name = "labelLatestStableVersionValue";
+            this.labelLatestStableVersionValue.Size = new System.Drawing.Size(41, 12);
+            this.labelLatestStableVersionValue.TabIndex = 4;
+            this.labelLatestStableVersionValue.Text = "label5";
+            // 
+            // labelLatestVersionValue
+            // 
+            this.labelLatestVersionValue.AutoSize = true;
+            this.labelLatestVersionValue.Location = new System.Drawing.Point(146, 24);
+            this.labelLatestVersionValue.Name = "labelLatestVersionValue";
+            this.labelLatestVersionValue.Size = new System.Drawing.Size(41, 12);
+            this.labelLatestVersionValue.TabIndex = 5;
+            this.labelLatestVersionValue.Text = "label6";
+            // 
+            // checkBoxCheckUpdate
+            // 
+            this.checkBoxCheckUpdate.AutoSize = true;
+            this.checkBoxCheckUpdate.Checked = true;
+            this.checkBoxCheckUpdate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tableLayoutPanel4.SetColumnSpan(this.checkBoxCheckUpdate, 2);
+            this.checkBoxCheckUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBoxCheckUpdate.Location = new System.Drawing.Point(3, 39);
+            this.checkBoxCheckUpdate.Name = "checkBoxCheckUpdate";
+            this.checkBoxCheckUpdate.Size = new System.Drawing.Size(251, 16);
+            this.checkBoxCheckUpdate.TabIndex = 6;
+            this.checkBoxCheckUpdate.Text = "Check Update on Startup";
+            this.checkBoxCheckUpdate.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxNotifyStableOnly
+            // 
+            this.checkBoxNotifyStableOnly.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.checkBoxNotifyStableOnly, 2);
+            this.checkBoxNotifyStableOnly.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBoxNotifyStableOnly.Location = new System.Drawing.Point(3, 61);
+            this.checkBoxNotifyStableOnly.Name = "checkBoxNotifyStableOnly";
+            this.checkBoxNotifyStableOnly.Size = new System.Drawing.Size(251, 16);
+            this.checkBoxNotifyStableOnly.TabIndex = 7;
+            this.checkBoxNotifyStableOnly.Text = "Check for Stable Version Only";
+            this.checkBoxNotifyStableOnly.UseVisualStyleBackColor = true;
+            // 
+            // buttonCheckUpdate
+            // 
+            this.buttonCheckUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCheckUpdate.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.buttonCheckUpdate, 2);
+            this.buttonCheckUpdate.Location = new System.Drawing.Point(143, 83);
+            this.buttonCheckUpdate.Name = "buttonCheckUpdate";
+            this.buttonCheckUpdate.Size = new System.Drawing.Size(111, 23);
+            this.buttonCheckUpdate.TabIndex = 8;
+            this.buttonCheckUpdate.Text = "Check Update Now";
+            this.buttonCheckUpdate.UseVisualStyleBackColor = true;
+            this.buttonCheckUpdate.Click += new System.EventHandler(this.buttonCheckUpdate_Click);
+            // 
+            // buttonDownloadUpdate
+            // 
+            this.buttonDownloadUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDownloadUpdate.AutoSize = true;
+            this.tableLayoutPanel4.SetColumnSpan(this.buttonDownloadUpdate, 2);
+            this.buttonDownloadUpdate.Location = new System.Drawing.Point(113, 112);
+            this.buttonDownloadUpdate.Name = "buttonDownloadUpdate";
+            this.buttonDownloadUpdate.Size = new System.Drawing.Size(141, 23);
+            this.buttonDownloadUpdate.TabIndex = 9;
+            this.buttonDownloadUpdate.Text = "Open Download Website";
+            this.buttonDownloadUpdate.UseVisualStyleBackColor = true;
+            this.buttonDownloadUpdate.Click += new System.EventHandler(this.buttonDownloadUpdate_Click);
             // 
             // groupBoxProxy
             // 
@@ -1465,138 +1601,6 @@
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.labelCurrentVersion, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.labelCurrentVersionValue, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.labelLatestStableVersion, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.labelLatestVersion, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.labelLatestStableVersionValue, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.labelLatestVersionValue, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.checkBoxCheckUpdate, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.checkBoxNotifyStableOnly, 0, 4);
-            this.tableLayoutPanel4.Controls.Add(this.buttonCheckUpdate, 0, 5);
-            this.tableLayoutPanel4.Controls.Add(this.buttonDownloadUpdate, 0, 6);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 17);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 7;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(257, 170);
-            this.tableLayoutPanel4.TabIndex = 0;
-            // 
-            // labelCurrentVersion
-            // 
-            this.labelCurrentVersion.AutoSize = true;
-            this.labelCurrentVersion.Location = new System.Drawing.Point(3, 0);
-            this.labelCurrentVersion.Name = "labelCurrentVersion";
-            this.labelCurrentVersion.Size = new System.Drawing.Size(101, 12);
-            this.labelCurrentVersion.TabIndex = 0;
-            this.labelCurrentVersion.Text = "Current Version:";
-            // 
-            // labelCurrentVersionValue
-            // 
-            this.labelCurrentVersionValue.AutoSize = true;
-            this.labelCurrentVersionValue.Location = new System.Drawing.Point(146, 0);
-            this.labelCurrentVersionValue.Name = "labelCurrentVersionValue";
-            this.labelCurrentVersionValue.Size = new System.Drawing.Size(41, 12);
-            this.labelCurrentVersionValue.TabIndex = 1;
-            this.labelCurrentVersionValue.Text = "label2";
-            // 
-            // labelLatestStableVersion
-            // 
-            this.labelLatestStableVersion.AutoSize = true;
-            this.labelLatestStableVersion.Location = new System.Drawing.Point(3, 12);
-            this.labelLatestStableVersion.Name = "labelLatestStableVersion";
-            this.labelLatestStableVersion.Size = new System.Drawing.Size(137, 12);
-            this.labelLatestStableVersion.TabIndex = 2;
-            this.labelLatestStableVersion.Text = "Latest Stable Version:";
-            // 
-            // labelLatestVersion
-            // 
-            this.labelLatestVersion.AutoSize = true;
-            this.labelLatestVersion.Location = new System.Drawing.Point(3, 24);
-            this.labelLatestVersion.Name = "labelLatestVersion";
-            this.labelLatestVersion.Size = new System.Drawing.Size(95, 12);
-            this.labelLatestVersion.TabIndex = 3;
-            this.labelLatestVersion.Text = "Latest Version:";
-            // 
-            // labelLatestStableVersionValue
-            // 
-            this.labelLatestStableVersionValue.AutoSize = true;
-            this.labelLatestStableVersionValue.Location = new System.Drawing.Point(146, 12);
-            this.labelLatestStableVersionValue.Name = "labelLatestStableVersionValue";
-            this.labelLatestStableVersionValue.Size = new System.Drawing.Size(41, 12);
-            this.labelLatestStableVersionValue.TabIndex = 4;
-            this.labelLatestStableVersionValue.Text = "label5";
-            // 
-            // labelLatestVersionValue
-            // 
-            this.labelLatestVersionValue.AutoSize = true;
-            this.labelLatestVersionValue.Location = new System.Drawing.Point(146, 24);
-            this.labelLatestVersionValue.Name = "labelLatestVersionValue";
-            this.labelLatestVersionValue.Size = new System.Drawing.Size(41, 12);
-            this.labelLatestVersionValue.TabIndex = 5;
-            this.labelLatestVersionValue.Text = "label6";
-            // 
-            // checkBoxCheckUpdate
-            // 
-            this.checkBoxCheckUpdate.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.checkBoxCheckUpdate, 2);
-            this.checkBoxCheckUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBoxCheckUpdate.Location = new System.Drawing.Point(3, 39);
-            this.checkBoxCheckUpdate.Name = "checkBoxCheckUpdate";
-            this.checkBoxCheckUpdate.Size = new System.Drawing.Size(251, 16);
-            this.checkBoxCheckUpdate.TabIndex = 6;
-            this.checkBoxCheckUpdate.Text = "Check Update on Startup";
-            this.checkBoxCheckUpdate.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxNotifyStableOnly
-            // 
-            this.checkBoxNotifyStableOnly.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.checkBoxNotifyStableOnly, 2);
-            this.checkBoxNotifyStableOnly.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBoxNotifyStableOnly.Location = new System.Drawing.Point(3, 61);
-            this.checkBoxNotifyStableOnly.Name = "checkBoxNotifyStableOnly";
-            this.checkBoxNotifyStableOnly.Size = new System.Drawing.Size(251, 16);
-            this.checkBoxNotifyStableOnly.TabIndex = 7;
-            this.checkBoxNotifyStableOnly.Text = "Check for Stable Version Only";
-            this.checkBoxNotifyStableOnly.UseVisualStyleBackColor = true;
-            // 
-            // buttonCheckUpdate
-            // 
-            this.buttonCheckUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCheckUpdate.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.buttonCheckUpdate, 2);
-            this.buttonCheckUpdate.Location = new System.Drawing.Point(143, 83);
-            this.buttonCheckUpdate.Name = "buttonCheckUpdate";
-            this.buttonCheckUpdate.Size = new System.Drawing.Size(111, 23);
-            this.buttonCheckUpdate.TabIndex = 8;
-            this.buttonCheckUpdate.Text = "Check Update Now";
-            this.buttonCheckUpdate.UseVisualStyleBackColor = true;
-            // 
-            // buttonDownloadUpdate
-            // 
-            this.buttonDownloadUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDownloadUpdate.AutoSize = true;
-            this.tableLayoutPanel4.SetColumnSpan(this.buttonDownloadUpdate, 2);
-            this.buttonDownloadUpdate.Location = new System.Drawing.Point(113, 112);
-            this.buttonDownloadUpdate.Name = "buttonDownloadUpdate";
-            this.buttonDownloadUpdate.Size = new System.Drawing.Size(141, 23);
-            this.buttonDownloadUpdate.TabIndex = 9;
-            this.buttonDownloadUpdate.Text = "Open Download Website";
-            this.buttonDownloadUpdate.UseVisualStyleBackColor = true;
-            // 
             // translateProviderPanel
             // 
             this.translateProviderPanel.Location = new System.Drawing.Point(6, 250);
@@ -1625,6 +1629,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneralSettings.ResumeLayout(false);
             this.groupBoxUpdate.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.groupBoxProxy.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -1634,8 +1640,6 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tabPageLog.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -109,6 +109,8 @@ namespace ACT.FFXIVTranslate
 
         public string ProxyDomain { get; set; }
 
+        public string VersionIgnored { get; set; }
+
         #endregion
 
         #region Controller notify
@@ -129,6 +131,7 @@ namespace ACT.FFXIVTranslate
             Settings.AddStringSetting(nameof(ProxyUser));
             Settings.AddStringSetting(nameof(ProxyPassword));
             Settings.AddStringSetting(nameof(ProxyDomain));
+            Settings.AddStringSetting(nameof(VersionIgnored));
 
             _controller = plugin.Controller;
 
@@ -136,6 +139,7 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
             _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
             _controller.ProxyChanged += ControllerOnProxyChanged;
+            _controller.NewVersionIgnored += ControllerOnNewVersionIgnored;
         }
 
         public void PostAttachToAct(FFXIVTranslatePlugin plugin)
@@ -157,6 +161,8 @@ namespace ACT.FFXIVTranslate
 
             _controller.NotifyTranslateProviderChanged(false, TranslateProvider, TranslateApiKey, TranslateLangFrom, TranslateLangTo);
             _controller.NotifyProxyChanged(false, ProxyType, ProxyServer, ProxyPort, ProxyUser, ProxyPassword, ProxyDomain);
+
+            _controller.NotifySettingsLoaded();
         }
 
         private void ControllerOnLanguageChanged(bool fromView, string lang)
@@ -206,6 +212,11 @@ namespace ACT.FFXIVTranslate
             ProxyUser = user;
             ProxyPassword = password;
             ProxyDomain = domain;
+        }
+
+        private void ControllerOnNewVersionIgnored(bool fromView, string ignoredVersion)
+        {
+            VersionIgnored = ignoredVersion;
         }
 
         #endregion

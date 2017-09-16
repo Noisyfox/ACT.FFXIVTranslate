@@ -106,6 +106,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 忽略 的本地化字符串。
+        /// </summary>
+        public static string buttonIgnoreVersion {
+            get {
+                return ResourceManager.GetString("buttonIgnoreVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 应用 的本地化字符串。
         /// </summary>
         public static string buttonProviderApply {
@@ -129,6 +138,24 @@ namespace ACT.FFXIVTranslate.localization {
         public static string buttonReadColor {
             get {
                 return ResourceManager.GetString("buttonReadColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 稍后 的本地化字符串。
+        /// </summary>
+        public static string buttonUpdateLater {
+            get {
+                return ResourceManager.GetString("buttonUpdateLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新 的本地化字符串。
+        /// </summary>
+        public static string buttonUpdateNow {
+            get {
+                return ResourceManager.GetString("buttonUpdateNow", resourceCulture);
             }
         }
         
@@ -628,6 +655,33 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 当前已是最新版！ 的本地化字符串。
+        /// </summary>
+        public static string messageLatest {
+            get {
+                return ResourceManager.GetString("messageLatest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发现新的抢鲜版: {0}。 的本地化字符串。
+        /// </summary>
+        public static string messageNewPrerelease {
+            get {
+                return ResourceManager.GetString("messageNewPrerelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发现新的稳定版: {0}。 的本地化字符串。
+        /// </summary>
+        public static string messageNewStable {
+            get {
+                return ResourceManager.GetString("messageNewStable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 该翻译来源未提供公用密钥。请参照插件文档获取密钥。 的本地化字符串。
         /// </summary>
         public static string messageNoFreeKey {
@@ -734,6 +788,24 @@ namespace ACT.FFXIVTranslate.localization {
         public static string timeFormat12HourPM {
             get {
                 return ResourceManager.GetString("timeFormat12HourPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查中... 的本地化字符串。
+        /// </summary>
+        public static string updateChecking {
+            get {
+                return ResourceManager.GetString("updateChecking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未知 的本地化字符串。
+        /// </summary>
+        public static string versionUnknown {
+            get {
+                return ResourceManager.GetString("versionUnknown", resourceCulture);
             }
         }
     }

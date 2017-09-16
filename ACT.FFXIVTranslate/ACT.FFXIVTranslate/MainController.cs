@@ -1,10 +1,18 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using ACT.FFXIVTranslate.translate;
 
 namespace ACT.FFXIVTranslate
 {
-    public class MainController
+    internal class MainController
     {
+        public event Action SettingsLoaded;
+
+        public void NotifySettingsLoaded()
+        {
+            SettingsLoaded?.Invoke();
+        }
+
         public delegate void OnOverlayMovedDelegate(bool fromView, int x, int y);
 
         public event OnOverlayMovedDelegate OverlayMoved;
@@ -92,7 +100,7 @@ namespace ACT.FFXIVTranslate
 
         public event OnLanguageChangedDelegate LanguageChanged;
 
-        public void NoitfyLanguageChanged(bool fromView, string lang)
+        public void NotifyLanguageChanged(bool fromView, string lang)
         {
             LanguageChanged?.Invoke(fromView, lang);
         }
@@ -178,6 +186,33 @@ namespace ACT.FFXIVTranslate
             string user, string password, string domain)
         {
             ProxyChanged?.Invoke(fromView, type, server, port, user, password, domain);
+        }
+
+        public delegate void OnUpdateCheckingStarted(bool fromView);
+
+        public event OnUpdateCheckingStarted UpdateCheckingStarted;
+
+        public void NotifyUpdateCheckingStarted(bool fromView)
+        {
+            UpdateCheckingStarted?.Invoke(fromView);
+        }
+
+        public delegate void OnNewVersionIgnored(bool fromView, string ignoredVersion);
+
+        public event OnNewVersionIgnored NewVersionIgnored;
+
+        public void NotifyNewVersionIgnored(bool fromView, string ignoredVersion)
+        {
+            NewVersionIgnored?.Invoke(fromView, ignoredVersion);
+        }
+
+        public delegate void OnVersionChecked(bool fromView, UpdateChecker.VersionInfo versionInfo, bool forceNotify);
+
+        public event OnVersionChecked VersionChecked;
+
+        public void NotifyVersionChecked(bool fromView, UpdateChecker.VersionInfo versionInfo, bool forceNotify)
+        {
+            VersionChecked?.Invoke(fromView, versionInfo, forceNotify);
         }
     }
 }

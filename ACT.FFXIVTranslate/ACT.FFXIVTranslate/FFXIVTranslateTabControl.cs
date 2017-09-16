@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using ACT.FFXIVTranslate.localization;
@@ -15,6 +14,7 @@ namespace ACT.FFXIVTranslate
 {
     public partial class FFXIVTranslateTabControl : UserControl, PluginComponent
     {
+        private FFXIVTranslatePlugin _plugin;
         private MainController _controller;
         private readonly List<ChannelSettingsMapper> _channelSettings;
         private Font _currentFont;
@@ -93,11 +93,13 @@ namespace ACT.FFXIVTranslate
             comboBoxLanguage.DisplayMember = "DisplayName";
             comboBoxLanguage.ValueMember = "LangCode";
             comboBoxLanguage.DataSource = localization.Localization.SupportedLanguages;
+
+            labelCurrentVersionValue.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)
         {
-
+            _plugin = plugin;
             var parentTabPage = plugin.ParentTabPage;
 
             parentTabPage.Controls.Add(this);
@@ -116,6 +118,8 @@ namespace ACT.FFXIVTranslate
             settings.AddControlSetting(checkBoxAutoHide);
             settings.AddControlSetting(checkBoxAddTimestamp);
             settings.AddControlSetting(checkBox24Hour);
+            settings.AddControlSetting(checkBoxCheckUpdate);
+            settings.AddControlSetting(checkBoxNotifyStableOnly);
 
             foreach (var cs in _channelSettings)
             {
@@ -141,6 +145,7 @@ namespace ACT.FFXIVTranslate
             checkBoxAddTimestamp.CheckedChanged += CheckBoxAddTimestampOnCheckedChanged;
             checkBox24Hour.CheckedChanged += CheckBox24HourOnCheckedChanged;
 
+            _controller.SettingsLoaded += ControllerOnSettingsLoaded;
             _controller.OverlayMoved += ControllerOnOverlayMoved;
             _controller.OverlayResized += ControllerOnOverlayResized;
             _controller.LanguageChanged += ControllerOnLanguageChanged;
@@ -148,6 +153,8 @@ namespace ACT.FFXIVTranslate
             _controller.OverlayFontChanged += ControllerOnOverlayFontChanged;
             _controller.ChannelColorChanged += ControllerOnChannelColorChanged;
             _controller.ProxyChanged += ControllerOnProxyChanged;
+            _controller.UpdateCheckingStarted += ControllerOnUpdateCheckingStarted;
+            _controller.VersionChecked += ControllerOnVersionChecked;
 
             translateProviderPanel.AttachToAct(plugin);
         }
@@ -188,6 +195,8 @@ namespace ACT.FFXIVTranslate
                 new Item(strings.proxyTypeHttp, ProxyFactory.TypeHttp),
                 new Item(strings.proxyTypeSocks5, ProxyFactory.TypeSocks5)
             }.ToList();
+            labelLatestStableVersionValue.Text = strings.versionUnknown;
+            labelLatestVersionValue.Text = strings.versionUnknown;
 
             translateProviderPanel.DoLocalization();
         }
@@ -332,6 +341,13 @@ namespace ACT.FFXIVTranslate
             _controller.NotifyOverlayAutoHideChanged(true, checkBoxAutoHide.Checked);
         }
 
+        private void buttonProxyApply_Click(object sender, EventArgs e)
+        {
+            _controller.NotifyProxyChanged(true, (string)comboBoxProxyType.SelectedValue, textBoxProxyServer.Text,
+                (int)numericUpDownProxyPort.Value, textBoxProxyUser.Text, textBoxProxyPassword.Text,
+                textBoxProxyDomain.Text);
+        }
+
         private void CheckBoxAddTimestampOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _controller.NotifyAddTimestampChanged(true, checkBoxAddTimestamp.Checked);
@@ -359,7 +375,25 @@ namespace ACT.FFXIVTranslate
 
         private void ComboBoxLanguageSelectedIndexChanged(object sender, EventArgs e)
         {
-            _controller.NoitfyLanguageChanged(true, (string) comboBoxLanguage.SelectedValue);
+            _controller.NotifyLanguageChanged(true, (string) comboBoxLanguage.SelectedValue);
+        }
+
+        private void buttonCheckUpdate_Click(object sender, EventArgs e)
+        {
+            _plugin.UpdateChecker.CheckUpdate(true);
+        }
+
+        private void buttonDownloadUpdate_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(UpdateChecker.ReleasePage);
+        }
+
+        private void ControllerOnSettingsLoaded()
+        {
+            if (checkBoxCheckUpdate.Checked)
+            {
+                _plugin.UpdateChecker.CheckUpdate(false);
+            }
         }
 
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
@@ -402,7 +436,7 @@ namespace ACT.FFXIVTranslate
                 return;
             }
             var ld = localization.Localization.GetLanguage(lang);
-            _controller.NoitfyLanguageChanged(true, ld.LangCode);
+            _controller.NotifyLanguageChanged(true, ld.LangCode);
             comboBoxLanguage.SelectedValue = ld.LangCode;
         }
 
@@ -446,11 +480,110 @@ namespace ACT.FFXIVTranslate
             buttonProxyApply_Click(this, EventArgs.Empty);
         }
 
-        private void buttonProxyApply_Click(object sender, EventArgs e)
+        private void ControllerOnUpdateCheckingStarted(bool fromView)
         {
-            _controller.NotifyProxyChanged(true, (string) comboBoxProxyType.SelectedValue, textBoxProxyServer.Text,
-                (int) numericUpDownProxyPort.Value, textBoxProxyUser.Text, textBoxProxyPassword.Text,
-                textBoxProxyDomain.Text);
+            if (InvokeRequired)
+            {
+                Invoke(new Action(delegate
+                {
+                    ControllerOnUpdateCheckingStarted(fromView);
+                }));
+            }
+            else
+            {
+                labelLatestStableVersionValue.Text = strings.updateChecking;
+                labelLatestVersionValue.Text = strings.updateChecking;
+            }
+        }
+
+        private void ControllerOnVersionChecked(bool fromView, UpdateChecker.VersionInfo versionInfo, bool forceNotify)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(delegate
+                {
+                    ControllerOnVersionChecked(fromView, versionInfo, forceNotify);
+                }));
+            }
+            else
+            {
+                var stable = versionInfo?.LatestStableVersion?.ParsedVersion;
+                var latest = versionInfo?.LatestVersion?.ParsedVersion;
+
+                labelLatestStableVersionValue.Text = stable != null ? stable.ToString() : strings.versionUnknown;
+                labelLatestVersionValue.Text = latest != null ? latest.ToString() : strings.versionUnknown;
+
+                var stableOnly = checkBoxNotifyStableOnly.Checked;
+                if (stableOnly)
+                {
+                    ShowUpdateResult(IsNewVersion(versionInfo?.LatestStableVersion), forceNotify);
+                }
+                else
+                {
+                    ShowUpdateResult(IsNewVersion(versionInfo?.LatestVersion), forceNotify);
+                }
+            }
+        }
+
+        private UpdateChecker.PublishVersion IsNewVersion(UpdateChecker.PublishVersion newVersion)
+        {
+            if (newVersion == null)
+            {
+                return null;
+            }
+            var currentVersion = Assembly.GetCallingAssembly().GetName().Version;
+
+            var v = newVersion.ParsedVersion;
+            if (currentVersion.Revision == 0)
+            {
+                // Local build, no revision
+                v = new Version(v.Major, v.Minor, v.Build);
+            }
+
+            return v > currentVersion ? newVersion : null;
+        }
+
+        private void ShowUpdateResult(UpdateChecker.PublishVersion newVersion, bool forceNotify)
+        {
+            if (newVersion == null)
+            {
+                if (forceNotify)
+                {
+                    MessageBox.Show(strings.messageLatest, strings.actPanelTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                // Check if ignored
+                if (forceNotify ||
+                    !Version.TryParse(_plugin.Settings.VersionIgnored, out var v) ||
+                    v < newVersion.ParsedVersion)
+                {
+                    // Show notify
+                    var message = string.Format(newVersion.IsPreRelease
+                            ? strings.messageNewPrerelease
+                            : strings.messageNewStable,
+                        newVersion.ParsedVersion);
+
+                    MessageBoxManager.Yes = strings.buttonUpdateNow;
+                    MessageBoxManager.No = strings.buttonIgnoreVersion;
+                    MessageBoxManager.Cancel = strings.buttonUpdateLater;
+                    MessageBoxManager.Register();
+                    var res = MessageBox.Show(message, strings.actPanelTitle, MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    MessageBoxManager.Unregister();
+
+                    if (res == DialogResult.No)
+                    {
+                        _controller.NotifyNewVersionIgnored(true, newVersion.ParsedVersion.ToString());
+                    }
+                    else if (res == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(newVersion.PublishPage);
+                    }
+                }
+            }
         }
     }
 }

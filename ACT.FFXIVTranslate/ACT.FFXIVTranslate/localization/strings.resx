@@ -338,10 +338,34 @@
   <data name="labelCurrentVersion" xml:space="preserve">
     <value>当前版本:</value>
   </data>
+  <data name="labelLatestVersion" xml:space="preserve">
+    <value>最新版本:</value>
+  </data>
+  <data name="updateChecking" xml:space="preserve">
+    <value>检查中...</value>
+  </data>
+  <data name="versionUnknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
   <data name="labelLatestStableVersion" xml:space="preserve">
     <value>最新稳定版本:</value>
   </data>
-  <data name="labelLatestVersion" xml:space="preserve">
-    <value>最新版本:</value>
+  <data name="buttonIgnoreVersion" xml:space="preserve">
+    <value>忽略</value>
+  </data>
+  <data name="buttonUpdateLater" xml:space="preserve">
+    <value>稍后</value>
+  </data>
+  <data name="buttonUpdateNow" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="messageLatest" xml:space="preserve">
+    <value>当前已是最新版！</value>
+  </data>
+  <data name="messageNewPrerelease" xml:space="preserve">
+    <value>发现新的抢鲜版: {0}。</value>
+  </data>
+  <data name="messageNewStable" xml:space="preserve">
+    <value>发现新的稳定版: {0}。</value>
   </data>
 </root>

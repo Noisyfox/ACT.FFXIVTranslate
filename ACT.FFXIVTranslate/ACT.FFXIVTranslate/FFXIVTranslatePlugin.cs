@@ -14,12 +14,13 @@ namespace ACT.FFXIVTranslate
     {
         private bool _settingsLoaded = false;
 
-        public MainController Controller { get; private set; }
+        internal MainController Controller { get; private set; }
         public SettingsHolder Settings { get; private set; }
         public TabPage ParentTabPage { get; private set; }
         public Label StatusLabel { get; private set; }
         public FFXIVTranslateTabControl SettingsTab { get; private set; }
         public TranslateWindow OverlayWPF { get; private set; }
+        internal UpdateChecker UpdateChecker { get; } = new UpdateChecker();
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
 
@@ -61,6 +62,7 @@ namespace ACT.FFXIVTranslate
 
                 TranslateService.AttachToAct(this);
                 _windowsMessagePump.AttachToAct(this);
+                UpdateChecker.AttachToAct(this);
 
                 Settings.PostAttachToAct(this);
                 OverlayWPF.PostAttachToAct(this);
@@ -68,6 +70,7 @@ namespace ACT.FFXIVTranslate
                 ProxyFactory.Instance.PostAttachToAct(this);
                 TranslateService.PostAttachToAct(this);
                 _windowsMessagePump.PostAttachToAct(this);
+                UpdateChecker.PostAttachToAct(this);
 
                 Settings.Load();
                 _settingsLoaded = true;
@@ -98,7 +101,7 @@ namespace ACT.FFXIVTranslate
 
         private void DoLocalization()
         {
-            Controller.NoitfyLanguageChanged(false, Settings.Language);
+            Controller.NotifyLanguageChanged(false, Settings.Language);
 
             localization.Localization.ConfigLocalization(Settings.Language);
 
@@ -180,6 +183,7 @@ namespace ACT.FFXIVTranslate
             ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
             TranslateService.Stop();
             _workingThread.StopWorkingThread();
+            UpdateChecker.Stop();
 
             if (_settingsLoaded)
             {

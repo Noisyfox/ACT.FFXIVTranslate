@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -13,6 +12,7 @@ namespace ACT.FFXIVTranslate
 {
     public class FFXIVTranslatePlugin : IActPluginV1
     {
+        private bool _settingsLoaded = false;
 
         public MainController Controller { get; private set; }
         public SettingsHolder Settings { get; private set; }
@@ -33,6 +33,7 @@ namespace ACT.FFXIVTranslate
 
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
+            _settingsLoaded = false;
             ParentTabPage = pluginScreenSpace;
             StatusLabel = pluginStatusText;
             ParentTabPage.Text = "Chatting Translate";
@@ -69,6 +70,7 @@ namespace ACT.FFXIVTranslate
                 _windowsMessagePump.PostAttachToAct(this);
 
                 Settings.Load();
+                _settingsLoaded = true;
 
                 DoLocalization();
 
@@ -83,7 +85,14 @@ namespace ACT.FFXIVTranslate
             catch (Exception ex)
             {
                 StatusLabel.Text = "Init Failed: " + ex.ToString();
-                MessageBox.Show(StatusLabel.Text);
+                if (_settingsLoaded)
+                {
+                    MessageBox.Show($"Init failed!\nCaused by:\n{ex}");
+                }
+                else
+                {
+                    MessageBox.Show($"Init failed before settings are loaded. Settings won't be saved until next successfully initialization to prevent settings lost!\nCaused by:\n{ex}");
+                }
             }
         }
 
@@ -172,7 +181,10 @@ namespace ACT.FFXIVTranslate
             TranslateService.Stop();
             _workingThread.StopWorkingThread();
 
-            Settings?.Save();
+            if (_settingsLoaded)
+            {
+                Settings?.Save();
+            }
 
             StatusLabel.Text = "Exited. Bye~";
         }

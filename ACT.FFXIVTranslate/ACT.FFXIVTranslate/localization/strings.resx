@@ -320,4 +320,28 @@
   <data name="proxyTypeSocks5" xml:space="preserve">
     <value>SOCKS5代理</value>
   </data>
+  <data name="groupBoxUpdate" xml:space="preserve">
+    <value>插件更新</value>
+  </data>
+  <data name="buttonCheckUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="buttonDownloadUpdate" xml:space="preserve">
+    <value>打开下载页面</value>
+  </data>
+  <data name="checkBoxCheckUpdate" xml:space="preserve">
+    <value>自动检查更新</value>
+  </data>
+  <data name="checkBoxNotifyStableOnly" xml:space="preserve">
+    <value>只提示稳定版更新</value>
+  </data>
+  <data name="labelCurrentVersion" xml:space="preserve">
+    <value>当前版本:</value>
+  </data>
+  <data name="labelLatestStableVersion" xml:space="preserve">
+    <value>最新稳定版本:</value>
+  </data>
+  <data name="labelLatestVersion" xml:space="preserve">
+    <value>最新版本:</value>
+  </data>
 </root>

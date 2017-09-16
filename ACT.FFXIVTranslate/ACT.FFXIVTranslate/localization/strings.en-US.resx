@@ -320,4 +320,28 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="proxyTypeSocks5" xml:space="preserve">
     <value>SOCKS5 Proxy</value>
   </data>
+  <data name="groupBoxUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="buttonCheckUpdate" xml:space="preserve">
+    <value>Check Update Now</value>
+  </data>
+  <data name="buttonDownloadUpdate" xml:space="preserve">
+    <value>Open Download Website</value>
+  </data>
+  <data name="checkBoxCheckUpdate" xml:space="preserve">
+    <value>Check Update on Startup</value>
+  </data>
+  <data name="checkBoxNotifyStableOnly" xml:space="preserve">
+    <value>Check for Stable Version Only</value>
+  </data>
+  <data name="labelCurrentVersion" xml:space="preserve">
+    <value>Current Version:</value>
+  </data>
+  <data name="labelLatestStableVersion" xml:space="preserve">
+    <value>Lateset Stable Version:</value>
+  </data>
+  <data name="labelLatestVersion" xml:space="preserve">
+    <value>Latest Version:</value>
+  </data>
 </root>

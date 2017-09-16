@@ -70,6 +70,24 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 检查更新 的本地化字符串。
+        /// </summary>
+        public static string buttonCheckUpdate {
+            get {
+                return ResourceManager.GetString("buttonCheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开下载页面 的本地化字符串。
+        /// </summary>
+        public static string buttonDownloadUpdate {
+            get {
+                return ResourceManager.GetString("buttonDownloadUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 更改字体 的本地化字符串。
         /// </summary>
         public static string buttonFont {
@@ -295,11 +313,29 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 自动检查更新 的本地化字符串。
+        /// </summary>
+        public static string checkBoxCheckUpdate {
+            get {
+                return ResourceManager.GetString("checkBoxCheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 鼠标穿透 的本地化字符串。
         /// </summary>
         public static string checkBoxClickthrough {
             get {
                 return ResourceManager.GetString("checkBoxClickthrough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 只提示稳定版更新 的本地化字符串。
+        /// </summary>
+        public static string checkBoxNotifyStableOnly {
+            get {
+                return ResourceManager.GetString("checkBoxNotifyStableOnly", resourceCulture);
             }
         }
         
@@ -358,6 +394,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 插件更新 的本地化字符串。
+        /// </summary>
+        public static string groupBoxUpdate {
+            get {
+                return ResourceManager.GetString("groupBoxUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 API密钥: 的本地化字符串。
         /// </summary>
         public static string labelApiKey {
@@ -394,6 +439,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 当前版本: 的本地化字符串。
+        /// </summary>
+        public static string labelCurrentVersion {
+            get {
+                return ResourceManager.GetString("labelCurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 高: 的本地化字符串。
         /// </summary>
         public static string labelHeight {
@@ -426,6 +480,24 @@ namespace ACT.FFXIVTranslate.localization {
         public static string labelLangTo {
             get {
                 return ResourceManager.GetString("labelLangTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 最新稳定版本: 的本地化字符串。
+        /// </summary>
+        public static string labelLatestStableVersion {
+            get {
+                return ResourceManager.GetString("labelLatestStableVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 最新版本: 的本地化字符串。
+        /// </summary>
+        public static string labelLatestVersion {
+            get {
+                return ResourceManager.GetString("labelLatestVersion", resourceCulture);
             }
         }
         

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ACT.FFXIVTranslate
@@ -23,6 +24,8 @@ namespace ACT.FFXIVTranslate
             _controller = plugin.Controller;
 
             _window = new MessageOnlyWindow(plugin);
+
+            _controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
         }
 
         public void PostAttachToAct(FFXIVTranslatePlugin plugin)
@@ -34,11 +37,24 @@ namespace ACT.FFXIVTranslate
 
         public void Dispose()
         {
+            _controller.ChannelFilterChanged -= ControllerOnChannelFilterChanged;
+
             UnhookWinEvent(_hookPtrForeground);
             _hookPtrForeground = IntPtr.Zero;
             _hookPtrDele = null;
-            _window?.DestroyHandle();
+            _window?.Dispose();
+            _window = null;
             _plugin = null;
+        }
+
+        private void ControllerOnChannelFilterChanged(bool fromView, EventCode code, bool show)
+        {
+            if (code != EventCode.Clipboard)
+            {
+                return;
+            }
+
+            _window.EnableClipboardMonitor(show);
         }
 
         delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
@@ -104,9 +120,27 @@ namespace ACT.FFXIVTranslate
         }
     }
 
-    sealed class MessageOnlyWindow : NativeWindow
+    sealed class MessageOnlyWindow : NativeWindow, IDisposable
     {
+
+        // Only works on VISTA+, but since we use .net 4.5, so it's guaranteed to work 
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool AddClipboardFormatListener(IntPtr hwnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool PostMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
+        private const int WM_CLIPBOARDUPDATE = 0x031D;
+
+        private const int WM_USER = 0x0400;
+        private const int WM_USER_POSTCLIPBOARDUPDATE = WM_USER + 1;
+
         private readonly FFXIVTranslatePlugin _plugin;
+
+        private bool _clipboardEnabled = false;
 
         public MessageOnlyWindow(FFXIVTranslatePlugin plugin)
         {
@@ -120,7 +154,57 @@ namespace ACT.FFXIVTranslate
 
         protected override void WndProc(ref Message m)
         {
-            base.WndProc(ref m);
+            switch (m.Msg)
+            {
+                case WM_CLIPBOARDUPDATE:
+                    PostMessage(Handle, WM_USER_POSTCLIPBOARDUPDATE, IntPtr.Zero, IntPtr.Zero);
+                    m.Result = IntPtr.Zero;
+                    break;
+                case WM_USER_POSTCLIPBOARDUPDATE:
+                    var text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        _plugin.Controller.NotifyClipboardContentChanged(false, text);
+//                        _plugin.Controller.NotifyLogMessageAppend(false, $"Clipboard: {text}\n");
+                    }
+                    break;
+                default:
+                    base.WndProc(ref m);
+                    break;
+            }
+        }
+
+        public void Dispose()
+        {
+            EnableClipboardMonitor(false);
+            DestroyHandle();
+        }
+
+        public void EnableClipboardMonitor(bool enable)
+        {
+            if (_clipboardEnabled == enable)
+            {
+                return;
+            }
+
+            if (enable)
+            {
+                if (!AddClipboardFormatListener(Handle))
+                {
+                    _plugin.Controller.NotifyLogMessageAppend(false, "AddClipboardFormatListener() failed! \n");
+                    return;
+                }
+            }
+            else
+            {
+                if (!RemoveClipboardFormatListener(Handle))
+                {
+                    _plugin.Controller.NotifyLogMessageAppend(false, "RemoveClipboardFormatListener() failed! \n");
+                    return;
+                }
+            }
+
+            _clipboardEnabled = enable;
         }
     }
 }

@@ -196,6 +196,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 剪贴板 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterClipboard {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 部队 的本地化字符串。
         /// </summary>
         public static string checkBoxChannelFilterFC {

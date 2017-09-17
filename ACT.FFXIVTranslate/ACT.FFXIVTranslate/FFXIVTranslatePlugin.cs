@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate;
 using Advanced_Combat_Tracker;
 
@@ -26,6 +27,8 @@ namespace ACT.FFXIVTranslate
 
         private readonly LogReadThread _workingThread = new LogReadThread();
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
+
+        private bool _isGameActivated = false;
 
         public FFXIVTranslatePlugin()
         {
@@ -57,6 +60,8 @@ namespace ACT.FFXIVTranslate
                 Controller.ChannelFilterChanged += ControllerOnChannelFilterChanged;
                 Controller.ChannelColorChanged += ControllerOnChannelColorChanged;
                 Controller.ChannelLabelChanged += ControllerOnChannelLabelChanged;
+                Controller.ActivatedProcessPathChanged += ControllerOnActivatedProcessPathChanged;
+                Controller.ClipboardContentChanged += ControllerOnClipboardContentChanged;
 
                 ProxyFactory.Instance.AttachToAct(this);
 
@@ -161,6 +166,30 @@ namespace ACT.FFXIVTranslate
                     b.ShowLabel = show;
                     return b;
                 });
+        }
+
+        private void ControllerOnActivatedProcessPathChanged(bool fromView, string path)
+        {
+            _isGameActivated = Utils.IsGameExePath(path);
+        }
+
+        private void ControllerOnClipboardContentChanged(bool fromView, string newContent)
+        {
+            if (!_isGameActivated)
+            {
+                return;
+            }
+
+            var chat = new ChattingLine
+            {
+                RawEventCode = (byte)EventCode.Clipboard,
+                EventCode = EventCode.Clipboard,
+                RawSender = strings.checkBoxChannelFilterClipboard,
+                RawContent = newContent,
+                Timestamp = DateTime.Now,
+            };
+
+            TranslateService.SubmitNewLine(chat);
         }
 
         private void OFormActMainOnLogFileChanged(bool isImport, string newLogFileName)
@@ -301,6 +330,8 @@ namespace ACT.FFXIVTranslate
 //            Emote = 0x1d,
         Yell = 0x1e,
         NPC = 0x3d,
+
+        Clipboard = 0xf0,
     }
 
     public class ChattingLine

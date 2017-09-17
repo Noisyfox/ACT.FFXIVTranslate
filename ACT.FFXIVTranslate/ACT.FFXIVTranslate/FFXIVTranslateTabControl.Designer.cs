@@ -100,6 +100,7 @@
             this.textBoxProxyDomain = new System.Windows.Forms.TextBox();
             this.buttonProxyApply = new System.Windows.Forms.Button();
             this.numericUpDownProxyPort = new System.Windows.Forms.NumericUpDown();
+            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.tabPageChannelSettings = new System.Windows.Forms.TabPage();
             this.buttonReadColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -141,8 +142,10 @@
             this.checkBoxChannelFilterNPC = new System.Windows.Forms.CheckBox();
             this.buttonChannelColorNPC = new System.Windows.Forms.Button();
             this.checkBoxChannelLabelNPC = new System.Windows.Forms.CheckBox();
+            this.checkBoxChannelFilterClipboard = new System.Windows.Forms.CheckBox();
+            this.buttonChannelColorClipboard = new System.Windows.Forms.Button();
+            this.checkBoxChannelLabelClipboard = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
-            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -1102,6 +1105,13 @@
             0,
             0});
             // 
+            // translateProviderPanel
+            // 
+            this.translateProviderPanel.Location = new System.Drawing.Point(6, 250);
+            this.translateProviderPanel.Name = "translateProviderPanel";
+            this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
+            this.translateProviderPanel.TabIndex = 2;
+            // 
             // tabPageChannelSettings
             // 
             this.tabPageChannelSettings.AutoScroll = true;
@@ -1118,7 +1128,7 @@
             // buttonReadColor
             // 
             this.buttonReadColor.AutoSize = true;
-            this.buttonReadColor.Location = new System.Drawing.Point(425, 25);
+            this.buttonReadColor.Location = new System.Drawing.Point(425, 85);
             this.buttonReadColor.Name = "buttonReadColor";
             this.buttonReadColor.Size = new System.Drawing.Size(141, 23);
             this.buttonReadColor.TabIndex = 4;
@@ -1186,9 +1196,13 @@
             this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelFilterNPC, 0, 17);
             this.tableLayoutPanel2.Controls.Add(this.buttonChannelColorNPC, 1, 17);
             this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelLabelNPC, 2, 17);
+            this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelFilterClipboard, 0, 18);
+            this.tableLayoutPanel2.Controls.Add(this.buttonChannelColorClipboard, 1, 18);
+            this.tableLayoutPanel2.Controls.Add(this.checkBoxChannelLabelClipboard, 2, 18);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 19;
+            this.tableLayoutPanel2.RowCount = 20;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1208,7 +1222,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 523);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 549);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // buttonChannelColorSay
@@ -1590,6 +1604,38 @@
             this.checkBoxChannelLabelNPC.TabIndex = 50;
             this.checkBoxChannelLabelNPC.UseVisualStyleBackColor = true;
             // 
+            // checkBoxChannelFilterClipboard
+            // 
+            this.checkBoxChannelFilterClipboard.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxChannelFilterClipboard.AutoSize = true;
+            this.checkBoxChannelFilterClipboard.Checked = true;
+            this.checkBoxChannelFilterClipboard.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxChannelFilterClipboard.Location = new System.Drawing.Point(3, 511);
+            this.checkBoxChannelFilterClipboard.Name = "checkBoxChannelFilterClipboard";
+            this.checkBoxChannelFilterClipboard.Size = new System.Drawing.Size(78, 16);
+            this.checkBoxChannelFilterClipboard.TabIndex = 51;
+            this.checkBoxChannelFilterClipboard.Text = "Clipboard";
+            this.checkBoxChannelFilterClipboard.UseVisualStyleBackColor = true;
+            // 
+            // buttonChannelColorClipboard
+            // 
+            this.buttonChannelColorClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonChannelColorClipboard.Location = new System.Drawing.Point(105, 508);
+            this.buttonChannelColorClipboard.Name = "buttonChannelColorClipboard";
+            this.buttonChannelColorClipboard.Size = new System.Drawing.Size(98, 23);
+            this.buttonChannelColorClipboard.TabIndex = 52;
+            this.buttonChannelColorClipboard.UseVisualStyleBackColor = false;
+            // 
+            // checkBoxChannelLabelClipboard
+            // 
+            this.checkBoxChannelLabelClipboard.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkBoxChannelLabelClipboard.AutoSize = true;
+            this.checkBoxChannelLabelClipboard.Location = new System.Drawing.Point(258, 512);
+            this.checkBoxChannelLabelClipboard.Name = "checkBoxChannelLabelClipboard";
+            this.checkBoxChannelLabelClipboard.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxChannelLabelClipboard.TabIndex = 53;
+            this.checkBoxChannelLabelClipboard.UseVisualStyleBackColor = true;
+            // 
             // tabPageLog
             // 
             this.tabPageLog.Controls.Add(this.richTextBoxLog);
@@ -1600,13 +1646,6 @@
             this.tabPageLog.TabIndex = 2;
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
-            // 
-            // translateProviderPanel
-            // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(6, 250);
-            this.translateProviderPanel.Name = "translateProviderPanel";
-            this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
-            this.translateProviderPanel.TabIndex = 2;
             // 
             // FFXIVTranslateTabControl
             // 
@@ -1761,5 +1800,8 @@
         private System.Windows.Forms.CheckBox checkBoxNotifyStableOnly;
         private System.Windows.Forms.Button buttonCheckUpdate;
         private System.Windows.Forms.Button buttonDownloadUpdate;
+        private System.Windows.Forms.CheckBox checkBoxChannelFilterClipboard;
+        private System.Windows.Forms.Button buttonChannelColorClipboard;
+        private System.Windows.Forms.CheckBox checkBoxChannelLabelClipboard;
     }
 }

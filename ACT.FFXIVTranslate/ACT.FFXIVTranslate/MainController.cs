@@ -177,6 +177,15 @@ namespace ACT.FFXIVTranslate
             ActivatedProcessPathChanged?.Invoke(fromView, path);
         }
 
+        public delegate void OnClipboardContentChangedDelegate(bool fromView, string newContent);
+
+        public event OnClipboardContentChangedDelegate ClipboardContentChanged;
+
+        public void NotifyClipboardContentChanged(bool fromView, string newContent)
+        {
+            ClipboardContentChanged?.Invoke(fromView, newContent);
+        }
+
         public delegate void OnProxyChangedDelegate(bool fromView, string type, string server, int port,
             string user, string password, string domain);
 

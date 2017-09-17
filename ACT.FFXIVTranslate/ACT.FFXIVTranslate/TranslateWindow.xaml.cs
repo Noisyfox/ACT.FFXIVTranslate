@@ -225,7 +225,7 @@ namespace ACT.FFXIVTranslate
                 }
                 else
                 {
-                    if (Utils.IsGameExePath(_activatedExePath) || Utils.IsActExePaht(_activatedExePath))
+                    if (Utils.IsGameExePath(_activatedExePath) || Utils.IsActExePath(_activatedExePath))
                     {
                         targetVisible = true;
                     }

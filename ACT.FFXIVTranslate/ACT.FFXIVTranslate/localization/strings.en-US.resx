@@ -368,4 +368,7 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="messageNewStable" xml:space="preserve">
     <value>New stable version available: {0}.</value>
   </data>
+  <data name="checkBoxChannelFilterClipboard" xml:space="preserve">
+    <value>Clipboard</value>
+  </data>
 </root>

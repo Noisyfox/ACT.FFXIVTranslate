@@ -368,4 +368,7 @@
   <data name="messageNewStable" xml:space="preserve">
     <value>发现新的稳定版: {0}。</value>
   </data>
+  <data name="checkBoxChannelFilterClipboard" xml:space="preserve">
+    <value>剪贴板</value>
+  </data>
 </root>

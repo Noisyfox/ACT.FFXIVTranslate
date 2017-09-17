@@ -22,7 +22,7 @@ namespace ACT.FFXIVTranslate
             return exe == "ffxiv.exe" || exe == "ffxiv_dx11.exe";
         }
 
-        public static bool IsActExePaht(string path)
+        public static bool IsActExePath(string path)
         {
             return path == Process.GetCurrentProcess().MainModule.FileName;
         }

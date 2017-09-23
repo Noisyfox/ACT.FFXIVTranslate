@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using ACT.FFXIVTranslate.translate;
 
 namespace ACT.FFXIVTranslate
@@ -223,5 +224,34 @@ namespace ACT.FFXIVTranslate
         {
             VersionChecked?.Invoke(fromView, versionInfo, forceNotify);
         }
+
+        public delegate void OnShortcutChanged(bool fromView, Shortcut shortcut, Keys key);
+
+        public event OnShortcutChanged ShortcutChanged;
+
+        public void NotifyShortcutChanged(bool fromView, Shortcut shortcut, Keys key)
+        {
+            ShortcutChanged?.Invoke(fromView, shortcut, key);
+        }
+
+        public delegate void OnShortcutRegister(bool fromView, Shortcut shortcut, bool isRegister, bool success);
+
+        public event OnShortcutRegister ShortcutRegister;
+
+
+        public void NotifyShortcutRegister(bool fromView, Shortcut shortcut, bool isRegister, bool success)
+        {
+            ShortcutRegister?.Invoke(fromView, shortcut, isRegister, success);
+        }
+
+        public delegate void OnShortcutFired(bool fromView, Shortcut shortcut);
+
+        public event OnShortcutFired ShortcutFired;
+
+        public void NotifyShortcutFired(bool fromView, Shortcut shortcut)
+        {
+            ShortcutFired?.Invoke(fromView, shortcut);
+        }
+
     }
 }

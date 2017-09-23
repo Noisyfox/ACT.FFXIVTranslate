@@ -70,6 +70,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string buttonCancel {
+            get {
+                return ResourceManager.GetString("buttonCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 检查更新 的本地化字符串。
         /// </summary>
         public static string buttonCheckUpdate {
@@ -106,11 +115,29 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 清除快捷键 的本地化字符串。
+        /// </summary>
+        public static string buttonHotkeyNone {
+            get {
+                return ResourceManager.GetString("buttonHotkeyNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 忽略 的本地化字符串。
         /// </summary>
         public static string buttonIgnoreVersion {
             get {
                 return ResourceManager.GetString("buttonIgnoreVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确定 的本地化字符串。
+        /// </summary>
+        public static string buttonOk {
+            get {
+                return ResourceManager.GetString("buttonOk", resourceCulture);
             }
         }
         
@@ -637,6 +664,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 快捷键: 的本地化字符串。
+        /// </summary>
+        public static string labelShortcutHide {
+            get {
+                return ResourceManager.GetString("labelShortcutHide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 尺寸 的本地化字符串。
         /// </summary>
         public static string labelSize {
@@ -706,6 +742,15 @@ namespace ACT.FFXIVTranslate.localization {
         public static string messageSettingsReadFailed {
             get {
                 return ResourceManager.GetString("messageSettingsReadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 等待按键... 的本地化字符串。
+        /// </summary>
+        public static string messageWaitKey {
+            get {
+                return ResourceManager.GetString("messageWaitKey", resourceCulture);
             }
         }
         

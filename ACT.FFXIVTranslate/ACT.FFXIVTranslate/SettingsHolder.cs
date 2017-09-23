@@ -111,6 +111,8 @@ namespace ACT.FFXIVTranslate
 
         public string VersionIgnored { get; set; }
 
+        public string ShortcutHide { get; set; }
+
         #endregion
 
         #region Controller notify
@@ -132,6 +134,7 @@ namespace ACT.FFXIVTranslate
             Settings.AddStringSetting(nameof(ProxyPassword));
             Settings.AddStringSetting(nameof(ProxyDomain));
             Settings.AddStringSetting(nameof(VersionIgnored));
+            Settings.AddStringSetting(nameof(ShortcutHide));
 
             _controller = plugin.Controller;
 
@@ -140,6 +143,7 @@ namespace ACT.FFXIVTranslate
             _controller.TranslateProviderChanged += ControllerOnTranslateProviderChanged;
             _controller.ProxyChanged += ControllerOnProxyChanged;
             _controller.NewVersionIgnored += ControllerOnNewVersionIgnored;
+            _controller.ShortcutChanged += ControllerOnShortcutChanged;
         }
 
         public void PostAttachToAct(FFXIVTranslatePlugin plugin)
@@ -161,6 +165,7 @@ namespace ACT.FFXIVTranslate
 
             _controller.NotifyTranslateProviderChanged(false, TranslateProvider, TranslateApiKey, TranslateLangFrom, TranslateLangTo);
             _controller.NotifyProxyChanged(false, ProxyType, ProxyServer, ProxyPort, ProxyUser, ProxyPassword, ProxyDomain);
+            _controller.NotifyShortcutChanged(false, Shortcut.HideOverlay, ShortkeyManager.StringToKey(ShortcutHide));
 
             _controller.NotifySettingsLoaded();
         }
@@ -217,6 +222,22 @@ namespace ACT.FFXIVTranslate
         private void ControllerOnNewVersionIgnored(bool fromView, string ignoredVersion)
         {
             VersionIgnored = ignoredVersion;
+        }
+
+        private void ControllerOnShortcutChanged(bool fromView, Shortcut shortcut, Keys key)
+        {
+            if (!fromView)
+            {
+                return;
+            }
+
+            var ks = ShortkeyManager.KeyToString(key);
+            switch (shortcut)
+            {
+                case Shortcut.HideOverlay:
+                    ShortcutHide = ks;
+                    break;
+            }
         }
 
         #endregion

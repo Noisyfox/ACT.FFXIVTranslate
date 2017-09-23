@@ -24,6 +24,7 @@ namespace ACT.FFXIVTranslate
         internal UpdateChecker UpdateChecker { get; } = new UpdateChecker();
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
+        private ShortkeyManager _shortkeyManager;
 
         private readonly LogReadThread _workingThread = new LogReadThread();
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
@@ -69,6 +70,9 @@ namespace ACT.FFXIVTranslate
                 _windowsMessagePump.AttachToAct(this);
                 UpdateChecker.AttachToAct(this);
 
+                _shortkeyManager = new ShortkeyManager();
+                _shortkeyManager.AttachToAct(this);
+
                 Settings.PostAttachToAct(this);
                 OverlayWPF.PostAttachToAct(this);
                 SettingsTab.PostAttachToAct(this);
@@ -76,6 +80,7 @@ namespace ACT.FFXIVTranslate
                 TranslateService.PostAttachToAct(this);
                 _windowsMessagePump.PostAttachToAct(this);
                 UpdateChecker.PostAttachToAct(this);
+                _shortkeyManager.PostAttachToAct(this);
 
                 Settings.Load();
                 _settingsLoaded = true;
@@ -205,6 +210,9 @@ namespace ACT.FFXIVTranslate
 
         public void DeInitPlugin()
         {
+            _shortkeyManager?.Dispose();
+            _shortkeyManager = null;
+
             _windowsMessagePump.Dispose();
             
             OverlayWPF?.Close();
@@ -353,5 +361,10 @@ namespace ACT.FFXIVTranslate
         public bool Show { get; set; } = true;
         public Color DisplayColor { get; set; } = Color.White;
         public bool ShowLabel { get; set; } = false;
+    }
+
+    internal enum Shortcut
+    {
+        HideOverlay
     }
 }

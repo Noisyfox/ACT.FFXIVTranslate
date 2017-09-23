@@ -371,4 +371,19 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="checkBoxChannelFilterClipboard" xml:space="preserve">
     <value>Clipboard</value>
   </data>
+  <data name="labelShortcutHide" xml:space="preserve">
+    <value>Shortcut:</value>
+  </data>
+  <data name="buttonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="buttonHotkeyNone" xml:space="preserve">
+    <value>Clear Hotkey</value>
+  </data>
+  <data name="buttonOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="messageWaitKey" xml:space="preserve">
+    <value>Wait for Keys...</value>
+  </data>
 </root>

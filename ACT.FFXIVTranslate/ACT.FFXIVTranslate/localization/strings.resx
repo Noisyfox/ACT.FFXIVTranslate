@@ -371,4 +371,19 @@
   <data name="checkBoxChannelFilterClipboard" xml:space="preserve">
     <value>剪贴板</value>
   </data>
+  <data name="labelShortcutHide" xml:space="preserve">
+    <value>快捷键:</value>
+  </data>
+  <data name="buttonCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="buttonHotkeyNone" xml:space="preserve">
+    <value>清除快捷键</value>
+  </data>
+  <data name="buttonOk" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="messageWaitKey" xml:space="preserve">
+    <value>等待按键...</value>
+  </data>
 </root>

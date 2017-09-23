@@ -44,6 +44,9 @@
     <Reference Include="Extreme.Net, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Extreme.Net.2.0.20\lib\net45\Extreme.Net.dll</HintPath>
     </Reference>
+    <Reference Include="GlobalHotKey, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GlobalHotKey.1.1.0\lib\GlobalHotKey.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -86,6 +89,7 @@
     <Compile Include="FFXIVTranslateTabControl.Designer.cs">
       <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShortkeyManager.cs" />
     <Compile Include="localization\LanguageDef.cs" />
     <Compile Include="localization\Localization.cs" />
     <Compile Include="LogReadThread.cs" />
@@ -99,6 +103,12 @@
     </Compile>
     <Compile Include="ProxyFactory.cs" />
     <Compile Include="SettingsHolder.cs" />
+    <Compile Include="ShortcutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShortcutDialog.Designer.cs">
+      <DependentUpon>ShortcutDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextProcessor.cs" />
     <Compile Include="TranslateForm.cs">
       <SubType>Form</SubType>
@@ -143,6 +153,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="localization\strings.en-US.resx" />
+    <EmbeddedResource Include="ShortcutDialog.resx">
+      <DependentUpon>ShortcutDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TranslateForm.resx">
       <DependentUpon>TranslateForm.cs</DependentUpon>
     </EmbeddedResource>

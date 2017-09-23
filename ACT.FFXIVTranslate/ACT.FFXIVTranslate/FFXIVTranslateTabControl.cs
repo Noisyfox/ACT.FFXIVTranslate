@@ -155,6 +155,9 @@ namespace ACT.FFXIVTranslate
             _controller.ProxyChanged += ControllerOnProxyChanged;
             _controller.UpdateCheckingStarted += ControllerOnUpdateCheckingStarted;
             _controller.VersionChecked += ControllerOnVersionChecked;
+            _controller.ShortcutChanged += ControllerOnShortcutChanged;
+            _controller.ShortcutRegister += ControllerOnShortcutRegister;
+            _controller.ShortcutFired += ControllerOnShortcutFired;
 
             translateProviderPanel.AttachToAct(plugin);
         }
@@ -343,8 +346,8 @@ namespace ACT.FFXIVTranslate
 
         private void buttonProxyApply_Click(object sender, EventArgs e)
         {
-            _controller.NotifyProxyChanged(true, (string)comboBoxProxyType.SelectedValue, textBoxProxyServer.Text,
-                (int)numericUpDownProxyPort.Value, textBoxProxyUser.Text, textBoxProxyPassword.Text,
+            _controller.NotifyProxyChanged(true, (string) comboBoxProxyType.SelectedValue, textBoxProxyServer.Text,
+                (int) numericUpDownProxyPort.Value, textBoxProxyUser.Text, textBoxProxyPassword.Text,
                 textBoxProxyDomain.Text);
         }
 
@@ -386,6 +389,22 @@ namespace ACT.FFXIVTranslate
         private void buttonDownloadUpdate_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(UpdateChecker.ReleasePage);
+        }
+
+        private void buttonShortcutHide_Click(object sender, EventArgs e)
+        {
+            var dialog = new ShortcutDialog
+            {
+                CurrentKey = ShortkeyManager.StringToKey(_plugin.Settings.ShortcutHide)
+            };
+            var result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                var key = dialog.CurrentKey;
+
+                _controller.NotifyShortcutChanged(true, Shortcut.HideOverlay, key);
+            }
         }
 
         private void ControllerOnSettingsLoaded()
@@ -523,6 +542,63 @@ namespace ACT.FFXIVTranslate
                     ShowUpdateResult(IsNewVersion(versionInfo?.LatestVersion), forceNotify);
                 }
             }
+        }
+
+        private void ControllerOnShortcutChanged(bool fromView, Shortcut shortcut, Keys key)
+        {
+            var str = ShortkeyManager.KeyToString(key);
+
+            switch (shortcut)
+            {
+                case Shortcut.HideOverlay:
+                    buttonShortcutHide.Text = str;
+                    break;
+            }
+        }
+
+        private void ControllerOnShortcutRegister(bool fromView, Shortcut shortcut, bool isRegister, bool success)
+        {
+            switch (shortcut)
+            {
+                case Shortcut.HideOverlay:
+                    UpdateHotkeyControlColor(buttonShortcutHide, isRegister, success);
+                    break;
+            }
+        }
+
+        private void ControllerOnShortcutFired(bool fromView, Shortcut shortcut)
+        {
+            switch (shortcut)
+            {
+                case Shortcut.HideOverlay:
+                    checkBoxShowOverlay.Checked = !checkBoxShowOverlay.Checked;
+                    break;
+            }
+        }
+
+        private static void UpdateHotkeyControlColor(Control control, bool isRegister, bool success)
+        {
+            var c = GetHotkeyRegisterColor(isRegister, success);
+
+            if (c == Color.Empty)
+            {
+                control.ForeColor = Color.Empty;
+            }
+            else
+            {
+                control.ForeColor = Color.White;
+            }
+            control.BackColor = c;
+        }
+
+        private static Color GetHotkeyRegisterColor(bool isRegister, bool success)
+        {
+            if (!success)
+            {
+                return Color.Red;
+            }
+
+            return isRegister ? Color.Green : Color.Empty;
         }
 
         private UpdateChecker.PublishVersion IsNewVersion(UpdateChecker.PublishVersion newVersion)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ACT.FFXIVTranslate"
         mc:Ignorable="d"
         Title="TranslateWindow" Height="300" Width="300"
-        AllowsTransparency="True" WindowStyle="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" Loaded="Window_Loaded" Closing="Window_Closing">
+        AllowsTransparency="True" WindowStyle="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" Loaded="Window_Loaded" Closing="Window_Closing" MinWidth="300" MinHeight="200">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate1" TargetType="{x:Type TextBoxBase}">
             <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
@@ -158,18 +158,129 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ThumbResizeStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Cursor" Value="SizeNESW"/>
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Transparent"/>
+            <Setter Property="Width" Value="23"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="shadowGrid">
+                            <Border Background="Transparent"/>
+                            <Path x:Name="thumbPath" Margin="3" ClipToBounds="True" StrokeThickness="2" Stroke="#29ffffff">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <LineGeometry EndPoint="0,-1" StartPoint="18,17"/>
+                                        <LineGeometry EndPoint="6,-1" StartPoint="18,11"/>
+                                        <LineGeometry EndPoint="12,-1" StartPoint="18,5"/>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="0" Direction="0" Color="#ffc64c"/>
+                            </Grid.Effect>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                    <Condition Property="IsDragging" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Effect" TargetName="shadowGrid" Value="{x:Null}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="thumbPath" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="true">
+                                <Setter Property="Stroke" TargetName="thumbPath" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ThumbMoveStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Cursor" Value="SizeAll"/>
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Transparent"/>
+            <Setter Property="Width" Value="23"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="shadowGrid">
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="7" ShadowDepth="0" Direction="0" Color="#ffc64c"/>
+                            </Grid.Effect>
+                            <Border Background="Transparent"/>
+                            <Path x:Name="thumbPath" Margin="3" ClipToBounds="True" StrokeThickness="2" Stroke="#29ffffff">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <LineGeometry EndPoint="-1,-1" StartPoint="18,18"/>
+                                        <LineGeometry EndPoint="18,-1" StartPoint="-1,18"/>
+                                        
+                                        <LineGeometry EndPoint="-1,0.5" StartPoint="6,0.5"/>
+                                        <LineGeometry EndPoint="0.5,-1" StartPoint="0.5,6"/>
+
+                                        <LineGeometry EndPoint="-1,16.5" StartPoint="6,16.5"/>
+                                        <LineGeometry EndPoint="0.5,18" StartPoint="0.5,11"/>
+
+                                        <LineGeometry EndPoint="18,0.5" StartPoint="11,0.5"/>
+                                        <LineGeometry EndPoint="16.5,-1" StartPoint="16.5,6"/>
+                                        
+                                        <LineGeometry EndPoint="18,16.5" StartPoint="11,16.5"/>
+                                        <LineGeometry EndPoint="16.5,18" StartPoint="16.5,11"/>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                    <Condition Property="IsDragging" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Effect" TargetName="shadowGrid" Value="{x:Null}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="thumbPath" Value="LightGray"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="true">
+                                <Setter Property="Stroke" TargetName="thumbPath" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Window.Background>
         <SolidColorBrush Opacity="0.5" Color="Black"/>
     </Window.Background>
     <Grid Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <RichTextBox Name="RichTextBoxContent" Background="Transparent" Foreground="White" Cursor="Arrow" BorderThickness="0" IsReadOnly="True" IsUndoEnabled="False" VerticalScrollBarVisibility="Auto" Template="{DynamicResource TextBoxBaseControlTemplate1}"/>
-        <Label Name="LabelCopyRight" Grid.Row="1" HorizontalContentAlignment="Right" Visibility="Collapsed">
+        <RichTextBox Name="RichTextBoxContent" Background="Transparent" Foreground="White" Cursor="Arrow" BorderThickness="0" IsReadOnly="True" IsUndoEnabled="False" VerticalScrollBarVisibility="Auto" Template="{DynamicResource TextBoxBaseControlTemplate1}" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+        <Thumb Name="ThumbResize" Grid.Row="0" Grid.Column="1" Style="{DynamicResource ThumbResizeStyle}" DragDelta="ThumbResize_DragDelta"/>
+        <Thumb Name="ThumbMove" Grid.Row="1" Grid.Column="1" Style="{DynamicResource ThumbMoveStyle}" DragDelta="ThumbMove_DragDelta"/>
+        <Label Name="LabelCopyRight" Grid.Row="3" HorizontalContentAlignment="Right" Visibility="Collapsed" Grid.ColumnSpan="2">
             <Label.Foreground>
                 <SolidColorBrush Color="White" Opacity="0.5"/>
             </Label.Foreground>

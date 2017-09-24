@@ -76,6 +76,31 @@ namespace ACT.FFXIVTranslate
             _isClosed = true;
         }
 
+        private void ThumbResize_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            var height = Height - e.VerticalChange;
+            var width = Width + e.HorizontalChange;
+
+            height = Math.Max(height, MinHeight);
+            width = Math.Max(width, MinWidth);
+
+            var dHeight = Height - height;
+
+            Height = height;
+            Width = width;
+
+            Top += dHeight;
+            _controller.NotifyOverlayMoved(true, (int)Left, (int)Top);
+            _controller.NotifyOverlayResized(true, (int)width, (int)height);
+        }
+
+        private void ThumbMove_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            Left += e.HorizontalChange;
+            Top += e.VerticalChange;
+            _controller.NotifyOverlayMoved(true, (int)Left, (int)Top);
+        }
+
         private void ControllerOnOverlayMoved(bool fromView, int x, int y)
         {
             if (fromView)
@@ -115,6 +140,10 @@ namespace ACT.FFXIVTranslate
                 return;
             }
             Win32APIUtils.SetWS_EX_TRANSPARENT(_handle, clickthrough);
+
+            var v = clickthrough ? Visibility.Collapsed : Visibility.Visible;
+            ThumbResize.Visibility = v;
+            ThumbMove.Visibility = v;
         }
 
         private void ControllerOnOverlayContentUpdated(bool fromView, string content)

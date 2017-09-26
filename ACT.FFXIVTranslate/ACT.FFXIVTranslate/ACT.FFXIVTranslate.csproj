@@ -68,7 +68,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -110,12 +109,6 @@
       <DependentUpon>ShortcutDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="TextProcessor.cs" />
-    <Compile Include="TranslateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TranslateForm.Designer.cs">
-      <DependentUpon>TranslateForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="translate\baidu\BaiduTranslateProvider.cs" />
     <Compile Include="translate\baidu\BaiduTranslateProviderFactory.cs" />
     <Compile Include="translate\bing\AzureAuthToken.cs" />
@@ -155,9 +148,6 @@
     <EmbeddedResource Include="localization\strings.en-US.resx" />
     <EmbeddedResource Include="ShortcutDialog.resx">
       <DependentUpon>ShortcutDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TranslateForm.resx">
-      <DependentUpon>TranslateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="translate\TranslateProviderPanel.resx">
       <DependentUpon>TranslateProviderPanel.cs</DependentUpon>

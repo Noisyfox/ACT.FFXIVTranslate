@@ -1,5 +1,16 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/oy9yi49qnsk26hiq/branch/master?svg=true)](https://ci.appveyor.com/project/Noisyfox/act-ffxivtranslate/branch/master)
 
+# Help Translate this Plugin!
+The plugin UI now support Chinese (Simplified) and English (US) only.
+
+If you speak another language or speak English / Chinese better than me and wanna help,
+please visit:
+https://noisyfox.oneskyapp.com/collaboration/project/128830
+
+Currently I plan to support Russian and Chinese (Tranditional). If you'd like this plugin
+to support your language, please raise an Issue and I can add more languages!
+
+Any help would be appreciated!
 
 # ACT.FFXIVTranslate
 这是一个用来翻译最终幻想14国际服玩家聊天内容的ACT插件。

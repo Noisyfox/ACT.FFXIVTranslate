@@ -14,6 +14,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
             LanguageDef.BuildLangFromCulture("ja"),
             LanguageDef.BuildLangFromCulture("de"),
             LanguageDef.BuildLangFromCulture("fr"),
+            LanguageDef.BuildLangFromCulture("ru"),
         }.ToList();
 
         public string ProviderName => "Google Translate (unofficial)";

@@ -14,6 +14,7 @@ namespace ACT.FFXIVTranslate.translate.bing
             LanguageDef.BuildLangFromCulture("ja"),
             LanguageDef.BuildLangFromCulture("de"),
             LanguageDef.BuildLangFromCulture("fr"),
+            LanguageDef.BuildLangFromCulture("ru"),
         }.ToList();
 
         public string ProviderName => "Microsoft Translator";

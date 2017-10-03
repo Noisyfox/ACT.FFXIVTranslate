@@ -485,10 +485,17 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            comboBoxProxyType.SelectedValue = type;
-            if (comboBoxProxyType.SelectedIndex == -1)
+            if (string.IsNullOrEmpty(type))
             {
                 comboBoxProxyType.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBoxProxyType.SelectedValue = type;
+                if (comboBoxProxyType.SelectedIndex == -1)
+                {
+                    comboBoxProxyType.SelectedIndex = 0;
+                }
             }
             textBoxProxyServer.Text = server;
             numericUpDownProxyPort.Value = port;

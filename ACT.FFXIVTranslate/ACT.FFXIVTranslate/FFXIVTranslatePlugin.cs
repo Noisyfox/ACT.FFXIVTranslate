@@ -113,9 +113,9 @@ namespace ACT.FFXIVTranslate
         {
             Controller.NotifyLanguageChanged(false, Settings.Language);
 
-            localization.Localization.ConfigLocalization(Settings.Language);
+            Localization.ConfigLocalization(Settings.Language);
 
-            ParentTabPage.Text = localization.strings.actPanelTitle;
+            ParentTabPage.Text = strings.actPanelTitle;
             SettingsTab.DoLocalization();
         }
 
@@ -257,8 +257,7 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            int eventCode;
-            if (!int.TryParse(data[2], NumberStyles.HexNumber, null, out eventCode))
+            if (!int.TryParse(data[2], NumberStyles.HexNumber, null, out var eventCode))
             {
                 return;
             }
@@ -307,7 +306,7 @@ namespace ACT.FFXIVTranslate
         }
     }
 
-    public interface PluginComponent
+    public interface IPluginComponent
     {
         void AttachToAct(FFXIVTranslatePlugin plugin);
         void PostAttachToAct(FFXIVTranslatePlugin plugin);

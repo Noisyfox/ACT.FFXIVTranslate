@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ACT.FFXIVTranslate
 {
-    internal class UpdateChecker : PluginComponent
+    internal class UpdateChecker : IPluginComponent
     {
         public const string ReleasePage = "https://github.com/Noisyfox/ACT.FFXIVTranslate/releases";
 

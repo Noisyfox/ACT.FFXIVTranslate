@@ -7,7 +7,7 @@ using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 
 namespace ACT.FFXIVTranslate
 {
-    internal class ShortkeyManager : PluginComponent, IDisposable
+    internal class ShortkeyManager : IPluginComponent, IDisposable
     {
         private readonly HotKeyManager _hotKeyManager = new HotKeyManager();
 

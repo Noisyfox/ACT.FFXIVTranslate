@@ -55,7 +55,7 @@ namespace ACT.FFXIVTranslate
         }
     }
 
-    public class SettingsHolder : PluginComponent
+    public class SettingsHolder : IPluginComponent
     {
         #region Proxy methods
 

@@ -14,7 +14,7 @@ using RTF;
 namespace ACT.FFXIVTranslate.translate
 {
 
-    class TranslateService : PluginComponent
+    class TranslateService : IPluginComponent
     {
         private FFXIVTranslatePlugin _plugin;
         private MainController _controller;

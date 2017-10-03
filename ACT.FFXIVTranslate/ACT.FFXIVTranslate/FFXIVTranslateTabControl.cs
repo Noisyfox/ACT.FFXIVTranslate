@@ -12,7 +12,7 @@ using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
-    public partial class FFXIVTranslateTabControl : UserControl, PluginComponent
+    public partial class FFXIVTranslateTabControl : UserControl, IPluginComponent
     {
         private FFXIVTranslatePlugin _plugin;
         private MainController _controller;

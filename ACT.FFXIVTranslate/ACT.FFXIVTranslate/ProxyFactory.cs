@@ -5,7 +5,7 @@ using Extreme.Net;
 
 namespace ACT.FFXIVTranslate
 {
-    class ProxyFactory : PluginComponent
+    class ProxyFactory : IPluginComponent
     {
         public const string TypeNone = "none";
         public const string TypeHttp = "http";

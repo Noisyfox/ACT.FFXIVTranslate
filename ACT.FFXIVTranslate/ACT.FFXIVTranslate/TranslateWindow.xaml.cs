@@ -6,18 +6,16 @@ using System.Text;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using ACT.FFXIVTranslate.translate;
-using FontFamily = System.Windows.Media.FontFamily;
 
 namespace ACT.FFXIVTranslate
 {
     /// <summary>
     /// TranslateWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class TranslateWindow : Window, PluginComponent
+    public partial class TranslateWindow : Window, IPluginComponent
     {
         private MainController _controller;
 
@@ -172,7 +170,7 @@ namespace ACT.FFXIVTranslate
 
         private void ControllerOnOverlayFontChanged(bool fromView, Font font)
         {
-            var tf = NewTypeFaceFromFont(font);
+            var tf = Utils.NewTypeFaceFromFont(font);
             RichTextBoxContent.FontFamily = tf.FontFamily;
             RichTextBoxContent.FontStyle = tf.Style;
             RichTextBoxContent.FontWeight = tf.Weight;
@@ -229,18 +227,6 @@ namespace ACT.FFXIVTranslate
         {
             _activatedExePath = path;
             CheckVisibility();
-        }
-
-        private static Typeface NewTypeFaceFromFont(Font f)
-        {
-            var ff = new FontFamily(f.Name);
-
-            var typeface = new Typeface(ff,
-                f.Style.HasFlag(System.Drawing.FontStyle.Italic) ? FontStyles.Italic : FontStyles.Normal,
-                f.Style.HasFlag(System.Drawing.FontStyle.Bold) ? FontWeights.Bold : FontWeights.Normal,
-                FontStretches.Normal);
-
-            return typeface;
         }
 
         private void CheckVisibility()

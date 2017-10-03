@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ACT.FFXIVTranslate
 {
-    class WindowsMessagePump : PluginComponent, IDisposable
+    class WindowsMessagePump : IPluginComponent, IDisposable
     {
         private FFXIVTranslatePlugin _plugin;
         private MainController _controller;

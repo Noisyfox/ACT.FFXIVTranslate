@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Windows;
+using System.Windows.Media;
+using FontFamily = System.Windows.Media.FontFamily;
 
 namespace ACT.FFXIVTranslate
 {
@@ -22,6 +26,18 @@ namespace ACT.FFXIVTranslate
         public static bool IsActExePath(string path)
         {
             return path == Process.GetCurrentProcess().MainModule.FileName;
+        }
+
+        public static Typeface NewTypeFaceFromFont(Font f)
+        {
+            var ff = new FontFamily(f.Name);
+
+            var typeface = new Typeface(ff,
+                f.Style.HasFlag(System.Drawing.FontStyle.Italic) ? FontStyles.Italic : FontStyles.Normal,
+                f.Style.HasFlag(System.Drawing.FontStyle.Bold) ? FontWeights.Bold : FontWeights.Normal,
+                FontStretches.Normal);
+
+            return typeface;
         }
     }
 }

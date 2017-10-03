@@ -10,7 +10,7 @@ using ACT.FFXIVTranslate.localization;
 
 namespace ACT.FFXIVTranslate.translate
 {
-    public partial class TranslateProviderPanel : UserControl, PluginComponent
+    public partial class TranslateProviderPanel : UserControl, IPluginComponent
     {
         private FFXIVTranslatePlugin _plugin;
         private TranslateService _service;

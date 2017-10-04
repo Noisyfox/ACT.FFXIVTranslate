@@ -14,6 +14,7 @@ namespace ACT.FFXIVTranslate.translate.baidu
             LanguageDef.BuildLangFromCulture("de"),
             LanguageDef.BuildLangFromCulture("fr", "fra"),
             LanguageDef.BuildLangFromCulture("ru"),
+            LanguageDef.BuildLangFromCulture("ko", "kor"),
         }.ToList();
 
         public string ProviderName => "百度翻译";

@@ -13,6 +13,7 @@ namespace ACT.FFXIVTranslate.translate.youdao
             LanguageDef.BuildLangFromCulture("ja"),
             LanguageDef.BuildLangFromCulture("fr"),
             LanguageDef.BuildLangFromCulture("ru"),
+            LanguageDef.BuildLangFromCulture("ko"),
         }.ToList();
 
         public string ProviderName => "有道翻译";

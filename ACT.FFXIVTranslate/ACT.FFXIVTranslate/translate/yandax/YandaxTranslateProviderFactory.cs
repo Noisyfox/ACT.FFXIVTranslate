@@ -14,6 +14,7 @@ namespace ACT.FFXIVTranslate.translate.yandax
             LanguageDef.BuildLangFromCulture("de"),
             LanguageDef.BuildLangFromCulture("fr"),
             LanguageDef.BuildLangFromCulture("ru"),
+            LanguageDef.BuildLangFromCulture("ko"),
         }.ToList();
 
         public string ProviderName => "Yandex Translate";

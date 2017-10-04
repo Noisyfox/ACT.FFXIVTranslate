@@ -339,7 +339,7 @@
             0,
             0});
             this.numericUpDownWidth.Minimum = new decimal(new int[] {
-            300,
+            40,
             0,
             0,
             0});
@@ -362,7 +362,7 @@
             0,
             0});
             this.numericUpDownHeight.Minimum = new decimal(new int[] {
-            200,
+            40,
             0,
             0,
             0});

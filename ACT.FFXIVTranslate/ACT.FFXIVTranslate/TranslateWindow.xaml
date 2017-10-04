@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ACT.FFXIVTranslate"
         mc:Ignorable="d"
         Title="TranslateWindow" Height="300" Width="300"
-        AllowsTransparency="True" WindowStyle="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" Loaded="Window_Loaded" Closing="Window_Closing" MinWidth="300" MinHeight="200">
+        AllowsTransparency="True" WindowStyle="None" Topmost="True" ShowInTaskbar="False" ShowActivated="False" Loaded="Window_Loaded" Closing="Window_Closing" MinWidth="40" MinHeight="40">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate1" TargetType="{x:Type TextBoxBase}">
             <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">

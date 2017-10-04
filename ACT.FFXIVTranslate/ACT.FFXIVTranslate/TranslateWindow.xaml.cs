@@ -79,8 +79,8 @@ namespace ACT.FFXIVTranslate
             var height = Height - e.VerticalChange;
             var width = Width + e.HorizontalChange;
 
-            height = Math.Max(height, MinHeight);
-            width = Math.Max(width, MinWidth);
+            height = height.Clamp(MinHeight, MaxHeight);
+            width = width.Clamp(MinWidth, MaxWidth);
 
             var dHeight = Height - height;
 

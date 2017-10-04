@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ACT.FFXIVTranslate.translate.youdao
 {
-    internal class YoudaoTranslateProvider : ITranslateProvider
+    internal class YoudaoTranslateProvider : DefaultTranslateProvider
     {
         private readonly string _appKey;
         private readonly string _secret;
@@ -34,32 +34,12 @@ namespace ACT.FFXIVTranslate.translate.youdao
             _langTo = dst.LangCode;
         }
 
-        public void Translate(List<ChattingLine> chattingLines)
+        public override void Translate(List<ChattingLine> chattingLines)
         {
             try
             {
                 // Build text
-                var availableLines = new List<ChattingLine>();
-                chattingLines.ForEach(it =>
-                {
-                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
-                    if (!string.IsNullOrEmpty(it.CleanedContent))
-                    {
-                        availableLines.Add(it);
-                    }
-                    else
-                    {
-                        it.TranslatedContent = string.Empty;
-                    }
-                });
-
-                // Make sure we do have something to translate
-                if (availableLines.Count == 0)
-                {
-                    return;
-                }
-
-                var query = string.Join("\n", availableLines.Select(it => it.CleanedContent));
+                var query = string.Join("\n", chattingLines.Select(it => it.CleanedContent));
 
                 // 1. Generate a salt
                 var salt = Utils.TimestampMillisFromDateTime(DateTime.Now).ToString();
@@ -139,11 +119,11 @@ namespace ACT.FFXIVTranslate.translate.youdao
                 }
 
                 var translation = ((string) result["translation"][0]).Split('\n');
-                if (translation.Length >= availableLines.Count)
+                if (translation.Length >= chattingLines.Count)
                 {
-                    for (var i = 0; i < availableLines.Count; i++)
+                    for (var i = 0; i < chattingLines.Count; i++)
                     {
-                        availableLines[i].TranslatedContent = translation[i];
+                        chattingLines[i].TranslatedContent = translation[i];
                     }
                 }
                 else

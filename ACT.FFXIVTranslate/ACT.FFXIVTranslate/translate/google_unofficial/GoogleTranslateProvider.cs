@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ACT.FFXIVTranslate.translate.google_unofficial
 {
-    internal class GoogleTranslateProvider : ITranslateProvider
+    internal class GoogleTranslateProvider : DefaultTranslateProvider
     {
         private const int MaxContentLength = 2048 - 50;
 
@@ -23,32 +23,12 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
             _langTo = dst.LangCode;
         }
 
-        public void Translate(List<ChattingLine> chattingLines)
+        public override void Translate(List<ChattingLine> chattingLines)
         {
             try
             {
-                var availableLines = new List<ChattingLine>();
-                chattingLines.ForEach(it =>
-                {
-                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
-                    if (!string.IsNullOrEmpty(it.CleanedContent))
-                    {
-                        availableLines.Add(it);
-                    }
-                    else
-                    {
-                        it.TranslatedContent = string.Empty;
-                    }
-                });
-
-                // Make sure we do have something to translate
-                if (availableLines.Count == 0)
-                {
-                    return;
-                }
-
                 var current = 0;
-                while (current < availableLines.Count)
+                while (current < chattingLines.Count)
                 {
                     var start = current;
 
@@ -61,13 +41,13 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     // Build text
                     var vaildText = string.Empty;
                     var textBuilder = new StringBuilder();
-                    for (current = start; current < availableLines.Count; current++)
+                    for (current = start; current < chattingLines.Count; current++)
                     {
                         if (textBuilder.Length > 0)
                         {
                             textBuilder.Append('\n');
                         }
-                        textBuilder.Append(availableLines[current].CleanedContent);
+                        textBuilder.Append(chattingLines[current].CleanedContent);
                         var newText = HttpUtility.UrlEncode(textBuilder.ToString(), Encoding.UTF8);
                         if (newText.Length > MaxContentLength)
                         {
@@ -78,7 +58,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     if (current == start)
                     {
                         // The single line exceeds the limit, skip
-                        availableLines[current].TranslatedContent = "Content too long for translating.";
+                        chattingLines[current].TranslatedContent = "Content too long for translating.";
                         current++;
                         continue;
                     }
@@ -104,7 +84,7 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
                     {
                         for (var i = start; i < current; i++)
                         {
-                            availableLines[i].TranslatedContent = finalResults[i - start];
+                            chattingLines[i].TranslatedContent = finalResults[i - start];
                         }
                     }
                     else

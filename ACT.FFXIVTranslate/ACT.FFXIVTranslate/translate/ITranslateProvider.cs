@@ -7,6 +7,26 @@ namespace ACT.FFXIVTranslate.translate
     internal interface ITranslateProvider
     {
         void Translate(List<ChattingLine> chattingLines);
+        
+        /// <param name="chattingLine"></param>
+        /// <returns>False if this line can be ignored (usually is empty), True otherwise.</returns>
+        bool PreprocessLine(ChattingLine chattingLine);
+    }
+
+    /// <summary>
+    /// A provider that use TextProcessor.NaiveCleanText() as the econtent preprossor
+    /// and ignores all empty lines after that.
+    /// </summary>
+    internal abstract class DefaultTranslateProvider : ITranslateProvider
+    {
+        public abstract void Translate(List<ChattingLine> chattingLines);
+
+        public virtual bool PreprocessLine(ChattingLine chattingLine)
+        {
+            chattingLine.CleanedContent = TextProcessor.NaiveCleanText(chattingLine.RawContent);
+
+            return !string.IsNullOrEmpty(chattingLine.CleanedContent);
+        }
     }
 
     internal interface ITranslaterProviderFactory

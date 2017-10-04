@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
 namespace ACT.FFXIVTranslate.translate.bing
 {
-    internal class BingTranslateProvider : ITranslateProvider
+    internal class BingTranslateProvider : DefaultTranslateProvider
     {
         private readonly AzureAuthToken _token;
         private readonly string _langFrom;
@@ -30,31 +29,11 @@ namespace ACT.FFXIVTranslate.translate.bing
         private const string NsArrays = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
 
 
-        public void Translate(List<ChattingLine> chattingLines)
+        public override void Translate(List<ChattingLine> chattingLines)
         {
             try
             {
                 // Build text
-                var availableLines = new List<ChattingLine>();
-                chattingLines.ForEach(it =>
-                {
-                    it.CleanedContent = TextProcessor.NaiveCleanText(it.RawContent);
-                    if (!string.IsNullOrEmpty(it.CleanedContent))
-                    {
-                        availableLines.Add(it);
-                    }
-                    else
-                    {
-                        it.TranslatedContent = string.Empty;
-                    }
-                });
-
-                // Make sure we do have something to translate
-                if (availableLines.Count == 0)
-                {
-                    return;
-                }
-
                 var textBuilder = new StringBuilder();
                 var settings = new XmlWriterSettings {OmitXmlDeclaration = true};
                 var textWriter = XmlWriter.Create(textBuilder, settings);
@@ -77,7 +56,7 @@ namespace ACT.FFXIVTranslate.translate.bing
 
                     textWriter.WriteStartElement("Texts");
                     {
-                        foreach (var line in availableLines)
+                        foreach (var line in chattingLines)
                         {
                             textWriter.WriteElementString("string", NsArrays,
                                 WebUtility.HtmlEncode(line.CleanedContent));
@@ -114,8 +93,8 @@ namespace ACT.FFXIVTranslate.translate.bing
                             {
                                 var result = WebUtility.HtmlDecode(node.Value);
                                 Console.WriteLine("\n\nSource text: {0}\nTranslated Text: {1}",
-                                    availableLines[sourceTextCounter].RawContent, result);
-                                availableLines[sourceTextCounter].TranslatedContent = result;
+                                    chattingLines[sourceTextCounter].RawContent, result);
+                                chattingLines[sourceTextCounter].TranslatedContent = result;
                             }
                             sourceTextCounter++;
                         }

@@ -119,8 +119,10 @@ namespace ACT.FFXIVTranslate.translate
             protected override void DoWork(TranslateContext context)
             {
                 var service = context.Service;
+                var provider = context.Provider;
                 int batchWait = 0;
                 var batchWorkingList = new List<ChattingLine>();
+                var availableLines = new List<ChattingLine>();
 
                 while (!WorkingThreadStopping)
                 {
@@ -131,7 +133,23 @@ namespace ACT.FFXIVTranslate.translate
 
                         try
                         {
-                            context.Provider.Translate(batchWorkingList);
+                            // Make sure we do have something to translate
+                            batchWorkingList.ForEach(it =>
+                            {
+                                if (provider.PreprocessLine(it))
+                                {
+                                    availableLines.Add(it);
+                                }
+                                else
+                                {
+                                    it.TranslatedContent = string.Empty;
+                                }
+                            });
+                            if (availableLines.Count != 0)
+                            {
+                                provider.Translate(availableLines);
+                                availableLines.Clear();
+                            }
 
                             var finalResultBuilder = new RTFBuilder();
                             foreach (var line in batchWorkingList)

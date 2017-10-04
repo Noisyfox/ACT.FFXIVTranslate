@@ -185,6 +185,11 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
+            // The channel filter has done in WindowsMessagePump.cs by enable / disable
+            // clipboard monitoring, which means this function will be called only if
+            // the filter for clipboard is set to show, so here we don't need to check 
+            // the filter as we do in OnLogLineRead().
+
             var chat = new ChattingLine
             {
                 RawEventCode = (byte)EventCode.Clipboard,

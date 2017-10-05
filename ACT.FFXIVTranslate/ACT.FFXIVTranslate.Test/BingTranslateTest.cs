@@ -26,7 +26,11 @@ namespace ACT.FFXIVTranslate.Test
                 new ChattingLine{RawContent = "This is a string <aaa> contains html tag."},
                 new ChattingLine{RawContent = "This is a string &lt; contains html tag."},
                 new ChattingLine{RawContent = "&lt;"},
-            }.ToList();
+            }.Select(it =>
+            {
+                provider.PreprocessLine(it);
+                return it;
+            }).ToList();
 
             provider.Translate(lines);
         }

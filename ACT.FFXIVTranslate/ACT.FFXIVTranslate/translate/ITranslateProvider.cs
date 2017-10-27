@@ -69,6 +69,11 @@ namespace ACT.FFXIVTranslate.translate
         {
             Reason = reason;
         }
+
+        public override string ToString()
+        {
+            return $"({Reason}){base.ToString()}";
+        }
     }
 
     public class ProviderLegalInfo

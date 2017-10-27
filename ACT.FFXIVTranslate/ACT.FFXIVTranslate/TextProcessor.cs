@@ -207,6 +207,8 @@ namespace ACT.FFXIVTranslate
                                 return $"[FC]<{nameWithWorld}> ";
                             case EventCode.Party:
                                 return $"({nameWithWorld}) ";
+                            case EventCode.Alliance:
+                                return $"(({nameWithWorld})) ";
                         }
                     }
                 }

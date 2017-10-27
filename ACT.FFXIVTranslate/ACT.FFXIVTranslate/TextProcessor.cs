@@ -15,12 +15,31 @@ namespace ACT.FFXIVTranslate
             var builder = new StringBuilder();
             var is02 = false;
 
-            foreach (var chr in input)
+            for (var i = 0; i < input.Length; i++)
             {
+                var chr = input[i];
+
                 switch (chr)
                 {
                     case '\u0002':
                         is02 = true;
+                        if (i + 3 < input.Length)
+                        {
+                            int len = input[i + 2];
+                            var last = i + 2 + len;
+                            if (last < input.Length)
+                            {
+                                if (input[last] == '\u0003')
+                                {
+                                    i = last;
+                                    is02 = false;
+                                    continue;
+                                }
+                                i = last - 1;
+                                continue;
+                            }
+                        }
+                        i += 2;
                         continue;
                     case '\u0003':
                         is02 = false;
@@ -91,6 +110,8 @@ namespace ACT.FFXIVTranslate
             {
                 case '\uE03C': // EE 80 BC (HQ)
                     return "[HQ]";
+                case '\uE06F': // EE 81 AF
+                    return "🡆"; // 🡆
                 case '\uE070':
                     return "[?]";
             }
@@ -118,7 +139,7 @@ namespace ACT.FFXIVTranslate
             switch (c)
             {
                 case '\uE0BB': // EE 82 BB (The icon before item name)
-                    return null;
+                    return "\u2326"; // ⌦
             }
 
             return null;

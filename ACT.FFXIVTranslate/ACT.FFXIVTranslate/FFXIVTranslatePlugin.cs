@@ -97,7 +97,7 @@ namespace ACT.FFXIVTranslate
             }
             catch (Exception ex)
             {
-                StatusLabel.Text = "Init Failed: " + ex.ToString();
+                StatusLabel.Text = "Init Failed: " + ex;
                 if (_settingsLoaded)
                 {
                     MessageBox.Show($"Init failed!\nCaused by:\n{ex}");

@@ -137,21 +137,12 @@
     <Compile Include="WindowsMessagePump.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FFXIVTranslateTabControl.resx">
-      <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="localization\strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="localization\strings.en-US.resx" />
-    <EmbeddedResource Include="ShortcutDialog.resx">
-      <DependentUpon>ShortcutDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="translate\TranslateProviderPanel.resx">
-      <DependentUpon>TranslateProviderPanel.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

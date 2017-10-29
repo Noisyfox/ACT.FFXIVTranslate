@@ -92,7 +92,7 @@ namespace ACT.FFXIVTranslate
 
             comboBoxLanguage.DisplayMember = "DisplayName";
             comboBoxLanguage.ValueMember = "LangCode";
-            comboBoxLanguage.DataSource = localization.Localization.SupportedLanguages;
+            comboBoxLanguage.DataSource = Localization.SupportedLanguages;
 
             labelCurrentVersionValue.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();
         }

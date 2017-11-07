@@ -73,6 +73,11 @@ Any help would be appreciated!
 6. 在**应用详情**页面可以看到应用的**应用ID**以及**应用密钥**。
 7. 在本插件的**API密钥**框中输入 **应用ID**:**应用密钥**，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
 
+# Q & A
+> Q: 启用该插件后我的ACT窗口变小了！
+
+请参考 https://github.com/Noisyfox/ACT.FFXIVTranslate/wiki/Fix-ACT-window-scale-down
+
 # TODO
 - ~~加入显示开关~~
 - 加入谷歌翻译官方API支持。
@@ -133,6 +138,11 @@ The free api keys have limits on words per month. You may want to get your own p
    pricing otherwise you will be charged.
 4. After creating the instance, find it in Azure protal and go to the detail page.
 5. Click the link **Keys** at the left side, and you will find two keys. Any of those should be work.
+
+# Q & A
+> Q: My ACT window get resized after enable this plugin
+
+See https://github.com/Noisyfox/ACT.FFXIVTranslate/wiki/Fix-ACT-window-scale-down
 
 # TODO
 - ~~Add switch to show / hide the overlay~~

@@ -73,10 +73,6 @@
       <Project>{7263a6d5-a142-4f3f-92a7-c3dfa9ba45b9}</Project>
       <Name>ACT.FFXIVTranslate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ACT.FoxCommon\ACT.FoxCommon\ACT.FoxCommon.csproj">
-      <Project>{78342B89-6BAA-43E8-824A-A6FB06CDE993}</Project>
-      <Name>ACT.FoxCommon</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

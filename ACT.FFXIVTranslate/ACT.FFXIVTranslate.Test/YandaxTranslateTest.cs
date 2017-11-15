@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using ACT.FFXIVTranslate.localization;
+﻿using System.Linq;
 using ACT.FFXIVTranslate.translate.yandax;
+using ACT.FoxCommon.localization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ACT.FFXIVTranslate.Test

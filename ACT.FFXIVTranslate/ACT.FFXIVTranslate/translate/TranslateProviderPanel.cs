@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ACT.FFXIVTranslate.localization;
+using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate
 {
@@ -18,12 +14,12 @@ namespace ACT.FFXIVTranslate.translate
         public TranslateProviderPanel()
         {
             InitializeComponent();
-            comboBoxProvider.DisplayMember = "ProviderName";
-            comboBoxProvider.ValueMember = "ProviderName";
-            comboBoxLangFrom.DisplayMember = "DisplayName";
-            comboBoxLangFrom.ValueMember = "LangCode";
-            comboBoxLangTo.DisplayMember = "DisplayName";
-            comboBoxLangTo.ValueMember = "LangCode";
+            comboBoxProvider.DisplayMember = nameof(ITranslaterProviderFactory.ProviderName);
+            comboBoxProvider.ValueMember = nameof(ITranslaterProviderFactory.ProviderName);
+            comboBoxLangFrom.DisplayMember = nameof(LanguageDef.DisplayName);
+            comboBoxLangFrom.ValueMember = nameof(LanguageDef.LangCode);
+            comboBoxLangTo.DisplayMember = nameof(LanguageDef.DisplayName);
+            comboBoxLangTo.ValueMember = nameof(LanguageDef.LangCode);
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)

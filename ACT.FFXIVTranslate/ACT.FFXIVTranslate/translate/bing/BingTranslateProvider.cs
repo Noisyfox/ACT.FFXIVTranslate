@@ -1,11 +1,11 @@
-﻿using ACT.FFXIVTranslate.localization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.bing
 {

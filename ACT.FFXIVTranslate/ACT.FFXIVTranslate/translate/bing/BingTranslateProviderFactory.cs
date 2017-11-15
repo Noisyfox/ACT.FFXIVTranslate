@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ACT.FFXIVTranslate.localization;
+using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.bing
 {

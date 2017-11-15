@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Web;
-using ACT.FFXIVTranslate.localization;
+using ACT.FoxCommon.localization;
 using Newtonsoft.Json.Linq;
 
 namespace ACT.FFXIVTranslate.translate.google_unofficial

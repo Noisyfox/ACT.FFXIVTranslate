@@ -4,7 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using ACT.FFXIVTranslate.localization;
+using ACT.FoxCommon;
+using ACT.FoxCommon.localization;
 using Newtonsoft.Json.Linq;
 
 namespace ACT.FFXIVTranslate.translate.youdao

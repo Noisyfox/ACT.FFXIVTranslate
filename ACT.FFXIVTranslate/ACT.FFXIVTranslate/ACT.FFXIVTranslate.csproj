@@ -38,14 +38,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Advanced Combat Tracker">
-      <HintPath>3rdparty\Advanced Combat Tracker.exe</HintPath>
+      <HintPath>..\ACT.FoxCommon\ACT.FoxCommon\3rdparty\Advanced Combat Tracker.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Extreme.Net, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Extreme.Net.2.0.20\lib\net45\Extreme.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="GlobalHotKey, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GlobalHotKey.1.1.0\lib\GlobalHotKey.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -79,8 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseThreading.cs" />
-    <Compile Include="Ext.cs" />
     <Compile Include="FFXIVTranslatePlugin.cs" />
     <Compile Include="FFXIVTranslateTabControl.cs">
       <SubType>UserControl</SubType>
@@ -88,12 +83,9 @@
     <Compile Include="FFXIVTranslateTabControl.Designer.cs">
       <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShortkeyManager.cs" />
-    <Compile Include="localization\LanguageDef.cs" />
     <Compile Include="localization\Localization.cs" />
     <Compile Include="LogReadThread.cs" />
     <Compile Include="MainController.cs" />
-    <Compile Include="MessageBoxManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="localization\strings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -102,12 +94,6 @@
     </Compile>
     <Compile Include="ProxyFactory.cs" />
     <Compile Include="SettingsHolder.cs" />
-    <Compile Include="ShortcutDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ShortcutDialog.Designer.cs">
-      <DependentUpon>ShortcutDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="TextProcessor.cs" />
     <Compile Include="translate\baidu\BaiduTranslateProvider.cs" />
     <Compile Include="translate\baidu\BaiduTranslateProviderFactory.cs" />
@@ -129,8 +115,6 @@
     <Compile Include="translate\youdao\YoudaoTranslateProvider.cs" />
     <Compile Include="translate\youdao\YoudaoTranslateProviderFactory.cs" />
     <Compile Include="UpdateChecker.cs" />
-    <Compile Include="Utils.cs" />
-    <Compile Include="Win32APIUtils.cs" />
     <Compile Include="TranslateWindow.xaml.cs">
       <DependentUpon>TranslateWindow.xaml</DependentUpon>
     </Compile>
@@ -150,6 +134,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ACT.FoxCommon\ACT.FoxCommon\ACT.FoxCommon.csproj">
+      <Project>{78342b89-6baa-43e8-824a-a6fb06cde993}</Project>
+      <Name>ACT.FoxCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RTFLib\RTFLib.csproj">
       <Project>{CD1CF51F-CDE9-4403-A07E-C8CA4C015C58}</Project>
       <Name>RTFLib</Name>

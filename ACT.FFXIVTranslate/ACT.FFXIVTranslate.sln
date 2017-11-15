@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT.FFXIVTranslate", "ACT.FFXIVTranslate\ACT.FFXIVTranslate.csproj", "{7263A6D5-A142-4F3F-92A7-C3DFA9BA45B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT.FFXIVTranslate.Test", "ACT.FFXIVTranslate.Test\ACT.FFXIVTranslate.Test.csproj", "{81906072-43FD-40D0-916A-F16D0EDA15BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTFLib", "RTFLib\RTFLib.csproj", "{CD1CF51F-CDE9-4403-A07E-C8CA4C015C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACT.FoxCommon", "ACT.FoxCommon\ACT.FoxCommon\ACT.FoxCommon.csproj", "{78342B89-6BAA-43E8-824A-A6FB06CDE993}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{CD1CF51F-CDE9-4403-A07E-C8CA4C015C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD1CF51F-CDE9-4403-A07E-C8CA4C015C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD1CF51F-CDE9-4403-A07E-C8CA4C015C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78342B89-6BAA-43E8-824A-A6FB06CDE993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78342B89-6BAA-43E8-824A-A6FB06CDE993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78342B89-6BAA-43E8-824A-A6FB06CDE993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78342B89-6BAA-43E8-824A-A6FB06CDE993}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

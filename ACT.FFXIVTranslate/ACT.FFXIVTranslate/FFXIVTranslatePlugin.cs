@@ -5,17 +5,19 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using ACT.FFXIVPing;
 using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate;
+using ACT.FoxCommon;
+using ACT.FoxCommon.core;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
-    public class FFXIVTranslatePlugin : IActPluginV1
+    public class FFXIVTranslatePlugin : PluginBase<MainController>
     {
         private bool _settingsLoaded = false;
-
-        internal MainController Controller { get; private set; }
+        
         public SettingsHolder Settings { get; private set; }
         public TabPage ParentTabPage { get; private set; }
         public Label StatusLabel { get; private set; }
@@ -24,7 +26,7 @@ namespace ACT.FFXIVTranslate
         internal UpdateChecker UpdateChecker { get; } = new UpdateChecker();
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
-        private ShortkeyManager _shortkeyManager;
+        private ShortkeyManager<MainController, FFXIVTranslatePlugin> _shortkeyManager;
 
         private readonly LogReadThread _workingThread = new LogReadThread();
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
@@ -36,7 +38,7 @@ namespace ACT.FFXIVTranslate
             _workingThread.OnLogLineRead += OnLogLineRead;
         }
 
-        public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
+        public override void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
             _settingsLoaded = false;
             ParentTabPage = pluginScreenSpace;
@@ -70,7 +72,7 @@ namespace ACT.FFXIVTranslate
                 _windowsMessagePump.AttachToAct(this);
                 UpdateChecker.AttachToAct(this);
 
-                _shortkeyManager = new ShortkeyManager();
+                _shortkeyManager = new ShortkeyManager<MainController, FFXIVTranslatePlugin>();
                 _shortkeyManager.AttachToAct(this);
 
                 Settings.PostAttachToAct(this);
@@ -173,7 +175,7 @@ namespace ACT.FFXIVTranslate
                 });
         }
 
-        private void ControllerOnActivatedProcessPathChanged(bool fromView, string path)
+        private void ControllerOnActivatedProcessPathChanged(bool fromView, string path, uint pid)
         {
             _isGameActivated = Utils.IsGameExePath(path);
         }
@@ -213,7 +215,7 @@ namespace ACT.FFXIVTranslate
             _workingThread.StartWorkingThread(newLogFileName);
         }
 
-        public void DeInitPlugin()
+        public override void DeInitPlugin()
         {
             _shortkeyManager?.Dispose();
             _shortkeyManager = null;
@@ -365,10 +367,5 @@ namespace ACT.FFXIVTranslate
         public bool Show { get; set; } = true;
         public Color DisplayColor { get; set; } = Color.White;
         public bool ShowLabel { get; set; } = false;
-    }
-
-    internal enum Shortcut
-    {
-        HideOverlay
     }
 }

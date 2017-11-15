@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading;
+using ACT.FoxCommon.core;
 using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
@@ -13,15 +14,6 @@ namespace ACT.FFXIVTranslate
         public event LogLineReadDelegate OnLogLineRead;
 
         private readonly char[] _newlineChars = { '\r', '\n' };
-
-        protected override Thread SetupThread()
-        {
-            var t = base.SetupThread();
-
-            t.Name = "FFXIV Translate";
-
-            return t;
-        }
 
         protected override void DoWork(string logFilePath)
         {

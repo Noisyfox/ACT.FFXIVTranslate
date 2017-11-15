@@ -9,6 +9,8 @@ using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.google_unofficial;
 using ACT.FFXIVTranslate.translate.yandax;
 using ACT.FFXIVTranslate.translate.youdao;
+using ACT.FoxCommon.core;
+using ACT.FoxCommon.localization;
 using RTF;
 
 namespace ACT.FFXIVTranslate.translate

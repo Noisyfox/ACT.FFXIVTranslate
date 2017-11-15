@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Globalization;
+using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.localization
 {
@@ -16,49 +12,16 @@ namespace ACT.FFXIVTranslate.localization
 
         private const string DefaultLanguage = "zh-CN";
 
-
-
-        public static LanguageDef GetLanguage(string code)
+        static Localization()
         {
-            return SupportedLanguages.FirstOrDefault(it => it.LangCode == code) ?? GetLanguage(DefaultLanguage);
+            LocalizationBase.InitLocalization(strings.ResourceManager, SupportedLanguages, DefaultLanguage);
         }
+
 
         public static void ConfigLocalization(string code)
         {
             strings.Culture = CultureInfo.GetCultureInfo(code);
-        }
-
-        private static void UpdateTextBasedOnName(Control control)
-        {
-            var t = strings.ResourceManager.GetString(control.Name, strings.Culture);
-            if (t != null)
-            {
-                control.Text = t;
-            }
-        }
-
-        public static void TranslateControls(Control control)
-        {
-            var setterList = new List<Action>();
-
-            setterList.Add(()=>UpdateTextBasedOnName(control));
-
-            foreach (Control child in control.Controls.AsParallel())
-            {
-                TranslateControls(child);
-            }
-
-            foreach (var action in setterList.AsParallel())
-            {
-                if (control.InvokeRequired)
-                {
-                    control.Invoke((MethodInvoker)delegate { action(); });
-                }
-                else
-                {
-                    action();
-                }
-            }
+            LocalizationBase.ConfigLocalization(code);
         }
     }
 }

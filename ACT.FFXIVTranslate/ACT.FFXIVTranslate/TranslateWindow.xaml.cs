@@ -9,6 +9,7 @@ using System.Windows.Interop;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using ACT.FFXIVTranslate.translate;
+using ACT.FoxCommon;
 
 namespace ACT.FFXIVTranslate
 {
@@ -223,7 +224,7 @@ namespace ACT.FFXIVTranslate
             CheckVisibility();
         }
 
-        private void ControllerOnActivatedProcessPathChanged(bool fromView, string path)
+        private void ControllerOnActivatedProcessPathChanged(bool fromView, string path, uint pid)
         {
             _activatedExePath = path;
             CheckVisibility();

@@ -465,7 +465,7 @@ namespace ACT.FFXIVTranslate
 
         private void ControllerOnLogMessageAppend(bool fromView, string log)
         {
-            ThreadInvokes.RichTextBoxAppendDateTimeLine(ActGlobals.oFormActMain, richTextBoxLog, log);
+            richTextBoxLog.AppendDateTimeLine(log);
         }
 
         private void ControllerOnOverlayFontChanged(bool fromView, Font font)
@@ -514,7 +514,7 @@ namespace ACT.FFXIVTranslate
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(delegate
+                this.SafeInvoke(new Action(delegate
                 {
                     ControllerOnUpdateCheckingStarted(fromView);
                 }));
@@ -530,7 +530,7 @@ namespace ACT.FFXIVTranslate
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(delegate
+                this.SafeInvoke(new Action(delegate
                 {
                     ControllerOnVersionChecked(fromView, versionInfo, forceNotify);
                 }));

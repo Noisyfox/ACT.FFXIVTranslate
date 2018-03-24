@@ -76,7 +76,12 @@ Any help would be appreciated!
 # Q & A
 > Q: 启用该插件后我的ACT窗口变小了！
 
-请参考 https://github.com/Noisyfox/ACT.FFXIVTranslate/wiki/Fix-ACT-window-scale-down
+请参考 [https://github.com/Noisyfox/ACT.FFXIVTranslate/wiki/Fix-ACT-window-scale-down](https://github.com/Noisyfox/ACT.FFXIVTranslate/wiki/Fix-ACT-window-scale-down)
+
+> Q: 我用的无猫整合版 ACT，没有办法加载插件，肿么办
+
+访问 [http://bbs.nga.cn/read.php?tid=12526945](http://bbs.nga.cn/read.php?tid=12526945)，找到 __ACT插件自整合__ 分类的百度网盘地址，选择 __单体插件自整合 > 6. 其他工具__，使用其中的
+__ACT绿色化工具(配置移根目录).rar__ 处理即可。
 
 # TODO
 - ~~加入显示开关~~

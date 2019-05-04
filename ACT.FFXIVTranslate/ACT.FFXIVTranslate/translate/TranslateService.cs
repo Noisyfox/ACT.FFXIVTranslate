@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading;
-using ACT.FFXIVTranslate.localization;
 using ACT.FFXIVTranslate.translate.baidu;
 using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.google_unofficial;
@@ -11,7 +9,6 @@ using ACT.FFXIVTranslate.translate.yandax;
 using ACT.FFXIVTranslate.translate.youdao;
 using ACT.FoxCommon.core;
 using ACT.FoxCommon.localization;
-using RTF;
 
 namespace ACT.FFXIVTranslate.translate
 {
@@ -153,36 +150,16 @@ namespace ACT.FFXIVTranslate.translate
                                 availableLines.Clear();
                             }
 
-                            var finalResultBuilder = new RTFBuilder();
-                            foreach (var line in batchWorkingList)
-                            {
-                                if (service.AddTimestamp)
-                                {
-                                    finalResultBuilder.ForeColor(Color.White);
-                                    string formattedTime;
-                                    if (service.Timestamp24Hour)
-                                    {
-                                        formattedTime = $"[{line.Timestamp:HH:mm}]";
-                                    }
-                                    else
-                                    {
-                                        formattedTime =
-                                            string.Format("[{0}]",
-                                                line.Timestamp.ToString(
-                                                    line.Timestamp.Hour > 11
-                                                        ? strings.timeFormat12HourPM
-                                                        : strings.timeFormat12HourAM,
-                                                    strings.Culture));
-                                    }
-                                    finalResultBuilder.Append(formattedTime);
-                                }
-                                var settings = service._plugin.GetChannelSettings(line.EventCode);
-                                finalResultBuilder.ForeColor(settings.DisplayColor);
-                                finalResultBuilder.AppendLine(
-                                    $"{TextProcessor.BuildQuote(line, settings.ShowLabel)}{line.TranslatedContent}");
-                            }
+                            service._controller.NotifyBatchTranslateCompleted(false, new List<ChattingLine>(batchWorkingList));
 
-                            service._controller.NotifyOverlayContentUpdated(false, finalResultBuilder.ToString());
+                            // Render overlay text
+                            var overlayContentRendered = TextProcessor.BuildRTF(
+                                service._plugin,
+                                service.AddTimestamp,
+                                service.Timestamp24Hour,
+                                batchWorkingList.Where(it => it.EventCode <= EventCode.Clipboard)); // Don't display test channels
+
+                            service._controller.NotifyOverlayContentUpdated(false, overlayContentRendered);
                         }
                         catch (Exception ex)
                         {

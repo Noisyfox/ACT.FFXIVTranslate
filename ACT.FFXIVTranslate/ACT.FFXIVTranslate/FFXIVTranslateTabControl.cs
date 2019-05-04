@@ -12,7 +12,6 @@ using ACT.FoxCommon;
 using ACT.FoxCommon.localization;
 using ACT.FoxCommon.shortcut;
 using ACT.FoxCommon.update;
-using Advanced_Combat_Tracker;
 
 namespace ACT.FFXIVTranslate
 {
@@ -162,6 +161,7 @@ namespace ACT.FFXIVTranslate
             _controller.ShortcutChanged += ControllerOnShortcutChanged;
             _controller.ShortcutRegister += ControllerOnShortcutRegister;
             _controller.ShortcutFired += ControllerOnShortcutFired;
+            _controller.BatchTranslateCompleted += ControllerOnBatchTranslateCompleted;
 
             translateProviderPanel.AttachToAct(plugin);
         }
@@ -669,6 +669,58 @@ namespace ACT.FFXIVTranslate
                     {
                         System.Diagnostics.Process.Start(newVersion.PublishPage);
                     }
+                }
+            }
+        }
+
+        private void ButtonTranslateTest_Click(object sender, EventArgs e)
+        {
+            textBoxTranslateTestOutput.Clear();
+
+            var lines = textBoxTranslateTestInput
+                .Lines
+                .Select(it => it.Trim())
+                .Where(it => it.Length > 0)
+                .Select(it => new ChattingLine
+                {
+                    RawEventCode = (byte) ((byte) EventCode.Test & byte.MaxValue),
+                    EventCode = EventCode.Test,
+                    RawSender = "Test",
+                    RawContent = it,
+                    Timestamp = DateTime.Now,
+                });
+            foreach (var line in lines)
+            {
+                _plugin.TranslateService.SubmitNewLine(line);
+            }
+        }
+
+        private void ControllerOnBatchTranslateCompleted(bool fromView, List<ChattingLine> chattingLines)
+        {
+            // Show test channel only
+            var testLines = chattingLines.Where(it => it.EventCode == EventCode.Test).ToList();
+            if (testLines.Count == 0)
+            {
+                return;
+            }
+
+            if (InvokeRequired)
+            {
+                this.SafeInvoke(new Action(delegate
+                {
+                    foreach (var line in testLines)
+                    {
+                        textBoxTranslateTestOutput.AppendText(line.TranslatedContent);
+                        textBoxTranslateTestOutput.AppendText(Environment.NewLine);
+                    }
+                }));
+            }
+            else
+            {
+                foreach (var line in testLines)
+                {
+                    textBoxTranslateTestOutput.AppendText(line.TranslatedContent);
+                    textBoxTranslateTestOutput.AppendText(Environment.NewLine);
                 }
             }
         }

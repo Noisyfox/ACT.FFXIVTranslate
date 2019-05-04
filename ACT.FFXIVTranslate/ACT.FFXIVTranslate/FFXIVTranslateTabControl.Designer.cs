@@ -103,6 +103,10 @@
             this.buttonProxyApply = new System.Windows.Forms.Button();
             this.numericUpDownProxyPort = new System.Windows.Forms.NumericUpDown();
             this.tabPageTranslateSettings = new System.Windows.Forms.TabPage();
+            this.groupBoxTranslateTest = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxTranslateTestInput = new System.Windows.Forms.TextBox();
+            this.textBoxTranslateTestOutput = new System.Windows.Forms.TextBox();
             this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.tabPageChannelSettings = new System.Windows.Forms.TabPage();
             this.buttonReadColor = new System.Windows.Forms.Button();
@@ -149,6 +153,7 @@
             this.buttonChannelColorClipboard = new System.Windows.Forms.Button();
             this.checkBoxChannelLabelClipboard = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
+            this.buttonTranslateTest = new System.Windows.Forms.Button();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -165,6 +170,8 @@
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).BeginInit();
             this.tabPageTranslateSettings.SuspendLayout();
+            this.groupBoxTranslateTest.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tabPageChannelSettings.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabPageLog.SuspendLayout();
@@ -1135,6 +1142,8 @@
             // 
             // tabPageTranslateSettings
             // 
+            this.tabPageTranslateSettings.AutoScroll = true;
+            this.tabPageTranslateSettings.Controls.Add(this.groupBoxTranslateTest);
             this.tabPageTranslateSettings.Controls.Add(this.translateProviderPanel);
             this.tabPageTranslateSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageTranslateSettings.Name = "tabPageTranslateSettings";
@@ -1144,11 +1153,60 @@
             this.tabPageTranslateSettings.Text = "Translate Settings";
             this.tabPageTranslateSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBoxTranslateTest
+            // 
+            this.groupBoxTranslateTest.Controls.Add(this.tableLayoutPanel5);
+            this.groupBoxTranslateTest.Location = new System.Drawing.Point(3, 192);
+            this.groupBoxTranslateTest.Name = "groupBoxTranslateTest";
+            this.groupBoxTranslateTest.Size = new System.Drawing.Size(748, 191);
+            this.groupBoxTranslateTest.TabIndex = 4;
+            this.groupBoxTranslateTest.TabStop = false;
+            this.groupBoxTranslateTest.Text = "Translate Test";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.buttonTranslateTest, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.textBoxTranslateTestInput, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.textBoxTranslateTestOutput, 2, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(742, 171);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // textBoxTranslateTestInput
+            // 
+            this.textBoxTranslateTestInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxTranslateTestInput.Location = new System.Drawing.Point(3, 3);
+            this.textBoxTranslateTestInput.Multiline = true;
+            this.textBoxTranslateTestInput.Name = "textBoxTranslateTestInput";
+            this.textBoxTranslateTestInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxTranslateTestInput.Size = new System.Drawing.Size(324, 165);
+            this.textBoxTranslateTestInput.TabIndex = 1;
+            // 
+            // textBoxTranslateTestOutput
+            // 
+            this.textBoxTranslateTestOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxTranslateTestOutput.Location = new System.Drawing.Point(414, 3);
+            this.textBoxTranslateTestOutput.Multiline = true;
+            this.textBoxTranslateTestOutput.Name = "textBoxTranslateTestOutput";
+            this.textBoxTranslateTestOutput.ReadOnly = true;
+            this.textBoxTranslateTestOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxTranslateTestOutput.Size = new System.Drawing.Size(325, 165);
+            this.textBoxTranslateTestOutput.TabIndex = 2;
+            // 
             // translateProviderPanel
             // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(6, 6);
+            this.translateProviderPanel.Location = new System.Drawing.Point(3, 3);
+            this.translateProviderPanel.MinimumSize = new System.Drawing.Size(400, 0);
             this.translateProviderPanel.Name = "translateProviderPanel";
-            this.translateProviderPanel.Size = new System.Drawing.Size(462, 183);
+            this.translateProviderPanel.Size = new System.Drawing.Size(490, 183);
             this.translateProviderPanel.TabIndex = 3;
             // 
             // tabPageChannelSettings
@@ -1686,6 +1744,17 @@
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
+            // buttonTranslateTest
+            // 
+            this.buttonTranslateTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonTranslateTest.Location = new System.Drawing.Point(333, 74);
+            this.buttonTranslateTest.Name = "buttonTranslateTest";
+            this.buttonTranslateTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonTranslateTest.TabIndex = 0;
+            this.buttonTranslateTest.Text = ">";
+            this.buttonTranslateTest.UseVisualStyleBackColor = true;
+            this.buttonTranslateTest.Click += new System.EventHandler(this.ButtonTranslateTest_Click);
+            // 
             // FFXIVTranslateTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1714,6 +1783,9 @@
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).EndInit();
             this.tabPageTranslateSettings.ResumeLayout(false);
+            this.groupBoxTranslateTest.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tabPageChannelSettings.ResumeLayout(false);
             this.tabPageChannelSettings.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1846,5 +1918,10 @@
         private System.Windows.Forms.Button buttonShortcutHide;
         private System.Windows.Forms.TabPage tabPageTranslateSettings;
         private translate.TranslateProviderPanel translateProviderPanel;
+        private System.Windows.Forms.GroupBox groupBoxTranslateTest;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TextBox textBoxTranslateTestInput;
+        private System.Windows.Forms.TextBox textBoxTranslateTestOutput;
+        private System.Windows.Forms.Button buttonTranslateTest;
     }
 }

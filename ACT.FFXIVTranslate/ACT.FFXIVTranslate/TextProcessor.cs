@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using ACT.FFXIVTranslate.localization;
+using RTF;
 
 namespace ACT.FFXIVTranslate
 {
@@ -215,6 +218,44 @@ namespace ACT.FFXIVTranslate
             }
 
             return $"{extractedName.Item1}: ";
+        }
+
+        public static string BuildRTF(
+            FFXIVTranslatePlugin plugin,
+            bool addTimestamp,
+            bool timestamp24Hour,
+            IEnumerable<ChattingLine> chattingLines)
+        {
+            var finalResultBuilder = new RTFBuilder();
+            foreach (var line in chattingLines)
+            {
+                if (addTimestamp)
+                {
+                    finalResultBuilder.ForeColor(Color.White);
+                    string formattedTime;
+                    if (timestamp24Hour)
+                    {
+                        formattedTime = $"[{line.Timestamp:HH:mm}]";
+                    }
+                    else
+                    {
+                        formattedTime =
+                            string.Format("[{0}]",
+                                line.Timestamp.ToString(
+                                    line.Timestamp.Hour > 11
+                                        ? strings.timeFormat12HourPM
+                                        : strings.timeFormat12HourAM,
+                                    strings.Culture));
+                    }
+                    finalResultBuilder.Append(formattedTime);
+                }
+                var settings = plugin.GetChannelSettings(line.EventCode);
+                finalResultBuilder.ForeColor(settings.DisplayColor);
+                finalResultBuilder.AppendLine(
+                    $"{TextProcessor.BuildQuote(line, settings.ShowLabel)}{line.TranslatedContent}");
+            }
+
+            return finalResultBuilder.ToString();
         }
     }
 }

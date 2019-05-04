@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using ACT.FFXIVTranslate.translate;
 using ACT.FoxCommon.core;
 
@@ -41,6 +42,15 @@ namespace ACT.FFXIVTranslate
         public void NotifyClickthroughChanged(bool fromView, bool clickthrough)
         {
             ClickthroughChanged?.Invoke(fromView, clickthrough);
+        }
+
+        public delegate void OnBatchTranslateCompletedDelegate(bool fromView, List<ChattingLine> chattingLines);
+
+        public event OnBatchTranslateCompletedDelegate BatchTranslateCompleted;
+
+        public void NotifyBatchTranslateCompleted(bool fromView, List<ChattingLine> chattingLines)
+        {
+            BatchTranslateCompleted?.Invoke(fromView, chattingLines);
         }
 
         public delegate void OnOverlayContentUpdatedDelegate(bool fromView, string content);

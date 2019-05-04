@@ -404,4 +404,7 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="tabPageTranslateSettings" xml:space="preserve">
     <value>Translate Settings</value>
   </data>
+  <data name="groupBoxTranslateTest" xml:space="preserve">
+    <value>Translate Test</value>
+  </data>
 </root>

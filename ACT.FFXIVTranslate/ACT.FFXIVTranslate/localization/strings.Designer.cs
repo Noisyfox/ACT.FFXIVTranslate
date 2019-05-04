@@ -457,6 +457,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 翻译测试 的本地化字符串。
+        /// </summary>
+        public static string groupBoxTranslateTest {
+            get {
+                return ResourceManager.GetString("groupBoxTranslateTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 插件更新 的本地化字符串。
         /// </summary>
         public static string groupBoxUpdate {

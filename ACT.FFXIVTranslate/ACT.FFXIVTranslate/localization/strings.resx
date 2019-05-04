@@ -404,4 +404,7 @@
   <data name="tabPageTranslateSettings" xml:space="preserve">
     <value>翻译设置</value>
   </data>
+  <data name="groupBoxTranslateTest" xml:space="preserve">
+    <value>翻译测试</value>
+  </data>
 </root>

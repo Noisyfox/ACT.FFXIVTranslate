@@ -679,14 +679,13 @@ namespace ACT.FFXIVTranslate
 
             var lines = textBoxTranslateTestInput
                 .Lines
-                .Select(it => it.Trim())
-                .Where(it => it.Length > 0)
+                .Where(it => !string.IsNullOrWhiteSpace(it))
                 .Select(it => new ChattingLine
                 {
                     RawEventCode = (byte) ((byte) EventCode.Test & byte.MaxValue),
                     EventCode = EventCode.Test,
                     RawSender = "Test",
-                    RawContent = it,
+                    RawContent = it.Trim(),
                     Timestamp = DateTime.Now,
                 });
             foreach (var line in lines)

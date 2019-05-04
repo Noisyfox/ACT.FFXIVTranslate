@@ -39,7 +39,8 @@ namespace ACT.FFXIVTranslate.translate
 
         List<LanguageDef> SupportedSrcLanguages { get; }
 
-        List<LanguageDef> SupportedDestLanguages { get; }
+        List<LanguageDef> GetSupportedDestLanguages(LanguageDef srcLanguage);
+
 
         ProviderLegalInfo LegalInfo { get; }
 

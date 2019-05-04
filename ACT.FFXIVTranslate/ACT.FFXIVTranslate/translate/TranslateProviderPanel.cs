@@ -51,7 +51,19 @@ namespace ACT.FFXIVTranslate.translate
                 comboBoxLangFrom.DataSource = selectedProvider.SupportAutoDetect
                     ? new[] { new LanguageDef(LanguageDef.CodeAuto, strings.LangAutoDetect, string.Empty) }.Concat(selectedProvider.SupportedSrcLanguages).ToList()
                     : selectedProvider.SupportedSrcLanguages;
-                comboBoxLangTo.DataSource = selectedProvider.SupportedDestLanguages;
+
+                UpdateSupportedDestLanguage();
+            }
+        }
+
+        private void UpdateSupportedDestLanguage()
+        {
+            var selectedProvider = (ITranslaterProviderFactory) comboBoxProvider.SelectedItem;
+            var selectedFromLang = (LanguageDef) comboBoxLangFrom.SelectedItem;
+
+            if (selectedProvider != null && selectedFromLang != null)
+            {
+                comboBoxLangTo.DataSource = selectedProvider.GetSupportedDestLanguages(selectedFromLang);
             }
         }
 
@@ -155,6 +167,11 @@ namespace ACT.FFXIVTranslate.translate
                 }
                 textBoxApiKey.Text = key;
             }
+        }
+
+        private void ComboBoxLangFrom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSupportedDestLanguage();
         }
     }
 }

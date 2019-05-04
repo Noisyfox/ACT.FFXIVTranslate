@@ -70,7 +70,7 @@ namespace ACT.FFXIVTranslate.translate
             var lF = langFrom == LanguageDef.CodeAuto
                 ? null
                 : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);
-            var lT = factory.SupportedDestLanguages.First(it => it.LangCode == langTo);
+            var lT = factory.GetSupportedDestLanguages(lF).First(it => it.LangCode == langTo);
             var context = new TranslateContext
             {
                 Service = this,

@@ -23,8 +23,10 @@ namespace ACT.FFXIVTranslate.translate.yandax
         public bool SupportAutoDetect => true;
 
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
-
-        public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;
+        public List<LanguageDef> GetSupportedDestLanguages(LanguageDef srcLanguage)
+        {
+            return _allSupportedLanguages.Where(it => it != srcLanguage).ToList();
+        }
         public ProviderLegalInfo LegalInfo { get; } = new ProviderLegalInfo
         {
             LabelMain = "Powered by Yandex.Translate",

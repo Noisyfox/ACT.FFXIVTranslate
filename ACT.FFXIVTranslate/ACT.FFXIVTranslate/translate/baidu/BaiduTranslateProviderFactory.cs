@@ -22,7 +22,11 @@ namespace ACT.FFXIVTranslate.translate.baidu
 
         public bool SupportAutoDetect => true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
-        public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;
+        public List<LanguageDef> GetSupportedDestLanguages(LanguageDef srcLanguage)
+        {
+            return _allSupportedLanguages.Where(it => it != srcLanguage).ToList();
+        }
+
         public ProviderLegalInfo LegalInfo => null;
         public string DefaultPublicKey => null;
 

@@ -22,7 +22,10 @@ namespace ACT.FFXIVTranslate.translate.microsoft
         public string ProviderName => LocalizationBase.GetString("translateProviderNameMicrosoft", ProviderId);
         public bool SupportAutoDetect => true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
-        public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;
+        public List<LanguageDef> GetSupportedDestLanguages(LanguageDef srcLanguage)
+        {
+            return _allSupportedLanguages.Where(it => it != srcLanguage).ToList();
+        }
         public ProviderLegalInfo LegalInfo => null;
         public string DefaultPublicKey => "1d69aad8beef4ef298e4dcaf892ae512";
 

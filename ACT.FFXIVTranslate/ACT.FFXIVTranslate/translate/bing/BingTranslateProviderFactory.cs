@@ -24,7 +24,7 @@ namespace ACT.FFXIVTranslate.translate.bing
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;
         public ProviderLegalInfo LegalInfo => null;
-        public string DefaultPublicKey => "90ebd9b5e7544500a5c1cf3ff7996314";
+        public string DefaultPublicKey => "1d69aad8beef4ef298e4dcaf892ae512";
 
         public ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst)
         {

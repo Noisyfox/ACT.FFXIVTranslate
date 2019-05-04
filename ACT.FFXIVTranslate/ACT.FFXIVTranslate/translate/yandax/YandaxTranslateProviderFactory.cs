@@ -17,7 +17,8 @@ namespace ACT.FFXIVTranslate.translate.yandax
             LanguageDef.BuildLangFromCulture("ko"),
         }.ToList();
 
-        public string ProviderName => "Yandex Translate";
+        public string ProviderId => "Yandex Translate";
+        public string ProviderName => LocalizationBase.GetString("translateProviderNameYandex", ProviderId);
 
         public bool SupportAutoDetect => true;
 

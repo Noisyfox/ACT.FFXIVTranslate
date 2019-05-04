@@ -15,7 +15,7 @@ namespace ACT.FFXIVTranslate.translate
         {
             InitializeComponent();
             comboBoxProvider.DisplayMember = nameof(ITranslaterProviderFactory.ProviderName);
-            comboBoxProvider.ValueMember = nameof(ITranslaterProviderFactory.ProviderName);
+            comboBoxProvider.ValueMember = nameof(ITranslaterProviderFactory.ProviderId);
             comboBoxLangFrom.DisplayMember = nameof(LanguageDef.DisplayName);
             comboBoxLangFrom.ValueMember = nameof(LanguageDef.LangCode);
             comboBoxLangTo.DisplayMember = nameof(LanguageDef.DisplayName);

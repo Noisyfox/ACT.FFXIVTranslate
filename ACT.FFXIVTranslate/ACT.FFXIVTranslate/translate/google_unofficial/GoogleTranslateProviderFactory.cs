@@ -18,7 +18,8 @@ namespace ACT.FFXIVTranslate.translate.google_unofficial
             LanguageDef.BuildLangFromCulture("ko"),
         }.ToList();
 
-        public string ProviderName => "Google Translate (unofficial)";
+        public string ProviderId => "Google Translate (unofficial)";
+        public string ProviderName => LocalizationBase.GetString("translateProviderNameGoogleUnofficial", ProviderId);
         public bool SupportAutoDetect => true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;

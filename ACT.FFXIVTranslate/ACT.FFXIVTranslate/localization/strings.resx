@@ -386,4 +386,19 @@
   <data name="messageWaitKey" xml:space="preserve">
     <value>等待按键...</value>
   </data>
+  <data name="translateProviderNameBaidu" xml:space="preserve">
+    <value>百度翻译</value>
+  </data>
+  <data name="translateProviderNameGoogleUnofficial" xml:space="preserve">
+    <value>谷歌翻译（非官方 API）</value>
+  </data>
+  <data name="translateProviderNameMicrosoft" xml:space="preserve">
+    <value>微软翻译</value>
+  </data>
+  <data name="translateProviderNameYandex" xml:space="preserve">
+    <value>Yandex 翻译</value>
+  </data>
+  <data name="translateProviderNameYoudao" xml:space="preserve">
+    <value>有道翻译</value>
+  </data>
 </root>

@@ -19,7 +19,7 @@ namespace ACT.FFXIVTranslate.localization {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class strings {
@@ -47,7 +47,7 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
-        ///   使用此强类型资源类，为所有资源查找
+        ///   重写当前线程的 CurrentUICulture 属性
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -842,6 +842,51 @@ namespace ACT.FFXIVTranslate.localization {
         public static string timeFormat12HourPM {
             get {
                 return ResourceManager.GetString("timeFormat12HourPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 百度翻译 的本地化字符串。
+        /// </summary>
+        public static string translateProviderNameBaidu {
+            get {
+                return ResourceManager.GetString("translateProviderNameBaidu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 谷歌翻译（非官方 API） 的本地化字符串。
+        /// </summary>
+        public static string translateProviderNameGoogleUnofficial {
+            get {
+                return ResourceManager.GetString("translateProviderNameGoogleUnofficial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 微软翻译 的本地化字符串。
+        /// </summary>
+        public static string translateProviderNameMicrosoft {
+            get {
+                return ResourceManager.GetString("translateProviderNameMicrosoft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Yandex 翻译 的本地化字符串。
+        /// </summary>
+        public static string translateProviderNameYandex {
+            get {
+                return ResourceManager.GetString("translateProviderNameYandex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 有道翻译 的本地化字符串。
+        /// </summary>
+        public static string translateProviderNameYoudao {
+            get {
+                return ResourceManager.GetString("translateProviderNameYoudao", resourceCulture);
             }
         }
         

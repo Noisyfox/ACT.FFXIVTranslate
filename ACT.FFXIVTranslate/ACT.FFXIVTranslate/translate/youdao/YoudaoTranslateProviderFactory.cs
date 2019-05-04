@@ -16,7 +16,8 @@ namespace ACT.FFXIVTranslate.translate.youdao
             LanguageDef.BuildLangFromCulture("ko"),
         }.ToList();
 
-        public string ProviderName => "有道翻译";
+        public string ProviderId => "有道翻译";
+        public string ProviderName => LocalizationBase.GetString("translateProviderNameYoudao", ProviderId);
         public bool SupportAutoDetect => true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;

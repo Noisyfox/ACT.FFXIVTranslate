@@ -18,7 +18,8 @@ namespace ACT.FFXIVTranslate.translate.bing
             LanguageDef.BuildLangFromCulture("ko"),
         }.ToList();
 
-        public string ProviderName => "Microsoft Translator";
+        public string ProviderId => "Microsoft Translator";
+        public string ProviderName => LocalizationBase.GetString("translateProviderNameMicrosoft", ProviderId);
         public bool SupportAutoDetect => true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;

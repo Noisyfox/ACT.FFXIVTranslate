@@ -31,6 +31,8 @@ namespace ACT.FFXIVTranslate.translate
 
     internal interface ITranslaterProviderFactory
     {
+        string ProviderId { get; }
+
         string ProviderName { get; }
 
         bool SupportAutoDetect { get; }

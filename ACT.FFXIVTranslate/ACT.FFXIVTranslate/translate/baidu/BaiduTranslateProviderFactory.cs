@@ -17,7 +17,9 @@ namespace ACT.FFXIVTranslate.translate.baidu
             LanguageDef.BuildLangFromCulture("ko", "kor"),
         }.ToList();
 
-        public string ProviderName => "百度翻译";
+        public string ProviderId => "百度翻译";
+        public string ProviderName => LocalizationBase.GetString("translateProviderNameBaidu", ProviderId);
+
         public bool SupportAutoDetect => true;
         public List<LanguageDef> SupportedSrcLanguages => _allSupportedLanguages;
         public List<LanguageDef> SupportedDestLanguages => _allSupportedLanguages;

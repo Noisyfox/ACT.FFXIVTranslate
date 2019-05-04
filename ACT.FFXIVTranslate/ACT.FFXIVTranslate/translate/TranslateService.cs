@@ -69,7 +69,7 @@ namespace ACT.FFXIVTranslate.translate
             TranslateLangFrom = langFrom;
             TranslateLangTo = langTo;
 
-            var factory = AllProviders.First(it => it.ProviderName == provider);
+            var factory = AllProviders.First(it => it.ProviderId == provider);
             var lF = langFrom == LanguageDef.CodeAuto
                 ? null
                 : factory.SupportedSrcLanguages.First(it => it.LangCode == langFrom);

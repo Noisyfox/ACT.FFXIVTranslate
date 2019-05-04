@@ -386,4 +386,19 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="messageWaitKey" xml:space="preserve">
     <value>Wait for Keys...</value>
   </data>
+  <data name="translateProviderNameBaidu" xml:space="preserve">
+    <value>Baidu Translate</value>
+  </data>
+  <data name="translateProviderNameGoogleUnofficial" xml:space="preserve">
+    <value>Google Translate (Unofficial)</value>
+  </data>
+  <data name="translateProviderNameMicrosoft" xml:space="preserve">
+    <value>Microsoft Translator</value>
+  </data>
+  <data name="translateProviderNameYandex" xml:space="preserve">
+    <value>Yandex.Translate</value>
+  </data>
+  <data name="translateProviderNameYoudao" xml:space="preserve">
+    <value>Youdao Translator</value>
+  </data>
 </root>

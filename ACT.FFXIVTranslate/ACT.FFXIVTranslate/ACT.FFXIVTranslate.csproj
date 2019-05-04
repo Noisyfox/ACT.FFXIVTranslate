@@ -97,9 +97,9 @@
     <Compile Include="TextProcessor.cs" />
     <Compile Include="translate\baidu\BaiduTranslateProvider.cs" />
     <Compile Include="translate\baidu\BaiduTranslateProviderFactory.cs" />
-    <Compile Include="translate\bing\AzureAuthToken.cs" />
-    <Compile Include="translate\bing\BingTranslateProvider.cs" />
-    <Compile Include="translate\bing\BingTranslateProviderFactory.cs" />
+    <Compile Include="translate\microsoft\AzureAuthToken.cs" />
+    <Compile Include="translate\microsoft\MicrosoftTranslateProvider.cs" />
+    <Compile Include="translate\microsoft\MicrosoftTranslateProviderFactory.cs" />
     <Compile Include="translate\google_unofficial\GoogleTranslateProvider.cs" />
     <Compile Include="translate\google_unofficial\GoogleTranslateProviderFactory.cs" />
     <Compile Include="translate\ITranslateProvider.cs" />

@@ -2,9 +2,9 @@
 using System.Linq;
 using ACT.FoxCommon.localization;
 
-namespace ACT.FFXIVTranslate.translate.bing
+namespace ACT.FFXIVTranslate.translate.microsoft
 {
-    internal class BingTranslateProviderFactory : ITranslaterProviderFactory
+    internal class MicrosoftTranslateProviderFactory : ITranslaterProviderFactory
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {
@@ -28,7 +28,7 @@ namespace ACT.FFXIVTranslate.translate.bing
 
         public ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst)
         {
-            return new BingTranslateProvider(apiKey, src, dst);
+            return new MicrosoftTranslateProvider(apiKey, src, dst);
         }
     }
 }

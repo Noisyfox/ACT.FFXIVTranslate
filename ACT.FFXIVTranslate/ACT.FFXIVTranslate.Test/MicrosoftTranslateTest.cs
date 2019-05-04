@@ -1,17 +1,17 @@
 ﻿using System.Linq;
-using ACT.FFXIVTranslate.translate.bing;
+using ACT.FFXIVTranslate.translate.microsoft;
 using ACT.FoxCommon.localization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ACT.FFXIVTranslate.Test
 {
     [TestClass]
-    public class BingTranslateTest
+    public class MicrosoftTranslateTest
     {
         [TestMethod]
-        public void TestBingTranslate()
+        public void TestMicrosoftTranslate()
         {
-            var factory = new BingTranslateProviderFactory();
+            var factory = new MicrosoftTranslateProviderFactory();
             var key = "90ebd9b5e7544500a5c1cf3ff7996314";
             var to = LanguageDef.BuildLangFromCulture("zh-CHS");
             var provider = factory.CreateProvider(key, null, to);

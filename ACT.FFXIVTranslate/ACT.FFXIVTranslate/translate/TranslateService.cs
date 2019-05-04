@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using ACT.FFXIVTranslate.translate.baidu;
-using ACT.FFXIVTranslate.translate.bing;
 using ACT.FFXIVTranslate.translate.google_unofficial;
+using ACT.FFXIVTranslate.translate.microsoft;
 using ACT.FFXIVTranslate.translate.yandax;
 using ACT.FFXIVTranslate.translate.youdao;
 using ACT.FoxCommon.core;
@@ -34,7 +34,7 @@ namespace ACT.FFXIVTranslate.translate
             {
                 new YandaxTranslateProviderFactory(),
                 new BaiduTranslateProviderFactory(), 
-                new BingTranslateProviderFactory(),
+                new MicrosoftTranslateProviderFactory(),
                 new GoogleTranslateProviderFactory(),
                 new YoudaoTranslateProviderFactory(), 
             }.ToList();

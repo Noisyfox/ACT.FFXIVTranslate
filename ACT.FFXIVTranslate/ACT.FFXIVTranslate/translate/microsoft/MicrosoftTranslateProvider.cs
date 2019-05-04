@@ -7,16 +7,16 @@ using System.Xml;
 using System.Xml.Linq;
 using ACT.FoxCommon.localization;
 
-namespace ACT.FFXIVTranslate.translate.bing
+namespace ACT.FFXIVTranslate.translate.microsoft
 {
-    internal class BingTranslateProvider : DefaultTranslateProvider
+    internal class MicrosoftTranslateProvider : DefaultTranslateProvider
     {
         private readonly AzureAuthToken _token;
         private readonly string _langFrom;
         private readonly string _langTo;
 
 
-        public BingTranslateProvider(string apiKey, LanguageDef src, LanguageDef dst)
+        public MicrosoftTranslateProvider(string apiKey, LanguageDef src, LanguageDef dst)
         {
             _token = new AzureAuthToken(apiKey);
             _langFrom = src?.LangCode;

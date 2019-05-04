@@ -102,6 +102,8 @@
             this.textBoxProxyDomain = new System.Windows.Forms.TextBox();
             this.buttonProxyApply = new System.Windows.Forms.Button();
             this.numericUpDownProxyPort = new System.Windows.Forms.NumericUpDown();
+            this.tabPageTranslateSettings = new System.Windows.Forms.TabPage();
+            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.tabPageChannelSettings = new System.Windows.Forms.TabPage();
             this.buttonReadColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -147,7 +149,6 @@
             this.buttonChannelColorClipboard = new System.Windows.Forms.Button();
             this.checkBoxChannelLabelClipboard = new System.Windows.Forms.CheckBox();
             this.tabPageLog = new System.Windows.Forms.TabPage();
-            this.translateProviderPanel = new ACT.FFXIVTranslate.translate.TranslateProviderPanel();
             this.groupBoxOverlay.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
@@ -163,6 +164,7 @@
             this.groupBoxProxy.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).BeginInit();
+            this.tabPageTranslateSettings.SuspendLayout();
             this.tabPageChannelSettings.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabPageLog.SuspendLayout();
@@ -786,6 +788,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageGeneralSettings);
+            this.tabControl1.Controls.Add(this.tabPageTranslateSettings);
             this.tabControl1.Controls.Add(this.tabPageChannelSettings);
             this.tabControl1.Controls.Add(this.tabPageLog);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -802,7 +805,6 @@
             this.tabPageGeneralSettings.Controls.Add(this.groupBoxProxy);
             this.tabPageGeneralSettings.Controls.Add(this.tableLayoutPanelMainLanguage);
             this.tabPageGeneralSettings.Controls.Add(this.groupBoxOverlay);
-            this.tabPageGeneralSettings.Controls.Add(this.translateProviderPanel);
             this.tabPageGeneralSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneralSettings.Name = "tabPageGeneralSettings";
             this.tabPageGeneralSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -1130,6 +1132,24 @@
             0,
             0,
             0});
+            // 
+            // tabPageTranslateSettings
+            // 
+            this.tabPageTranslateSettings.Controls.Add(this.translateProviderPanel);
+            this.tabPageTranslateSettings.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTranslateSettings.Name = "tabPageTranslateSettings";
+            this.tabPageTranslateSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTranslateSettings.Size = new System.Drawing.Size(866, 535);
+            this.tabPageTranslateSettings.TabIndex = 3;
+            this.tabPageTranslateSettings.Text = "Translate Settings";
+            this.tabPageTranslateSettings.UseVisualStyleBackColor = true;
+            // 
+            // translateProviderPanel
+            // 
+            this.translateProviderPanel.Location = new System.Drawing.Point(6, 6);
+            this.translateProviderPanel.Name = "translateProviderPanel";
+            this.translateProviderPanel.Size = new System.Drawing.Size(462, 183);
+            this.translateProviderPanel.TabIndex = 3;
             // 
             // tabPageChannelSettings
             // 
@@ -1666,13 +1686,6 @@
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
-            // translateProviderPanel
-            // 
-            this.translateProviderPanel.Location = new System.Drawing.Point(6, 297);
-            this.translateProviderPanel.Name = "translateProviderPanel";
-            this.translateProviderPanel.Size = new System.Drawing.Size(505, 159);
-            this.translateProviderPanel.TabIndex = 2;
-            // 
             // FFXIVTranslateTabControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1700,6 +1713,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownProxyPort)).EndInit();
+            this.tabPageTranslateSettings.ResumeLayout(false);
             this.tabPageChannelSettings.ResumeLayout(false);
             this.tabPageChannelSettings.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -1729,7 +1743,6 @@
         private System.Windows.Forms.Button buttonFont;
         private System.Windows.Forms.CheckBox checkBoxClickthrough;
         private System.Windows.Forms.TextBox textBoxFont;
-        private translate.TranslateProviderPanel translateProviderPanel;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterSay;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterShout;
         private System.Windows.Forms.CheckBox checkBoxChannelFilterYell;
@@ -1831,5 +1844,7 @@
         private System.Windows.Forms.CheckBox checkBoxChannelLabelClipboard;
         private System.Windows.Forms.Label labelShortcutHide;
         private System.Windows.Forms.Button buttonShortcutHide;
+        private System.Windows.Forms.TabPage tabPageTranslateSettings;
+        private translate.TranslateProviderPanel translateProviderPanel;
     }
 }

@@ -828,6 +828,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 翻译设置 的本地化字符串。
+        /// </summary>
+        public static string tabPageTranslateSettings {
+            get {
+                return ResourceManager.GetString("tabPageTranslateSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &quot;上午 &quot;h:MM 的本地化字符串。
         /// </summary>
         public static string timeFormat12HourAM {

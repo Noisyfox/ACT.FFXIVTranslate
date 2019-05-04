@@ -346,6 +346,7 @@ namespace ACT.FFXIVTranslate
         NPC = 0x3d,
 
         Clipboard = 0xf0,
+        Test = 0xf1,
     }
 
     public class ChattingLine

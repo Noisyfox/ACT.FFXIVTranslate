@@ -401,4 +401,7 @@
   <data name="translateProviderNameYoudao" xml:space="preserve">
     <value>有道翻译</value>
   </data>
+  <data name="tabPageTranslateSettings" xml:space="preserve">
+    <value>翻译设置</value>
+  </data>
 </root>

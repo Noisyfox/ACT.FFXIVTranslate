@@ -91,7 +91,7 @@ namespace ACT.FFXIVTranslate
         {
             InitializeComponent();
 
-            _channelSettings = Enum.GetValues(typeof(EventCode)).OfType<EventCode>().Where(it => it != EventCode.TellTo)
+            _channelSettings = Enum.GetValues(typeof(EventCode)).OfType<EventCode>().Where(it => it != EventCode.TellTo && it <= EventCode.Clipboard)
                 .Select(it => new ChannelSettingsMapper(it, Controls)).ToList();
 
             comboBoxLanguage.DisplayMember = "DisplayName";

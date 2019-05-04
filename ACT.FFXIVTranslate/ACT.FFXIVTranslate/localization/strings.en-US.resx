@@ -401,4 +401,7 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="translateProviderNameYoudao" xml:space="preserve">
     <value>Youdao Translator</value>
   </data>
+  <data name="tabPageTranslateSettings" xml:space="preserve">
+    <value>Translate Settings</value>
+  </data>
 </root>

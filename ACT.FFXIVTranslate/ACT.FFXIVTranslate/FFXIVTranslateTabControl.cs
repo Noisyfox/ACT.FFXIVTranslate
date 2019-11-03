@@ -187,6 +187,12 @@ namespace ACT.FFXIVTranslate
             }
 
             translateProviderPanel.PostAttachToAct(plugin);
+
+            if (!UpdateChecker.IsEnabled)
+            {
+                // Hide update checker panel
+                groupBoxUpdate.Visible = false;
+            }
         }
 
         public void DoLocalization()

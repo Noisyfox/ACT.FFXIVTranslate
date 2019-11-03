@@ -407,4 +407,31 @@ Usually at Documents\\My Games\\FINAL FANTASY XIV - A Realm Reborn and has a nam
   <data name="groupBoxTranslateTest" xml:space="preserve">
     <value>Translate Test</value>
   </data>
+  <data name="checkBoxChannelFilterCWLS1" xml:space="preserve">
+    <value>Cross-world Linkshell 1</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS2" xml:space="preserve">
+    <value>Cross-world Linkshell 2</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS3" xml:space="preserve">
+    <value>Cross-world Linkshell 3</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS4" xml:space="preserve">
+    <value>Cross-world Linkshell 4</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS5" xml:space="preserve">
+    <value>Cross-world Linkshell 5</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS6" xml:space="preserve">
+    <value>Cross-world Linkshell 6</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS7" xml:space="preserve">
+    <value>Cross-world Linkshell 7</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS8" xml:space="preserve">
+    <value>Cross-world Linkshell 8</value>
+  </data>
+  <data name="channelLabelCWLS" xml:space="preserve">
+    <value>CWLS{0}</value>
+  </data>
 </root>

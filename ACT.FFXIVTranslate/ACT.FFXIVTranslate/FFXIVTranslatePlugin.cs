@@ -276,6 +276,7 @@ namespace ACT.FFXIVTranslate
 
             Debug.WriteLine(line);
             Debug.WriteLine($"eventCode={data[2]}, known={knownCode}, {name} says: {content}");
+            Controller.NotifyLogMessageAppend(false, $"eventCode={data[2]}, known={knownCode}, {name} says: {content}");
 //            Controller.NotifyOverlayContentUpdated(false,
 //                $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
 
@@ -343,6 +344,14 @@ namespace ACT.FFXIVTranslate
         Novice = 0x1b,
 //            Emote = 0x1d,
         Yell = 0x1e,
+        CWLS1 = 0x25,
+        CWLS2 = 0x65,
+        CWLS3 = 0x66,
+        CWLS4 = 0x67,
+        CWLS5 = 0x68,
+        CWLS6 = 0x69,
+        CWLS7 = 0x6a,
+        CWLS8 = 0x6b,
         NPC = 0x3d,
 
         Clipboard = 0xf0,

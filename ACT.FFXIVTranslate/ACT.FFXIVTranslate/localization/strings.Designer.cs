@@ -187,6 +187,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 跨服贝{0} 的本地化字符串。
+        /// </summary>
+        public static string channelLabelCWLS {
+            get {
+                return ResourceManager.GetString("channelLabelCWLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 24小时制 的本地化字符串。
         /// </summary>
         public static string checkBox24Hour {
@@ -228,6 +237,78 @@ namespace ACT.FFXIVTranslate.localization {
         public static string checkBoxChannelFilterClipboard {
             get {
                 return ResourceManager.GetString("checkBoxChannelFilterClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝1 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS1 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝2 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS2 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝3 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS3 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝4 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS4 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝5 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS5 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝6 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS6 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝7 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS7 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 跨服通讯贝8 的本地化字符串。
+        /// </summary>
+        public static string checkBoxChannelFilterCWLS8 {
+            get {
+                return ResourceManager.GetString("checkBoxChannelFilterCWLS8", resourceCulture);
             }
         }
         

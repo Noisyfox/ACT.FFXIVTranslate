@@ -206,6 +206,22 @@ namespace ACT.FFXIVTranslate
                                 return $"[7]<{nameWithWorld}> ";
                             case EventCode.LS8:
                                 return $"[8]<{nameWithWorld}> ";
+                            case EventCode.CWLS1:
+                                return $"[{GetCWLSLabel(1)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS2:
+                                return $"[{GetCWLSLabel(2)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS3:
+                                return $"[{GetCWLSLabel(3)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS4:
+                                return $"[{GetCWLSLabel(4)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS5:
+                                return $"[{GetCWLSLabel(5)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS6:
+                                return $"[{GetCWLSLabel(6)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS7:
+                                return $"[{GetCWLSLabel(7)}]<{nameWithWorld}> ";
+                            case EventCode.CWLS8:
+                                return $"[{GetCWLSLabel(8)}]<{nameWithWorld}> ";
                             case EventCode.FreeCompany:
                                 return $"[FC]<{nameWithWorld}> ";
                             case EventCode.Party:
@@ -218,6 +234,11 @@ namespace ACT.FFXIVTranslate
             }
 
             return $"{extractedName.Item1}: ";
+        }
+
+        private static string GetCWLSLabel(int n)
+        {
+            return string.Format(strings.channelLabelCWLS, n);
         }
 
         public static string BuildRTF(

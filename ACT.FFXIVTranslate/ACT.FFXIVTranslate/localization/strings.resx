@@ -407,4 +407,31 @@
   <data name="groupBoxTranslateTest" xml:space="preserve">
     <value>翻译测试</value>
   </data>
+  <data name="checkBoxChannelFilterCWLS1" xml:space="preserve">
+    <value>跨服通讯贝1</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS2" xml:space="preserve">
+    <value>跨服通讯贝2</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS3" xml:space="preserve">
+    <value>跨服通讯贝3</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS4" xml:space="preserve">
+    <value>跨服通讯贝4</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS5" xml:space="preserve">
+    <value>跨服通讯贝5</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS6" xml:space="preserve">
+    <value>跨服通讯贝6</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS7" xml:space="preserve">
+    <value>跨服通讯贝7</value>
+  </data>
+  <data name="checkBoxChannelFilterCWLS8" xml:space="preserve">
+    <value>跨服通讯贝8</value>
+  </data>
+  <data name="channelLabelCWLS" xml:space="preserve">
+    <value>跨服贝{0}</value>
+  </data>
 </root>

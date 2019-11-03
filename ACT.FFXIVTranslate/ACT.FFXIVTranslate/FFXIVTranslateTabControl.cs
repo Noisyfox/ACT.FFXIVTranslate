@@ -67,6 +67,9 @@ namespace ACT.FFXIVTranslate
                     case EventCode.NPC:
                         ColorSettingKey = "ColorNpcSay";
                         break;
+                    case EventCode.CWLS1:
+                        ColorSettingKey = "ColorCWLS";
+                        break;
                     default:
                         ColorSettingKey = $"Color{name}";
                         break;

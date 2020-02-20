@@ -176,6 +176,7 @@
             this.comboBoxLangFrom.Name = "comboBoxLangFrom";
             this.comboBoxLangFrom.Size = new System.Drawing.Size(138, 20);
             this.comboBoxLangFrom.TabIndex = 7;
+            this.comboBoxLangFrom.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLangFrom_SelectedIndexChanged);
             // 
             // comboBoxLangTo
             // 

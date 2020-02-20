@@ -27,7 +27,7 @@ namespace ACT.FFXIVTranslate.translate.tencent
             return _allSupportedLanguages.Where(it => it != srcLanguage).ToList();
         }
         public ProviderLegalInfo LegalInfo => null;
-        public string DefaultPublicKey => null;
+        public string DefaultPublicKey => "AKIDMSHqSphlMjpeFsgPu9ByUjzZz9KHnOZf:1nLn10iCcsscLq54qY2JnMglaPyHK7oG";
 
         public ITranslateProvider CreateProvider(string apiKey, LanguageDef src, LanguageDef dst)
         {

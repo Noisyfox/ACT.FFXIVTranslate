@@ -4,7 +4,7 @@ using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.yandax
 {
-    internal class YandaxTranslateProviderFactory : ITranslaterProviderFactory
+    internal class YandaxTranslateProviderFactory : ITranslateProviderFactory
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {

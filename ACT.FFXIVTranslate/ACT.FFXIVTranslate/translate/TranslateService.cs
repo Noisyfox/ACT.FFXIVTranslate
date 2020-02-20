@@ -29,14 +29,14 @@ namespace ACT.FFXIVTranslate.translate
         private bool AddTimestamp { get; set; }
         private bool Timestamp24Hour { get; set; }
 
-        public List<ITranslaterProviderFactory> AllProviders { get; } =
-            new ITranslaterProviderFactory[]
+        public List<ITranslateProviderFactory> AllProviders { get; } =
+            new ITranslateProviderFactory[]
             {
                 new YandaxTranslateProviderFactory(),
-                new BaiduTranslateProviderFactory(), 
+                new BaiduTranslateProviderFactory(),
                 new MicrosoftTranslateProviderFactory(),
                 new GoogleTranslateProviderFactory(),
-                new YoudaoTranslateProviderFactory(), 
+                new YoudaoTranslateProviderFactory(),
             }.ToList();
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)

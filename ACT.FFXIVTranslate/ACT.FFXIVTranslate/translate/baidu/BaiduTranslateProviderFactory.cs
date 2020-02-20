@@ -4,7 +4,7 @@ using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.baidu
 {
-    internal class BaiduTranslateProviderFactory : ITranslaterProviderFactory
+    internal class BaiduTranslateProviderFactory : ITranslateProviderFactory
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {

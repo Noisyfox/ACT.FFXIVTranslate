@@ -14,8 +14,8 @@ namespace ACT.FFXIVTranslate.translate
         public TranslateProviderPanel()
         {
             InitializeComponent();
-            comboBoxProvider.DisplayMember = nameof(ITranslaterProviderFactory.ProviderName);
-            comboBoxProvider.ValueMember = nameof(ITranslaterProviderFactory.ProviderId);
+            comboBoxProvider.DisplayMember = nameof(ITranslateProviderFactory.ProviderName);
+            comboBoxProvider.ValueMember = nameof(ITranslateProviderFactory.ProviderId);
             comboBoxLangFrom.DisplayMember = nameof(LanguageDef.DisplayName);
             comboBoxLangFrom.ValueMember = nameof(LanguageDef.LangCode);
             comboBoxLangTo.DisplayMember = nameof(LanguageDef.DisplayName);
@@ -43,7 +43,7 @@ namespace ACT.FFXIVTranslate.translate
 
         private void comboBoxProvider_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedProvider = (ITranslaterProviderFactory) comboBoxProvider.SelectedItem;
+            var selectedProvider = (ITranslateProviderFactory) comboBoxProvider.SelectedItem;
 
             if (selectedProvider != null)
             {
@@ -58,7 +58,7 @@ namespace ACT.FFXIVTranslate.translate
 
         private void UpdateSupportedDestLanguage()
         {
-            var selectedProvider = (ITranslaterProviderFactory) comboBoxProvider.SelectedItem;
+            var selectedProvider = (ITranslateProviderFactory) comboBoxProvider.SelectedItem;
             var selectedFromLang = (LanguageDef) comboBoxLangFrom.SelectedItem;
 
             if (selectedProvider != null && selectedFromLang != null)
@@ -154,7 +154,7 @@ namespace ACT.FFXIVTranslate.translate
         private void buttonFreeKey_Click(object sender, EventArgs e)
         {
 
-            var selectedProvider = (ITranslaterProviderFactory) comboBoxProvider.SelectedItem;
+            var selectedProvider = (ITranslateProviderFactory) comboBoxProvider.SelectedItem;
 
             if (selectedProvider != null)
             {

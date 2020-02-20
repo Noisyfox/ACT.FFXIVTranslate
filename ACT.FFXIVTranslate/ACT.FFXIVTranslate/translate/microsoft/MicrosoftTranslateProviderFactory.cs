@@ -4,7 +4,7 @@ using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.microsoft
 {
-    internal class MicrosoftTranslateProviderFactory : ITranslaterProviderFactory
+    internal class MicrosoftTranslateProviderFactory : ITranslateProviderFactory
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {

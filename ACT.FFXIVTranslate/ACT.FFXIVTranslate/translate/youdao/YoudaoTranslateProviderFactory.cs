@@ -4,7 +4,7 @@ using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.youdao
 {
-    internal class YoudaoTranslateProviderFactory : ITranslaterProviderFactory
+    internal class YoudaoTranslateProviderFactory : ITranslateProviderFactory
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {

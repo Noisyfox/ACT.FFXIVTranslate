@@ -4,7 +4,7 @@ using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate.google_unofficial
 {
-    internal class GoogleTranslateProviderFactory : ITranslaterProviderFactory
+    internal class GoogleTranslateProviderFactory : ITranslateProviderFactory
     {
         private readonly List<LanguageDef> _allSupportedLanguages = new[]
         {

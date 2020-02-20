@@ -14,7 +14,7 @@ namespace ACT.FFXIVTranslate.translate
     }
 
     /// <summary>
-    /// A provider that use TextProcessor.NaiveCleanText() as the econtent preprossor
+    /// A provider that use TextProcessor.NaiveCleanText() as the content preprocessor
     /// and ignores all empty lines after that.
     /// </summary>
     internal abstract class DefaultTranslateProvider : ITranslateProvider
@@ -29,7 +29,7 @@ namespace ACT.FFXIVTranslate.translate
         }
     }
 
-    internal interface ITranslaterProviderFactory
+    internal interface ITranslateProviderFactory
     {
         string ProviderId { get; }
 

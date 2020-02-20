@@ -1,10 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using System.Xml;
+using ACT.FoxCommon.core;
 using ACT.FoxCommon.shortcut;
 using Advanced_Combat_Tracker;
 
@@ -15,44 +13,36 @@ namespace ACT.FFXIVTranslate
     /// </summary>
     internal class PluginSettings : SettingsSerializer
     {
-        private readonly string _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config\\ACT.FFXIVTranslate.config.xml");
+        private readonly SettingsIO _settingsIo = new SettingsIO("ACT.FFXIVTranslate");
 
         public PluginSettings(object ParentSettingsClass) : base(ParentSettingsClass)
         {
+            _settingsIo.WriteSettings = writer =>
+            {
+                writer.WriteStartElement("SettingsSerializer");
+                ExportToXml(writer);
+                writer.WriteEndElement();
+            };
+
+            _settingsIo.ReadSettings = reader =>
+            {
+                switch (reader.LocalName)
+                {
+                    case "SettingsSerializer":
+                        ImportFromXml(reader);
+                        break;
+                }
+            };
         }
 
         public void Load()
         {
-            if (File.Exists(_settingsFile))
-            {
-                FileStream fs = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
-                XmlTextReader reader = new XmlTextReader(fs);
-                while (reader.Read())
-                {
-                    if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "SettingsSerializer")
-                        ImportFromXml(reader);
-                }
-                reader.Close();
-            }
+            _settingsIo.Load();
         }
 
         public void Save()
         {
-            FileStream stream = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-            XmlTextWriter writer = new XmlTextWriter(stream, Encoding.UTF8);
-            writer.Formatting = Formatting.Indented;
-            writer.Indentation = 1;
-            writer.IndentChar = '\t';
-            writer.WriteStartDocument(true);
-            writer.WriteStartElement("Config");
-            writer.WriteStartElement("SettingsSerializer");
-            ExportToXml(writer);
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-            writer.WriteEndDocument();
-            writer.Flush();
-            writer.Close();
+            _settingsIo.Save();
         }
     }
 

@@ -460,4 +460,7 @@
 2.重置为默认设置，这也将导致当前设置丢失！
 3.直接忽略设置文件的错误并继续，这将不会更改任何现有设置，因此你可以手动检查你的设置文件并尝试恢复，但是本插件将无法正常工作！</value>
   </data>
+  <data name="translateProviderNameTencent" xml:space="preserve">
+    <value>腾讯翻译君</value>
+  </data>
 </root>

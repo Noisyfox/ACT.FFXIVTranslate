@@ -5,6 +5,7 @@ using System.Threading;
 using ACT.FFXIVTranslate.translate.baidu;
 using ACT.FFXIVTranslate.translate.google_unofficial;
 using ACT.FFXIVTranslate.translate.microsoft;
+using ACT.FFXIVTranslate.translate.tencent;
 using ACT.FFXIVTranslate.translate.yandax;
 using ACT.FFXIVTranslate.translate.youdao;
 using ACT.FoxCommon.core;
@@ -37,6 +38,7 @@ namespace ACT.FFXIVTranslate.translate
                 new MicrosoftTranslateProviderFactory(),
                 new GoogleTranslateProviderFactory(),
                 new YoudaoTranslateProviderFactory(),
+                new TencentTranslateProviderFactory(),
             }.ToList();
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)

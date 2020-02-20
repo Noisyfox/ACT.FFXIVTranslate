@@ -1040,6 +1040,15 @@ namespace ACT.FFXIVTranslate.localization {
         }
         
         /// <summary>
+        ///   查找类似 腾讯翻译君 的本地化字符串。
+        /// </summary>
+        public static string translateProviderNameTencent {
+            get {
+                return ResourceManager.GetString("translateProviderNameTencent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Yandex 翻译 的本地化字符串。
         /// </summary>
         public static string translateProviderNameYandex {

@@ -104,6 +104,8 @@
     <Compile Include="translate\google_unofficial\GoogleTranslateProvider.cs" />
     <Compile Include="translate\google_unofficial\GoogleTranslateProviderFactory.cs" />
     <Compile Include="translate\ITranslateProvider.cs" />
+    <Compile Include="translate\tencent\TencentTranslateProvider.cs" />
+    <Compile Include="translate\tencent\TencentTranslateProviderFactory.cs" />
     <Compile Include="translate\TranslateProviderPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

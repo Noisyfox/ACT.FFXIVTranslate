@@ -22,12 +22,13 @@ Any help would be appreciated!
 4. 将悬浮窗拖拽到合适的位置，大功告成！
 
 # 翻译来源设置
-目前本插件支持以下五个在线翻译API:
+目前本插件支持以下六个在线翻译API:
 - Yandax.Translate
 - 百度翻译
 - Microsoft Translator
 - 谷歌翻译非官方版
 - 有道翻译
+- 腾讯翻译
 
 其中谷歌翻译非官方版不需要输入API key就可以使用。
 我为 Yandax.Translate 与 Microsoft Translator 这两个翻译API都申请了免费的API key提供给大家测试或者临时使用。
@@ -61,8 +62,8 @@ Any help would be appreciated!
 1. 访问 http://api.fanyi.baidu.com/api/trans/product/index
 2. 点击页面中的 **申请接入** 按钮，如有需要请登录你的百度账号。
 3. 根据页面提示输入所需资料并继续。
-4. 当提示**API接口权限申请成功**时，你可以在下方找到你的**APP ID**和**密钥**。
-5. 在本插件的**API密钥**框中输入 **APP ID**:**密钥**，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
+4. 当提示**API接口权限申请成功**时，你可以在下方找到你的 *APP ID* 和 *密钥*。
+5. 在本插件的**API密钥**框中输入 *APP ID*:*密钥*，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
 
 ## 有道翻译
 1. 访问 http://ai.youdao.com/index.s 并登录。
@@ -70,8 +71,22 @@ Any help would be appreciated!
 3. 点击**创建实例**按钮，按照提示创建好一个实例。
 4. 页面左侧选择**应用管理**->**我的应用**。
 5. 点击**创建应用**按钮，按照提示创建好一个应用。在创建应用完成后的**应用实例添加**对话框中，选中刚才创建好的**自然语言翻译服务**的实例，并点击**提交更改**按钮。
-6. 在**应用详情**页面可以看到应用的**应用ID**以及**应用密钥**。
-7. 在本插件的**API密钥**框中输入 **应用ID**:**应用密钥**，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
+6. 在**应用详情**页面可以看到应用的 *应用ID* 以及 *应用密钥*。
+7. 在本插件的**API密钥**框中输入 *应用ID*:*应用密钥*，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
+
+## 腾讯翻译
+1. 访问 https://cloud.tencent.com/product/tmt/， 点击 **立即使用** 按钮。按提示登录腾讯云。
+2. 首次使用会提示要开通机器翻译功能，按提示开通免费版本（当然你愿意可以开收费版:P）。
+3. 开通机器翻译后，访问 https://console.cloud.tencent.com/cam/capi 并点击 **新建密钥** 创建一组 *SecretId* 和 *SecretKey*。
+    - 可能会看到一个关于使用子用户的高风险提示，如果你只是个人使用那么可以点击 **继续使用**。
+    - **请勿将自己的密钥共享给他人！该密钥拥有完整的腾讯云权限，随意共享可能导致您的财产损失！**
+    - **请勿将自己的密钥共享给他人！该密钥拥有完整的腾讯云权限，随意共享可能导致您的财产损失！**
+    - **请勿将自己的密钥共享给他人！该密钥拥有完整的腾讯云权限，随意共享可能导致您的财产损失！**
+    - *如果您熟悉腾讯云的权限管理机制的话，您是可以创建出一个能够安全共享的密钥，然而该操作比较复杂，除非您知道自己在做什么，否则***绝对不要***与任何人共享您的密钥！*
+    - **共享密钥导致的任何损失，本人不承担任何责任！**
+    - **本插件在任何情况下都不会与任何人共享您输入的密钥。**
+    - **如果您要截图分享您的插件设置，请注意给自己的密钥打码！**
+4. 在本插件的 **API密钥** 框中输入 *SecretId*:*SecretKey*，注意分隔符为半角冒号，前后均无任何空格，请不要输错。
 
 # Q & A
 > Q: 启用该插件后我的ACT窗口变小了！
@@ -107,12 +122,13 @@ where you can find the ACT's main executable file. Replace any existing files.
 4. Drag the translation window to your prefer location and enjoy!
 
 # Translator Provider Settings
-Currently this plugin support 5 providers:
+Currently this plugin support 6 providers:
 - Yandax.Translate
 - Baidu Translator
 - Microsoft Translator
 - Unofficial Google Translate
 - Youdao Translator
+- Tencent Translator
 
 The unofficial Google Translate doesn't require an API key.
 Yandax.Translate and Microsoft Translator providers are bundled with a free public API key for testing / temporarily using.

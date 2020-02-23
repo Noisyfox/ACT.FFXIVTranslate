@@ -24,9 +24,9 @@ namespace ACT.FFXIVTranslate
 
         private bool _isClosed = false;
 
-        private bool _showOverlay = false;
-        private bool _autoHide = false;
-        private string _activatedExePath = null;
+        private volatile bool _showOverlay = false;
+        private volatile bool _autoHide = false;
+        private volatile string _activatedExePath = null;
 
         public TranslateWindow()
         {
@@ -234,45 +234,43 @@ namespace ACT.FFXIVTranslate
         {
             if (Dispatcher.CheckAccess())
             {
-                var targetVisible = false;
-                if (_showOverlay && _autoHide)
+                if (_isClosed)
                 {
-                    if (_activatedExePath == null)
+                    return;
+                }
+
+                var showOverlay = _showOverlay;
+                var autoHide = _autoHide;
+                var activatedExePath = _activatedExePath;
+
+                var targetVisible = Visibility.Hidden;
+                if (showOverlay && autoHide)
+                {
+                    if (activatedExePath == null)
                     {
-                        targetVisible = true;
+                        targetVisible = Visibility.Visible;
                     }
                     else
                     {
-                        if (Utils.IsGameExePath(_activatedExePath) || Utils.IsActExePath(_activatedExePath))
+                        if (Utils.IsGameExePath(activatedExePath) || Utils.IsActExePath(activatedExePath))
                         {
-                            targetVisible = true;
+                            targetVisible = Visibility.Visible;
                         }
                     }
                 }
                 else
                 {
-                    targetVisible = _showOverlay;
+                    targetVisible = showOverlay ? Visibility.Visible : Visibility.Hidden;
                 }
 
-                ApplyVisibility(targetVisible);
+                if (Visibility != targetVisible)
+                {
+                    Visibility = targetVisible;
+                }
             }
             else
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(CheckVisibility));
-            }
-        }
-
-        private void ApplyVisibility(bool visibility)
-        {
-            if (_isClosed)
-            {
-                return;
-            }
-
-            var t = visibility ? Visibility.Visible : Visibility.Hidden;
-            if (Visibility != t)
-            {
-                Visibility = t;
             }
         }
     }

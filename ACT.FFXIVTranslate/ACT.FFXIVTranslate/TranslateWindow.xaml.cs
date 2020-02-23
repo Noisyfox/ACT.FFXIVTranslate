@@ -232,49 +232,47 @@ namespace ACT.FFXIVTranslate
 
         private void CheckVisibility()
         {
-            var targetVisible = false;
-            if (_showOverlay && _autoHide)
+            if (Dispatcher.CheckAccess())
             {
-                if (_activatedExePath == null)
+                var targetVisible = false;
+                if (_showOverlay && _autoHide)
                 {
-                    targetVisible = true;
-                }
-                else
-                {
-                    if (Utils.IsGameExePath(_activatedExePath) || Utils.IsActExePath(_activatedExePath))
+                    if (_activatedExePath == null)
                     {
                         targetVisible = true;
                     }
+                    else
+                    {
+                        if (Utils.IsGameExePath(_activatedExePath) || Utils.IsActExePath(_activatedExePath))
+                        {
+                            targetVisible = true;
+                        }
+                    }
                 }
+                else
+                {
+                    targetVisible = _showOverlay;
+                }
+
+                ApplyVisibility(targetVisible);
             }
             else
             {
-                targetVisible = _showOverlay;
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(CheckVisibility));
             }
-
-            ApplyVisibility(targetVisible);
         }
 
         private void ApplyVisibility(bool visibility)
         {
-            if (Dispatcher.CheckAccess())
+            if (_isClosed)
             {
-                if (_isClosed)
-                {
-                    return;
-                }
-                var t = visibility ? Visibility.Visible : Visibility.Hidden;
-                if (Visibility != t)
-                {
-                    Visibility = t;
-                }
+                return;
             }
-            else
+
+            var t = visibility ? Visibility.Visible : Visibility.Hidden;
+            if (Visibility != t)
             {
-                Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(delegate
-                {
-                    ApplyVisibility(visibility);
-                }));
+                Visibility = t;
             }
         }
     }

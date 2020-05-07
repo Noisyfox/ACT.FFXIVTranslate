@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using ACT.FFXIVTranslate.localization;
 using ACT.FoxCommon;
+using ACT.FoxCommon.dpi;
 using ACT.FoxCommon.localization;
 using ACT.FoxCommon.shortcut;
 using ACT.FoxCommon.update;
@@ -101,6 +102,8 @@ namespace ACT.FFXIVTranslate
             comboBoxLanguage.DataSource = Localization.SupportedLanguages;
 
             labelCurrentVersionValue.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();
+
+            this.AdjustForDpiScaling();
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)

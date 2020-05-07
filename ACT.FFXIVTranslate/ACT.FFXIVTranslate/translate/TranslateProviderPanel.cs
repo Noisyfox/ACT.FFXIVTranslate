@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using ACT.FFXIVTranslate.localization;
+using ACT.FoxCommon.dpi;
 using ACT.FoxCommon.localization;
 
 namespace ACT.FFXIVTranslate.translate
@@ -20,6 +21,8 @@ namespace ACT.FFXIVTranslate.translate
             comboBoxLangFrom.ValueMember = nameof(LanguageDef.LangCode);
             comboBoxLangTo.DisplayMember = nameof(LanguageDef.DisplayName);
             comboBoxLangTo.ValueMember = nameof(LanguageDef.LangCode);
+
+            this.AdjustForDpiScaling();
         }
 
         public void AttachToAct(FFXIVTranslatePlugin plugin)

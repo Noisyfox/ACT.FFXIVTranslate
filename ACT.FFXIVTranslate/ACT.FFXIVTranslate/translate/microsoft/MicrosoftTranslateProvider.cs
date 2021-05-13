@@ -3,12 +3,31 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Xml;
-using System.Xml.Linq;
 using ACT.FoxCommon.localization;
+using Newtonsoft.Json;
 
 namespace ACT.FFXIVTranslate.translate.microsoft
 {
+    internal class RequestItem
+    {
+        public readonly string Text;
+
+        public RequestItem(string text)
+        {
+            Text = text;
+        }
+    }
+
+    internal class ResponseItem
+    {
+        internal class TranslationItem
+        {
+            public string text;
+        }
+
+        public List<TranslationItem> translations;
+    }
+
     internal class MicrosoftTranslateProvider : DefaultTranslateProvider
     {
         private readonly AzureAuthToken _token;
@@ -23,59 +42,26 @@ namespace ACT.FFXIVTranslate.translate.microsoft
             _langTo = dst.LangCode;
         }
 
-        private const string ServiceUri = "https://api.microsofttranslator.com/v2/Http.svc/TranslateArray";
-
-        private const string NsService = "http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2";
-        private const string NsArrays = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
-
+        private const string ServiceUri = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";
 
         public override void Translate(List<ChattingLine> chattingLines)
         {
             try
             {
                 // Build text
-                var textBuilder = new StringBuilder();
-                var settings = new XmlWriterSettings {OmitXmlDeclaration = true};
-                var textWriter = XmlWriter.Create(textBuilder, settings);
-                textWriter.WriteStartElement("TranslateArrayRequest");
+                var uri = $"{ServiceUri}&from={_langFrom}&to={_langTo}";
+                Console.WriteLine("Uri is: {0}.", uri);
+
+                var bodyContent = new List<RequestItem>();
+                foreach (var line in chattingLines)
                 {
-                    textWriter.WriteElementString("AppId", null);
-                    textWriter.WriteElementString("From", _langFrom);
-
-                    textWriter.WriteStartElement("Options");
-                    {
-                        textWriter.WriteElementString("Category", NsService, "general");
-                        textWriter.WriteElementString("ContentType", NsService, "text/html");
-                        textWriter.WriteElementString("ReservedFlags", NsService, null);
-                        textWriter.WriteElementString("State", NsService, "0");
-                        textWriter.WriteElementString("Uri", NsService, "all");
-                        textWriter.WriteElementString("User", NsService, "all");
-
-                        textWriter.WriteEndElement();
-                    }
-
-                    textWriter.WriteStartElement("Texts");
-                    {
-                        foreach (var line in chattingLines)
-                        {
-                            textWriter.WriteElementString("string", NsArrays,
-                                WebUtility.HtmlEncode(line.CleanedContent));
-                        }
-
-                        textWriter.WriteEndElement();
-                    }
-
-                    textWriter.WriteElementString("To", _langTo);
-
-                    textWriter.WriteEndElement();
+                    bodyContent.Add(new RequestItem(line.CleanedContent));
                 }
-                textWriter.Flush();
-                textWriter.Close();
-                var requestBody = textBuilder.ToString();
+                var requestBody = JsonConvert.SerializeObject(bodyContent, Formatting.None);
                 Console.WriteLine("Request body is: {0}.", requestBody);
 
                 // Call Microsoft translate API.
-                DoRequest(GetAuthToken(), requestBody, out string responseBody, out HttpStatusCode statusCode);
+                DoRequest(GetAuthToken(), uri, requestBody, out string responseBody, out HttpStatusCode statusCode);
 
                 // Parse result
                 switch (statusCode)
@@ -84,18 +70,14 @@ namespace ACT.FFXIVTranslate.translate.microsoft
                         Console.WriteLine("Request status is OK. Response body is:");
                         Console.WriteLine(responseBody);
                         Console.WriteLine("Result of translate array method is:");
-                        var doc = XDocument.Parse(responseBody);
-                        var ns = XNamespace.Get(NsService);
+
+                        var response = JsonConvert.DeserializeObject<List<ResponseItem>>(responseBody);
                         var sourceTextCounter = 0;
-                        foreach (var xe in doc.Descendants(ns + "TranslateArrayResponse"))
+                        foreach (var line in response)
                         {
-                            foreach (var node in xe.Elements(ns + "TranslatedText"))
-                            {
-                                var result = WebUtility.HtmlDecode(node.Value);
-                                Console.WriteLine("\n\nSource text: {0}\nTranslated Text: {1}",
-                                    chattingLines[sourceTextCounter].RawContent, result);
-                                chattingLines[sourceTextCounter].TranslatedContent = result;
-                            }
+                            var result = line.translations[0].text;
+                            Console.WriteLine("\n\nSource text: {0}\nTranslated Text: {1}", chattingLines[sourceTextCounter].RawContent, result);
+                            chattingLines[sourceTextCounter].TranslatedContent = result;
                             sourceTextCounter++;
                         }
                         break;
@@ -148,18 +130,20 @@ namespace ACT.FFXIVTranslate.translate.microsoft
             return authToken;
         }
 
-        private void DoRequest(string authToken, string requestBody,
+        private void DoRequest(string authToken, string uri, string requestBody,
             out string responseBody, out HttpStatusCode statusCode)
         {
             string _responseBody;
             HttpStatusCode _statusCode;
 
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
             using (var client = ProxyFactory.Instance.NewClient())
             using (var request = new HttpRequestMessage())
             {
                 request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(ServiceUri);
-                request.Content = new StringContent(requestBody, Encoding.UTF8, "text/xml");
+                request.RequestUri = new Uri(uri);
+                request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
                 request.Headers.Add("Authorization", authToken);
                 var response = client.SendAsync(request).Result;
                 _responseBody = response.Content.ReadAsStringAsync().Result;

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using ACT.FFXIVPing;
@@ -28,14 +29,14 @@ namespace ACT.FFXIVTranslate
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
         private ShortkeyManager<MainController, FFXIVTranslatePlugin> _shortkeyManager;
 
-        private readonly LogReadThread _workingThread = new LogReadThread();
+        //private readonly LogReadThread _workingThread = new LogReadThread();
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
 
         private bool _isGameActivated = false;
 
         public FFXIVTranslatePlugin()
         {
-            _workingThread.OnLogLineRead += OnLogLineRead;
+            //_workingThread.OnLogLineRead += OnLogLineRead;
         }
 
         public override void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
@@ -89,9 +90,10 @@ namespace ACT.FFXIVTranslate
 
                 DoLocalization();
 
-                ActGlobals.oFormActMain.LogFileChanged += OFormActMainOnLogFileChanged;
+                //ActGlobals.oFormActMain.LogFileChanged += OFormActMainOnLogFileChanged;
+                ActGlobals.oFormActMain.OnLogLineRead += OFormActMain_OnLogLineRead;
 
-                _workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
+                //_workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
 
                 Settings.NotifySettingsLoaded();
 
@@ -208,15 +210,25 @@ namespace ACT.FFXIVTranslate
             TranslateService.SubmitNewLine(chat);
         }
 
-        private void OFormActMainOnLogFileChanged(bool isImport, string newLogFileName)
+        //private void OFormActMainOnLogFileChanged(bool isImport, string newLogFileName)
+        //{
+        //    if (isImport)
+        //    {
+        //        return;
+        //    }
+
+        //    // Read raw logs by ourself
+        //    _workingThread.StartWorkingThread(newLogFileName);
+        //}
+
+        private void OFormActMain_OnLogLineRead(bool isImport, LogLineEventArgs logInfo)
         {
             if (isImport)
             {
                 return;
             }
 
-            // Read raw logs by ourself
-            _workingThread.StartWorkingThread(newLogFileName);
+            OnLogLineRead(logInfo.logLine);
         }
 
         public override void DeInitPlugin()
@@ -228,9 +240,10 @@ namespace ACT.FFXIVTranslate
             
             OverlayWPF?.Close();
 
-            ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
+            ActGlobals.oFormActMain.OnLogLineRead -= OFormActMain_OnLogLineRead;
+            //ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
             TranslateService.Stop();
-            _workingThread.StopWorkingThread();
+            //_workingThread.StopWorkingThread();
             UpdateChecker.Stop();
 
             if (_settingsLoaded)
@@ -246,14 +259,22 @@ namespace ACT.FFXIVTranslate
             // Parse log line
 
             // The legal talking log line has the following format:
-            // 00|[timestamp]|[event code]|[name or to?]|[content]<|[MD5]>
+            // [HH:mm:ss.fff] 00:<event code>:<name or to?>:<content>
             // eg:
-            // 00|2017-07-13T22:26:50.0000000+08:00|0010|Pinoko Fox|哈呀|f94872989411d9f173c9e9b36e29c9d1
-            // or
-            // 00|2017-07-13T22:26:50.0000000+08:00|0010|Pinoko Fox|哈呀
+            // [21:34:27.000] 00:0018:Pinoko Fox:哇
+            if (line.Length < 23)
+            {
+                return;
+            }
 
-            var data = line.Split('|');
-            if (data.Length < 5)
+            var timestampStr = line.Substring(0, 15);
+            if (!(timestampStr.StartsWith("[") && timestampStr.EndsWith("] ")))
+            {
+                return;
+            }
+
+            var data = line.Substring(15).Split(':');
+            if (data.Length < 4)
             {
                 return;
             }
@@ -263,24 +284,24 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            if (string.IsNullOrEmpty(data[3]))
+            if (string.IsNullOrEmpty(data[2]))
             {
                 return;
             }
 
-            if (!int.TryParse(data[2], NumberStyles.HexNumber, null, out var eventCode))
+            if (!int.TryParse(data[1], NumberStyles.HexNumber, null, out var eventCode))
             {
                 return;
             }
 
             var knownCode = Enum.IsDefined(typeof(EventCode), (byte) (eventCode & byte.MaxValue));
 
-            var name = data[3];
-            var content = data[4];
+            var name = data[2];
+            var content = string.Join(":", data.Skip(3).ToArray());
 
             Debug.WriteLine(line);
-            Debug.WriteLine($"eventCode={data[2]}, known={knownCode}, {name} says: {content}");
-            Controller.NotifyLogMessageAppend(false, $"eventCode={data[2]}, known={knownCode}, {name} says: {content}");
+            Debug.WriteLine($"eventCode={data[1]}, known={knownCode}, {name} says: {content}");
+            Controller.NotifyLogMessageAppend(false, $"eventCode={data[1]}, known={knownCode}, {name} says: {content}");
 //            Controller.NotifyOverlayContentUpdated(false,
 //                $"eventCode={data[2]}, known={knownCode}, {name} says: {content}\n");
 
@@ -296,13 +317,19 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
+            timestampStr = timestampStr.Substring(1, timestampStr.Length - 3);
+            if (!DateTime.TryParseExact(timestampStr, "HH:mm:ss.fff", null, DateTimeStyles.None, out var timestamp))
+            {
+                return;
+            }
+
             var chat = new ChattingLine
             {
                 RawEventCode = (byte) (eventCode & byte.MaxValue),
                 EventCode = eventCodeKnown,
                 RawSender = name,
                 RawContent = content,
-                Timestamp = DateTime.Parse(data[1]),
+                Timestamp = timestamp,
             };
 
             TranslateService.SubmitNewLine(chat);

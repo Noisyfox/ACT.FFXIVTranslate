@@ -85,7 +85,6 @@
       <DependentUpon>FFXIVTranslateTabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="localization\Localization.cs" />
-    <Compile Include="LogReadThread.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="localization\strings.Designer.cs">

@@ -28,16 +28,10 @@ namespace ACT.FFXIVTranslate
         internal TranslateService TranslateService { get; } = new TranslateService();
         private readonly WindowsMessagePump _windowsMessagePump = new WindowsMessagePump();
         private ShortkeyManager<MainController, FFXIVTranslatePlugin> _shortkeyManager;
-
-        //private readonly LogReadThread _workingThread = new LogReadThread();
+        
         private readonly ConcurrentDictionary<EventCode, ChannelSettings> _channelSettings = new ConcurrentDictionary<EventCode, ChannelSettings>();
 
         private bool _isGameActivated = false;
-
-        public FFXIVTranslatePlugin()
-        {
-            //_workingThread.OnLogLineRead += OnLogLineRead;
-        }
 
         public override void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
@@ -89,11 +83,8 @@ namespace ACT.FFXIVTranslate
                 _settingsLoaded = true;
 
                 DoLocalization();
-
-                //ActGlobals.oFormActMain.LogFileChanged += OFormActMainOnLogFileChanged;
+                
                 ActGlobals.oFormActMain.OnLogLineRead += OFormActMain_OnLogLineRead;
-
-                //_workingThread.StartWorkingThread(ActGlobals.oFormActMain.LogFilePath);
 
                 Settings.NotifySettingsLoaded();
 
@@ -210,17 +201,6 @@ namespace ACT.FFXIVTranslate
             TranslateService.SubmitNewLine(chat);
         }
 
-        //private void OFormActMainOnLogFileChanged(bool isImport, string newLogFileName)
-        //{
-        //    if (isImport)
-        //    {
-        //        return;
-        //    }
-
-        //    // Read raw logs by ourself
-        //    _workingThread.StartWorkingThread(newLogFileName);
-        //}
-
         private void OFormActMain_OnLogLineRead(bool isImport, LogLineEventArgs logInfo)
         {
             if (isImport)
@@ -241,9 +221,7 @@ namespace ACT.FFXIVTranslate
             OverlayWPF?.Close();
 
             ActGlobals.oFormActMain.OnLogLineRead -= OFormActMain_OnLogLineRead;
-            //ActGlobals.oFormActMain.LogFileChanged -= OFormActMainOnLogFileChanged;
             TranslateService.Stop();
-            //_workingThread.StopWorkingThread();
             UpdateChecker.Stop();
 
             if (_settingsLoaded)

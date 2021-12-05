@@ -257,7 +257,7 @@ namespace ACT.FFXIVTranslate
                 return;
             }
 
-            if (!"00".Equals(data[0]))
+            if (!("00".Equals(data[0]) || "ChatLog 00".Equals(data[0])))
             {
                 return;
             }

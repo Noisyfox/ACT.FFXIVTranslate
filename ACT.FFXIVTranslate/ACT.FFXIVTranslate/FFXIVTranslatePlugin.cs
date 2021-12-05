@@ -237,9 +237,9 @@ namespace ACT.FFXIVTranslate
             // Parse log line
 
             // The legal talking log line has the following format:
-            // [HH:mm:ss.fff] 00:<event code>:<name or to?>:<content>
+            // [HH:mm:ss.fff] ChatLog 00:<event code>:<name or to?>:<content>
             // eg:
-            // [21:34:27.000] 00:0018:Pinoko Fox:哇
+            // [21:34:27.000] ChatLog 00:0018:Pinoko Fox:哇
             if (line.Length < 23)
             {
                 return;
